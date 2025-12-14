@@ -1,11 +1,11 @@
 -------------------------------------------------------------------------------
 COROUTINE_VIDEO_CLIP(parall_part3, final_video, "avi_work", "zavod", 0, "fade_in", nil, 1500)
 
--- Начало уровня
+-- РќР°С‡Р°Р»Рѕ СѓСЂРѕРІРЅСЏ
 -------------------------------------------------------------------------------
 function coroutines.parall.on_level_start:run()
 
-	-- Фейд
+	-- Р¤РµР№Рґ
 	local pp_id = engine.get_post_process_id("fade_out_long");
 	if pp_id ~= -1 then
 		g_actor_player:apply_post_process(pp_id)
@@ -14,10 +14,10 @@ function coroutines.parall.on_level_start:run()
 	coroutines.levels_common.on_level_start.run(self)
 end
 
--- Конец уровня
+-- РљРѕРЅРµС† СѓСЂРѕРІРЅСЏ
 -------------------------------------------------------------------------------
 function coroutines.parall_part3.on_level_end:run()
-	-- Запускаем видеоролик
+	-- Р—Р°РїСѓСЃРєР°РµРј РІРёРґРµРѕСЂРѕР»РёРє
 	execute_coroutine("parall_part3.final_video")
 end
 

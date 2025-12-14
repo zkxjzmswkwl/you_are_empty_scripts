@@ -3,10 +3,10 @@ COROUTINE_ANIMATION_SCENE(kolhoz, startup_animation, "pobeda_enter", "Operatciya
 COROUTINE_VIDEO_CLIP(kolhoz_part2, final_video, "avi_childhood", "detstvo", 0, "fade_in", nil, 1500)
 
 -------------------------------------------------------------------------------
---Видео в конце уровня
+--Р’РёРґРµРѕ РІ РєРѕРЅС†Рµ СѓСЂРѕРІРЅСЏ
 -------------------------------------------------------------------------------
 function coroutines.kolhoz_part2.on_level_end:run()
-	-- Запускаем видеоролик
+	-- Р—Р°РїСѓСЃРєР°РµРј РІРёРґРµРѕСЂРѕР»РёРє
 	execute_coroutine("kolhoz_part2.final_video")
 end
 
@@ -16,11 +16,11 @@ function coroutines.kolhoz_part2.final_video.m_on_end_cinema()
 	coroutines.levels_common.on_level_end.run(self)
 end
 
--- Начало уровня(fade_out)
+-- РќР°С‡Р°Р»Рѕ СѓСЂРѕРІРЅСЏ(fade_out)
 -------------------------------------------------------------------------------
 function coroutines.kolhoz.on_level_start:run()
 
-	-- Фейд
+	-- Р¤РµР№Рґ
 	local pp_id = engine.get_post_process_id("fade_out_long");
 	if pp_id ~= -1 then
 		g_actor_player:apply_post_process(pp_id)
@@ -29,19 +29,19 @@ function coroutines.kolhoz.on_level_start:run()
 	coroutines.levels_common.on_level_start.run(self)
 end
 -------------------------------------------------------------------------------
--- Начало уровня
+-- РќР°С‡Р°Р»Рѕ СѓСЂРѕРІРЅСЏ
 -------------------------------------------------------------------------------
 function coroutines.kolhoz.on_level_start:run()
-	-- сообщаем о том, что началась игра
+	-- СЃРѕРѕР±С‰Р°РµРј Рѕ С‚РѕРј, С‡С‚Рѕ РЅР°С‡Р°Р»Р°СЃСЊ РёРіСЂР°
 	engine.game_start();
 
-	-- Запускаем анимационную сцену
+	-- Р—Р°РїСѓСЃРєР°РµРј Р°РЅРёРјР°С†РёРѕРЅРЅСѓСЋ СЃС†РµРЅСѓ
 	execute_coroutine("kolhoz.startup_animation")
 end
 
 -------------------------------------------------------------------------------
 function coroutines.kolhoz.startup_animation.m_on_begin_cinema()
-	-- запуск параллельно включение взрывов поезда
+	-- Р·Р°РїСѓСЃРє РїР°СЂР°Р»Р»РµР»СЊРЅРѕ РІРєР»СЋС‡РµРЅРёРµ РІР·СЂС‹РІРѕРІ РїРѕРµР·РґР°
 	execute_coroutine("kolhoz.explosion_sounds")
 end
 
@@ -62,7 +62,7 @@ function coroutines.kolhoz.startup_animation.m_on_end_cinema()
 end
 
 -------------------------------------------------------------------------------
--- прибытие
+-- РїСЂРёР±С‹С‚РёРµ
 -------------------------------------------------------------------------------
 coroutines.kolhoz.explosion_sounds = {}
 

@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 
--- Начало уровня
+-- РќР°С‡Р°Р»Рѕ СѓСЂРѕРІРЅСЏ
 -------------------------------------------------------------------------------
 function coroutines.gor.on_level_start:init()
 	engine.set_var("r_ll_scale", 1)
@@ -10,7 +10,7 @@ end
 -------------------------------------------------------------------------------
 function coroutines.gor.on_level_start:run()
 
-	-- Фейд
+	-- Р¤РµР№Рґ
 	local pp_id = engine.get_post_process_id("fade_out_long");
 	if pp_id ~= -1 then
 		g_actor_player:apply_post_process(pp_id)

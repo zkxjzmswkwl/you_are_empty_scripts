@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Сопрограммы для игры YAE
+-- РЎРѕРїСЂРѕРіСЂР°РјРјС‹ РґР»СЏ РёРіСЂС‹ YAE
 ------------------------------------------------------------------------
 
 #include "coroutines_common.lua"
@@ -52,7 +52,7 @@ coroutines.futur			= utils.inherit(coroutines.levels_common)
 coroutines.lastzlo			= utils.inherit(coroutines.levels_common)
 
 -------------------------------------------------------------------------------
--- включаемые файлы для уровней
+-- РІРєР»СЋС‡Р°РµРјС‹Рµ С„Р°Р№Р»С‹ РґР»СЏ СѓСЂРѕРІРЅРµР№
 -------------------------------------------------------------------------------
 --#include "coroutines_aitest1.lua"
 
@@ -81,5 +81,5 @@ coroutines.lastzlo			= utils.inherit(coroutines.levels_common)
 #include "coroutines_futur.lua"
 #include "coroutines_lastzlo.lua"
 
--- Игровые видеоролики
+-- РРіСЂРѕРІС‹Рµ РІРёРґРµРѕСЂРѕР»РёРєРё
 #include "coroutines_video.lua"

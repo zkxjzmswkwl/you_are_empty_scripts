@@ -1,11 +1,11 @@
 -------------------------------------------------------------------------------
 COROUTINE_VIDEO_CLIP(lastzlo, game_final_video, "avi_outro", "outro", 0, "nil", nil, 1500)
 
--- Начало уровня
+-- РќР°С‡Р°Р»Рѕ СѓСЂРѕРІРЅСЏ
 -------------------------------------------------------------------------------
 function coroutines.lastzlo.on_level_start:run()
 
-	-- Фейд
+	-- Р¤РµР№Рґ
 	local pp_id = engine.get_post_process_id("fade_out_long");
 	if pp_id ~= -1 then
 		g_actor_player:apply_post_process(pp_id)
@@ -15,21 +15,21 @@ function coroutines.lastzlo.on_level_start:run()
 end
 
 
--- Конец игры
+-- РљРѕРЅРµС† РёРіСЂС‹
 -------------------------------------------------------------------------------
 coroutines.lastzlo.end_game = {}
 
 -------------------------------------------------------------------------------
 function coroutines.lastzlo.end_game:run()
 
-	-- Запускаем видеоролик
+	-- Р—Р°РїСѓСЃРєР°РµРј РІРёРґРµРѕСЂРѕР»РёРє
 	execute_coroutine("lastzlo.game_final_video")
 end
 
 -------------------------------------------------------------------------------
 function coroutines.lastzlo.game_final_video.m_on_end_cinema()
 	
-	-- Выходим в меню
+	-- Р’С‹С…РѕРґРёРј РІ РјРµРЅСЋ
 	g_world_props:signal("disconnect")
 end
 
