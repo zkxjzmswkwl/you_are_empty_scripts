@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Authors:	Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_hitable - триггер, которому можно наносить урон с помощью стрельбы
+-- trigger_hitable - С‚СЂРёРіРіРµСЂ, РєРѕС‚РѕСЂРѕРјСѓ РјРѕР¶РЅРѕ РЅР°РЅРѕСЃРёС‚СЊ СѓСЂРѕРЅ СЃ РїРѕРјРѕС‰СЊСЋ СЃС‚СЂРµР»СЊР±С‹
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_hitable = {
 	guid = {0xf6d3d4e, 0xed36, 0x4278, 0x8e, 0xff, 0x6d, 0xc3, 0x6, 0xe2, 0x3e, 0x2c},
 }
@@ -20,7 +20,7 @@ function trigger_hitable:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 
 sv_trigger_hitable = utils.inherit(sv_game_object, trigger_hitable)
 
@@ -33,7 +33,7 @@ function sv_trigger_hitable:on_init()
 	sv_game_object.on_init(self)
 end
 
--- функции обработчики слотов
+-- С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 function sv_trigger_damage:OnEnter(activator)
 	self.entered_time = engine.get_game_time()
 	return self:damage(activator)
@@ -49,7 +49,7 @@ function sv_trigger_damage:OnExit(activator)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_trigger_damage = utils.inherit(cl_game_object, trigger_damage);
 
 function cl_trigger_damage:register_properties(prop_registry)

@@ -3,12 +3,12 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Описание actions - действий, выполняемых по запросу присоединенного
--- контроллера
+-- РћРїРёСЃР°РЅРёРµ actions - РґРµР№СЃС‚РІРёР№, РІС‹РїРѕР»РЅСЏРµРјС‹С… РїРѕ Р·Р°РїСЂРѕСЃСѓ РїСЂРёСЃРѕРµРґРёРЅРµРЅРЅРѕРіРѕ
+-- РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
 ------------------------------------------------------------------------
 
 -------------------------------------
--- ACTION_MOVE действие передвижения
+-- ACTION_MOVE РґРµР№СЃС‚РІРёРµ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ
 -------------------------------------
 function sv_actor_basic:action_move(id, input_params, output_params)
 
@@ -49,12 +49,12 @@ function sv_actor_basic:action_move(id, input_params, output_params)
 end
 
 -------------------------------------
--- ACTION_ATTACK действие атаки
+-- ACTION_ATTACK РґРµР№СЃС‚РІРёРµ Р°С‚Р°РєРё
 -------------------------------------
 function sv_actor_basic:action_attack(id, input_params, output_params)
 	target_id, attack_type = engine.data_stream_parse(input_params, actor.get_action_input_types(id));
 	
-	-- текущая атака должна быть завершена
+	-- С‚РµРєСѓС‰Р°СЏ Р°С‚Р°РєР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р·Р°РІРµСЂС€РµРЅР°
 	if(attack_type == "halt_attack") then
 		self:halt_attack();
 		engine.data_stream_load(output_params, actor.get_action_output_types(id), false);
@@ -62,7 +62,7 @@ function sv_actor_basic:action_attack(id, input_params, output_params)
 		return;
 	end
 	
-	-- для игрока, получаем команды от кнопок мыши
+	-- РґР»СЏ РёРіСЂРѕРєР°, РїРѕР»СѓС‡Р°РµРј РєРѕРјР°РЅРґС‹ РѕС‚ РєРЅРѕРїРѕРє РјС‹С€Рё
 	if(self:is_player_controlled()) then
 		if(attack_type == ATTACK_PRIMARY) then
 			if(self.params.attack_info[0] == nil) then
@@ -158,14 +158,14 @@ function sv_actor_basic:action_alert(id, input_params, output_params)
 	
 	self:set_idle("idle_alert", self.params.aggresive_stance_time)
 	
-	-- Переход в агрессивное состояние
+	-- РџРµСЂРµС…РѕРґ РІ Р°РіСЂРµСЃСЃРёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
 	local custom_trans_to_alert_state_name = self:get_property_value(self.m_custom_transition_to_alert_prop);
 	if(custom_trans_to_alert_state_name == "?" or custom_trans_to_alert_state_name == " " or custom_trans_to_alert_state_name == "") then
 		self:set_property_value(self.m_stop_during_transition_to_alert_prop, false);
 		if(self.state_visual_info["transition_to_alert"]) then
-			-- устанавливаем activator, тем самым эмулируем
-			-- крик от врага а не от самих себя, для того чтоб наши
-			-- союзники тоже узнали о существовании врага
+			-- СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј activator, С‚РµРј СЃР°РјС‹Рј СЌРјСѓР»РёСЂСѓРµРј
+			-- РєСЂРёРє РѕС‚ РІСЂР°РіР° Р° РЅРµ РѕС‚ СЃР°РјРёС… СЃРµР±СЏ, РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР± РЅР°С€Рё
+			-- СЃРѕСЋР·РЅРёРєРё С‚РѕР¶Рµ СѓР·РЅР°Р»Рё Рѕ СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРё РІСЂР°РіР°
 			self.m_ai_sound_activator = target_id;
 
 			if(self.state_visual_info["transition_to_alert"].without_anims == true) then
@@ -236,7 +236,7 @@ end
 
 
 -------------------------------------
--- ACTION_GET_ATTACK_PARAMS - параметры допустимых атак у актера 
+-- ACTION_GET_ATTACK_PARAMS - РїР°СЂР°РјРµС‚СЂС‹ РґРѕРїСѓСЃС‚РёРјС‹С… Р°С‚Р°Рє Сѓ Р°РєС‚РµСЂР° 
 -------------------------------------
 function sv_actor_basic:action_get_attack_params(id, input_params, output_params)
 	engine.data_stream_load(output_params, actor.get_action_output_types(id), self.params.attack_info);

@@ -3,16 +3,16 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Граната (патроны)
+-- Р“СЂР°РЅР°С‚Р° (РїР°С‚СЂРѕРЅС‹)
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ammo_grenade = {};
 
 ammo_grenade.guid = {0xce576c90, 0x2815, 0x43b4, 0xb7, 0x99, 0x25, 0x5f, 0xf1, 0x85, 0x70, 0x3e}
 
 -------------------------------------------	
--- Свойства
+-- РЎРІРѕР№СЃС‚РІР°
 -------------------------------------------	
 ammo_grenade.properties_design = utils.merge_arrays(ammo_basic.properties_design, {
 	{"model_name",		"itemPatroni"},
@@ -24,13 +24,13 @@ ammo_grenade.properties_design = utils.merge_arrays(ammo_basic.properties_design
 })
 
 -------------------------------------------
-ammo_grenade.m_holdable_icon_id	= 13	-- Иконка HUD
+ammo_grenade.m_holdable_icon_id	= 13	-- РРєРѕРЅРєР° HUD
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ammo_grenade = utils.inherit(sv_ammo_basic, ammo_grenade)
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_ammo_grenade = utils.inherit(cl_ammo_basic, ammo_grenade)

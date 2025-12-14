@@ -924,7 +924,7 @@ ui_windows_ini =
 			},
 			{
 				--------------------------------------------------------------------------
-				-- Информационное сообщение
+				-- РРЅС„РѕСЂРјР°С†РёРѕРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ
 				alignment = "ALIGNMENT_NONE", 
 				text_alignment = "ALIGNMENT_CENTER",
 				class_name = "StaticText", 

@@ -3,18 +3,18 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Actor Veslo - девушка с веслом
+-- Actor Veslo - РґРµРІСѓС€РєР° СЃ РІРµСЃР»РѕРј
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_veslo.guid = {0xdff2fc7f, 0xabfb, 0x4146, 0x89, 0xb6, 0xf8, 0x79, 0x12, 0x6, 0x39, 0x57};
 
 function actor_veslo:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_veslo = utils.inherit(sv_actor_basic, actor_veslo);
 
 function sv_actor_veslo:register_properties(prop_registry)
@@ -26,14 +26,14 @@ function sv_actor_veslo:on_init()
 	actor_veslo.on_init(self);
 end
 
--- после атаки с прыжка нужно бежать дальше
+-- РїРѕСЃР»Рµ Р°С‚Р°РєРё СЃ РїСЂС‹Р¶РєР° РЅСѓР¶РЅРѕ Р±РµР¶Р°С‚СЊ РґР°Р»СЊС€Рµ
 function sv_actor_veslo:on_enter_attack_jump_land()
 	sv_actor_basic.on_enter_attack_jump_land(self);
 	self.m_performed_forward = 1;
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_veslo = utils.inherit(cl_actor_basic, actor_veslo);
 
 function cl_actor_veslo:on_init()

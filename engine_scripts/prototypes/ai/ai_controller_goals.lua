@@ -3,29 +3,29 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- ai controller goals, прототипы задач ИИ
+-- ai controller goals, РїСЂРѕС‚РѕС‚РёРїС‹ Р·Р°РґР°С‡ РР
 ------------------------------------------------------------------------
 
 ------------------------------------
--- задачи
+-- Р·Р°РґР°С‡Рё
 ------------------------------------
 goal_abstract = {};
 
 function goal_abstract:clone()
 	local owner = self.m_owner;
-	-- чтоб не копировать таблицу m_owner мы временно
-	-- уничтожаем ссылку на нее
+	-- С‡С‚РѕР± РЅРµ РєРѕРїРёСЂРѕРІР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ m_owner РјС‹ РІСЂРµРјРµРЅРЅРѕ
+	-- СѓРЅРёС‡С‚РѕР¶Р°РµРј СЃСЃС‹Р»РєСѓ РЅР° РЅРµРµ
 	self.m_owner = nil;
 	local cloned_goal = utils.clone(self);
 	self.m_owner = owner;
 	cloned_goal.m_owner = owner;
-	-- c++ объект должен быть переназначен
+	-- c++ РѕР±СЉРµРєС‚ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РїРµСЂРµРЅР°Р·РЅР°С‡РµРЅ
 	cloned_goal.__object = nil;
 	return cloned_goal;
 end
 
 ------------------------------------
--- атака
+-- Р°С‚Р°РєР°
 ------------------------------------
 
 goal_attack = utils.inherit(goal_abstract);
@@ -65,7 +65,7 @@ function goal_attack:activate()
 	if(self.m_owner.io.m_need_to_relocate == true) then
 		--console.print("================== relocating");
 		
-		--.hack непонятно почему может быть не задано self.m_owner.io.m_relocate_pos
+		--.hack РЅРµРїРѕРЅСЏС‚РЅРѕ РїРѕС‡РµРјСѓ РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµ Р·Р°РґР°РЅРѕ self.m_owner.io.m_relocate_pos
 		if(self.m_owner.io.m_relocate_pos == nil or self.m_owner.io.m_relocate_radius == nil) then
 			--engine.warning("actor:"..self.m_owner.m_actor:get_name().." wrong params relocating: radius "..(self.m_owner.io.m_relocate_radius and self.m_owner.io.m_relocate_radius or "nil").." pos "..(self.m_owner.io.m_relocate_pos and self.m_owner.io.m_relocate_pos.x or "nil"));
 			self.m_owner.io.m_need_to_relocate = false;
@@ -142,7 +142,7 @@ function goal_attack:process(dt)
 	self.m_owner:process_attack(dt);
 	
 
-	-- если нет текущих задач, провести активацию по новой
+	-- РµСЃР»Рё РЅРµС‚ С‚РµРєСѓС‰РёС… Р·Р°РґР°С‡, РїСЂРѕРІРµСЃС‚Рё Р°РєС‚РёРІР°С†РёСЋ РїРѕ РЅРѕРІРѕР№
 	if(self:is_has_subgoals() == false) then
 		--console.print("-- dont have subgoals")
 		self:set_status(INACTIVE);
@@ -156,7 +156,7 @@ function goal_attack:terminate()
 	self:set_status(INACTIVE);
 	
 	
-	-- если мы успели выбрать якорь - отказаться от него
+	-- РµСЃР»Рё РјС‹ СѓСЃРїРµР»Рё РІС‹Р±СЂР°С‚СЊ СЏРєРѕСЂСЊ - РѕС‚РєР°Р·Р°С‚СЊСЃСЏ РѕС‚ РЅРµРіРѕ
 	if(self.m_owner.m_current_anchor and 
 		self.m_owner.m_current_anchor:am_i_occupier(self.m_owner)) then
 		self.m_owner:use_anchor(self.m_owner.m_current_anchor, false);
@@ -180,7 +180,7 @@ end
 
 
 ------------------------------------
--- wander - хождение без дела
+-- wander - С…РѕР¶РґРµРЅРёРµ Р±РµР· РґРµР»Р°
 ------------------------------------
 
 goal_wander = utils.inherit(goal_abstract);
@@ -248,18 +248,18 @@ end
 function goal_wander:on_callback(callback_id, data_stream)
 	
 	local play_idle_wait_time = self.m_owner.params.wander_play_idle_time;
-	-- только когда заканчивается проигрывание idle анимации
-	-- мы можем двигаться в следующий waypoint	
+	-- С‚РѕР»СЊРєРѕ РєРѕРіРґР° Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёРµ idle Р°РЅРёРјР°С†РёРё
+	-- РјС‹ РјРѕР¶РµРј РґРІРёРіР°С‚СЊСЃСЏ РІ СЃР»РµРґСѓСЋС‰РёР№ waypoint	
 	if(callback_id == CALLBACK_ANIM_END) then
 		--console.print(" ---------------------- goal_wander:on_callback CALLBACK_ANIM_END ");
 		if(self.m_wait_time > play_idle_wait_time) then
 			self:activate();
 			return true;
 		end	
-	-- для передвижения по ai_ctrl_trigger	
+	-- РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РїРѕ ai_ctrl_trigger	
 	elseif(callback_id == CALLBACK_WALK_HERE) then
 		--console.print(" ---------------------- goal_wander:on_callback CALLBACK_WALK_HERE ");
-		-- для передвижения по ai_ctrl_trigger	
+		-- РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РїРѕ ai_ctrl_trigger	
 		self.m_pos_to_wander = engine.data_stream_get_vec3(data_stream);
 		self.m_need_to_wander_in_pos = 1;
 
@@ -272,8 +272,8 @@ function goal_wander:on_callback(callback_id, data_stream)
 end
 
 ------------------------------------
--- relocate - перемещение в точку или
--- якорь
+-- relocate - РїРµСЂРµРјРµС‰РµРЅРёРµ РІ С‚РѕС‡РєСѓ РёР»Рё
+-- СЏРєРѕСЂСЊ
 ------------------------------------
 
 goal_relocate = utils.inherit(goal_abstract);
@@ -322,10 +322,10 @@ function goal_relocate:process(dt)
 	if(result == COMPLETED) then
 		if(self.m_owner.io.m_need_to_relocate == true) then
 			if(self:is_has_subgoals()) then
-			    -- только что закончили перемещение в нужную позицию
+			    -- С‚РѕР»СЊРєРѕ С‡С‚Рѕ Р·Р°РєРѕРЅС‡РёР»Рё РїРµСЂРµРјРµС‰РµРЅРёРµ РІ РЅСѓР¶РЅСѓСЋ РїРѕР·РёС†РёСЋ
 			    self.m_owner.io.m_need_to_relocate = false;
-				-- убрать все подзадачи, чтоб вызвалась функция terminate
-				-- у текущего goal_move_to_pos
+				-- СѓР±СЂР°С‚СЊ РІСЃРµ РїРѕРґР·Р°РґР°С‡Рё, С‡С‚РѕР± РІС‹Р·РІР°Р»Р°СЃСЊ С„СѓРЅРєС†РёСЏ terminate
+				-- Сѓ С‚РµРєСѓС‰РµРіРѕ goal_move_to_pos
 			    self:remove_all_subgoals();
 			end
 		end
@@ -345,7 +345,7 @@ end
 
 
 ------------------------------------
--- guard - охрана позиции или объекта
+-- guard - РѕС…СЂР°РЅР° РїРѕР·РёС†РёРё РёР»Рё РѕР±СЉРµРєС‚Р°
 ------------------------------------
 
 goal_guard = utils.inherit(goal_abstract);
@@ -399,7 +399,7 @@ function goal_guard:terminate()
 end
 
 ------------------------------------
--- беспорядочное отступление (от гранаты)
+-- Р±РµСЃРїРѕСЂСЏРґРѕС‡РЅРѕРµ РѕС‚СЃС‚СѓРїР»РµРЅРёРµ (РѕС‚ РіСЂР°РЅР°С‚С‹)
 ------------------------------------
 
 goal_flee_from_danger = utils.inherit(goal_abstract);
@@ -413,7 +413,7 @@ function goal_flee_from_danger:activate()
 	self.m_owner:set_run_mode(true);
 	self.m_owner:halt_attack();
 	
-	-- если мы успели выбрать якорь - отказаться от него
+	-- РµСЃР»Рё РјС‹ СѓСЃРїРµР»Рё РІС‹Р±СЂР°С‚СЊ СЏРєРѕСЂСЊ - РѕС‚РєР°Р·Р°С‚СЊСЃСЏ РѕС‚ РЅРµРіРѕ
 	if(self.m_owner.m_current_anchor and 
 		self.m_owner.m_current_anchor:am_i_occupier(self.m_owner)) then
 		self.m_owner:use_anchor(self.m_owner.m_current_anchor, false);
@@ -431,7 +431,7 @@ function goal_flee_from_danger:process(dt)
 	
 	local result = self:process_subgoals(dt);
 	
-	-- если нет текущих задач, провести активацию по новой
+	-- РµСЃР»Рё РЅРµС‚ С‚РµРєСѓС‰РёС… Р·Р°РґР°С‡, РїСЂРѕРІРµСЃС‚Рё Р°РєС‚РёРІР°С†РёСЋ РїРѕ РЅРѕРІРѕР№
 	if(self:is_has_subgoals() == false) then
 		self:set_status(INACTIVE);
 	end

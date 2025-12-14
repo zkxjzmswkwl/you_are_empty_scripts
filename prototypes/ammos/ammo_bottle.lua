@@ -3,16 +3,16 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Коктейль молотова (патроны)
+-- РљРѕРєС‚РµР№Р»СЊ РјРѕР»РѕС‚РѕРІР° (РїР°С‚СЂРѕРЅС‹)
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ammo_bottle = {};
 
 ammo_bottle.guid = {0x86d1dff4, 0xc573, 0x44bf, 0x97, 0x42, 0xfe, 0x63, 0xba, 0x88, 0xdc, 0x64}
 
 -------------------------------------------	
--- Свойства
+-- РЎРІРѕР№СЃС‚РІР°
 -------------------------------------------	
 ammo_bottle.properties_design = utils.merge_arrays(ammo_basic.properties_design, {
 	{"model_name",		"itemPatroni"},
@@ -24,12 +24,12 @@ ammo_bottle.properties_design = utils.merge_arrays(ammo_basic.properties_design,
 })
 
 -------------------------------------------
-ammo_bottle.m_holdable_icon_id	= 13	-- Иконка HUD
-ammo_bottle.m_damage_limit		= 5		-- Предел повреждения, при котором бутылка разрушается
+ammo_bottle.m_holdable_icon_id	= 13	-- РРєРѕРЅРєР° HUD
+ammo_bottle.m_damage_limit		= 5		-- РџСЂРµРґРµР» РїРѕРІСЂРµР¶РґРµРЅРёСЏ, РїСЂРё РєРѕС‚РѕСЂРѕРј Р±СѓС‚С‹Р»РєР° СЂР°Р·СЂСѓС€Р°РµС‚СЃСЏ
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ammo_bottle = utils.inherit(sv_ammo_basic, ammo_bottle)
 
 -------------------------------------------
@@ -43,10 +43,10 @@ end
 -------------------------------------------
 function sv_ammo_bottle:on_damage_limit()
 
-	-- Создаем взрыв
+	-- РЎРѕР·РґР°РµРј РІР·СЂС‹РІ
 	local explosion = engine.spawn_entity("Explosion")
 	
-	-- Задаем свойства, такие же как и у ammo_missile_bottle
+	-- Р—Р°РґР°РµРј СЃРІРѕР№СЃС‚РІР°, С‚Р°РєРёРµ Р¶Рµ РєР°Рє Рё Сѓ ammo_missile_bottle
 	local missile = engine.spawn_entity("ammo_missile_bottle")
 	
 	explosion:set_property_value_by_name("radius", missile:get_property_value_by_name("explode_radius") * 64)
@@ -56,18 +56,18 @@ function sv_ammo_bottle:on_damage_limit()
 	explosion:set_property_value_by_name("effect", missile:get_property_value_by_name("explode_effect_name"))
 	explosion:set_property_value_by_name("destroy_after_explosion", true)
 	
-	-- Уничтожаем временный объект
+	-- РЈРЅРёС‡С‚РѕР¶Р°РµРј РІСЂРµРјРµРЅРЅС‹Р№ РѕР±СЉРµРєС‚
 	missile:destroy_object()
 	
-	-- Позиционируем
+	-- РџРѕР·РёС†РёРѕРЅРёСЂСѓРµРј
 	explosion:set_pos(self:get_pos())
 	engine.add_entity_to_world(explosion)
 	
-	-- Взрываем
+	-- Р’Р·СЂС‹РІР°РµРј
 	explosion:signal("explode", self);
 
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_ammo_bottle = utils.inherit(cl_ammo_basic, ammo_bottle)

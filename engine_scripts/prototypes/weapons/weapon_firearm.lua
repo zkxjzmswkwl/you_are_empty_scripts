@@ -3,12 +3,12 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Базовый класс для огненстрельного оружия.
--- Под огнестрельным понимается оружие с патронами, которое необходимо
--- перезаряжать
+-- Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ РѕРіРЅРµРЅСЃС‚СЂРµР»СЊРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ.
+-- РџРѕРґ РѕРіРЅРµСЃС‚СЂРµР»СЊРЅС‹Рј РїРѕРЅРёРјР°РµС‚СЃСЏ РѕСЂСѓР¶РёРµ СЃ РїР°С‚СЂРѕРЅР°РјРё, РєРѕС‚РѕСЂРѕРµ РЅРµРѕР±С…РѕРґРёРјРѕ
+-- РїРµСЂРµР·Р°СЂСЏР¶Р°С‚СЊ
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_firearm = {}
 
 function weapon_firearm:on_init()
@@ -18,19 +18,19 @@ function weapon_firearm:register_properties(prop_registry)
 end	
 
 ---------------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_firearm = utils.inherit(sv_weapon_basic, weapon_firearm);
 
 ---------------------------------------------------------------------------
--- коррекция параметров стрельбы
-sv_weapon_firearm.m_sit_disp_k						= 1		-- коэффициент масштабирования разброса в режиме сидя
-sv_weapon_firearm.m_sit_recoil_k					= 1		-- коэффициент масштабирования отдачи в режиме сидя
-sv_weapon_firearm.m_last_shots_number				= 0		-- число учитываемых последних выстрелов
-sv_weapon_firearm.m_one_shot_energy					= 0		-- энергия одного выстрела
-sv_weapon_firearm.m_recoil_time_correction_k_min	= 1		-- минимальное значение коэффициента (1 - нет коррекции)
-sv_weapon_firearm.m_recoil_time_correction_k_max	= 1		-- максимальное значение коэффициента
-sv_weapon_firearm.m_disp_time_correction_k_min		= 1		-- минимальное значение коэффициента (1 - нет коррекции)
-sv_weapon_firearm.m_disp_time_correction_k_max		= 1		-- максимальное значение коэффициента
+-- РєРѕСЂСЂРµРєС†РёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ СЃС‚СЂРµР»СЊР±С‹
+sv_weapon_firearm.m_sit_disp_k						= 1		-- РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ СЂР°Р·Р±СЂРѕСЃР° РІ СЂРµР¶РёРјРµ СЃРёРґСЏ
+sv_weapon_firearm.m_sit_recoil_k					= 1		-- РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ РѕС‚РґР°С‡Рё РІ СЂРµР¶РёРјРµ СЃРёРґСЏ
+sv_weapon_firearm.m_last_shots_number				= 0		-- С‡РёСЃР»Рѕ СѓС‡РёС‚С‹РІР°РµРјС‹С… РїРѕСЃР»РµРґРЅРёС… РІС‹СЃС‚СЂРµР»РѕРІ
+sv_weapon_firearm.m_one_shot_energy					= 0		-- СЌРЅРµСЂРіРёСЏ РѕРґРЅРѕРіРѕ РІС‹СЃС‚СЂРµР»Р°
+sv_weapon_firearm.m_recoil_time_correction_k_min	= 1		-- РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° (1 - РЅРµС‚ РєРѕСЂСЂРµРєС†РёРё)
+sv_weapon_firearm.m_recoil_time_correction_k_max	= 1		-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
+sv_weapon_firearm.m_disp_time_correction_k_min		= 1		-- РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° (1 - РЅРµС‚ РєРѕСЂСЂРµРєС†РёРё)
+sv_weapon_firearm.m_disp_time_correction_k_max		= 1		-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 
 ---------------------------------------------------------------------------------
 function sv_weapon_firearm:register_properties(prop_registry)
@@ -46,35 +46,35 @@ function sv_weapon_firearm:on_init()
 	sv_weapon_basic.on_init(self);
 	weapon_firearm.on_init(self);
 
-	-- для включения и выключения режима приближения	
+	-- РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ Рё РІС‹РєР»СЋС‡РµРЅРёСЏ СЂРµР¶РёРјР° РїСЂРёР±Р»РёР¶РµРЅРёСЏ	
 	self.zoom_in_state		= self:add_fsm_state(self.main_fsm, "zoom_in_state", self.on_enter_zoom_in, self.on_update_zoom_in, nil, nil, true);
 	self.zoom_out_state		= self:add_fsm_state(self.main_fsm, "zoom_out_state", self.on_enter_zoom_out, self.on_update_zoom_out, nil, nil, true);
-	-- дополнительное состояние для выстрела
+	-- РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РґР»СЏ РІС‹СЃС‚СЂРµР»Р°
 	self.fire_finish_state	= self:add_fsm_state(self.main_fsm, "fire_finish_state", self.on_enter_fire_finish, self.on_update_fire_finish, nil, nil);
-	-- перезарядка обоймы
+	-- РїРµСЂРµР·Р°СЂСЏРґРєР° РѕР±РѕР№РјС‹
 	self.reload_state	= self:add_fsm_state(self.main_fsm, "reload_state", self.on_enter_reload, self.on_update_reload, nil, nil);
 	
-	-- параметры для выстрела
+	-- РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ РІС‹СЃС‚СЂРµР»Р°
 	--self.m_bullets_in_shot = 1;
 	--self.m_bullet_damage = 10;
 	--self.m_bullet_impulse = 10;
 	--self.m_bullet_dist = 30;
-	--self.m_shot_disp = 2;			-- (град.) дисперсия выстрела 
-	--self.m_shot_recoil = 0;		-- (град.) отдача от выстрела 
+	--self.m_shot_disp = 2;			-- (РіСЂР°Рґ.) РґРёСЃРїРµСЂСЃРёСЏ РІС‹СЃС‚СЂРµР»Р° 
+	--self.m_shot_recoil = 0;		-- (РіСЂР°Рґ.) РѕС‚РґР°С‡Р° РѕС‚ РІС‹СЃС‚СЂРµР»Р° 
 	----------------------------------------
-	-- параметры патронов
-	--self.m_ammo_type = "unknown ammo";	-- тип используемых патронов
-	--self.m_clip_size = 20;				-- вместимость обоймы
-	--self.m_ammo_for_shot = 1;			-- кол-во патронов расходуемых на один выстрел
+	-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
+	--self.m_ammo_type = "unknown ammo";	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+	--self.m_clip_size = 20;				-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
+	--self.m_ammo_for_shot = 1;			-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
 	
-	-- FOV дляразных режимов
+	-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 	--self.m_normal_fov = 90;
 	--self.m_zoomed_fov = 45;
 end
 
 ---------------------------------------------------------------------------------
 function sv_weapon_firearm:set_zoom(zoom_on)
-	-- вначале режим приближения выключен
+	-- РІРЅР°С‡Р°Р»Рµ СЂРµР¶РёРј РїСЂРёР±Р»РёР¶РµРЅРёСЏ РІС‹РєР»СЋС‡РµРЅ
 	self.m_is_zoomed = zoom_on;
 end
 
@@ -108,7 +108,7 @@ end
 
 ---------------------------------------------------------------------------------
 function sv_weapon_firearm:event_lever2_down()
-	-- для включения режима "ZOOM"
+	-- РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ СЂРµР¶РёРјР° "ZOOM"
 	if(self:get_cur_fsm_state(self.main_fsm) == self.idle_state) then
 		if(self.m_is_zoomed) then
 			self:change_fsm_state(self.main_fsm, self.zoom_out_state, true);
@@ -135,7 +135,7 @@ function sv_weapon_firearm:event_reload()
 			end
 		else
 			if self:is_empty() then
-				-- Закончились патроны - преключаемся на следующее оружие (по приоритету)
+				-- Р—Р°РєРѕРЅС‡РёР»РёСЃСЊ РїР°С‚СЂРѕРЅС‹ - РїСЂРµРєР»СЋС‡Р°РµРјСЃСЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РѕСЂСѓР¶РёРµ (РїРѕ РїСЂРёРѕСЂРёС‚РµС‚Сѓ)
 				local owner = self:get_owner()
 				if owner then
 					if not owner:select_weapon(BEST_WEAPON) then
@@ -152,14 +152,14 @@ function sv_weapon_firearm:on_use(_actor)
 
 	assert(_actor)
 	
-	-- Монстры не подбирают патроны
+	-- РњРѕРЅСЃС‚СЂС‹ РЅРµ РїРѕРґР±РёСЂР°СЋС‚ РїР°С‚СЂРѕРЅС‹
 	if not _actor:is_player_controlled() then return end
 	
-	-- Если в инвентаре есть еще место для патронов, то забираем патроны с оружия,
-	-- а само оружие будет удалено при попытке поместить его в инвентарь.
-	-- Иначе ничего не делаем с данным оружием.
+	-- Р•СЃР»Рё РІ РёРЅРІРµРЅС‚Р°СЂРµ РµСЃС‚СЊ РµС‰Рµ РјРµСЃС‚Рѕ РґР»СЏ РїР°С‚СЂРѕРЅРѕРІ, С‚Рѕ Р·Р°Р±РёСЂР°РµРј РїР°С‚СЂРѕРЅС‹ СЃ РѕСЂСѓР¶РёСЏ,
+	-- Р° СЃР°РјРѕ РѕСЂСѓР¶РёРµ Р±СѓРґРµС‚ СѓРґР°Р»РµРЅРѕ РїСЂРё РїРѕРїС‹С‚РєРµ РїРѕРјРµСЃС‚РёС‚СЊ РµРіРѕ РІ РёРЅРІРµРЅС‚Р°СЂСЊ.
+	-- РРЅР°С‡Рµ РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°РµРј СЃ РґР°РЅРЅС‹Рј РѕСЂСѓР¶РёРµРј.
 	
-	-- Добавить в инвентарь патроны из оружия
+	-- Р”РѕР±Р°РІРёС‚СЊ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїР°С‚СЂРѕРЅС‹ РёР· РѕСЂСѓР¶РёСЏ
 	local taken_ammo = 0
 	local all_inventory_ammo = 0
 	local already_have = false
@@ -167,35 +167,35 @@ function sv_weapon_firearm:on_use(_actor)
 	local all_ammo = self:get_property_value(self.m_all_ammo_prop)
 	local max_ammo = self:get_property_value(self.m_max_ammo_prop);
 	
-	-- Подсчитываем сколько таких предметов уже есть в инвентаре
+	-- РџРѕРґСЃС‡РёС‚С‹РІР°РµРј СЃРєРѕР»СЊРєРѕ С‚Р°РєРёС… РїСЂРµРґРјРµС‚РѕРІ СѓР¶Рµ РµСЃС‚СЊ РІ РёРЅРІРµРЅС‚Р°СЂРµ
 	local inv_items = _actor:get_all_from_inventory( self.guid )	
 	local inv_items_count = table.getn(inv_items)
 	
 	if (inv_items_count > 0) then
-		-- Такое оружие уже есть в инвентаре. Берем все патроны.
+		-- РўР°РєРѕРµ РѕСЂСѓР¶РёРµ СѓР¶Рµ РµСЃС‚СЊ РІ РёРЅРІРµРЅС‚Р°СЂРµ. Р‘РµСЂРµРј РІСЃРµ РїР°С‚СЂРѕРЅС‹.
 		taken_ammo = all_ammo + loaded_ammo
 		
 		already_have = true
 		
-		-- Узнаем, сколько патронов в данный момент в инвентаре для такого оружия
+		-- РЈР·РЅР°РµРј, СЃРєРѕР»СЊРєРѕ РїР°С‚СЂРѕРЅРѕРІ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ РІ РёРЅРІРµРЅС‚Р°СЂРµ РґР»СЏ С‚Р°РєРѕРіРѕ РѕСЂСѓР¶РёСЏ
 		for j, inv_weapon in pairs(inv_items) do
 			all_inventory_ammo = inv_weapon:get_property_value_by_name("all_ammo")
 			break
 		end
 	else
-		-- Такого оружия еще не было в инвентаре. Берем все патроны, кроме тех которые, в стволе.
+		-- РўР°РєРѕРіРѕ РѕСЂСѓР¶РёСЏ РµС‰Рµ РЅРµ Р±С‹Р»Рѕ РІ РёРЅРІРµРЅС‚Р°СЂРµ. Р‘РµСЂРµРј РІСЃРµ РїР°С‚СЂРѕРЅС‹, РєСЂРѕРјРµ С‚РµС… РєРѕС‚РѕСЂС‹Рµ, РІ СЃС‚РІРѕР»Рµ.
 		taken_ammo = all_ammo
 	end
 	
 	--engine.warning(self.class_name .. ":\ntaken: "..taken_ammo.."\nall_inventory_ammo: "..all_inventory_ammo.."\nmax: "..max_ammo);
 	
-	-- После подбора, количество патронов в инвентаре не должно превышать допустимый максимум
+	-- РџРѕСЃР»Рµ РїРѕРґР±РѕСЂР°, РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ РІ РёРЅРІРµРЅС‚Р°СЂРµ РЅРµ РґРѕР»Р¶РЅРѕ РїСЂРµРІС‹С€Р°С‚СЊ РґРѕРїСѓСЃС‚РёРјС‹Р№ РјР°РєСЃРёРјСѓРј
 	taken_ammo = ((all_inventory_ammo + taken_ammo) > max_ammo) and (max_ammo - all_inventory_ammo) or taken_ammo;
 				
 	--engine.warning(self.class_name .. "\ntaken: "..taken_ammo);			
 	
-	-- Добавляем патроны в инвентарь.
-	-- Создаем коробку с патронами. Подгоняем размер коробки под "taken_ammo"
+	-- Р”РѕР±Р°РІР»СЏРµРј РїР°С‚СЂРѕРЅС‹ РІ РёРЅРІРµРЅС‚Р°СЂСЊ.
+	-- РЎРѕР·РґР°РµРј РєРѕСЂРѕР±РєСѓ СЃ РїР°С‚СЂРѕРЅР°РјРё. РџРѕРґРіРѕРЅСЏРµРј СЂР°Р·РјРµСЂ РєРѕСЂРѕР±РєРё РїРѕРґ "taken_ammo"
 	if taken_ammo ~= 0 and self.m_ammo_class then
 		local ammo = engine.spawn_entity(self.m_ammo_class)
 		ammo:set_property_value_by_name("ammo_capacity", taken_ammo);
@@ -205,7 +205,7 @@ function sv_weapon_firearm:on_use(_actor)
 		_actor:add_to_inventory(ammo)
 	end
 	
-	-- Запрещаем или разрешаем подбор оружия
+	-- Р—Р°РїСЂРµС‰Р°РµРј РёР»Рё СЂР°Р·СЂРµС€Р°РµРј РїРѕРґР±РѕСЂ РѕСЂСѓР¶РёСЏ
 	if taken_ammo ~= 0 or not already_have then
 		self:set_property_value_by_name("is_can_take", true);
 		self:set_property_value_by_name("all_ammo", 0);
@@ -215,7 +215,7 @@ function sv_weapon_firearm:on_use(_actor)
 	
 	if already_have then
 		self:set_property_value_by_name("marked_to_delete", true);
-		-- Синхронизируем, чтобы клиент как можно скорее узнал о новом значении
+		-- РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј, С‡С‚РѕР±С‹ РєР»РёРµРЅС‚ РєР°Рє РјРѕР¶РЅРѕ СЃРєРѕСЂРµРµ СѓР·РЅР°Р» Рѕ РЅРѕРІРѕРј Р·РЅР°С‡РµРЅРёРё
 		self:instant_properties_synchronize();
 	end
 
@@ -252,8 +252,8 @@ function sv_weapon_firearm:on_enter_hide()
 	end
 end
 ---------------------------------------------------------------------------------
--- подсчитать кол-во доступных в инвентаре патронов 
--- и занести результат в 
+-- РїРѕРґСЃС‡РёС‚Р°С‚СЊ РєРѕР»-РІРѕ РґРѕСЃС‚СѓРїРЅС‹С… РІ РёРЅРІРµРЅС‚Р°СЂРµ РїР°С‚СЂРѕРЅРѕРІ 
+-- Рё Р·Р°РЅРµСЃС‚Рё СЂРµР·СѓР»СЊС‚Р°С‚ РІ 
 function sv_weapon_firearm:calc_ammo_count()
 	local actor = self:get_owner();
 	assert(actor);
@@ -338,7 +338,7 @@ function sv_weapon_firearm:reload_ammo()
 
 				
 		self:set_property_value(self.m_loaded_ammo_prop, ammo_current + ammo_loaded);
-		--.hack не совсем рационально, self.m_all_ammo_prop надо вычислить из уже имеющихся данных
+		--.hack РЅРµ СЃРѕРІСЃРµРј СЂР°С†РёРѕРЅР°Р»СЊРЅРѕ, self.m_all_ammo_prop РЅР°РґРѕ РІС‹С‡РёСЃР»РёС‚СЊ РёР· СѓР¶Рµ РёРјРµСЋС‰РёС…СЃСЏ РґР°РЅРЅС‹С…
 		self:calc_ammo_count();
 		--self:set_property_value(self.m_all_ammo_prop, 
 		--		self:get_property_value(self.m_all_ammo_prop) - ammo_loaded);
@@ -352,9 +352,9 @@ function sv_weapon_firearm:reload_ammo()
 end
 
 ----------------------------------------------------------------------------------
--- Отображает эффекты выстрела
+-- РћС‚РѕР±СЂР°Р¶Р°РµС‚ СЌС„С„РµРєС‚С‹ РІС‹СЃС‚СЂРµР»Р°
 function sv_weapon_firearm:visualize_shoot_effects()
-	-- Загружаем и прячем эффект выстрела (только при первом выстреле)
+	-- Р—Р°РіСЂСѓР¶Р°РµРј Рё РїСЂСЏС‡РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р° (С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј РІС‹СЃС‚СЂРµР»Рµ)
 	if self.m_shot_effect_id == nil then
 		if (self.m_shot_effect_name and self.m_shot_point_name) then
 			local template_id = self:add_effect_template(self.m_shot_effect_name)
@@ -362,14 +362,14 @@ function sv_weapon_firearm:visualize_shoot_effects()
 		end
 	end
 	
-	-- Запускаем эффект выстрела (если он есть, конечно)
+	-- Р—Р°РїСѓСЃРєР°РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р° (РµСЃР»Рё РѕРЅ РµСЃС‚СЊ, РєРѕРЅРµС‡РЅРѕ)
 	if self.m_shot_effect_id and self.m_shot_effect_id ~= -1 then
 		self:reset_effect(self.m_shot_effect_id)
 	end
 end
 
 ----------------------------------------------------------------------------------
--- Прячет эффекты выстрела
+-- РџСЂСЏС‡РµС‚ СЌС„С„РµРєС‚С‹ РІС‹СЃС‚СЂРµР»Р°
 function sv_weapon_firearm:deactivate_shoot_effects()
 	if self.m_shot_effect_id and self.m_shot_effect_id ~= -1 then
 		self:deactivate_effect(self.m_shot_effect_id)
@@ -385,7 +385,7 @@ function sv_weapon_firearm:on_enter_idle()
 	end		
 end
 ---------------------------------------------------------------------------------
--- начало выстрела
+-- РЅР°С‡Р°Р»Рѕ РІС‹СЃС‚СЂРµР»Р°
 function sv_weapon_firearm:on_enter_fire()
 	--console.print("..............sv_weapon_firearm:on_enter_fire()");
 	if(self.m_is_zoomed == true) then
@@ -414,7 +414,7 @@ function sv_weapon_firearm:on_update_fire()
 end
 
 --------------------------------------------------------------------------------
--- завершение выстрела, нанести хит
+-- Р·Р°РІРµСЂС€РµРЅРёРµ РІС‹СЃС‚СЂРµР»Р°, РЅР°РЅРµСЃС‚Рё С…РёС‚
 function sv_weapon_firearm:on_enter_fire_finish()
 
 	local min_dist;
@@ -428,27 +428,27 @@ function sv_weapon_firearm:on_enter_fire_finish()
 		max_dist = self.m_bullet_max_dist
 	end
 
-	-- зависимость параметров стрельбы от режима прицеливания
+	-- Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ РїР°СЂР°РјРµС‚СЂРѕРІ СЃС‚СЂРµР»СЊР±С‹ РѕС‚ СЂРµР¶РёРјР° РїСЂРёС†РµР»РёРІР°РЅРёСЏ
 	local shot_disp		= (not self.m_is_zoomed) and self.m_shot_disp	or self.m_shot_disp_zoomed
 	local shot_recoil	= (not self.m_is_zoomed) and self.m_shot_recoil	or self.m_shot_recoil_zoomed
 
-	-- зависимость параметров стрельбы от состояния тела (стоя/сидя)
+	-- Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ РїР°СЂР°РјРµС‚СЂРѕРІ СЃС‚СЂРµР»СЊР±С‹ РѕС‚ СЃРѕСЃС‚РѕСЏРЅРёСЏ С‚РµР»Р° (СЃС‚РѕСЏ/СЃРёРґСЏ)
 	local owner = self:get_owner();	assert(owner)
 	if owner:get_property_value_by_name("is_sitting") then
 		shot_disp	= shot_disp	  * self.m_sit_disp_k
 		shot_recoil	= shot_recoil * self.m_sit_recoil_k
 	end
 
-	-- зависимость параметров стрельбы от времени	
+	-- Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ РїР°СЂР°РјРµС‚СЂРѕРІ СЃС‚СЂРµР»СЊР±С‹ РѕС‚ РІСЂРµРјРµРЅРё	
 	local curr_time = engine.get_game_time()
 
-	-- таблица с информацией о последних выстрелах
+	-- С‚Р°Р±Р»РёС†Р° СЃ РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ РїРѕСЃР»РµРґРЅРёС… РІС‹СЃС‚СЂРµР»Р°С…
 	if self.m_last_shots == nil then
 		self.m_last_shots = {}
 		self.m_last_shots_idx = 1
 	end
 
-	-- просчет энергии выстрелов, переданной оружию, с учетом времени
+	-- РїСЂРѕСЃС‡РµС‚ СЌРЅРµСЂРіРёРё РІС‹СЃС‚СЂРµР»РѕРІ, РїРµСЂРµРґР°РЅРЅРѕР№ РѕСЂСѓР¶РёСЋ, СЃ СѓС‡РµС‚РѕРј РІСЂРµРјРµРЅРё
 	local energy_aver = 0
 	for i = 1, self.m_last_shots_number, 1 do
 		if(self.m_last_shots[i]) then
@@ -460,7 +460,7 @@ function sv_weapon_firearm:on_enter_fire_finish()
 		end
 	end
 
-	-- сохраним параметры текущего выстрела
+	-- СЃРѕС…СЂР°РЅРёРј РїР°СЂР°РјРµС‚СЂС‹ С‚РµРєСѓС‰РµРіРѕ РІС‹СЃС‚СЂРµР»Р°
 	local shot_rec = {}
 	shot_rec.shot_energy = self.m_one_shot_energy
 	shot_rec.shot_time = curr_time
@@ -468,7 +468,7 @@ function sv_weapon_firearm:on_enter_fire_finish()
 	self.m_last_shots[self.m_last_shots_idx] = shot_rec
 	self.m_last_shots_idx = self.m_last_shots_idx + 1
 
-	-- коррекция отдачи
+	-- РєРѕСЂСЂРµРєС†РёСЏ РѕС‚РґР°С‡Рё
 	local recoil_time_correction_k = energy_aver
 	if recoil_time_correction_k > self.m_recoil_time_correction_k_max then
 		recoil_time_correction_k = self.m_recoil_time_correction_k_max
@@ -479,7 +479,7 @@ function sv_weapon_firearm:on_enter_fire_finish()
 
 	shot_recoil = shot_recoil*recoil_time_correction_k
 
-	-- коррекция разброса
+	-- РєРѕСЂСЂРµРєС†РёСЏ СЂР°Р·Р±СЂРѕСЃР°
 	local disp_time_correction_k = energy_aver
 	if disp_time_correction_k > self.m_disp_time_correction_k_max then
 		disp_time_correction_k = self.m_disp_time_correction_k_max
@@ -493,15 +493,15 @@ function sv_weapon_firearm:on_enter_fire_finish()
 	--console.print("recoil_time_correction_k "..recoil_time_correction_k)
 	--console.print("disp_time_correction_k   "..disp_time_correction_k)
 	
-	-- производим выстрелы		
+	-- РїСЂРѕРёР·РІРѕРґРёРј РІС‹СЃС‚СЂРµР»С‹		
 	for i = 1, self.m_bullets_in_shot, 1 do
 		self:fire_trace(self.m_bullet_damage, g_damage_type.GUNSHOT, self.m_bullet_impulse, 
 						min_dist, max_dist, shot_disp, shot_recoil);
 	end
 	
 	if self.m_not_visualize_last_fire_finish and not self:can_fire() then 
-		-- Не отображаем последний fire_finish, если не можем стрелять
-		-- (не отображать анимацию перезарядки, если нет патронов)
+		-- РќРµ РѕС‚РѕР±СЂР°Р¶Р°РµРј РїРѕСЃР»РµРґРЅРёР№ fire_finish, РµСЃР»Рё РЅРµ РјРѕР¶РµРј СЃС‚СЂРµР»СЏС‚СЊ
+		-- (РЅРµ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ Р°РЅРёРјР°С†РёСЋ РїРµСЂРµР·Р°СЂСЏРґРєРё, РµСЃР»Рё РЅРµС‚ РїР°С‚СЂРѕРЅРѕРІ)
 	else
 		if(self.m_is_zoomed == true) then
 			self:visualize_state(self.main_fsm, self.state_visual_info, "fire_finish_zoomed");
@@ -562,14 +562,14 @@ end
 function sv_weapon_firearm:on_shutdown()
 	sv_weapon_basic.on_shutdown(self)
 	
-	-- Освобождаем эффект
+	-- РћСЃРІРѕР±РѕР¶РґР°РµРј СЌС„С„РµРєС‚
 	if self.m_shot_effect_id and self.m_shot_effect_id ~= -1 then
 		self:release_effect(self.m_shot_effect_id)
 	end
 end
 
 ---------------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 ---------------------------------------------------------------------------------
 cl_weapon_firearm = utils.inherit(cl_weapon_basic, weapon_firearm);
 

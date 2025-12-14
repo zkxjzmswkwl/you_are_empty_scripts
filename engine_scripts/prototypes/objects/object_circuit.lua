@@ -3,13 +3,13 @@
 ------------------------------------------------------------------------
 -- Authors: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- object_circuit - перенаправляет сигнал входящего слота на один из
--- выходящих слотов. Каждый раз входящий сигнал перенаправляется на
--- следующий выходящий слот. Выходящие слоты перебираются циклически.
+-- object_circuit - РїРµСЂРµРЅР°РїСЂР°РІР»СЏРµС‚ СЃРёРіРЅР°Р» РІС…РѕРґСЏС‰РµРіРѕ СЃР»РѕС‚Р° РЅР° РѕРґРёРЅ РёР·
+-- РІС‹С…РѕРґСЏС‰РёС… СЃР»РѕС‚РѕРІ. РљР°Р¶РґС‹Р№ СЂР°Р· РІС…РѕРґСЏС‰РёР№ СЃРёРіРЅР°Р» РїРµСЂРµРЅР°РїСЂР°РІР»СЏРµС‚СЃСЏ РЅР°
+-- СЃР»РµРґСѓСЋС‰РёР№ РІС‹С…РѕРґСЏС‰РёР№ СЃР»РѕС‚. Р’С‹С…РѕРґСЏС‰РёРµ СЃР»РѕС‚С‹ РїРµСЂРµР±РёСЂР°СЋС‚СЃСЏ С†РёРєР»РёС‡РµСЃРєРё.
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 object_circuit = {
 	guid = {0x71783124, 0x7928, 0x4931, 0xbf, 0xd8, 0x92, 0x60, 0x21, 0x1f, 0xd2, 0x4},
 	n_out_slots = 5	
@@ -22,7 +22,7 @@ end
 
 function object_circuit:on_init()
 	
-	-- С какого исходящего слота начинать перебор
+	-- РЎ РєР°РєРѕРіРѕ РёСЃС…РѕРґСЏС‰РµРіРѕ СЃР»РѕС‚Р° РЅР°С‡РёРЅР°С‚СЊ РїРµСЂРµР±РѕСЂ
 	local start_with = self:get_property_value(self.start_with)
 	if start_with < 1 or start_with > object_circuit.n_out_slots then
 		self.output_to = 1
@@ -33,7 +33,7 @@ function object_circuit:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_object_circuit = utils.inherit(sv_game_object, object_circuit)
 
 function sv_object_circuit:register_properties(prop_registry)
@@ -41,7 +41,7 @@ function sv_object_circuit:register_properties(prop_registry)
 	sv_game_object.register_properties(self, prop_registry)
 	object_circuit.register_properties(self, prop_registry);
 
-	-- Регистрация слотов
+	-- Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃР»РѕС‚РѕРІ
 	self.input = self:register_input_slot("input", self.input)
 
 	self.out_slots = {}
@@ -53,7 +53,7 @@ end
 
 function sv_object_circuit:move_next_slot()
 
-	-- Берем (по кругу) следующий исходящий слот 
+	-- Р‘РµСЂРµРј (РїРѕ РєСЂСѓРіСѓ) СЃР»РµРґСѓСЋС‰РёР№ РёСЃС…РѕРґСЏС‰РёР№ СЃР»РѕС‚ 
 	if self.output_to == object_circuit.n_out_slots then
 		self.output_to = 1
 	else
@@ -67,7 +67,7 @@ function sv_object_circuit:input(sender, activator, input_data)
 	local begin_slot	= self.output_to
 	local emitted		= false
 
-	-- Перебираем все слоты, пока не отправим сигнал на какой-нибудь слот
+	-- РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЃР»РѕС‚С‹, РїРѕРєР° РЅРµ РѕС‚РїСЂР°РІРёРј СЃРёРіРЅР°Р» РЅР° РєР°РєРѕР№-РЅРёР±СѓРґСЊ СЃР»РѕС‚
 	repeat
 	
 		if self:get_links_num( self.out_slots[self.output_to] ) ~= 0 then
@@ -84,7 +84,7 @@ function sv_object_circuit:input(sender, activator, input_data)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_object_circuit = utils.inherit(cl_game_object, object_circuit)
 
 function cl_object_circuit:register_properties(prop_registry)

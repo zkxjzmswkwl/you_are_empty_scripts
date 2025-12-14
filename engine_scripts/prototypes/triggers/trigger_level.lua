@@ -4,10 +4,10 @@
 -- Authors: Yuri Dobronravin
 --				Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_level - тригер для смены уровня
+-- trigger_level - С‚СЂРёРіРµСЂ РґР»СЏ СЃРјРµРЅС‹ СѓСЂРѕРІРЅСЏ
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_level = {
 	guid = {0xe108ce1e, 0xe3e8, 0x481e, 0xab, 0x1a, 0x73, 0xd7, 0x8a, 0xc5, 0xb5, 0xea},
 };
@@ -17,7 +17,7 @@ function trigger_level:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_trigger_level = utils.inherit(sv_game_object, trigger_level);
 
 function sv_trigger_level:register_properties(prop_registry)
@@ -29,7 +29,7 @@ function sv_trigger_level:on_init()
 	sv_game_object.on_init(self);
 end
 
--- функции обработчики слотов
+-- С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 function sv_trigger_level:OnEnter(activator)
 	engine.process_command("disconnect");
 	engine.process_command("map", self:get_property_value(self.next_level_prop));

@@ -3,19 +3,19 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Madman - монстр псих.больной
+-- Actor Madman - РјРѕРЅСЃС‚СЂ РїСЃРёС….Р±РѕР»СЊРЅРѕР№
 ------------------------------------------------------------------------
 
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_madman.guid = {0x5a22d68c, 0x8382, 0x456d, 0x8c, 0x61, 0x77, 0xa1, 0x4d, 0x30, 0xc9, 0x76};
 
 function actor_madman:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_madman = utils.inherit(sv_actor_basic, actor_madman);
 
 function sv_actor_madman:register_properties(prop_registry)
@@ -28,7 +28,7 @@ function sv_actor_madman:on_init()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_madman = utils.inherit(cl_actor_basic, actor_madman);
 
 function cl_actor_madman:on_init()

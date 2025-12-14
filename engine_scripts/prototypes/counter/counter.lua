@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- counter - счетчик, выдающий сигнал по достижении заданного числа
+-- counter - СЃС‡РµС‚С‡РёРє, РІС‹РґР°СЋС‰РёР№ СЃРёРіРЅР°Р» РїРѕ РґРѕСЃС‚РёР¶РµРЅРёРё Р·Р°РґР°РЅРЅРѕРіРѕ С‡РёСЃР»Р°
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 counter = {
 	guid = {0x5a89ed9d, 0x87f1, 0x4f3c, 0xac, 0x2c, 0xd8, 0x2b, 0xd3, 0xbc, 0x88, 0x8f},
 }
@@ -18,7 +18,7 @@ function counter:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_counter = utils.Inherit(sv_game_object, counter)
 
 function sv_counter:register_properties(prop_registry)
@@ -47,7 +47,7 @@ function sv_counter:decrease(sender, activator, input_data)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_counter = utils.Inherit(cl_game_object, counter)
 
 function cl_counter:register_properties(prop_registry)

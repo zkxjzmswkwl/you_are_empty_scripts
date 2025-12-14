@@ -3,21 +3,21 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Базовый прототип для игрового объекта
+-- Р‘Р°Р·РѕРІС‹Р№ РїСЂРѕС‚РѕС‚РёРї РґР»СЏ РёРіСЂРѕРІРѕРіРѕ РѕР±СЉРµРєС‚Р°
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 game_object = {
-	-- указатель на соответствующий объект из CPP,
-	-- инициализируется фабрикой при создании объекта
-	-- __object будет хранить указатель
+	-- СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РѕР±СЉРµРєС‚ РёР· CPP,
+	-- РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚СЃСЏ С„Р°Р±СЂРёРєРѕР№ РїСЂРё СЃРѕР·РґР°РЅРёРё РѕР±СЉРµРєС‚Р°
+	-- __object Р±СѓРґРµС‚ С…СЂР°РЅРёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ
 };
 
 function game_object:register_properties(prop_registry)
 end
 
--- Читаем параметры звука и добавляем звук через add_sound.
--- Используется в weapon_basic и actor_basic
+-- Р§РёС‚Р°РµРј РїР°СЂР°РјРµС‚СЂС‹ Р·РІСѓРєР° Рё РґРѕР±Р°РІР»СЏРµРј Р·РІСѓРє С‡РµСЂРµР· add_sound.
+-- РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ weapon_basic Рё actor_basic
 function game_object:read_sound(w, head_mode, 
 									default_vol, 
 									default_pitch, 
@@ -39,7 +39,7 @@ function game_object:read_sound(w, head_mode,
 	
 	local snd_play_once = nil;
 
-	-- если задана специальная таблица с параметрами звуками, читаем из нее
+	-- РµСЃР»Рё Р·Р°РґР°РЅР° СЃРїРµС†РёР°Р»СЊРЅР°СЏ С‚Р°Р±Р»РёС†Р° СЃ РїР°СЂР°РјРµС‚СЂР°РјРё Р·РІСѓРєР°РјРё, С‡РёС‚Р°РµРј РёР· РЅРµРµ
 	if(w.snd_params ~= nil) then
 		if(w.snd_params.vol ~= nil) then snd_vol = w.snd_params.vol end
 		if(w.snd_params.pitch ~= nil) then snd_pitch = w.snd_params.pitch end
@@ -54,7 +54,7 @@ function game_object:read_sound(w, head_mode,
 		snd_play_once = w.snd_params.play_once;
 	end
 		
-	-- параметры из таблицы могут быть перетерты
+	-- РїР°СЂР°РјРµС‚СЂС‹ РёР· С‚Р°Р±Р»РёС†С‹ РјРѕРіСѓС‚ Р±С‹С‚СЊ РїРµСЂРµС‚РµСЂС‚С‹
 	if(w.snd_vol ~= nil) then snd_vol = w.snd_vol end
 	if(w.snd_pitch ~= nil) then snd_pitch = w.snd_pitch end
 	if(w.snd_min_dist ~= nil) then snd_min_dist = w.snd_min_dist end
@@ -83,12 +83,12 @@ end
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_game_object = utils.inherit(game_object);
 
--- подтаблица в объекте, в которой нужно создавать
--- переменные, которые должны сериализироваться на 
--- функциях on_save_state и on_load_state
+-- РїРѕРґС‚Р°Р±Р»РёС†Р° РІ РѕР±СЉРµРєС‚Рµ, РІ РєРѕС‚РѕСЂРѕР№ РЅСѓР¶РЅРѕ СЃРѕР·РґР°РІР°С‚СЊ
+-- РїРµСЂРµРјРµРЅРЅС‹Рµ, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ СЃРµСЂРёР°Р»РёР·РёСЂРѕРІР°С‚СЊСЃСЏ РЅР° 
+-- С„СѓРЅРєС†РёСЏС… on_save_state Рё on_load_state
 sv_game_object.io = {};
 
 function sv_game_object:on_init()
@@ -101,7 +101,7 @@ function sv_game_object:on_load_state(dreader)
 	self.io = engine.load_lua_object(dreader);
 end
 
--- запись текущего состояния
+-- Р·Р°РїРёСЃСЊ С‚РµРєСѓС‰РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 function sv_game_object:on_save_state(dwriter)
 	engine.save_lua_object(self.io, dwriter);
 end
@@ -113,7 +113,7 @@ end
 function sv_game_object:on_update(dt)
 end
 
--- передается таблица в которой записаны пары - {имя, значение}
+-- РїРµСЂРµРґР°РµС‚СЃСЏ С‚Р°Р±Р»РёС†Р° РІ РєРѕС‚РѕСЂРѕР№ Р·Р°РїРёСЃР°РЅС‹ РїР°СЂС‹ - {РёРјСЏ, Р·РЅР°С‡РµРЅРёРµ}
 function sv_game_object:init_properties_from_table(properties_table)
 	for i,v in ipairs(properties_table) do
 		self:set_property_value_by_name(v[1], v[2]);
@@ -132,7 +132,7 @@ function sv_game_object:is_client_object()
 	return false;
 end
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_game_object = utils.inherit(game_object);
 
 function cl_game_object:on_init()

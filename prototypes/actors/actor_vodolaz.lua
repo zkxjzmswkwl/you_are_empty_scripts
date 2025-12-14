@@ -3,18 +3,18 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Vodolaz - монстр водолаз
+-- Actor Vodolaz - РјРѕРЅСЃС‚СЂ РІРѕРґРѕР»Р°Р·
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_vodolaz.guid = {0xcb2aaa, 0xb40f, 0x44bd, 0x95, 0x7b, 0x8, 0x7d, 0x24, 0x5, 0xd, 0xc7};
 
 function actor_vodolaz:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_vodolaz = utils.inherit(sv_actor_basic, actor_vodolaz);
 
 function sv_actor_vodolaz:register_properties(prop_registry)
@@ -28,7 +28,7 @@ function sv_actor_vodolaz:on_init()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_vodolaz = utils.inherit(cl_actor_basic, actor_vodolaz);
 
 function cl_actor_vodolaz:on_init()

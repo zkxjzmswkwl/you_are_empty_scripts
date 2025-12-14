@@ -3,12 +3,12 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_check_inventory - триггер, срабатывающий, если у актера есть 
--- заданный предмет в инвенторе
+-- trigger_check_inventory - С‚СЂРёРіРіРµСЂ, СЃСЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№, РµСЃР»Рё Сѓ Р°РєС‚РµСЂР° РµСЃС‚СЊ 
+-- Р·Р°РґР°РЅРЅС‹Р№ РїСЂРµРґРјРµС‚ РІ РёРЅРІРµРЅС‚РѕСЂРµ
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_check_inventory = {
 	guid = {0x308efde2, 0x626f, 0x4f4d, 0x9e, 0x29, 0x90, 0x83, 0x68, 0xf8, 0x35, 0xad},
 }
@@ -19,7 +19,7 @@ function trigger_check_inventory:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_trigger_check_inventory = utils.inherit(sv_game_object, trigger_check_inventory);
 
 function sv_trigger_check_inventory:register_properties(prop_registry)
@@ -38,7 +38,7 @@ function sv_trigger_check_inventory:is_need_react(activator)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_trigger_check_inventory = utils.inherit(cl_game_object, trigger_check_inventory);
 
 function cl_trigger_check_inventory:register_properties(prop_registry)

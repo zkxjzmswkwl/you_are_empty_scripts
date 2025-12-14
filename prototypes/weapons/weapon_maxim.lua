@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Класс пулемет "Максим"
+-- РљР»Р°СЃСЃ РїСѓР»РµРјРµС‚ "РњР°РєСЃРёРј"
 ------------------------------------------------------------------------
 
 include("ammo_maxim.lua")
@@ -16,28 +16,28 @@ weapon_maxim = {};
 weapon_maxim.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"ItemMauzer"},
 	{"hit_material",		"mat_hit_ppsh" },
-	{"slot_name",			g_weapon_slots[6] }, -- слот в котором может быть оружие
-	{"priority",			0 }, -- приоритет оружия
---	{"icon_id",				5 }, -- иконка для HUD
+	{"slot_name",			g_weapon_slots[6] }, -- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{"priority",			0 }, -- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{"icon_id",				5 }, -- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		150 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			0 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия	
+	{ "loaded_ammo",		150 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			0 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ	
 	
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_maxim.m_models_names = {
---	Имя игрока				Имя модели рук		Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє		РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"maxim_hands",		"maxim"			},
 }
 
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_maxim.m_ammo_icon_id		= 3
 weapon_maxim.m_holdable_icon_id	= 8
 
 ---------------------------------------
--- параметры выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РІС‹СЃС‚СЂРµР»Р°
 ---------------------------------------
 weapon_maxim.m_bullets_in_shot		= 1;
 weapon_maxim.m_bullet_damage		= 63;
@@ -49,31 +49,31 @@ weapon_maxim.m_bullet_dist			= 150;
 weapon_maxim.m_shot_disp_zoomed		= 10;
 weapon_maxim.m_shot_recoil_zoomed	= 3;
 
-weapon_maxim.m_shot_effect_name			= "pfx_shot_mauzer.lua" -- эффект при выстреле
-weapon_maxim.m_shot_point_name			= "#shoot_point"		-- точка привязки эффекта в модели
-weapon_maxim.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"	-- эффект трейса пули
+weapon_maxim.m_shot_effect_name			= "pfx_shot_mauzer.lua" -- СЌС„С„РµРєС‚ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
+weapon_maxim.m_shot_point_name			= "#shoot_point"		-- С‚РѕС‡РєР° РїСЂРёРІСЏР·РєРё СЌС„С„РµРєС‚Р° РІ РјРѕРґРµР»Рё
+weapon_maxim.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"	-- СЌС„С„РµРєС‚ С‚СЂРµР№СЃР° РїСѓР»Рё
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_maxim.m_rate_of_fire			= 1.7
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_maxim.m_ammo_class			= "ammo_maxim"	-- класс используемых патронов
-weapon_maxim.m_ammo_type			= "maxim ammo"	-- тип используемых патронов
-weapon_maxim.m_clip_size			= 371			-- вместимость обоймы
-weapon_maxim.m_ammo_for_shot		= 1				-- кол-во патронов расходуемых на один выстрел
+weapon_maxim.m_ammo_class			= "ammo_maxim"	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_maxim.m_ammo_type			= "maxim ammo"	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_maxim.m_clip_size			= 371			-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
+weapon_maxim.m_ammo_for_shot		= 1				-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_maxim.m_normal_fov			= 90;
 weapon_maxim.m_zoomed_fov			= 75;
 weapon_maxim.m_model_fov			= 45;
 
--- Чувствительность мыши (коэффициент масштабирования)
+-- Р§СѓРІСЃС‚РІРёС‚РµР»СЊРЅРѕСЃС‚СЊ РјС‹С€Рё (РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ)
 weapon_maxim.m_zoomed_mouse_sens_scale	= 0.3;
 weapon_maxim.m_normal_mouse_sens_scale	= 1;
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_maxim.states_design = {};
 weapon_maxim.states_design["show"] = {{anim = "taking", snd = "maxim_taking", snd_params = snd_weapon_common},};
@@ -124,27 +124,27 @@ weapon_maxim.states_design["fire_finish"] = {
 
 weapon_maxim.states_design["fire_finish_zoomed"] = utils.clone(weapon_maxim.states_design["fire_finish"])
 
--- анимации для zoom in/out
+-- Р°РЅРёРјР°С†РёРё РґР»СЏ zoom in/out
 weapon_maxim.states_design["zoom_in"]				= {{anim = "down", snd = "maxim_down"},};
 weapon_maxim.states_design["zoom_out"]				= {{anim = "up", snd = "maxim_up"},};
 weapon_maxim.states_design["zoom_in_lenta_end"]		= {{anim = "lenta_end_down"},};
 weapon_maxim.states_design["zoom_out_lenta_end"]	= {{anim = "lenta_end_up"},};
 
--- закончилась лента
+-- Р·Р°РєРѕРЅС‡РёР»Р°СЃСЊ Р»РµРЅС‚Р°
 weapon_maxim.states_design["lenta_end"] = {{anim = "lenta_end", snd = "maxim_lenta_end2"},};
 
--- перезарядка
+-- РїРµСЂРµР·Р°СЂСЏРґРєР°
 weapon_maxim.states_design["reload"] = {{anim = "reload", snd = "maxim_reload", snd_params = snd_weapon_common},};
 weapon_maxim.states_design["pull_out_lenta"] = {{anim = "lenta_end2", snd = "maxim_lenta_end2"},};
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_maxim.guid = {0x4117be19, 0xba50, 0x4350, 0xa4, 0x3c, 0xb6, 0x53, 0xc6, 0xb6, 0x78, 0x74};
 
 function weapon_maxim:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_maxim = utils.inherit(sv_weapon_firearm, weapon_maxim);
 
 function sv_weapon_maxim:register_properties(prop_registry)
@@ -178,7 +178,7 @@ end
 ---------------------------------------------------------------------------
 function sv_weapon_maxim:event_lever2_down()
 	self.m_getup_after_reload = false	
-	-- для включения режима "ZOOM"
+	-- РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ СЂРµР¶РёРјР° "ZOOM"
 	if( self:get_cur_fsm_state(self.main_fsm) == self.idle_state ) then
 		if( self.m_is_zoomed ) then
 			self:change_fsm_state(self.main_fsm, self.zoom_out_state, true);
@@ -186,11 +186,11 @@ function sv_weapon_maxim:event_lever2_down()
 			self:change_fsm_state(self.main_fsm, self.zoom_in_state, true);
 		end
 	elseif( self.m_is_zoomed and self:get_cur_fsm_state(self.main_fsm) == self.reload_state) then
-		-- Если встаем во время лежачей перезарядки, то		
-		-- Восстанавливаем FOV
+		-- Р•СЃР»Рё РІСЃС‚Р°РµРј РІРѕ РІСЂРµРјСЏ Р»РµР¶Р°С‡РµР№ РїРµСЂРµР·Р°СЂСЏРґРєРё, С‚Рѕ		
+		-- Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј FOV
 		self:set_camera_fov(self.m_normal_fov, self.m_zoom_in_anim_length );
 		engine.mouse_set_sensetivity_scale(self.m_normal_mouse_sens_scale)
-		-- Возвращаем возможность управления игроком
+		-- Р’РѕР·РІСЂР°С‰Р°РµРј РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СѓРїСЂР°РІР»РµРЅРёСЏ РёРіСЂРѕРєРѕРј
 		local owner = self:get_owner();
 		owner:set_property_value_by_name("block_movement", false);
 		self.m_getup_after_reload = true
@@ -212,7 +212,7 @@ function sv_weapon_maxim:on_enter_idle()
 	else
 		self:visualize_state(self.main_fsm, self.state_visual_info, "idle");
 	end		
-	-- обновлять оружие в idle не нужно, idle - зацикленная
+	-- РѕР±РЅРѕРІР»СЏС‚СЊ РѕСЂСѓР¶РёРµ РІ idle РЅРµ РЅСѓР¶РЅРѕ, idle - Р·Р°С†РёРєР»РµРЅРЅР°СЏ
 	self:set_fsm_update_time(self.main_fsm, 0);
 end
 
@@ -223,7 +223,7 @@ function sv_weapon_maxim:event_reload()
 			self:change_fsm_state(self.main_fsm, self.reload_state, true);
 		else
 			if self:is_empty() then
-				-- Закончились патроны - преключаемся на следующее оружие (по приоритету)
+				-- Р—Р°РєРѕРЅС‡РёР»РёСЃСЊ РїР°С‚СЂРѕРЅС‹ - РїСЂРµРєР»СЋС‡Р°РµРјСЃСЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РѕСЂСѓР¶РёРµ (РїРѕ РїСЂРёРѕСЂРёС‚РµС‚Сѓ)
 				self:select_next_weapon()
 			end
 		end
@@ -284,7 +284,7 @@ function sv_weapon_maxim:on_enter_zoom_in()
 
 	local owner = self:get_owner();
 	owner:set_property_value_by_name("block_movement", true);
-	--.HACK.Slava Пока передаем явно число 32, так как в Lua нет побитовых операций
+	--.HACK.Slava РџРѕРєР° РїРµСЂРµРґР°РµРј СЏРІРЅРѕ С‡РёСЃР»Рѕ 32, С‚Р°Рє РєР°Рє РІ Lua РЅРµС‚ РїРѕР±РёС‚РѕРІС‹С… РѕРїРµСЂР°С†РёР№
 	owner:set_property_value_by_name("block_movement_flags", 32); 
 end
 
@@ -317,7 +317,7 @@ function sv_weapon_maxim:on_enter_hide()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_maxim = utils.inherit(cl_weapon_firearm, weapon_maxim);
 
 function cl_weapon_maxim:on_init()

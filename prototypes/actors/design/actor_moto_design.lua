@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev, Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Moto - солдат в мотоциклетных очках
+-- Actor Moto - СЃРѕР»РґР°С‚ РІ РјРѕС‚РѕС†РёРєР»РµС‚РЅС‹С… РѕС‡РєР°С…
 ------------------------------------------------------------------------
 
 actor_moto = {};
@@ -26,16 +26,16 @@ actor_moto.properties_design = utils.merge_arrays(actor_basic.properties_design,
 	{ "run_backward_speed",		280.0 },
 	{ "run_strafe_speed",		240.0 },
 	{ "jump_height",			20	  },
-	{ "turn_speed",				{700.0, 700.0, 700.0}  }, -- угловая скорость поворота
+	{ "turn_speed",				{700.0, 700.0, 700.0}  }, -- СѓРіР»РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р°
 	
-	-- праметры зрения
-	{ "view_fov",				90		},	-- угол обзора (град) 
-	{ "view_dist",				170		},	-- максимальная дальность зрения (м)
+	-- РїСЂР°РјРµС‚СЂС‹ Р·СЂРµРЅРёСЏ
+	{ "view_fov",				90		},	-- СѓРіРѕР» РѕР±Р·РѕСЂР° (РіСЂР°Рґ) 
+	{ "view_dist",				170		},	-- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР°Р»СЊРЅРѕСЃС‚СЊ Р·СЂРµРЅРёСЏ (Рј)
 	
     { "turn_hands",				3       },	--// 0 - none, 1 - right, 2 - left, 3 - both
 	{ "allow_head_turn",		true    },
 	
-	{ "ignore_insuperable_danger", 	false   }, -- реагировать на гранаты
+	{ "ignore_insuperable_danger", 	false   }, -- СЂРµР°РіРёСЂРѕРІР°С‚СЊ РЅР° РіСЂР°РЅР°С‚С‹
 	
 	{ "material_steps",	 "mat_actor_human_steps"	},
 	
@@ -44,37 +44,37 @@ actor_moto.properties_design = utils.merge_arrays(actor_basic.properties_design,
 });
 ---------------------------------------------------------------------------------
 actor_moto.params = {
-	-- варианты моделек
+	-- РІР°СЂРёР°РЅС‚С‹ РјРѕРґРµР»РµРє
 	--model_variants = {"pepe" , "pepe", "pepe"};
 
-	-- поворот тела относительно головы при ходьбе прямо и вбок
+	-- РїРѕРІРѕСЂРѕС‚ С‚РµР»Р° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РіРѕР»РѕРІС‹ РїСЂРё С…РѕРґСЊР±Рµ РїСЂСЏРјРѕ Рё РІР±РѕРє
 	body_rotate_forward_strafe = 30,
 	
-	-- время падения после которого начинает отыгрыватья анимация падения
+	-- РІСЂРµРјСЏ РїР°РґРµРЅРёСЏ РїРѕСЃР»Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅР°С‡РёРЅР°РµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	falling_time = 60, 
 	
-	-- высота, выше которой включается анимация падения
+	-- РІС‹СЃРѕС‚Р°, РІС‹С€Рµ РєРѕС‚РѕСЂРѕР№ РІРєР»СЋС‡Р°РµС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	above_ground_level = 2,
 	
-	-- время в течении которого персонаж должен находится в состоянии
-	-- idle_alert после последней атаки
+	-- РІСЂРµРјСЏ РІ С‚РµС‡РµРЅРёРё РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶ РґРѕР»Р¶РµРЅ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё
+	-- idle_alert РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµР№ Р°С‚Р°РєРё
 	aggresive_stance_time = 2000,
 	
-	-- Количество выстрелов в очереди.
+	-- РљРѕР»РёС‡РµСЃС‚РІРѕ РІС‹СЃС‚СЂРµР»РѕРІ РІ РѕС‡РµСЂРµРґРё.
 	burst_size			= 5,--= 15,
-	-- кол-во патронов в обойме
+	-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ РІ РѕР±РѕР№РјРµ
 	clip_size			= 20,--= 71,
 	
-	-- расстояние отступления
+	-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚СЃС‚СѓРїР»РµРЅРёСЏ
 	retreat_dist = 14,
-	-- расстояние преследования
+	-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ РїСЂРµСЃР»РµРґРѕРІР°РЅРёСЏ
 	chase_dist = 7,
-	-- расстояние стрейфа
+	-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ СЃС‚СЂРµР№С„Р°
 	dodge_dist = 5,
-	-- время стрейфа в одну сторону
+	-- РІСЂРµРјСЏ СЃС‚СЂРµР№С„Р° РІ РѕРґРЅСѓ СЃС‚РѕСЂРѕРЅСѓ
 	dodge_time = 1000,
 	
-	-- состояния в которых будут звучать шаги
+	-- СЃРѕСЃС‚РѕСЏРЅРёСЏ РІ РєРѕС‚РѕСЂС‹С… Р±СѓРґСѓС‚ Р·РІСѓС‡Р°С‚СЊ С€Р°РіРё
 	states_with_step_callbacks = {"forward_walk", "backward_walk", 
 								"strafe_left_walk", "strafe_right_walk",
 								"forward_run", "backward_run", 
@@ -97,7 +97,7 @@ actor_moto.config_states["reload_sit"] = {
 };
 ------------------------------------
 
--- настройки hitbox-ов
+-- РЅР°СЃС‚СЂРѕР№РєРё hitbox-РѕРІ
 actor_moto.params.hitboxes = { 
 	{name = "head", damage_k = 1.45, },
 	{name = "pelvis", damage_k = .8, },
@@ -113,11 +113,11 @@ actor_moto.params.hitboxes = {
     {name = "rthigh2", damage_k = .35, },
 };
 
--- параметры атаки
+-- РїР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё
 actor_moto.params.attack_info = {};
 
 
--- Атака на бегу
+-- РђС‚Р°РєР° РЅР° Р±РµРіСѓ
 actor_moto.params.attack_info[0] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 5,
@@ -138,20 +138,20 @@ actor_moto.params.attack_info[0] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
-	--pause_between_attacks = 2000, -- пауза между атаками такого типа
+	--pause_between_attacks = 2000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 		
-	-- Эффект, появляющийся при выстреле.
-	-- Ключами в данной таблице являются точки привязки в модели.
-	-- Значениям в данной таблице являются списки эффектов. Во время выстрела
-	-- будет выбран случайным образом один из эффектов в списке.
+	-- Р­С„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ.
+	-- РљР»СЋС‡Р°РјРё РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё РІ РјРѕРґРµР»Рё.
+	-- Р—РЅР°С‡РµРЅРёСЏРј РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ СЃРїРёСЃРєРё СЌС„С„РµРєС‚РѕРІ. Р’Рѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	-- Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ РІ СЃРїРёСЃРєРµ.
 	shoot_effect		= {
 								["#shoot_point"] = {"pfx_shot_soldier.lua"}, 
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -159,7 +159,7 @@ actor_moto.params.attack_info[0] = {
 	visual_state_prefix	= "attack_run",
 };
 
--- Атака стоя , будет использоваться только в якорях с block_movement = true
+-- РђС‚Р°РєР° СЃС‚РѕСЏ , Р±СѓРґРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ С‚РѕР»СЊРєРѕ РІ СЏРєРѕСЂСЏС… СЃ block_movement = true
 actor_moto.params.attack_info[1] = {
 	type				= ATTACK_DISTANT,
 	
@@ -182,18 +182,18 @@ actor_moto.params.attack_info[1] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
-	-- Эффект, появляющийся при выстреле.
-	-- Ключами в данной таблице являются точки привязки в модели.
-	-- Значениям в данной таблице являются списки эффектов. Во время выстрела
-	-- будет выбран случайным образом один из эффектов в списке.
+	-- Р­С„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ.
+	-- РљР»СЋС‡Р°РјРё РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё РІ РјРѕРґРµР»Рё.
+	-- Р—РЅР°С‡РµРЅРёСЏРј РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ СЃРїРёСЃРєРё СЌС„С„РµРєС‚РѕРІ. Р’Рѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	-- Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ РІ СЃРїРёСЃРєРµ.
 	shoot_effect		= {
 								["#shoot_point"]	= {"pfx_shot_soldier.lua"},
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -205,7 +205,7 @@ actor_moto.params.attack_info[1] = {
 
 -- [[
 
--- Бросок гранаты
+-- Р‘СЂРѕСЃРѕРє РіСЂР°РЅР°С‚С‹
 actor_moto.params.attack_info[2] = {
 	type				= ATTACK_DISTANT,
 	dist				= 15,
@@ -231,14 +231,14 @@ actor_moto.params.attack_info[2] = {
 	missile_angular_velocity	= {0, 10, 0},
 	
 	
-	pause_between_attacks = 10000, -- пауза между атаками такого типа
+	pause_between_attacks = 10000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
 	fsm_state			= "attack",
 	visual_state_prefix	= "attack_missile",
 };
 
--- ближняя атака
+-- Р±Р»РёР¶РЅСЏСЏ Р°С‚Р°РєР°
 actor_moto.params.attack_info["melee"] = {
 		type				= ATTACK_MELEE,
 		dist				= 2, 
@@ -252,7 +252,7 @@ actor_moto.params.attack_info["melee"] = {
 		turn_body_to_enemy	= 1,
 		
 		priority = 3, 
-		pause_between_attacks = 4000, -- пауза между атаками такого типа
+		pause_between_attacks = 4000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 		
 		
 		damage_type			= g_damage_type.KNOCK,
@@ -268,10 +268,10 @@ actor_moto.params.attack_info["melee"] = {
 
 
 -------------------------------------------
--- атаки для якорей
+-- Р°С‚Р°РєРё РґР»СЏ СЏРєРѕСЂРµР№
 -------------------------------------------
 
--- атака стоя , будет использоваться только в якорях, с visual_config = "sit"
+-- Р°С‚Р°РєР° СЃС‚РѕСЏ , Р±СѓРґРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ С‚РѕР»СЊРєРѕ РІ СЏРєРѕСЂСЏС…, СЃ visual_config = "sit"
 actor_moto.params.attack_info["from_cover"] = {
 	type				= ATTACK_DISTANT,
 	
@@ -289,11 +289,11 @@ actor_moto.params.attack_info["from_cover"] = {
 	
 	priority = 0, 
 	
-	burst_size = 10,			-- количество выстрелов в очереди для данной атаки
-	burst_size_random_add = 5,  -- к количеству добавляем случайно еще (от 0 до N)
+	burst_size = 10,			-- РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹СЃС‚СЂРµР»РѕРІ РІ РѕС‡РµСЂРµРґРё РґР»СЏ РґР°РЅРЅРѕР№ Р°С‚Р°РєРё
+	burst_size_random_add = 5,  -- Рє РєРѕР»РёС‡РµСЃС‚РІСѓ РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РµС‰Рµ (РѕС‚ 0 РґРѕ N)
 	
-	pause_between_attacks	= 4000, 			-- пауза между атаками такого типа
-	pause_between_attacks_random_add = 3000,	-- к паузе добавляем случайно время (от 0 до X)
+	pause_between_attacks	= 4000, 			-- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
+	pause_between_attacks_random_add = 3000,	-- Рє РїР°СѓР·Рµ РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РІСЂРµРјСЏ (РѕС‚ 0 РґРѕ X)
 
 			
 	damage_type			= g_damage_type.GUNSHOT,
@@ -301,18 +301,18 @@ actor_moto.params.attack_info["from_cover"] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
-	-- Эффект, появляющийся при выстреле.
-	-- Ключами в данной таблице являются точки привязки в модели.
-	-- Значениям в данной таблице являются списки эффектов. Во время выстрела
-	-- будет выбран случайным образом один из эффектов в списке.
+	-- Р­С„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ.
+	-- РљР»СЋС‡Р°РјРё РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё РІ РјРѕРґРµР»Рё.
+	-- Р—РЅР°С‡РµРЅРёСЏРј РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ СЃРїРёСЃРєРё СЌС„С„РµРєС‚РѕРІ. Р’Рѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	-- Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ РІ СЃРїРёСЃРєРµ.
 	shoot_effect		= {
 								["#shoot_point"]	= {"pfx_shot_soldier.lua"},
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -322,7 +322,7 @@ actor_moto.params.attack_info["from_cover"] = {
 };
 
 
--- атака сидя
+-- Р°С‚Р°РєР° СЃРёРґСЏ
 actor_moto.params.attack_info["sit"] = {
 	type				= ATTACK_DISTANT,
 	
@@ -345,18 +345,18 @@ actor_moto.params.attack_info["sit"] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
-	-- Эффект, появляющийся при выстреле.
-	-- Ключами в данной таблице являются точки привязки в модели.
-	-- Значениям в данной таблице являются списки эффектов. Во время выстрела
-	-- будет выбран случайным образом один из эффектов в списке.
+	-- Р­С„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ.
+	-- РљР»СЋС‡Р°РјРё РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё РІ РјРѕРґРµР»Рё.
+	-- Р—РЅР°С‡РµРЅРёСЏРј РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ СЃРїРёСЃРєРё СЌС„С„РµРєС‚РѕРІ. Р’Рѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	-- Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ РІ СЃРїРёСЃРєРµ.
 	shoot_effect		= {
 								["#shoot_point"]	= {"pfx_shot_soldier.lua"},
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -365,7 +365,7 @@ actor_moto.params.attack_info["sit"] = {
 };
 
 
--- стрельба из-за угла слева
+-- СЃС‚СЂРµР»СЊР±Р° РёР·-Р·Р° СѓРіР»Р° СЃР»РµРІР°
 actor_moto.params.attack_info[3] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 5,
@@ -378,10 +378,10 @@ actor_moto.params.attack_info[3] = {
 	stop_during_attack	= 1,
 	turn_body_to_enemy	= 1,
 	
-	pause_between_attacks	= 4000, 			-- пауза между атаками такого типа
-	pause_between_attacks_random_add = 3000,	-- к паузе добавляем случайно время (от 0 до X)
+	pause_between_attacks	= 4000, 			-- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
+	pause_between_attacks_random_add = 3000,	-- Рє РїР°СѓР·Рµ РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РІСЂРµРјСЏ (РѕС‚ 0 РґРѕ X)
 	
-	burst_size_random_add = 5,  -- к количеству  выстрелов в очереди добавляем случайно еще (от 0 до N)
+	burst_size_random_add = 5,  -- Рє РєРѕР»РёС‡РµСЃС‚РІСѓ  РІС‹СЃС‚СЂРµР»РѕРІ РІ РѕС‡РµСЂРµРґРё РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РµС‰Рµ (РѕС‚ 0 РґРѕ N)
 
 		
 	damage_type			= g_damage_type.GUNSHOT,
@@ -389,14 +389,14 @@ actor_moto.params.attack_info[3] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
 	shoot_effect		= {
 								["#shoot_point"] = {"pfx_shot_soldier.lua"}, 
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -407,7 +407,7 @@ actor_moto.params.attack_info[3] = {
 	allow_blind_attack	= true,
 };
 
--- стрельба из-за угла справа
+-- СЃС‚СЂРµР»СЊР±Р° РёР·-Р·Р° СѓРіР»Р° СЃРїСЂР°РІР°
 actor_moto.params.attack_info[4] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 5,
@@ -421,10 +421,10 @@ actor_moto.params.attack_info[4] = {
 	turn_body_to_enemy	= 1,
 	
 	
-	pause_between_attacks	= 4000, 			-- пауза между атаками такого типа
-	pause_between_attacks_random_add = 3000,	-- к паузе добавляем случайно время (от 0 до X)
+	pause_between_attacks	= 4000, 			-- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
+	pause_between_attacks_random_add = 3000,	-- Рє РїР°СѓР·Рµ РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РІСЂРµРјСЏ (РѕС‚ 0 РґРѕ X)
 	
-	burst_size_random_add = 5,  -- к количеству  выстрелов в очереди добавляем случайно еще (от 0 до N)
+	burst_size_random_add = 5,  -- Рє РєРѕР»РёС‡РµСЃС‚РІСѓ  РІС‹СЃС‚СЂРµР»РѕРІ РІ РѕС‡РµСЂРµРґРё РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РµС‰Рµ (РѕС‚ 0 РґРѕ N)
 
 			
 	damage_type			= g_damage_type.GUNSHOT,
@@ -432,14 +432,14 @@ actor_moto.params.attack_info[4] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
 	shoot_effect		= {
 								["#shoot_point"] = {"pfx_shot_soldier.lua"}, 
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -450,7 +450,7 @@ actor_moto.params.attack_info[4] = {
 	allow_blind_attack	= true,
 };
 
--- бросок гранаты слева
+-- Р±СЂРѕСЃРѕРє РіСЂР°РЅР°С‚С‹ СЃР»РµРІР°
 actor_moto.params.attack_info[5] = {
 	type				= ATTACK_DISTANT,
 	dist				= 15,
@@ -468,8 +468,8 @@ actor_moto.params.attack_info[5] = {
 	missile_velocity			= 1000,
 	missile_angular_velocity	= {0, 10, 0},
 	
-	pause_between_attacks = 6000, -- пауза между атаками такого типа
-	pause_between_attacks_random_add = 4000,	-- к паузе добавляем случайно время (от 0 до X)
+	pause_between_attacks = 6000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
+	pause_between_attacks_random_add = 4000,	-- Рє РїР°СѓР·Рµ РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РІСЂРµРјСЏ (РѕС‚ 0 РґРѕ X)
 
 	
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -480,7 +480,7 @@ actor_moto.params.attack_info[5] = {
 	allow_blind_attack	= true,
 };
 
--- бросок гранаты справа
+-- Р±СЂРѕСЃРѕРє РіСЂР°РЅР°С‚С‹ СЃРїСЂР°РІР°
 actor_moto.params.attack_info[6] = {
 	type				= ATTACK_DISTANT,
 	dist				= 15,
@@ -498,8 +498,8 @@ actor_moto.params.attack_info[6] = {
 	missile_velocity			= 1000,
 	missile_angular_velocity	= {0, 10, 0},
 	
-	pause_between_attacks = 6000, -- пауза между атаками такого типа
-	pause_between_attacks_random_add = 4000,	-- к паузе добавляем случайно время (от 0 до X)
+	pause_between_attacks = 6000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
+	pause_between_attacks_random_add = 4000,	-- Рє РїР°СѓР·Рµ РґРѕР±Р°РІР»СЏРµРј СЃР»СѓС‡Р°Р№РЅРѕ РІСЂРµРјСЏ (РѕС‚ 0 РґРѕ X)
 
 	
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -514,7 +514,7 @@ actor_moto.params.attack_info[6] = {
 
 
 ---------------------------------------------------------------------------------
--- состояние тела
+-- СЃРѕСЃС‚РѕСЏРЅРёРµ С‚РµР»Р°
 actor_moto.params.body_states_transistions = {};
 actor_moto.params.body_states_transistions[NORMAL_BODY_STATE] = {};
 actor_moto.params.body_states_transistions[SIT_BODY_STATE] = {};
@@ -551,7 +551,7 @@ actor_moto.states_design["idle_alert"] = {
 			};
 			
 -------------------------------------------------------------
--- TRANSITION TO IDLE ALERT (Переход в агрессивное состояние)
+-- TRANSITION TO IDLE ALERT (РџРµСЂРµС…РѕРґ РІ Р°РіСЂРµСЃСЃРёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ)
 -------------------------------------------------------------
 actor_moto.states_design["transition_to_alert"] = {
 			{weight = 1, snd = "moto_alert1", snd_params = snd_actor_alert},
@@ -605,21 +605,21 @@ actor_moto.states_design["strafe_right_run"] = {
 ----------------------------
 -- JUMP & FALL & LAND
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 actor_moto.states_design["jump_prepare"] = {
 			{anim = "jamp6", anim_speed = 1.0, snd = " ", snd_params = snd_actor_common},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_moto.states_design["jump_begin"] = {
 			{anim = "jamp7", anim_speed = 1.0, snd = " ", snd_params = snd_actor_common},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_moto.states_design["fall"] = {
 			{anim = "jamp3", anim_speed = 1.0, anim_playback = ANIM_PB_REPEATEDLY, snd = " ", snd_params = snd_actor_common},};
 
--- приземление на бегу
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° Р±РµРіСѓ
 actor_moto.states_design["land_run"] = {
 			{anim = "jamp_4run", anim_speed = 1, snd = " ", snd_params = snd_actor_common},};
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_moto.states_design["land_stand"] = {
 			{anim = "jamp5", anim_speed = 1, snd = " ", snd_params = snd_actor_common},};
 			
@@ -765,7 +765,7 @@ actor_moto.states_design["reload"] = {
 };
 			
 --------------------------------------------------------
--- Переходы из стоячего положения в сидячее и обратно
+-- РџРµСЂРµС…РѕРґС‹ РёР· СЃС‚РѕСЏС‡РµРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ РІ СЃРёРґСЏС‡РµРµ Рё РѕР±СЂР°С‚РЅРѕ
 --------------------------------------------------------
 actor_moto.states_design["transition_stay_to_sit"] = {
 			{anim = "perehod_p1_p2", anim_speed = 1.5, snd = "Ded_reload1_attack", snd_params = snd_actor_common},};

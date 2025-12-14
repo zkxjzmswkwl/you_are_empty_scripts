@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Базовый класс для автоматов
+-- Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ Р°РІС‚РѕРјР°С‚РѕРІ
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------
@@ -14,18 +14,18 @@ function weapon_automatic:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_automatic = utils.inherit(sv_weapon_firearm, weapon_automatic);
 
 ---------------------------------------------------------------------------
-sv_weapon_automatic.m_sit_disp_k					= 0.5	-- коэффициент масштабирования разброса в режиме сидя
-sv_weapon_automatic.m_sit_recoil_k					= 0.5	-- коэффициент масштабирования отдачи в режиме сидя
-sv_weapon_automatic.m_last_shots_number				= 10	-- число учитываемых последних выстрелов
-sv_weapon_automatic.m_one_shot_energy				= 50	-- энергия одного выстрела
-sv_weapon_automatic.m_recoil_time_correction_k_min	= 0.5	-- минимальное значение коэффициента (1 - нет коррекции)
-sv_weapon_automatic.m_recoil_time_correction_k_max	= 1.5	-- максимальное значение коэффициента
-sv_weapon_automatic.m_disp_time_correction_k_min	= 0.5	-- минимальное значение коэффициента (1 - нет коррекции)
-sv_weapon_automatic.m_disp_time_correction_k_max	= 1.5	-- максимальное значение коэффициента
+sv_weapon_automatic.m_sit_disp_k					= 0.5	-- РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ СЂР°Р·Р±СЂРѕСЃР° РІ СЂРµР¶РёРјРµ СЃРёРґСЏ
+sv_weapon_automatic.m_sit_recoil_k					= 0.5	-- РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ РѕС‚РґР°С‡Рё РІ СЂРµР¶РёРјРµ СЃРёРґСЏ
+sv_weapon_automatic.m_last_shots_number				= 10	-- С‡РёСЃР»Рѕ СѓС‡РёС‚С‹РІР°РµРјС‹С… РїРѕСЃР»РµРґРЅРёС… РІС‹СЃС‚СЂРµР»РѕРІ
+sv_weapon_automatic.m_one_shot_energy				= 50	-- СЌРЅРµСЂРіРёСЏ РѕРґРЅРѕРіРѕ РІС‹СЃС‚СЂРµР»Р°
+sv_weapon_automatic.m_recoil_time_correction_k_min	= 0.5	-- РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° (1 - РЅРµС‚ РєРѕСЂСЂРµРєС†РёРё)
+sv_weapon_automatic.m_recoil_time_correction_k_max	= 1.5	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
+sv_weapon_automatic.m_disp_time_correction_k_min	= 0.5	-- РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° (1 - РЅРµС‚ РєРѕСЂСЂРµРєС†РёРё)
+sv_weapon_automatic.m_disp_time_correction_k_max	= 1.5	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 
 ---------------------------------------------------------------------------
 function sv_weapon_automatic:register_properties(prop_registry)
@@ -99,7 +99,7 @@ function sv_weapon_automatic:on_update_fire_finish()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_automatic = utils.inherit(cl_weapon_firearm, weapon_automatic);
 
 function cl_weapon_automatic:on_init()

@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Madman - монстр псих.больной
+-- Actor Madman - РјРѕРЅСЃС‚СЂ РїСЃРёС….Р±РѕР»СЊРЅРѕР№
 ------------------------------------------------------------------------
 
 actor_madman = {};
@@ -25,25 +25,25 @@ actor_madman.properties_design = utils.merge_arrays(actor_basic.properties_desig
 	{ "run_backward_speed",		220.0 },
 	{ "run_strafe_speed",		210.0 },
 	{ "jump_height",			50	  },
-	{ "turn_speed",				{180.0, 180.0, 380.0}  }, -- угловая скорость поворота
+	{ "turn_speed",				{180.0, 180.0, 380.0}  }, -- СѓРіР»РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р°
 	
 	{ "rag_doll_model",			"psih_ragdoll"  },
 });
 ---------------------------------------------------------------------------------
 actor_madman.params = {
-	-- поворот тела относительно головы при ходьбе прямо и вбок
+	-- РїРѕРІРѕСЂРѕС‚ С‚РµР»Р° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РіРѕР»РѕРІС‹ РїСЂРё С…РѕРґСЊР±Рµ РїСЂСЏРјРѕ Рё РІР±РѕРє
 	body_rotate_forward_strafe = 30,
-	-- время падения после которого начинает отыгрыватья анимация падения
+	-- РІСЂРµРјСЏ РїР°РґРµРЅРёСЏ РїРѕСЃР»Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅР°С‡РёРЅР°РµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	falling_time = 60, 
-	-- высота, выше которой включается анимация падения
+	-- РІС‹СЃРѕС‚Р°, РІС‹С€Рµ РєРѕС‚РѕСЂРѕР№ РІРєР»СЋС‡Р°РµС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	above_ground_level = 1,
-	-- время в течении которого персонаж должен находится в состоянии
-	-- idle_alert после последней атаки
+	-- РІСЂРµРјСЏ РІ С‚РµС‡РµРЅРёРё РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶ РґРѕР»Р¶РµРЅ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё
+	-- idle_alert РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµР№ Р°С‚Р°РєРё
 	aggresive_stance_time = 30000,
 };
 
 
--- настройки hitbox-ов
+-- РЅР°СЃС‚СЂРѕР№РєРё hitbox-РѕРІ
 actor_madman.params.hitboxes = { 
 	{name = "head", damage_k = 1.7, },
 	{name = "pelvis", damage_k = 1, },
@@ -60,7 +60,7 @@ actor_madman.params.hitboxes = {
 };
 
 
--- параметры атаки
+-- РїР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё
 actor_madman.params.attack_info = {};
 
 actor_madman.params.attack_info[0] = {
@@ -127,7 +127,7 @@ actor_madman.states_design["idle_alert"] = {
 			{anim = "alert2",anim_speed = 1, weight = 1, snd = "Psih_Kolbasivo2"},};
 			
 -------------------------------------------------------------
--- TRANSITION TO ALERT (Переход в агрессивное состояние)
+-- TRANSITION TO ALERT (РџРµСЂРµС…РѕРґ РІ Р°РіСЂРµСЃСЃРёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ)
 -------------------------------------------------------------
 actor_madman.states_design["transition_to_alert"] = {
 	{anim = nil, weight = 1, snd = "psih_klich", snd_params = snd_actor_alert},
@@ -159,21 +159,21 @@ actor_madman.states_design["strafe_right_run"] = {
 ----------------------------
 -- JUMP & FALL & LAND
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 actor_madman.states_design["jump_prepare"] = {
 			{anim = "run", anim_speed = 1.0, snd = "Psih_Run"},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_madman.states_design["jump_begin"] = {
 			{anim = "run", anim_speed = 1, snd = "Psih_Run"},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_madman.states_design["fall"] = {
 			{anim = "run", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Psih_Run"},};
 
--- приземление на бегу
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° Р±РµРіСѓ
 actor_madman.states_design["land_run"] = {
 			{anim = "run2", anim_speed = 1, snd = "Psih_Run"},};
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_madman.states_design["land_stand"] = {
 			{anim = "run", anim_speed = 1, snd = "Psih_Run"},};
 

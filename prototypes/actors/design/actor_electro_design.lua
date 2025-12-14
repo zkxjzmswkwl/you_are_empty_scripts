@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Electro - монстр электрик
+-- Actor Electro - РјРѕРЅСЃС‚СЂ СЌР»РµРєС‚СЂРёРє
 ------------------------------------------------------------------------
 
 actor_electro = {};
@@ -26,43 +26,43 @@ actor_electro.properties_design = utils.merge_arrays(actor_basic.properties_desi
 	{ "run_backward_speed",		310.0 },
 	{ "run_strafe_speed",		210.0 },
 	{ "jump_height",			130 },
-	{ "turn_speed",				{180.0, 180.0, 380.0}  }, -- угловая скорость поворота
+	{ "turn_speed",				{180.0, 180.0, 380.0}  }, -- СѓРіР»РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р°
 	
-	-- праметры зрения
-	{ "view_fov",				90	  },	-- угол обзора (град) 
-	{ "view_dist",				35	  },	-- максимальная дальность зрения (м)
+	-- РїСЂР°РјРµС‚СЂС‹ Р·СЂРµРЅРёСЏ
+	{ "view_fov",				90	  },	-- СѓРіРѕР» РѕР±Р·РѕСЂР° (РіСЂР°Рґ) 
+	{ "view_dist",				35	  },	-- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР°Р»СЊРЅРѕСЃС‚СЊ Р·СЂРµРЅРёСЏ (Рј)
 	
-	-- выравнивать модель по положению нормали земли, на которой стоим
+	-- РІС‹СЂР°РІРЅРёРІР°С‚СЊ РјРѕРґРµР»СЊ РїРѕ РїРѕР»РѕР¶РµРЅРёСЋ РЅРѕСЂРјР°Р»Рё Р·РµРјР»Рё, РЅР° РєРѕС‚РѕСЂРѕР№ СЃС‚РѕРёРј
 	{ "align_model_to_ground_normal",	true	  },
 	{ "align_model_only_by_pitch",		true	  },
 });
 ---------------------------------------------------------------------------------
 actor_electro.params = {
-	-- поворот тела относительно головы при ходьбе прямо и вбок
+	-- РїРѕРІРѕСЂРѕС‚ С‚РµР»Р° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РіРѕР»РѕРІС‹ РїСЂРё С…РѕРґСЊР±Рµ РїСЂСЏРјРѕ Рё РІР±РѕРє
 	body_rotate_forward_strafe = 30,
-	-- время падения после которого начинает отыгрыватья анимация падения
+	-- РІСЂРµРјСЏ РїР°РґРµРЅРёСЏ РїРѕСЃР»Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅР°С‡РёРЅР°РµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	falling_time = 200, 
-	-- высота, выше которой включается анимация падения
+	-- РІС‹СЃРѕС‚Р°, РІС‹С€Рµ РєРѕС‚РѕСЂРѕР№ РІРєР»СЋС‡Р°РµС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	above_ground_level = 1,
-	-- время в течении которого персонаж должен находится в состоянии
-	-- idle_alert после последней атаки
+	-- РІСЂРµРјСЏ РІ С‚РµС‡РµРЅРёРё РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶ РґРѕР»Р¶РµРЅ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё
+	-- idle_alert РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµР№ Р°С‚Р°РєРё
 	aggresive_stance_time = 60000,
 	
-	-- расстояние отступления
+	-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚СЃС‚СѓРїР»РµРЅРёСЏ
 	retreat_dist = 7,
-	-- расстояние преследования
+	-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ РїСЂРµСЃР»РµРґРѕРІР°РЅРёСЏ
 	chase_dist = 4,
-	-- расстояние стрейфа
+	-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ СЃС‚СЂРµР№С„Р°
 	dodge_dist = 5,
-	-- время стрейфа в одну сторону
+	-- РІСЂРµРјСЏ СЃС‚СЂРµР№С„Р° РІ РѕРґРЅСѓ СЃС‚РѕСЂРѕРЅСѓ
 	dodge_time = 3000,
 	
 	--[[
-	-- настройки для взрыва регдола, после смерти - 
-	-- разлета кусков после сильного повреждения
+	-- РЅР°СЃС‚СЂРѕР№РєРё РґР»СЏ РІР·СЂС‹РІР° СЂРµРіРґРѕР»Р°, РїРѕСЃР»Рµ СЃРјРµСЂС‚Рё - 
+	-- СЂР°Р·Р»РµС‚Р° РєСѓСЃРєРѕРІ РїРѕСЃР»Рµ СЃРёР»СЊРЅРѕРіРѕ РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 	death_explosion_impulse_threshold = nil;
 	death_explosion_damage_threshold = 90;
-	-- настроки для взрыва регдола
+	-- РЅР°СЃС‚СЂРѕРєРё РґР»СЏ РІР·СЂС‹РІР° СЂРµРіРґРѕР»Р°
 	death_explosion_effect = "Rat_Blood.lua";
 	death_explosion_model_name = "rat";
 	death_explosion_debris_model = "rat_debris";
@@ -71,7 +71,7 @@ actor_electro.params = {
 };
 
 ---------------------------------------------------------------------------------
--- состояние тела
+-- СЃРѕСЃС‚РѕСЏРЅРёРµ С‚РµР»Р°
 --actor_electro.params.body_states_transistions = {};
 --actor_electro.params.body_states_transistions[NORMAL_BODY_STATE] = {};
 --actor_electro.params.body_states_transistions[SIT_BODY_STATE] = {};
@@ -80,7 +80,7 @@ actor_electro.params = {
 --actor_electro.params.body_states_transistions[SIT_BODY_STATE][NORMAL_BODY_STATE] = "transition_sit_to_stay";
 
 
--- настройки hitbox-ов
+-- РЅР°СЃС‚СЂРѕР№РєРё hitbox-РѕРІ
 actor_electro_damage_k = 0.6;
 actor_electro.params.hitboxes = { 
 	{name = "head", damage_k = 1.7 * actor_electro_damage_k, },
@@ -97,10 +97,10 @@ actor_electro.params.hitboxes = {
     {name = "rthigh2", damage_k = .45 * actor_electro_damage_k, },
 };
 
--- параметры атаки
+-- РїР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё
 actor_electro.params.attack_info = {};
 
--- ближняя атака
+-- Р±Р»РёР¶РЅСЏСЏ Р°С‚Р°РєР°
 actor_electro.params.attack_info[0] = {
 		type				= ATTACK_MELEE,
 		dist				= 2, 
@@ -111,7 +111,7 @@ actor_electro.params.attack_info[0] = {
 		turn_body_to_enemy	= 1,
 		
 		priority = 1, 
-		pause_between_attacks = 4000, -- пауза между атаками такого типа
+		pause_between_attacks = 4000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 		
 			
 		damage_type			= g_damage_type.KNOCK,
@@ -140,12 +140,12 @@ actor_electro.params.attack_info[1] = {
 		--critical_min_dist	= 3,
 		
 		priority = 0, 
-		pause_between_attacks = 2500, -- пауза между атаками такого типа
+		pause_between_attacks = 2500, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 		
 		dispersion			= 0,
 		offset_pos			= {0, 1, 1.70},
 		
-		-- коррекция для попадания по параболе: на dist метрах мы целимся на height метров выше.
+		-- РєРѕСЂСЂРµРєС†РёСЏ РґР»СЏ РїРѕРїР°РґР°РЅРёСЏ РїРѕ РїР°СЂР°Р±РѕР»Рµ: РЅР° dist РјРµС‚СЂР°С… РјС‹ С†РµР»РёРјСЃСЏ РЅР° height РјРµС‚СЂРѕРІ РІС‹С€Рµ.
 		--height_offset				= {min_height = 0, min_dist = 5, max_dist = 15, max_height = 4}, 
 		height_offset				= {min_height = 0, min_dist = 5, max_dist = 25, max_height = 12}, 
 		missile						= "ammo_missile_fireball",
@@ -161,7 +161,7 @@ actor_electro.params.attack_info[1] = {
 		shoot_effect		= {["#shoot_point"] = {"pfx_electro_attack_start.lua"},},
 };
 
--- атака прыжок
+-- Р°С‚Р°РєР° РїСЂС‹Р¶РѕРє
 actor_electro.params.attack_info[2] = {
 
 	type				= ATTACK_JUMP,
@@ -182,7 +182,7 @@ actor_electro.params.attack_info[2] = {
 	offset_pos			= {0, 0, 0.70},
 	
 	priority = 1,
-	--pause_between_attacks = 8000, -- пауза между атаками такого типа
+	--pause_between_attacks = 8000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	jump_height			= 3,
 	
@@ -211,7 +211,7 @@ actor_electro.states_design["idle_alert"] = {
 			{anim = "alert3", anim_speed = 1.6, snd = "Electrik_idle3_p1", weight = 1},};
 			
 -------------------------------------------------------------
--- TRANSITION TO ALERT (Переход в агрессивное состояние)
+-- TRANSITION TO ALERT (РџРµСЂРµС…РѕРґ РІ Р°РіСЂРµСЃСЃРёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ)
 -------------------------------------------------------------
 actor_electro.states_design["transition_to_alert"] = {
 	{anim = nil, weight = 1, snd = "electrik_klich", snd_params = snd_actor_alert},
@@ -251,28 +251,28 @@ actor_electro.states_design["strafe_right_run"] = {
 ----------------------------
 -- JUMP & FALL & LAND
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 
 actor_electro.states_design["jump_prepare"] = {
 			body_state = SIT_BODY_STATE,
 			{anim = "jamp1", anim_speed = 1.0, snd = "Electrik_volk_spid"},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_electro.states_design["jump_begin"] = {
 			body_state = SIT_BODY_STATE,
 			{anim = "jamp2", anim_speed = 1, snd = "Electrik_jump_pered"},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_electro.states_design["fall"] = {
 			body_state = SIT_BODY_STATE,
 			{anim = "jamp3", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY,},};
 
--- приземление на бегу
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° Р±РµРіСѓ
 actor_electro.states_design["land_run"] = {
 			body_state = SIT_BODY_STATE,
 --			{anim = "jamp5", anim_speed = 2, snd = "Electrik_volk_spid"},
 			{anim = "jamp4", anim_speed = 2, snd = "Electrik_volk_spid"},
 };
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_electro.states_design["land_stand"] = {
 			{anim = "jamp4", anim_speed = 2, snd = "Electrik_volk_spid"},
 };
@@ -312,7 +312,7 @@ actor_electro.states_design["attack_missile_end"] = {
 			{anim = "atak_4_p3_out"},};
 
 --------------------------------------------------------
--- Переходы из стоячего положения в сидячее и обратно
+-- РџРµСЂРµС…РѕРґС‹ РёР· СЃС‚РѕСЏС‡РµРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ РІ СЃРёРґСЏС‡РµРµ Рё РѕР±СЂР°С‚РЅРѕ
 --------------------------------------------------------
 actor_electro.states_design["transition_stay_to_sit"] = {
 			{anim = "perehod_p2", anim_speed = 1, snd = "Electrik_perehod_p2"},};

@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- ai controller basic, скриптовое представление для базового актера.
+-- ai controller basic, СЃРєСЂРёРїС‚РѕРІРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РґР»СЏ Р±Р°Р·РѕРІРѕРіРѕ Р°РєС‚РµСЂР°.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -18,11 +18,11 @@ ai_controller_basic.params = {
 };
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ai_controller_basic.guid = {0x31856808, 0x8af8, 0x4289, 0x9e, 0x6b, 0xef, 0x70, 0x86, 0xd9, 0x72, 0xe8};
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 function ai_controller_basic:register_properties(prop_registry)
 end
 
@@ -33,7 +33,7 @@ function ai_controller_basic:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ai_controller_basic = utils.inherit(sv_game_object, ai_controller_basic);
 
 function sv_ai_controller_basic:register_properties(prop_registry)
@@ -47,7 +47,7 @@ function sv_ai_controller_basic:on_init()
 	
 	self:init_properties_from_table(self.properties_design);
 	
-	-- получить ссылки на прототипы задачи, описаных на CPP
+	-- РїРѕР»СѓС‡РёС‚СЊ СЃСЃС‹Р»РєРё РЅР° РїСЂРѕС‚РѕС‚РёРїС‹ Р·Р°РґР°С‡Рё, РѕРїРёСЃР°РЅС‹С… РЅР° CPP
 	self.m_goal_chase = self:get_goal_prototype("chase");
 	self.m_goal_retreat = self:get_goal_prototype("retreat");
 	self.m_goal_dodge = self:get_goal_prototype("dodge");
@@ -74,16 +74,16 @@ function sv_ai_controller_basic:on_init()
 	self:add_strategy_evaluator("flee_from_danger", self.flee_from_danger_evaluator);
 	self:add_strategy_evaluator("guard", self.guard_evaluator);
 	
-	-- игнорировать наличие врагов	
+	-- РёРіРЅРѕСЂРёСЂРѕРІР°С‚СЊ РЅР°Р»РёС‡РёРµ РІСЂР°РіРѕРІ	
 	self.io.m_need_to_ignore_enemies = false;	
-	-- переменные атаки
+	-- РїРµСЂРµРјРµРЅРЅС‹Рµ Р°С‚Р°РєРё
 	self.io.m_attack_started = false;
 	self.io.m_last_attack_time = 0;
 	self.io.m_last_attack_time_end = 0;
-	-- режим в котором ИИ стреляет в предполагаемую
-	-- позицию игрока, не проверяя is_enemy_visible
+	-- СЂРµР¶РёРј РІ РєРѕС‚РѕСЂРѕРј РР СЃС‚СЂРµР»СЏРµС‚ РІ РїСЂРµРґРїРѕР»Р°РіР°РµРјСѓСЋ
+	-- РїРѕР·РёС†РёСЋ РёРіСЂРѕРєР°, РЅРµ РїСЂРѕРІРµСЂСЏСЏ is_enemy_visible
 	self.io.m_blind_attack_allowed = false;
-	-- переменные для guard
+	-- РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ guard
 	self.m_guard_target = nil;
 	self.m_guard_radius = 0;
 	self.m_guard_ignore_enemies = false;
@@ -95,27 +95,27 @@ function sv_ai_controller_basic:on_init()
 	self.io.m_is_actor_movement_blocked = false;
 	
 	--------------------
-	-- параметры для режима смены позиции 
+	-- РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ СЂРµР¶РёРјР° СЃРјРµРЅС‹ РїРѕР·РёС†РёРё 
 	--------------------
-	-- устанавливается в evaluate_attack_anchors
-	-- если выбран новый якорь, и учитывается в goal_relocate,
-	-- для выбора нового маршрута
+	-- СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ РІ evaluate_attack_anchors
+	-- РµСЃР»Рё РІС‹Р±СЂР°РЅ РЅРѕРІС‹Р№ СЏРєРѕСЂСЊ, Рё СѓС‡РёС‚С‹РІР°РµС‚СЃСЏ РІ goal_relocate,
+	-- РґР»СЏ РІС‹Р±РѕСЂР° РЅРѕРІРѕРіРѕ РјР°СЂС€СЂСѓС‚Р°
 	self.io.m_activate_relocate = false;
-	-- включается после выбора якоря 
-	-- и до завершения выполнения goal relocate
+	-- РІРєР»СЋС‡Р°РµС‚СЃСЏ РїРѕСЃР»Рµ РІС‹Р±РѕСЂР° СЏРєРѕСЂСЏ 
+	-- Рё РґРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ goal relocate
 	self.io.m_need_to_relocate = false;
-	-- параметры для работы goal_relocate
+	-- РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ СЂР°Р±РѕС‚С‹ goal_relocate
 	self.io.m_relocate_pos = nil;
 	self.io.m_relocate_radius = 0;
 	
-	-- массивы в котором хранятся якоря для ИИ
+	-- РјР°СЃСЃРёРІС‹ РІ РєРѕС‚РѕСЂРѕРј С…СЂР°РЅСЏС‚СЃСЏ СЏРєРѕСЂСЏ РґР»СЏ РР
 	self.m_attack_anchors = nil;
 	
-	-- сведения о текущих якорях
+	-- СЃРІРµРґРµРЅРёСЏ Рѕ С‚РµРєСѓС‰РёС… СЏРєРѕСЂСЏС…
 	self.m_last_anchor = nil;
 	self.m_current_anchor = nil;
 	self.io.m_current_anchor_used = false;
-	-- если false, то атаки где нужно останавливаться выбираться не будудт
+	-- РµСЃР»Рё false, С‚Рѕ Р°С‚Р°РєРё РіРґРµ РЅСѓР¶РЅРѕ РѕСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊСЃСЏ РІС‹Р±РёСЂР°С‚СЊСЃСЏ РЅРµ Р±СѓРґСѓРґС‚
 	self.io.stop_during_attack_allowed = true;
 end
 
@@ -146,7 +146,7 @@ function sv_ai_controller_basic:on_attach_actor()
 	self.m_actor = self:get_attached_actor_body();
 	assert(self.m_actor, "sv_ai_controller_basic works only with ESV_ActorBody inherited actors");
 	
-	-- включить якорь, который был сохранен	
+	-- РІРєР»СЋС‡РёС‚СЊ СЏРєРѕСЂСЊ, РєРѕС‚РѕСЂС‹Р№ Р±С‹Р» СЃРѕС…СЂР°РЅРµРЅ	
 	if(self.m_current_anchor) then
 		if(self.io.m_current_anchor_used == true) then
 			self:use_anchor(self.m_current_anchor, true);
@@ -164,7 +164,7 @@ function sv_ai_controller_basic:on_load_state(dreader)
 	if (dreader == nil) then return end
 end
 
--- запись текущего состояния
+-- Р·Р°РїРёСЃСЊ С‚РµРєСѓС‰РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 function sv_ai_controller_basic:on_save_state(dwriter)
 	self.io.m_current_anchor_id = self.m_current_anchor and self.m_current_anchor:get_id() or nil;
 	self.io.m_last_anchor_id = self.m_last_anchor and self.m_last_anchor:get_id() or nil;
@@ -193,7 +193,7 @@ function sv_ai_controller_basic:update_alert_state()
 			self.io.actor_alereted ~= true) then
 	    
 			self.io.actor_alereted = true;  
-			-- перейти в состояние агрессии	
+			-- РїРµСЂРµР№С‚Рё РІ СЃРѕСЃС‚РѕСЏРЅРёРµ Р°РіСЂРµСЃСЃРёРё	
 			local input_params = data_stream();
 			engine.data_stream_load(input_params, 
 					actor.get_action_input_types(ACTION_ALERT), self:get_enemy_id(), {});
@@ -203,7 +203,7 @@ function sv_ai_controller_basic:update_alert_state()
 	else
 		if(self.io.actor_alereted == true) then
 			self.io.actor_alereted = nil;
-			-- выйти из состояния агрессии
+			-- РІС‹Р№С‚Рё РёР· СЃРѕСЃС‚РѕСЏРЅРёСЏ Р°РіСЂРµСЃСЃРёРё
 			local input_params = data_stream();
 			engine.data_stream_load(input_params, 
 					actor.get_action_input_types(ACTION_ALERT), 0, {});
@@ -216,7 +216,7 @@ end
 
 -------------------------------------------------------------------------------------
 function sv_ai_controller_basic:on_callback(callback_id, data_stream)
-	-- для задания охраняемой точки или предмета
+	-- РґР»СЏ Р·Р°РґР°РЅРёСЏ РѕС…СЂР°РЅСЏРµРјРѕР№ С‚РѕС‡РєРё РёР»Рё РїСЂРµРґРјРµС‚Р°
 	if(callback_id == CALLBACK_GUARD) then
 		local need_to_set = engine.data_stream_get_int(data_stream);
 		
@@ -239,7 +239,7 @@ function sv_ai_controller_basic:on_callback(callback_id, data_stream)
 			--console.print("----------- reset guard");
 			self.m_guard_target = nil;	
 		end	
-	-- установка принудительно параметров для атаки
+	-- СѓСЃС‚Р°РЅРѕРІРєР° РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ Р°С‚Р°РєРё
 	elseif(callback_id == CALLBACK_SET_ATTACK_TYPE) then	
 		local attack_index = engine.data_stream_get_int(data_stream);
 		local status = engine.data_stream_get_int(data_stream);
@@ -264,8 +264,8 @@ function sv_ai_controller_basic:on_callback(callback_id, data_stream)
 			self.io.m_attack_started = true;
 			--self:block_movement(true);
 
-			-- вычислить информацию необходимую для отслеживания когда
-			-- и какого типа мы производили атаки
+			-- РІС‹С‡РёСЃР»РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ РЅРµРѕР±С…РѕРґРёРјСѓСЋ РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ РєРѕРіРґР°
+			-- Рё РєР°РєРѕРіРѕ С‚РёРїР° РјС‹ РїСЂРѕРёР·РІРѕРґРёР»Рё Р°С‚Р°РєРё
 			assert(self.io.m_last_selected_attack, "m_last_selected_attack is nil");
 			local attack_info = self.m_attack_infos[self.io.m_last_selected_attack];
 
@@ -303,9 +303,9 @@ function sv_ai_controller_basic:on_callback(callback_id, data_stream)
 			
 			if(self.io.m_last_attack_type == ATTACK_DISTANT) then
 				local attack_info = self.m_attack_infos[self.io.m_last_attack_index];
-				-- если атак было больше чем дозволеных на одну,
-				-- то осуществляем редислокацию (если столько же,
-				-- то выбираем другой тип атаки, если такой есть)
+				-- РµСЃР»Рё Р°С‚Р°Рє Р±С‹Р»Рѕ Р±РѕР»СЊС€Рµ С‡РµРј РґРѕР·РІРѕР»РµРЅС‹С… РЅР° РѕРґРЅСѓ,
+				-- С‚Рѕ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј СЂРµРґРёСЃР»РѕРєР°С†РёСЋ (РµСЃР»Рё СЃС‚РѕР»СЊРєРѕ Р¶Рµ,
+				-- С‚Рѕ РІС‹Р±РёСЂР°РµРј РґСЂСѓРіРѕР№ С‚РёРї Р°С‚Р°РєРё, РµСЃР»Рё С‚Р°РєРѕР№ РµСЃС‚СЊ)
 				if(attack_info.attacks_in_row_allowed and attack_info.attacks_in_row > attack_info.attacks_in_row_allowed) then
 					self.io.m_need_to_relocate_after_attack = true;
 				end
@@ -337,7 +337,7 @@ end
 
 
 -----------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_ai_controller_basic = utils.inherit(cl_game_object, ai_controller_basic);
 
 function cl_ai_controller_basic:register_properties(prop_registry)

@@ -4,11 +4,11 @@
 -- Author: Yuri Dobronravin
 --
 ------------------------------------------------------------------------
--- Прототип объекта якоря для навигации ИИ
+-- РџСЂРѕС‚РѕС‚РёРї РѕР±СЉРµРєС‚Р° СЏРєРѕСЂСЏ РґР»СЏ РЅР°РІРёРіР°С†РёРё РР
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ai_anchor = {
 	guid = {0x229022b6, 0xab78, 0x4bd8, 0x81, 0x8c, 0x8f, 0x33, 0x75, 0x96, 0xa8, 0x5c},
 }
@@ -42,8 +42,8 @@ function ai_anchor:register_properties(prop_registry)
 	self.m_block_movement_prop = self:register_property(prop_registry, "block_movement", true);
 	self.m_block_turn_prop = self:register_property(prop_registry, "block_turn", false);
 	
-	-- визуальные состояния которые будет использовать актер вместо оригинальных, 
-	-- после активации якоря
+	-- РІРёР·СѓР°Р»СЊРЅС‹Рµ СЃРѕСЃС‚РѕСЏРЅРёСЏ РєРѕС‚РѕСЂС‹Рµ Р±СѓРґРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р°РєС‚РµСЂ РІРјРµСЃС‚Рѕ РѕСЂРёРіРёРЅР°Р»СЊРЅС‹С…, 
+	-- РїРѕСЃР»Рµ Р°РєС‚РёРІР°С†РёРё СЏРєРѕСЂСЏ
 	self.m_visual_config_prop = self:register_property(prop_registry, "visual_config", "?");
 end
 
@@ -51,7 +51,7 @@ function ai_anchor:on_init()
 end
 	
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ai_anchor = utils.inherit(sv_game_object, ai_anchor);
 
 --.debug
@@ -82,11 +82,11 @@ function sv_ai_anchor:on_init(dreader)
 	sv_game_object.on_init(self);
 	ai_anchor.on_init(self);
 	
-	-- устанавливается ИИ контроллером, когда тот занял для себя этот tag point
+	-- СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ РР РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРј, РєРѕРіРґР° С‚РѕС‚ Р·Р°РЅСЏР» РґР»СЏ СЃРµР±СЏ СЌС‚РѕС‚ tag point
 	self.m_is_occupied = false;
 	self.m_occupier = nil;
 	
-	-- устанавливается ИИ контроллером, когда тот выбрал якорь и бежит к нему
+	-- СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ РР РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРј, РєРѕРіРґР° С‚РѕС‚ РІС‹Р±СЂР°Р» СЏРєРѕСЂСЊ Рё Р±РµР¶РёС‚ Рє РЅРµРјСѓ
 	self.m_wanter = nil;
 	self.m_wanter_dist = false;
 	self.m_wanter_set_time = 0;
@@ -109,7 +109,7 @@ function sv_ai_anchor:on_init(dreader)
 	
 	self:set_property_value(self.m_debug_sphere_color_prop, sv_ai_anchor.NOT_ACTIVE_COLOR);
 	
-	-- принудительно заставляем сработать deactive
+	-- РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°СЃС‚Р°РІР»СЏРµРј СЃСЂР°Р±РѕС‚Р°С‚СЊ deactive
 	self.m_is_active = true;
 	self:deactivate();
 	
@@ -342,7 +342,7 @@ end
 
 
 ------------------------------------
--- клиентская часть
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ
 cl_ai_anchor = utils.inherit(cl_game_object, ai_anchor);
 
 function cl_ai_anchor:on_init()

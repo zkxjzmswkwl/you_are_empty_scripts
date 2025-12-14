@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Базовый класс для автоматов
+-- Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ Р°РІС‚РѕРјР°С‚РѕРІ
 ------------------------------------------------------------------------
 
 include("ammo_ppsh.lua")
@@ -16,29 +16,29 @@ weapon_machinegun = {};
 weapon_machinegun.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"ItemPPS"},
 	{"hit_material",		"mat_hit_ppsh" },
-	{ "slot_name",			g_weapon_slots[5] }, -- слот в котором может быть оружие
-	{ "priority",			7 }, -- приоритет оружия
---	{ "icon_id",			4 }, -- иконка для HUD
+	{ "slot_name",			g_weapon_slots[5] }, -- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{ "priority",			7 }, -- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			4 }, -- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		35 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			0 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия
-	{ "max_ammo",			210 },	-- максимальное кол-во патронов, которое может быть у нас в инвентаре	
+	{ "loaded_ammo",		35 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			0 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
+	{ "max_ammo",			210 },	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Сѓ РЅР°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ	
 
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_machinegun.m_models_names = {
---	Имя игрока				Имя модели рук		Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє		РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"ppsh_hands",		"ppsh"			},
 }
 	
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_machinegun.m_ammo_icon_id		= 4
 weapon_machinegun.m_holdable_icon_id	= 6
 
 ---------------------------------------
--- параметры выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РІС‹СЃС‚СЂРµР»Р°
 ---------------------------------------
 weapon_machinegun.m_bullets_in_shot		= 1;
 weapon_machinegun.m_bullet_damage		= 50;
@@ -52,31 +52,31 @@ weapon_machinegun.m_shot_disp_zoomed	= 3;
 weapon_machinegun.m_shot_recoil			= 4;
 weapon_machinegun.m_shot_recoil_zoomed	= 3;
 
-weapon_machinegun.m_shot_effect_name			= "pfx_shot_machinegun.lua" -- эффект при выстреле
-weapon_machinegun.m_shot_point_name				= "#shoot_point"			-- точка привязки эффекта в модели
-weapon_machinegun.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"		-- эффект трейса пули
+weapon_machinegun.m_shot_effect_name			= "pfx_shot_machinegun.lua" -- СЌС„С„РµРєС‚ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
+weapon_machinegun.m_shot_point_name				= "#shoot_point"			-- С‚РѕС‡РєР° РїСЂРёРІСЏР·РєРё СЌС„С„РµРєС‚Р° РІ РјРѕРґРµР»Рё
+weapon_machinegun.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"		-- СЌС„С„РµРєС‚ С‚СЂРµР№СЃР° РїСѓР»Рё
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_machinegun.m_rate_of_fire		= 1.4
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_machinegun.m_ammo_class			= "ammo_ppsh"	-- класс используемых патронов
-weapon_machinegun.m_ammo_type			= "ppsh ammo"	-- тип используемых патронов
-weapon_machinegun.m_clip_size			= 71			-- вместимость обоймы
-weapon_machinegun.m_ammo_for_shot		= 1				-- кол-во патронов расходуемых на один выстрел
+weapon_machinegun.m_ammo_class			= "ammo_ppsh"	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_machinegun.m_ammo_type			= "ppsh ammo"	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_machinegun.m_clip_size			= 71			-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
+weapon_machinegun.m_ammo_for_shot		= 1				-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_machinegun.m_normal_fov			= 90;
 weapon_machinegun.m_zoomed_fov			= 45;
 weapon_machinegun.m_model_fov			= 45;
 
--- Чувствительность мыши (коэффициент масштабирования)
+-- Р§СѓРІСЃС‚РІРёС‚РµР»СЊРЅРѕСЃС‚СЊ РјС‹С€Рё (РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ)
 weapon_machinegun.m_zoomed_mouse_sens_scale	= 0.3;
 weapon_machinegun.m_normal_mouse_sens_scale	= 1;
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_machinegun.states_design = {};
 weapon_machinegun.states_design["show"] = {{anim = "taking", anim_speed = 2, snd = "ppsha_taking", snd_params = snd_weapon_common},};
@@ -108,7 +108,7 @@ weapon_machinegun.states_design["fire_finish"] = {
 	{anim = "fire12", snd = "ppsha_fire6", anim_speed = weapon_machinegun.m_rate_of_fire,snd_params = snd_weapon_shot,},
 };
 
--- анимации для zoom in/out
+-- Р°РЅРёРјР°С†РёРё РґР»СЏ zoom in/out
 weapon_machinegun.states_design["zoom_in"] = {{anim = "sight_in"},};
 weapon_machinegun.states_design["zoom_out"] = {{anim = "sight_out"},};
 
@@ -128,10 +128,10 @@ weapon_machinegun.states_design["fire_finish_zoomed"] = {
 	{anim = "fire_in_s6", snd = "ppsha_fire6", anim_speed = weapon_machinegun.m_rate_of_fire, snd_params = snd_weapon_shot},
 };
 
--- перезарядка
+-- РїРµСЂРµР·Р°СЂСЏРґРєР°
 weapon_machinegun.states_design["reload"] = {{anim = "reload", snd = "ppsha_reload", snd_params = snd_weapon_common},};
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_machinegun.guid = {0x6bef7b7c, 0xd02d, 0x42ab, 0x96, 0x9, 0x9f, 0x25, 0x23, 0x32, 0xdd, 0xd3};
 
 ---------------------------------------------------------------------------
@@ -139,7 +139,7 @@ function weapon_machinegun:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_machinegun = utils.inherit(sv_weapon_firearm, weapon_machinegun);
 
 ---------------------------------------------------------------------------
@@ -179,7 +179,7 @@ function sv_weapon_machinegun:on_update_fire_finish()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_machinegun = utils.inherit(cl_weapon_firearm, weapon_machinegun);
 
 function cl_weapon_machinegun:on_init()

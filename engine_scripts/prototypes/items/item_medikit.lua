@@ -4,10 +4,10 @@
 -- Authors: Yuri Dobronravin
 --				Andrey Frolov
 ------------------------------------------------------------------------
--- Аптечка
+-- РђРїС‚РµС‡РєР°
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 item_medikit = {
 	guid = {0x19525fe7, 0x578c, 0x4adf, 0x80, 0xc6, 0xb1, 0x3c, 0x9b, 0x55, 0xff, 0xf5},
 };
@@ -19,7 +19,7 @@ function item_medikit:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_item_medikit = utils.inherit(sv_game_object, item_medikit);
 
 ------------------------------------
@@ -30,7 +30,7 @@ function sv_item_medikit:on_init()
 	self:set_update_enable(false);
 end
 
--- использование аптечки актером
+-- РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ Р°РїС‚РµС‡РєРё Р°РєС‚РµСЂРѕРј
 function sv_item_medikit:on_use(activator)
 	if(activator.add_health ~= nil) then
 		if(activator:get_max_health() > activator:get_health()) then
@@ -45,12 +45,12 @@ function sv_item_medikit:on_use(activator)
 end
 
 function sv_item_medikit:on_take(activator)
-	-- если мы попали сюда, то аптечку использовали, так что удалимся
+	-- РµСЃР»Рё РјС‹ РїРѕРїР°Р»Рё СЃСЋРґР°, С‚Рѕ Р°РїС‚РµС‡РєСѓ РёСЃРїРѕР»СЊР·РѕРІР°Р»Рё, С‚Р°Рє С‡С‚Рѕ СѓРґР°Р»РёРјСЃСЏ
 	engine.destroy_entity(self)
 end
 
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_item_medikit = utils.inherit(cl_game_object, item_medikit);
 
 function cl_item_medikit:on_post_anims_init()

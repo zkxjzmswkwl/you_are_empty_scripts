@@ -3,21 +3,21 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Player, скриптовое представление актера, которым управляет игрок
+-- Actor Player, СЃРєСЂРёРїС‚РѕРІРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ Р°РєС‚РµСЂР°, РєРѕС‚РѕСЂС‹Рј СѓРїСЂР°РІР»СЏРµС‚ РёРіСЂРѕРє
 ------------------------------------------------------------------------
 
 actor_player = {};
 
--- Настройки актера
+-- РќР°СЃС‚СЂРѕР№РєРё Р°РєС‚РµСЂР°
 include("actor_player_design.lua");
 
 -------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 function actor_player:register_properties(prop_registry)
-	-- Символическое имя игрока
+	-- РЎРёРјРІРѕР»РёС‡РµСЃРєРѕРµ РёРјСЏ РёРіСЂРѕРєР°
 	self:register_property(prop_registry, "player_name", "-unknown-")
 
-	-- запомнить ссылки на properties для быстрого доступа к ним
+	-- Р·Р°РїРѕРјРЅРёС‚СЊ СЃСЃС‹Р»РєРё РЅР° properties РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РґРѕСЃС‚СѓРїР° Рє РЅРёРј
 	self.health_prop = self:get_property_by_name("health");
 end
 
@@ -25,7 +25,7 @@ function actor_player:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_player = utils.inherit(sv_game_object, actor_player);
 
 function sv_actor_player:register_properties(prop_registry)
@@ -39,7 +39,7 @@ function sv_actor_player:on_init(data_reader)
 	sv_game_object.on_init(self);
 	actor_player.on_init(self);
 	
-	-- запомнить ссылки на properties для быстрого доступа к ним
+	-- Р·Р°РїРѕРјРЅРёС‚СЊ СЃСЃС‹Р»РєРё РЅР° properties РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РґРѕСЃС‚СѓРїР° Рє РЅРёРј
 	self.run_forward_speed_prop		= self:get_property_by_name("run_forward_speed");
 	self.run_backward_speed_prop	= self:get_property_by_name("run_backward_speed");
 	self.run_strafe_speed_prop		= self:get_property_by_name("run_strafe_speed");
@@ -47,24 +47,24 @@ function sv_actor_player:on_init(data_reader)
 	self.walk_backward_speed_prop	= self:get_property_by_name("walk_backward_speed");
 	self.walk_strafe_speed_prop		= self:get_property_by_name("walk_strafe_speed");
 	
-	-- Создаем эффекты получения повреждений
+	-- РЎРѕР·РґР°РµРј СЌС„С„РµРєС‚С‹ РїРѕР»СѓС‡РµРЅРёСЏ РїРѕРІСЂРµР¶РґРµРЅРёР№
 	if type(self.m_damage_levels) == "table" then
 	
-		-- Перебираем уровни повреждений
+		-- РџРµСЂРµР±РёСЂР°РµРј СѓСЂРѕРІРЅРё РїРѕРІСЂРµР¶РґРµРЅРёР№
 		for k, level in pairs(self.m_damage_levels) do
 		
 			if type(level) == "table" then
 			
-				-- Таблица визуализации полученного повреждения
+				-- РўР°Р±Р»РёС†Р° РІРёР·СѓР°Р»РёР·Р°С†РёРё РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 				local damage_vis = level.damage_visualization	
 				if type(damage_vis) == "table" then
 			
-					-- Перебираем типы повреждений
+					-- РџРµСЂРµР±РёСЂР°РµРј С‚РёРїС‹ РїРѕРІСЂРµР¶РґРµРЅРёР№
 					for k, v in pairs(damage_vis) do
 					
 						if type(v) == "table" then
 						
-							-- Создаем постпроцесс. Id сохраним в той же таблице damage_visualization
+							-- РЎРѕР·РґР°РµРј РїРѕСЃС‚РїСЂРѕС†РµСЃСЃ. Id СЃРѕС…СЂР°РЅРёРј РІ С‚РѕР№ Р¶Рµ С‚Р°Р±Р»РёС†Рµ damage_visualization
 							if type(v.pp_name) == "string" then
 								
 								local pp_id = engine.get_post_process_id( v.pp_name )
@@ -75,8 +75,8 @@ function sv_actor_player:on_init(data_reader)
 								end
 							end
 							
-							-- Эффекты создаются при первом использовании. 
-							-- При полученнии повреждения.
+							-- Р­С„С„РµРєС‚С‹ СЃРѕР·РґР°СЋС‚СЃСЏ РїСЂРё РїРµСЂРІРѕРј РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё. 
+							-- РџСЂРё РїРѕР»СѓС‡РµРЅРЅРёРё РїРѕРІСЂРµР¶РґРµРЅРёСЏ.
 							
 						end
 					end
@@ -85,10 +85,10 @@ function sv_actor_player:on_init(data_reader)
 		end
 	end
 	
-	-- Таблица, хранящая идентификаторы загруженных эффектов повреждения
+	-- РўР°Р±Р»РёС†Р°, С…СЂР°РЅСЏС‰Р°СЏ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂС‹ Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… СЌС„С„РµРєС‚РѕРІ РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 	self.m_damage_effects = {}
 	
-	-- Постпроцесс смерти	
+	-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ СЃРјРµСЂС‚Рё	
 	self.m_pp_death_id		= engine.get_post_process_id("death");
 end
 
@@ -97,8 +97,8 @@ function sv_actor_player:on_load_state(dreader)
 	sv_game_object.on_load_state(self,  dreader);
 
 	if dreader then 
-		-- Загрузка из сейва
-		-- Не требуется инициализировать инвентарь
+		-- Р—Р°РіСЂСѓР·РєР° РёР· СЃРµР№РІР°
+		-- РќРµ С‚СЂРµР±СѓРµС‚СЃСЏ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ РёРЅРІРµРЅС‚Р°СЂСЊ
 		self.m_inventory_initialized = true
 	end
 end
@@ -106,7 +106,7 @@ end
 -------------------------------------
 function sv_actor_player:init_inventory()
 
-	-- Инициализируем только один раз
+	-- РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЂР°Р·
 	if self.m_inventory_initialized then
 		return
 	else
@@ -116,52 +116,52 @@ function sv_actor_player:init_inventory()
 	local actor_props = self.spawn_props
 	
 	if type(actor_props) ~= "table" then
-		-- У актера нет таблицы инициализации инвентаря
+		-- РЈ Р°РєС‚РµСЂР° РЅРµС‚ С‚Р°Р±Р»РёС†С‹ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РёРЅРІРµРЅС‚Р°СЂСЏ
 		
 		local actor_spawn_props_default = _G["actor_spawn_props_default"]
 	
 		if type(actor_spawn_props_default) == "table" then
-			-- Есть ли таблица для уровня
+			-- Р•СЃС‚СЊ Р»Рё С‚Р°Р±Р»РёС†Р° РґР»СЏ СѓСЂРѕРІРЅСЏ
 			actor_props = actor_spawn_props_default[engine.get_level_name()]
 
 			if type(actor_props) ~= "table" then
-				-- Нет таблицы для уровня, пытаемся использовать таблицу по умолчанию
+				-- РќРµС‚ С‚Р°Р±Р»РёС†С‹ РґР»СЏ СѓСЂРѕРІРЅСЏ, РїС‹С‚Р°РµРјСЃСЏ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 				actor_props = actor_spawn_props_default["default"]	
 			end
 		end
 	end
 	
-	-- Если не смогли найти таблицу инициализации инвентаря, то уходим
+	-- Р•СЃР»Рё РЅРµ СЃРјРѕРіР»Рё РЅР°Р№С‚Рё С‚Р°Р±Р»РёС†Сѓ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РёРЅРІРµРЅС‚Р°СЂСЏ, С‚Рѕ СѓС…РѕРґРёРј
 	if type(actor_props) ~= "table" then return end
 	
-	-- Считываем и устанавливаем здоровье актера
+	-- РЎС‡РёС‚С‹РІР°РµРј Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·РґРѕСЂРѕРІСЊРµ Р°РєС‚РµСЂР°
 	if actor_props.health then
 		self:set_health(actor_props.health)
 	end
 
-	-- Считываем и устанавливаем броню
+	-- РЎС‡РёС‚С‹РІР°РµРј Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р±СЂРѕРЅСЋ
 	if actor_props.armor then
 		self:set_armor(actor_props.armor)
 	end
 	
-	-- Синхронизируем, чтобы клиент как можно скорее узнал о новом значении
+	-- РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј, С‡С‚РѕР±С‹ РєР»РёРµРЅС‚ РєР°Рє РјРѕР¶РЅРѕ СЃРєРѕСЂРµРµ СѓР·РЅР°Р» Рѕ РЅРѕРІРѕРј Р·РЅР°С‡РµРЅРёРё
 	self:instant_properties_synchronize();
 	
-	-- Добавляем предметы в инвентарь
+	-- Р”РѕР±Р°РІР»СЏРµРј РїСЂРµРґРјРµС‚С‹ РІ РёРЅРІРµРЅС‚Р°СЂСЊ
 	if (type(actor_props.inventory) == "table") then
 		for i, v in pairs(actor_props.inventory) do
 			if (type(v) == "table")	then
-				-- Создаем необходимое количество указанных предметов
+				-- РЎРѕР·РґР°РµРј РЅРµРѕР±С…РѕРґРёРјРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СѓРєР°Р·Р°РЅРЅС‹С… РїСЂРµРґРјРµС‚РѕРІ
 				for cnt = 1, v.count do
 					local entity = engine.spawn_entity(v.name);
 					engine.add_entity_to_world(entity);
 					
-					-- Если это оружие, то нужно его зарядить
+					-- Р•СЃР»Рё СЌС‚Рѕ РѕСЂСѓР¶РёРµ, С‚Рѕ РЅСѓР¶РЅРѕ РµРіРѕ Р·Р°СЂСЏРґРёС‚СЊ
 					if (entity.m_clip_size) then
 						entity:set_property_value_by_name("loaded_ammo", entity.m_clip_size)
 					end
 					
-					-- Объект будет уничножен, если он окажется лишним
+					-- РћР±СЉРµРєС‚ Р±СѓРґРµС‚ СѓРЅРёС‡РЅРѕР¶РµРЅ, РµСЃР»Рё РѕРЅ РѕРєР°Р¶РµС‚СЃСЏ Р»РёС€РЅРёРј
 					local destroy_prop = entity:get_property_by_name("destroy_if_not_taken");			
 					if destroy_prop ~= nil then
 						entity:set_property_value(destroy_prop, true);
@@ -180,7 +180,7 @@ function sv_actor_player:on_update(dt)
 	sv_game_object.on_update(dt);
 	
 	local max_health = self:get_max_health();
-	local health_to_add = self.m_health_regeneration; -- скорость регенерации в секунду
+	local health_to_add = self.m_health_regeneration; -- СЃРєРѕСЂРѕСЃС‚СЊ СЂРµРіРµРЅРµСЂР°С†РёРё РІ СЃРµРєСѓРЅРґСѓ
 	health_to_add = (health_to_add * dt)/1000;
 	if(max_health > self:get_health()) then
 		if(health_to_add + self:get_health() > max_health) then
@@ -190,7 +190,7 @@ function sv_actor_player:on_update(dt)
 	end
 
 --	if(self.m_need_jump == true and	self:get_behavior_state() ~= BHV_JUMP and self:get_behavior_state() ~= BHV_FALL) then
-		-- выполняем отложенный прыжок
+		-- РІС‹РїРѕР»РЅСЏРµРј РѕС‚Р»РѕР¶РµРЅРЅС‹Р№ РїСЂС‹Р¶РѕРє
 --		self:set_behavior_move(0, 0, 0, 0, 1, 0);
 --		self.m_need_jump = false
 --	end
@@ -211,7 +211,7 @@ function sv_actor_player:on_damage(damage, damage_type)
 	
 	if not self.m_visualize_damage then return end
 	
-	-- Определяем степень повреждения и отображаем эффект, проигрываем постпроцесс
+	-- РћРїСЂРµРґРµР»СЏРµРј СЃС‚РµРїРµРЅСЊ РїРѕРІСЂРµР¶РґРµРЅРёСЏ Рё РѕС‚РѕР±СЂР°Р¶Р°РµРј СЌС„С„РµРєС‚, РїСЂРѕРёРіСЂС‹РІР°РµРј РїРѕСЃС‚РїСЂРѕС†РµСЃСЃ
 	if type(self.m_damage_levels) == "table" then
 	
 		for k, level in pairs(self.m_damage_levels) do
@@ -221,23 +221,23 @@ function sv_actor_player:on_damage(damage, damage_type)
 				if level.low <= damage then
 					
 					if level.high == nil or damage <= level.high then
-						-- Данный уровень повреждения соответствует полученному повреждению 
+						-- Р”Р°РЅРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ РїРѕРІСЂРµР¶РґРµРЅРёСЏ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ РїРѕР»СѓС‡РµРЅРЅРѕРјСѓ РїРѕРІСЂРµР¶РґРµРЅРёСЋ 
 						
-						-- Таблица визуализации полученного повреждения
+						-- РўР°Р±Р»РёС†Р° РІРёР·СѓР°Р»РёР·Р°С†РёРё РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 						local damage_vis = level.damage_visualization
 						if type(damage_vis) == "table" then
 						
-							-- Есть ли запись для полученного типа повреждения
+							-- Р•СЃС‚СЊ Р»Рё Р·Р°РїРёСЃСЊ РґР»СЏ РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ С‚РёРїР° РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 							local damage_type_tbl = damage_vis[damage_type]
 							if type(damage_type_tbl) == "table" then
 							
-								-- Проигрываем постпроцесс
+								-- РџСЂРѕРёРіСЂС‹РІР°РµРј РїРѕСЃС‚РїСЂРѕС†РµСЃСЃ
 								if damage_type_tbl.pp_id then
 									self:apply_post_process( damage_type_tbl.pp_id )
 								end
 								
-								-- Создаем эффект. Id сохраним в той же таблице damage_visualization
-								-- Создаем только при первом использовании
+								-- РЎРѕР·РґР°РµРј СЌС„С„РµРєС‚. Id СЃРѕС…СЂР°РЅРёРј РІ С‚РѕР№ Р¶Рµ С‚Р°Р±Р»РёС†Рµ damage_visualization
+								-- РЎРѕР·РґР°РµРј С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё
 								if damage_type_tbl.effect_id == nil then
 								
 									if type(damage_type_tbl.effect_name) == "string" then
@@ -252,11 +252,11 @@ function sv_actor_player:on_damage(damage, damage_type)
 										end
 									end
 								else
-									-- Проигрываем эффект	
+									-- РџСЂРѕРёРіСЂС‹РІР°РµРј СЌС„С„РµРєС‚	
 									self:reset_effect(damage_type_tbl.effect_id)
 								end
 								
-								-- Прекращаем поиск
+								-- РџСЂРµРєСЂР°С‰Р°РµРј РїРѕРёСЃРє
 								break;
 							end
 						end
@@ -278,7 +278,7 @@ end
 -------------------------------------
 function sv_actor_player:on_shutdown()
 	
-	-- Освобождаем эффекты повреждений
+	-- РћСЃРІРѕР±РѕР¶РґР°РµРј СЌС„С„РµРєС‚С‹ РїРѕРІСЂРµР¶РґРµРЅРёР№
 	if self.m_damage_effects then
 		
 		for k, v in pairs(self.m_damage_effects) do
@@ -287,7 +287,7 @@ function sv_actor_player:on_shutdown()
 	end
 end
 
--- изменение состояния carrier-а
+-- РёР·РјРµРЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ carrier-Р°
 function sv_actor_player:on_bhv_state_change(bhv_state, bhv_prev_state)
 	--sv_actor_basic.on_bhv_state_change(self, bhv_state, bhv_prev_state)
 	
@@ -298,16 +298,16 @@ function sv_actor_player:on_bhv_state_change(bhv_state, bhv_prev_state)
 end
 
 -------------------------------------
--- описание actions
+-- РѕРїРёСЃР°РЅРёРµ actions
 
 -------------------------------------
--- ACTION_MOVE действие передвижения
+-- ACTION_MOVE РґРµР№СЃС‚РІРёРµ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ
 -------------------------------------
 function sv_actor_player:action_move(id, input_params, output_params)
 
 	forward, backward, left, right, up, down, acceleration, deceleration = engine.data_stream_parse(input_params, actor.get_action_input_types(id));
 
-	-- .hack кнопка acceleration для игрока работает на оборот - замедляет игрока
+	-- .hack РєРЅРѕРїРєР° acceleration РґР»СЏ РёРіСЂРѕРєР° СЂР°Р±РѕС‚Р°РµС‚ РЅР° РѕР±РѕСЂРѕС‚ - Р·Р°РјРµРґР»СЏРµС‚ РёРіСЂРѕРєР°
 	if(acceleration == 1) then
 		self.m_acceleration = 0;
 	else
@@ -336,20 +336,20 @@ function sv_actor_player:action_move(id, input_params, output_params)
 	end
 	
 	if(up == 1 and self.m_prev_up ~= 1) then
-		-- нажатие клавишы прыжка (фронт)
+		-- РЅР°Р¶Р°С‚РёРµ РєР»Р°РІРёС€С‹ РїСЂС‹Р¶РєР° (С„СЂРѕРЅС‚)
 		self.m_need_jump = 1
 	elseif(self.m_prev_up == 1 and up ~= 1) then
-		-- отпускание клавишы прыжка (спад)
+		-- РѕС‚РїСѓСЃРєР°РЅРёРµ РєР»Р°РІРёС€С‹ РїСЂС‹Р¶РєР° (СЃРїР°Рґ)
 		self.m_need_jump = 0
 	end
 	self.m_prev_up = up
 	
-	-- передать команды физическому carrier-у
+	-- РїРµСЂРµРґР°С‚СЊ РєРѕРјР°РЅРґС‹ С„РёР·РёС‡РµСЃРєРѕРјСѓ carrier-Сѓ
 	self:set_behavior_move(forward, backward, left, right, self.m_need_jump, down);
 end
 
 -------------------------------------
--- ACTION_ATTACK действие атаки
+-- ACTION_ATTACK РґРµР№СЃС‚РІРёРµ Р°С‚Р°РєРё
 -------------------------------------
 function sv_actor_player:action_attack(id, input_params, output_params)
 	target_id, attack_type = engine.data_stream_parse(input_params, actor.get_action_input_types(id));
@@ -368,7 +368,7 @@ function sv_actor_player:attack_secondary(target_id)
 end
 
 
--- отыгрывание эффекта шагов
+-- РѕС‚С‹РіСЂС‹РІР°РЅРёРµ СЌС„С„РµРєС‚Р° С€Р°РіРѕРІ
 function sv_actor_player:make_step()
 
 	if(self.m_acceleration == 1) then
@@ -380,14 +380,14 @@ function sv_actor_player:make_step()
 end
 
 ----------------------------------------------------------------------------------
--- Выбирает следущее оружие, учитывая приоритет
+-- Р’С‹Р±РёСЂР°РµС‚ СЃР»РµРґСѓС‰РµРµ РѕСЂСѓР¶РёРµ, СѓС‡РёС‚С‹РІР°СЏ РїСЂРёРѕСЂРёС‚РµС‚
 function sv_actor_player:select_weapon(_select_type, _cur_priority)
 	
 	local max_priority = 0
-	local min_priority_diff = 1000000 -- заведомо большое число
+	local min_priority_diff = 1000000 -- Р·Р°РІРµРґРѕРјРѕ Р±РѕР»СЊС€РѕРµ С‡РёСЃР»Рѕ
 	local next_weapon = nil
 	
-	-- Перебираем все слоты и пытаемся найти оружие с максимальным приоритетом
+	-- РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЃР»РѕС‚С‹ Рё РїС‹С‚Р°РµРјСЃСЏ РЅР°Р№С‚Рё РѕСЂСѓР¶РёРµ СЃ РјР°РєСЃРёРјР°Р»СЊРЅС‹Рј РїСЂРёРѕСЂРёС‚РµС‚РѕРј
 	for i, slot_name in pairs(g_weapon_slots) do
 		
 		local weapons = self:get_all_from_inventory(slot_name)
@@ -395,10 +395,10 @@ function sv_actor_player:select_weapon(_select_type, _cur_priority)
 			continue
 		end
 			
-		-- Перебираем все оружия данного слота
+		-- РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ РѕСЂСѓР¶РёСЏ РґР°РЅРЅРѕРіРѕ СЃР»РѕС‚Р°
 		for k, weapon in pairs(weapons) do	
 			
-			-- Нельзя выбрать weapon_missile без патронов
+			-- РќРµР»СЊР·СЏ РІС‹Р±СЂР°С‚СЊ weapon_missile Р±РµР· РїР°С‚СЂРѕРЅРѕРІ
 			if weapon.m_missile_ammo_class ~= nil and weapon:is_empty() then
 				continue
 			end
@@ -406,24 +406,24 @@ function sv_actor_player:select_weapon(_select_type, _cur_priority)
 			local priority = weapon:get_property_value_by_name("priority")
 			
 			if _select_type == NEXT_WEAPON then
-				-- Ищем оружие с приоритетом больше текущего, но максимально близким к текущему приоритету
+				-- РС‰РµРј РѕСЂСѓР¶РёРµ СЃ РїСЂРёРѕСЂРёС‚РµС‚РѕРј Р±РѕР»СЊС€Рµ С‚РµРєСѓС‰РµРіРѕ, РЅРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕ Р±Р»РёР·РєРёРј Рє С‚РµРєСѓС‰РµРјСѓ РїСЂРёРѕСЂРёС‚РµС‚Сѓ
 				local priority_diff = math.abs(_cur_priority - priority)
 				if (priority_diff < min_priority_diff) and (priority > _cur_priority) then
 					min_priority_diff = priority_diff
 					next_weapon = weapon
 				end
 			elseif _select_type == PREV_WEAPON then
-				-- Ищем оружие с приоритетом меньше текущего, но максимально близким к текущему приоритету
+				-- РС‰РµРј РѕСЂСѓР¶РёРµ СЃ РїСЂРёРѕСЂРёС‚РµС‚РѕРј РјРµРЅСЊС€Рµ С‚РµРєСѓС‰РµРіРѕ, РЅРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕ Р±Р»РёР·РєРёРј Рє С‚РµРєСѓС‰РµРјСѓ РїСЂРёРѕСЂРёС‚РµС‚Сѓ
 				local priority_diff = math.abs(_cur_priority - priority)
 				if (priority_diff < min_priority_diff) and (priority < _cur_priority) then
 					min_priority_diff = priority_diff
 					next_weapon = weapon
 				end
 			elseif  _select_type == BEST_WEAPON then
-				-- Ищем оружие с наибольшим приоритетом
+				-- РС‰РµРј РѕСЂСѓР¶РёРµ СЃ РЅР°РёР±РѕР»СЊС€РёРј РїСЂРёРѕСЂРёС‚РµС‚РѕРј
 				if priority > max_priority then
 				
-					-- Незаряженный weapon_firearm не попадает в эту категорию
+					-- РќРµР·Р°СЂСЏР¶РµРЅРЅС‹Р№ weapon_firearm РЅРµ РїРѕРїР°РґР°РµС‚ РІ СЌС‚Сѓ РєР°С‚РµРіРѕСЂРёСЋ
 					if (weapon.is_empty ~= nil) and weapon:is_empty() then
 						continue
 					end
@@ -436,12 +436,12 @@ function sv_actor_player:select_weapon(_select_type, _cur_priority)
 			
 	end
 	
-	-- Если ничего подходящего не нашли, то остаемся с текущим оружием
+	-- Р•СЃР»Рё РЅРёС‡РµРіРѕ РїРѕРґС…РѕРґСЏС‰РµРіРѕ РЅРµ РЅР°С€Р»Рё, С‚Рѕ РѕСЃС‚Р°РµРјСЃСЏ СЃ С‚РµРєСѓС‰РёРј РѕСЂСѓР¶РёРµРј
 	if not next_weapon then 
 		return false
 	end
 	
-	-- Нашли следующее оружие. Выбираем его.
+	-- РќР°С€Р»Рё СЃР»РµРґСѓСЋС‰РµРµ РѕСЂСѓР¶РёРµ. Р’С‹Р±РёСЂР°РµРј РµРіРѕ.
 	self:select_holdable(next_weapon)
 	
 	return true;
@@ -449,7 +449,7 @@ function sv_actor_player:select_weapon(_select_type, _cur_priority)
 end
 
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_player = utils.inherit(cl_game_object, actor_player);
 
 function cl_actor_player:on_hit(hit_pos, hit_dir, hit_amount, damage_type)
@@ -457,7 +457,7 @@ function cl_actor_player:on_hit(hit_pos, hit_dir, hit_amount, damage_type)
 	local damage = hit_amount*100
 	local effector_name = "camera_hit"
 		
-	-- Определяем степень повреждения и отыгрываем эффектор
+	-- РћРїСЂРµРґРµР»СЏРµРј СЃС‚РµРїРµРЅСЊ РїРѕРІСЂРµР¶РґРµРЅРёСЏ Рё РѕС‚С‹РіСЂС‹РІР°РµРј СЌС„С„РµРєС‚РѕСЂ
 	if type(self.m_damage_levels) == "table" then
 	
 		for k, level in pairs(self.m_damage_levels) do
@@ -467,20 +467,20 @@ function cl_actor_player:on_hit(hit_pos, hit_dir, hit_amount, damage_type)
 				if level.low <= damage then
 					
 					if level.high == nil or damage <= level.high then
-						-- Данный уровень повреждения соответствует полученному повреждению 
+						-- Р”Р°РЅРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ РїРѕРІСЂРµР¶РґРµРЅРёСЏ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ РїРѕР»СѓС‡РµРЅРЅРѕРјСѓ РїРѕРІСЂРµР¶РґРµРЅРёСЋ 
 						
-						-- Таблица визуализации полученного повреждения
+						-- РўР°Р±Р»РёС†Р° РІРёР·СѓР°Р»РёР·Р°С†РёРё РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 						local damage_vis = level.damage_visualization
 						if type(damage_vis) == "table" then
 						
-							-- Есть ли запись для полученного типа повреждения
+							-- Р•СЃС‚СЊ Р»Рё Р·Р°РїРёСЃСЊ РґР»СЏ РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ С‚РёРїР° РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 							local damage_type_tbl = damage_vis[damage_type]
 							if type(damage_type_tbl) == "table" then
 							
 								if type(damage_type_tbl.effector_name) == "string" then
 				
 									effector_name = damage_type_tbl.effector_name
-									-- Прекращаем поиск
+									-- РџСЂРµРєСЂР°С‰Р°РµРј РїРѕРёСЃРє
 									break;
 								end
 							end
@@ -533,7 +533,7 @@ function cl_actor_player:on_init()
 end                             
 
 function cl_actor_player:on_hold_item(item)
-	-- иконка предмета
+	-- РёРєРѕРЅРєР° РїСЂРµРґРјРµС‚Р°
 	if	(item.class_name ~= nil) and
 		(item:get_property_value_by_name("silent_hold") == false) and
 		(item.m_holdable_icon_id ~= nil) then
@@ -554,10 +554,10 @@ function cl_actor_player:on_update(dt)
 	end
 	
 --[[
-	-- жизнь
+	-- Р¶РёР·РЅСЊ
 	self:hud_event(self.m_hud_health, HUD_EVENT_SET_INT, self:get_property_value(self.health_prop));
 
-	-- параметры оружия
+	-- РїР°СЂР°РјРµС‚СЂС‹ РѕСЂСѓР¶РёСЏ
 	local holdable = self:get_current_holdable();
 	if holdable ~= nil and 
 			holdable.m_enable_ammo_prop ~= nil and holdable:get_property_value(holdable.m_enable_ammo_prop) then
@@ -574,7 +574,7 @@ function cl_actor_player:on_update(dt)
 			self:hud_event(self.m_hud_ammo_all, HUD_EVENT_SET_INT, holdable:get_property_value(ammo_prop));
 		end
 		
-		-- иконка типа патронов
+		-- РёРєРѕРЅРєР° С‚РёРїР° РїР°С‚СЂРѕРЅРѕРІ
 		local ammo_type = holdable.m_ammo_type
 		if ammo_type ~= nil	and ammo_type ~= self.m_last_ammo_type then
 			self.m_last_ammo_type = ammo_type

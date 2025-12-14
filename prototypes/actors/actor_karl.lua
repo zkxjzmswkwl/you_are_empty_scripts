@@ -3,18 +3,18 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Karl - летающий монстр карлсон
+-- Actor Karl - Р»РµС‚Р°СЋС‰РёР№ РјРѕРЅСЃС‚СЂ РєР°СЂР»СЃРѕРЅ
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_karl.guid = {0x37c6e8ae, 0x2d84, 0x4422, 0xb0, 0x53, 0x79, 0xbd, 0xd9, 0xf0, 0xdd, 0xd8};
 
 function actor_karl:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_karl = utils.inherit(sv_actor_basic, actor_karl);
 
 function sv_actor_karl:register_properties(prop_registry)
@@ -24,7 +24,7 @@ end
 function sv_actor_karl:on_init()
 	sv_actor_basic.on_init(self);
 	actor_karl.on_init(self);
-	-- чтобы монстр не убивался при прыжках с большой высоты	
+	-- С‡С‚РѕР±С‹ РјРѕРЅСЃС‚СЂ РЅРµ СѓР±РёРІР°Р»СЃСЏ РїСЂРё РїСЂС‹Р¶РєР°С… СЃ Р±РѕР»СЊС€РѕР№ РІС‹СЃРѕС‚С‹	
 	self:set_fall(1000, 0);
 	
 		
@@ -35,11 +35,11 @@ end
 
 
 ----------------------------------------
--- Обработка эффектов при enable/disable
+-- РћР±СЂР°Р±РѕС‚РєР° СЌС„С„РµРєС‚РѕРІ РїСЂРё enable/disable
 ----------------------------------------
 function sv_actor_karl:on_inslot_disable(sender, activator, input_data)
 
-	-- Выключаем все эффекты.
+	-- Р’С‹РєР»СЋС‡Р°РµРј РІСЃРµ СЌС„С„РµРєС‚С‹.
 	if self.m_nozzle_effect then
 		self:deactivate_effect(self.m_nozzle_effect)
 	end
@@ -49,7 +49,7 @@ end
 ----------------------------------------
 function sv_actor_karl:on_inslot_enable(sender, activator, input_data)
 	
-	-- Загружаем эффект горелки (только при первом enable)
+	-- Р—Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё (С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј enable)
 	if self.m_nozzle_effect == nil then
 		template_id = self:add_effect_template(self.params.nozzle_effect_name)
 		effect_id = self:create_effect(template_id, self.m_model_body, self.params.nozzle_point)
@@ -59,7 +59,7 @@ function sv_actor_karl:on_inslot_enable(sender, activator, input_data)
 			self.m_nozzle_effect = effect_id
 		end
 	end
-	-- Включаем эффект горелки
+	-- Р’РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё
 	self:activate_effect(self.m_nozzle_effect)
 end
 
@@ -67,7 +67,7 @@ end
 function sv_actor_karl:on_shutdown()
 	sv_actor_basic.on_shutdown(self);
 	
-	-- Освобождаем эффект
+	-- РћСЃРІРѕР±РѕР¶РґР°РµРј СЌС„С„РµРєС‚
 	if self.m_nozzle_effect then
 		self:release_effect(self.m_nozzle_effect)
 	end
@@ -75,7 +75,7 @@ end
 
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_karl = utils.inherit(cl_actor_basic, actor_karl);
 
 function cl_actor_karl:on_init()

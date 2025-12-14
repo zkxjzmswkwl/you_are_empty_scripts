@@ -3,10 +3,10 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- Аптечки
+-- РђРїС‚РµС‡РєРё
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 item_medikit_small = {
 	guid = {0x675a34df, 0x6193, 0x4d73, 0x97, 0x2c, 0xc8, 0x45, 0xfc, 0xa0, 0xe2, 0xf3},
 };
@@ -36,7 +36,7 @@ function sv_item_medikits:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_item_medikit_small	= utils.inherit(sv_item_medikits, item_medikit_small);
 sv_item_medikit_medium	= utils.inherit(sv_item_medikits, item_medikit_medium);
 sv_item_medikit_large	= utils.inherit(sv_item_medikits, item_medikit_large);
@@ -56,7 +56,7 @@ function sv_item_medikit_large:register_properties(prop_registry)
 end
 
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_item_medikit_small	= utils.inherit(cl_item_medikit, item_medikit_small);
 cl_item_medikit_medium	= utils.inherit(cl_item_medikit, item_medikit_medium);
 cl_item_medikit_large	= utils.inherit(cl_item_medikit, item_medikit_large);

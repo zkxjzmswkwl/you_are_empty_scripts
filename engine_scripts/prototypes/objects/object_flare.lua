@@ -7,7 +7,7 @@
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 object_flare = {
 	guid = {0x8b0d8dd3, 0xc782, 0x4a0f, 0xb2, 0x88, 0xb5, 0x3, 0xa0, 0xb8, 0x13, 0x61},
 }
@@ -17,7 +17,7 @@ function object_flare:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_object_flare = utils.inherit(sv_game_object, object_flare)
 
 function sv_object_flare:register_properties(prop_registry)
@@ -31,7 +31,7 @@ function sv_object_flare:on_update(dt)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_object_flare = utils.inherit(cl_game_object, object_flare)
 
 function cl_object_flare:register_properties(prop_registry)

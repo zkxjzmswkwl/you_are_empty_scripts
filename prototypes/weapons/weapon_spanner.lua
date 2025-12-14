@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Оружие - разводной ключ
+-- РћСЂСѓР¶РёРµ - СЂР°Р·РІРѕРґРЅРѕР№ РєР»СЋС‡
 ------------------------------------------------------------------------
 
 weapon_spanner = {};
@@ -12,24 +12,24 @@ weapon_spanner = {};
 weapon_spanner.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"ItemSpanner" },
 	{"hit_material",		"mat_hit_spanner" },
-	{ "slot_name",			g_weapon_slots[1] }, -- слот в котором может быть оружие
-	{ "priority",			2 }, -- приоритет оружия
---	{ "icon_id",			1 }, -- иконка для HUD
+	{ "slot_name",			g_weapon_slots[1] }, -- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{ "priority",			2 }, -- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			1 }, -- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{"enable_ammo",			false},	-- патроны не нужны
+	{"enable_ammo",			false},	-- РїР°С‚СЂРѕРЅС‹ РЅРµ РЅСѓР¶РЅС‹
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_spanner.m_models_names = {
---	Имя игрока				Имя модели рук			Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє			РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"spanner_hands",		"spanner"			},
 }
 
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_spanner.m_holdable_icon_id	= 4
 	
--- параметры
--- атака
+-- РїР°СЂР°РјРµС‚СЂС‹
+-- Р°С‚Р°РєР°
 weapon_spanner.m_fire_damage		= 70;
 weapon_spanner.m_fire_impulse		= .5;
 weapon_spanner.m_fire_dist			= 2;
@@ -38,11 +38,11 @@ weapon_spanner.m_recoil_angle		= 0;
 -- FOV
 weapon_spanner.m_model_fov			= 65;
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_spanner.m_rate_of_fire		= 2
 
 
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 weapon_spanner.states_design = {};
 weapon_spanner.states_design["show"] = {{anim = "taking", anim_speed = 2.5, snd = "klych_taking"},};
 weapon_spanner.states_design["hide"] = {{anim = "hiding", anim_speed = 2.5, snd = "klych_hiding"},};
@@ -70,7 +70,7 @@ weapon_spanner.states_design["fire_out"] = {
 									   };
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_spanner.guid = {0xee3f119, 0x283b, 0x4051, 0x83, 0x94, 0x4b, 0xd9, 0x14, 0x3d, 0x7d, 0x6d};
 
 function weapon_spanner:on_init()
@@ -78,7 +78,7 @@ end
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_spanner = utils.inherit(sv_weapon_basic, weapon_spanner);
 
 function sv_weapon_spanner:register_properties(prop_registry)
@@ -89,7 +89,7 @@ function sv_weapon_spanner:on_init()
 	sv_weapon_basic.on_init(self);
 	weapon_spanner.on_init(self);
 	
-	-- дополнительное состояние для атаки
+	-- РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РґР»СЏ Р°С‚Р°РєРё
 	self.fire_finish_state	= self:add_fsm_state(self.main_fsm, "fire_finish_state", self.on_enter_fire_finish, self.on_update_fire_finish, nil, nil);
 end
 
@@ -100,8 +100,8 @@ end
 ---------------------------------------------------------------------------------
 function sv_weapon_spanner:event_lever1_down()
 
-	-- Если был нажат удар во время fire_finish,
-	-- то прерываем текущую атаку и начинаем новую атаку.
+	-- Р•СЃР»Рё Р±С‹Р» РЅР°Р¶Р°С‚ СѓРґР°СЂ РІРѕ РІСЂРµРјСЏ fire_finish,
+	-- С‚Рѕ РїСЂРµСЂС‹РІР°РµРј С‚РµРєСѓС‰СѓСЋ Р°С‚Р°РєСѓ Рё РЅР°С‡РёРЅР°РµРј РЅРѕРІСѓСЋ Р°С‚Р°РєСѓ.
 	local fsm_state = self:get_cur_fsm_state(self.main_fsm)
 	if fsm_state == self.fire_finish_state then
 		self:change_fsm_state(self.main_fsm, self.fire_state, true)
@@ -119,7 +119,7 @@ end
 ---------------------------------------------------------------------------------
 function sv_weapon_spanner:on_update_fire()
 
-	-- нанести хит
+	-- РЅР°РЅРµСЃС‚Рё С…РёС‚
 	self:fire_trace(self. m_fire_damage, g_damage_type.KNOCK, self.m_fire_impulse, 
 				self.m_fire_dist, self.m_fire_dist, self.m_fire_disp, self.m_recoil_angle);
 
@@ -138,7 +138,7 @@ function sv_weapon_spanner:on_update_fire_finish()
 end
 
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_spanner = utils.inherit(cl_weapon_basic, weapon_spanner);
 
 function cl_weapon_spanner:on_init()

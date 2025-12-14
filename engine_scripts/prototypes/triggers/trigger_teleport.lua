@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_teleport - триггер, перемещающий объект в заданный trigger_teleport_target
+-- trigger_teleport - С‚СЂРёРіРіРµСЂ, РїРµСЂРµРјРµС‰Р°СЋС‰РёР№ РѕР±СЉРµРєС‚ РІ Р·Р°РґР°РЅРЅС‹Р№ trigger_teleport_target
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_teleport = {
 	guid = {0x80fcaa07, 0xcc00, 0x48c8, 0xbe, 0x34, 0x76, 0xe9, 0x14, 0xae, 0xfc, 0xe3},
 }
@@ -16,7 +16,7 @@ function trigger_teleport:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_trigger_teleport = utils.inherit(sv_game_object, trigger_teleport);
 
 function sv_trigger_teleport:register_properties(prop_registry)
@@ -29,7 +29,7 @@ function sv_trigger_teleport:on_init()
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_trigger_teleport = utils.inherit(cl_game_object, trigger_teleport);
 
 function cl_trigger_teleport:register_properties(prop_registry)

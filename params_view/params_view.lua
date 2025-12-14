@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ----------------------------------------------------------------------------
---	Создание таблиц(HTML), отображающих параметры актеров и оружия.
+--	РЎРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†(HTML), РѕС‚РѕР±СЂР°Р¶Р°СЋС‰РёС… РїР°СЂР°РјРµС‚СЂС‹ Р°РєС‚РµСЂРѕРІ Рё РѕСЂСѓР¶РёСЏ.
 ----------------------------------------------------------------------------
 
 include("headers_desc.lua");
@@ -34,24 +34,24 @@ function export_design_params()
 	local tables = ""
 	local row_headers
 	
-	-- Экспорт параметров актеров.
-	tables = tables .. export_group("actor", actor_headers, "Параметры актеров")
+	-- Р­РєСЃРїРѕСЂС‚ РїР°СЂР°РјРµС‚СЂРѕРІ Р°РєС‚РµСЂРѕРІ.
+	tables = tables .. export_group("actor", actor_headers, "РџР°СЂР°РјРµС‚СЂС‹ Р°РєС‚РµСЂРѕРІ")
 	
-	-- Экспорт параметров атаки актеров.
-	tables = tables .. export_group("actor", actor_attack_headers, "Параметры атаки актеров")
+	-- Р­РєСЃРїРѕСЂС‚ РїР°СЂР°РјРµС‚СЂРѕРІ Р°С‚Р°РєРё Р°РєС‚РµСЂРѕРІ.
+	tables = tables .. export_group("actor", actor_attack_headers, "РџР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё Р°РєС‚РµСЂРѕРІ")
 	
-	-- Экспорт параметров оружия.
-	tables = tables .. export_group("weapon", weapon_headers, "Параметры оружия")
+	-- Р­РєСЃРїРѕСЂС‚ РїР°СЂР°РјРµС‚СЂРѕРІ РѕСЂСѓР¶РёСЏ.
+	tables = tables .. export_group("weapon", weapon_headers, "РџР°СЂР°РјРµС‚СЂС‹ РѕСЂСѓР¶РёСЏ")
 	
-	-- Экспорт параметров метательного оружия.
-	tables = tables .. export_group("ammo_missile", ammo_missile_headers, "Параметры метательного оружия")
+	-- Р­РєСЃРїРѕСЂС‚ РїР°СЂР°РјРµС‚СЂРѕРІ РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ.
+	tables = tables .. export_group("ammo_missile", ammo_missile_headers, "РџР°СЂР°РјРµС‚СЂС‹ РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ")
 	
 	return html_begin .. tables .. html_end
 	
 end
 
 ----------------------------------------------------------------------------
--- Экспортирует группу
+-- Р­РєСЃРїРѕСЂС‚РёСЂСѓРµС‚ РіСЂСѓРїРїСѓ
 function export_group(group_prefix, headers_tbl, caption)
 	local res = ""
 	local row_headers
@@ -59,7 +59,7 @@ function export_group(group_prefix, headers_tbl, caption)
 	local prefix_len = string.len(group_prefix)
 	
 	res = res .. "<h2>"..caption.."</h2>\n"
-	-- Находим и отображаем все специфические элементы группы
+	-- РќР°С…РѕРґРёРј Рё РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃРµ СЃРїРµС†РёС„РёС‡РµСЃРєРёРµ СЌР»РµРјРµРЅС‚С‹ РіСЂСѓРїРїС‹
 	for i, v in pairs(headers_tbl) do
 		row_headers = {"&nbsp;"}
 		if string.sub(i, 0, prefix_len) == group_prefix then
@@ -70,7 +70,7 @@ function export_group(group_prefix, headers_tbl, caption)
 		end
 	end
 	
-	-- Отображаем все остальны элементы группы
+	-- РћС‚РѕР±СЂР°Р¶Р°РµРј РІСЃРµ РѕСЃС‚Р°Р»СЊРЅС‹ СЌР»РµРјРµРЅС‚С‹ РіСЂСѓРїРїС‹
 	row_headers = get_group_names(group_prefix, except) 
 	table.insert(row_headers, 1, "&nbsp;")
 	res = res .. create_html_table(row_headers, headers_tbl.common, headers_tbl)
@@ -81,7 +81,7 @@ function export_group(group_prefix, headers_tbl, caption)
 end
 
 ----------------------------------------------------------------------------
--- Возвращает значение свойства по имени
+-- Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ СЃРІРѕР№СЃС‚РІР° РїРѕ РёРјРµРЅРё
 function get_prop_val_by_name(class_tbl, prop_name)
 	
 	if not class_tbl.properties_design then return nil end
@@ -96,22 +96,22 @@ function get_prop_val_by_name(class_tbl, prop_name)
 end
 
 ----------------------------------------------------------------------------
--- Возвращает имена классов указанной группы, кроме тех, которые уже есть в except
+-- Р’РѕР·РІСЂР°С‰Р°РµС‚ РёРјРµРЅР° РєР»Р°СЃСЃРѕРІ СѓРєР°Р·Р°РЅРЅРѕР№ РіСЂСѓРїРїС‹, РєСЂРѕРјРµ С‚РµС…, РєРѕС‚РѕСЂС‹Рµ СѓР¶Рµ РµСЃС‚СЊ РІ except
 function get_group_names(group_prefix, except)
 	
 	local prefix_len = string.len(group_prefix)
 	res = {}
 	
-	-- Ищем имена в таблице прототипов
+	-- РС‰РµРј РёРјРµРЅР° РІ С‚Р°Р±Р»РёС†Рµ РїСЂРѕС‚РѕС‚РёРїРѕРІ
 	for i, v in pairs(prototypes) do
 	
 		local class_name = v[3]
 		if string.sub(class_name, 0, prefix_len) == group_prefix then
 			
-			-- Пропускаем actor_player'а
+			-- РџСЂРѕРїСѓСЃРєР°РµРј actor_player'Р°
 			if class_name == "actor_player" then continue end
 			
-			-- Подходящее имя найдено. Проверим нет ли его среди исключений
+			-- РџРѕРґС…РѕРґСЏС‰РµРµ РёРјСЏ РЅР°Р№РґРµРЅРѕ. РџСЂРѕРІРµСЂРёРј РЅРµС‚ Р»Рё РµРіРѕ СЃСЂРµРґРё РёСЃРєР»СЋС‡РµРЅРёР№
 			local exeption = false
 			for j, v2 in ipairs(except) do
 				if class_name == v2 then
@@ -127,39 +127,39 @@ function get_group_names(group_prefix, except)
 		end
 	end
 	
-	-- Упорядочивает имена по алфавиту
+	-- РЈРїРѕСЂСЏРґРѕС‡РёРІР°РµС‚ РёРјРµРЅР° РїРѕ Р°Р»С„Р°РІРёС‚Сѓ
 	table.sort(res)
 	
 	return res
 end
 
 ----------------------------------------------------------------------------
--- Создает HTML-таблицу
+-- РЎРѕР·РґР°РµС‚ HTML-С‚Р°Р±Р»РёС†Сѓ
 function create_html_table(row_headers, column_headers, headers_tbl)
 
 	local res = ""
 	
 	res = res .. "<table"..HTMLStyles.table..">\n"
 	
-	-- Строки таблицы
+	-- РЎС‚СЂРѕРєРё С‚Р°Р±Р»РёС†С‹
 	for i, r in pairs(row_headers) do
 		
 		local rowspan = 1
 		local expanded_rows = nil
-		-- Стили строки и первых ячеек строки.
+		-- РЎС‚РёР»Рё СЃС‚СЂРѕРєРё Рё РїРµСЂРІС‹С… СЏС‡РµРµРє СЃС‚СЂРѕРєРё.
 		if i == 1 then
-			-- Угловая ячейка
+			-- РЈРіР»РѕРІР°СЏ СЏС‡РµР№РєР°
 			td_style = HTMLStyles.td_corner
-			-- Стиль первой строки(заголовки столбцов)
+			-- РЎС‚РёР»СЊ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё(Р·Р°РіРѕР»РѕРІРєРё СЃС‚РѕР»Р±С†РѕРІ)
 			tr_style = HTMLStyles.tr_col_header
 		else
-			-- Определим нужно ли расширять строку и на сколько
+			-- РћРїСЂРµРґРµР»РёРј РЅСѓР¶РЅРѕ Р»Рё СЂР°СЃС€РёСЂСЏС‚СЊ СЃС‚СЂРѕРєСѓ Рё РЅР° СЃРєРѕР»СЊРєРѕ
 			local exp_tbl = headers_tbl.expand[r] or headers_tbl.expand.common
 			if exp_tbl then
 				expanded_rows = {}
-				-- Дополнительные строки
+				-- Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃС‚СЂРѕРєРё
 				for i, v in pairs(exp_tbl) do
-					-- Определяем "путь" к параметру
+					-- РћРїСЂРµРґРµР»СЏРµРј "РїСѓС‚СЊ" Рє РїР°СЂР°РјРµС‚СЂСѓ
 					local param = _G[r]
 					for i, v in pairs(v.key) do
 						param = param[v]
@@ -181,9 +181,9 @@ function create_html_table(row_headers, column_headers, headers_tbl)
 				rowspan = table.getn(expanded_rows)
 			end
 			
-			-- Стиль первого столбца(заголовки строк)
+			-- РЎС‚РёР»СЊ РїРµСЂРІРѕРіРѕ СЃС‚РѕР»Р±С†Р°(Р·Р°РіРѕР»РѕРІРєРё СЃС‚СЂРѕРє)
 			td_style = HTMLStyles.td_row_header.." rowspan="..rowspan
-			-- Стиль ячеек с данными
+			-- РЎС‚РёР»СЊ СЏС‡РµРµРє СЃ РґР°РЅРЅС‹РјРё
 			tr_style = ""
 		end
 		
@@ -192,15 +192,15 @@ function create_html_table(row_headers, column_headers, headers_tbl)
 		
 		for row = 1, rowspan do
 	
-			-- Столбцы таблицы	
+			-- РЎС‚РѕР»Р±С†С‹ С‚Р°Р±Р»РёС†С‹	
 			for j, c in pairs(column_headers) do
 				res = res .. "\t\t<td"..HTMLStyles.td_data..">"
 				
 				if i == 1 then
-					-- Первая строка в таблице - заголовок.
+					-- РџРµСЂРІР°СЏ СЃС‚СЂРѕРєР° РІ С‚Р°Р±Р»РёС†Рµ - Р·Р°РіРѕР»РѕРІРѕРє.
 					res = res .. c.header_name
 				else
-					-- Если строка не первая, то пишем значение свойства
+					-- Р•СЃР»Рё СЃС‚СЂРѕРєР° РЅРµ РїРµСЂРІР°СЏ, С‚Рѕ РїРёС€РµРј Р·РЅР°С‡РµРЅРёРµ СЃРІРѕР№СЃС‚РІР°
 					if expanded_rows then
 						res = res .. format_value(expanded_rows[row][c.prop_name], c.prop_name)
 					else
@@ -222,12 +222,12 @@ function create_html_table(row_headers, column_headers, headers_tbl)
 end
 
 ----------------------------------------------------------------------------
--- Преобразовывает заначения в строку
+-- РџСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµС‚ Р·Р°РЅР°С‡РµРЅРёСЏ РІ СЃС‚СЂРѕРєСѓ
 function format_value(val, prop_name)
 	local res
 	
 	local formatted = false
-	-- Преобразование числовых значений в известные символические имена
+	-- РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‡РёСЃР»РѕРІС‹С… Р·РЅР°С‡РµРЅРёР№ РІ РёР·РІРµСЃС‚РЅС‹Рµ СЃРёРјРІРѕР»РёС‡РµСЃРєРёРµ РёРјРµРЅР°
 	if val then
 		if prop_name == "damage_type" then
 			for i, v in pairs(g_damage_type) do

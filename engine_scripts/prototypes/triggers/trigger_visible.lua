@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_visible - триггер, срабатывыющий на видимость игроками
+-- trigger_visible - С‚СЂРёРіРіРµСЂ, СЃСЂР°Р±Р°С‚С‹РІС‹СЋС‰РёР№ РЅР° РІРёРґРёРјРѕСЃС‚СЊ РёРіСЂРѕРєР°РјРё
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_visible = {
 	guid = {0x4228a215, 0xb0a6, 0x4177, 0xad, 0xf3, 0x31, 0x91, 0x8, 0x18, 0x92, 0x14},
 };
@@ -23,7 +23,7 @@ function trigger_visible:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 
 sv_trigger_visible = utils.inherit(sv_game_object, trigger_visible);
 sv_trigger_visible.is_in_view = false;
@@ -57,13 +57,13 @@ function sv_trigger_visible:on_update(dt)
 
 	for i,player in players
 	do
-		-- позиция игрока
+		-- РїРѕР·РёС†РёСЏ РёРіСЂРѕРєР°
 		local pl_pos = player:get_pos();
 		
-		-- проверка видимости по углу
+		-- РїСЂРѕРІРµСЂРєР° РІРёРґРёРјРѕСЃС‚Рё РїРѕ СѓРіР»Сѓ
 		if player:is_object_visible(self, self:get_property_value(self.fov_prop))
 		then
-			-- проверка видимости по расстоянию
+			-- РїСЂРѕРІРµСЂРєР° РІРёРґРёРјРѕСЃС‚Рё РїРѕ СЂР°СЃСЃС‚РѕСЏРЅРёСЋ
 			local distance_check = false;
 			if max_dist <= 0 then
 				distance_check = true;
@@ -74,16 +74,16 @@ function sv_trigger_visible:on_update(dt)
 						
 			if distance_check
 			then
-				-- основные тесты пройдены, считаем, что видимость есть
+				-- РѕСЃРЅРѕРІРЅС‹Рµ С‚РµСЃС‚С‹ РїСЂРѕР№РґРµРЅС‹, СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РІРёРґРёРјРѕСЃС‚СЊ РµСЃС‚СЊ
 				is_visible = true;
 
-				-- если надо, то проверка видимости по трассировке
+				-- РµСЃР»Рё РЅР°РґРѕ, С‚Рѕ РїСЂРѕРІРµСЂРєР° РІРёРґРёРјРѕСЃС‚Рё РїРѕ С‚СЂР°СЃСЃРёСЂРѕРІРєРµ
 				if self:get_property_value(self.is_need_trace)
 				then
 					was_intersection, point, normal, obj = trace_to_pos(pl_pos, my_pos, player);
 					if was_intersection == true
 					then
-						-- нет видимости по трассировке
+						-- РЅРµС‚ РІРёРґРёРјРѕСЃС‚Рё РїРѕ С‚СЂР°СЃСЃРёСЂРѕРІРєРµ
 						is_visible = false;
 					end
 				end
@@ -136,7 +136,7 @@ function sv_trigger_visible:out_visibility()
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_trigger_visible = utils.inherit(cl_game_object, trigger_visible);
 
 function cl_trigger_visible:register_properties(prop_registry)

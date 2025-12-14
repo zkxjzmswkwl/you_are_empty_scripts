@@ -3,38 +3,38 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Тест препроцессора
+-- РўРµСЃС‚ РїСЂРµРїСЂРѕС†РµСЃСЃРѕСЂР°
 ------------------------------------------------------------------------
 
 --console.print("===== PREPROCESSOR TEST (begin)=====")
 
--- Тест #define
+-- РўРµСЃС‚ #define
 #define  SOME_DEFINE 345
 assert(SOME_DEFINE == 345)
 
 #define INCL
 #ifdef INCL
 	#include "preprocessor_test_include.lua"
-	#include "preprocessor_test_include.lua" -- Не будет включен повторно
+	#include "preprocessor_test_include.lua" -- РќРµ Р±СѓРґРµС‚ РІРєР»СЋС‡РµРЅ РїРѕРІС‚РѕСЂРЅРѕ
 #else
 	#include "preprocessor_test_include2.lua"
 #endif
 
--- Тест #pragma once
--- В preprocessor_test_include2.lua разопределяется ONCE. Повторное включение этого
--- файла вызывает ошибку. Благодаря директиве #pragma once данный файл включается только один раз.
+-- РўРµСЃС‚ #pragma once
+-- Р’ preprocessor_test_include2.lua СЂР°Р·РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ ONCE. РџРѕРІС‚РѕСЂРЅРѕРµ РІРєР»СЋС‡РµРЅРёРµ СЌС‚РѕРіРѕ
+-- С„Р°Р№Р»Р° РІС‹Р·С‹РІР°РµС‚ РѕС€РёР±РєСѓ. Р‘Р»Р°РіРѕРґР°СЂСЏ РґРёСЂРµРєС‚РёРІРµ #pragma once РґР°РЅРЅС‹Р№ С„Р°Р№Р» РІРєР»СЋС‡Р°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЂР°Р·.
 #define ONCE
 #include "preprocessor_test_include2.lua"
 #include "preprocessor_test_include2.lua" 
 
--- Тест #pragma error. Если раскомментировать строку ниже, то получим ошибку :)
+-- РўРµСЃС‚ #pragma error. Р•СЃР»Рё СЂР°СЃРєРѕРјРјРµРЅС‚РёСЂРѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ РЅРёР¶Рµ, С‚Рѕ РїРѕР»СѓС‡РёРј РѕС€РёР±РєСѓ :)
 --#pragma error 'not good'
 
--- Тест #undef
-#undef AVG		-- Определен в "preprocessor_test_include.lua", поэтому ошибка не должна возникать
+-- РўРµСЃС‚ #undef
+#undef AVG		-- РћРїСЂРµРґРµР»РµРЅ РІ "preprocessor_test_include.lua", РїРѕСЌС‚РѕРјСѓ РѕС€РёР±РєР° РЅРµ РґРѕР»Р¶РЅР° РІРѕР·РЅРёРєР°С‚СЊ
 assert(AVG == nil)
 
--- Тест define с параметрами
+-- РўРµСЃС‚ define СЃ РїР°СЂР°РјРµС‚СЂР°РјРё
 #define	AVG(a, b) (b + a)/2
 assert(AVG(1.5, 2.5) == 2)
 
@@ -48,14 +48,14 @@ assert(WIDTH == 6)
 #define  LEN WIDTH + AVG(7,9)
 assert(LEN == 14)
 
--- Тест часть идентификатора
+-- РўРµСЃС‚ С‡Р°СЃС‚СЊ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР°
 #define  MACRO  	0
 #define  MACRO1 	MACRO+1
 #define  AMACRO 	MACRO+2
 #define  AVGMACROWIDTH 888
 assert("0128880" == tostring(MACRO)..tostring(MACRO1)..tostring(AMACRO)..tostring(AVGMACROWIDTH)..tostring(MACRO))
 
--- Тест логических скобок
+-- РўРµСЃС‚ Р»РѕРіРёС‡РµСЃРєРёС… СЃРєРѕР±РѕРє
 local pptest_sum = 0
 #define aaa
 #define zzz
@@ -107,18 +107,18 @@ assert(pptest_sum == 999)
 pptest_sum = nil
 
 
--- Тест в составе строки
+-- РўРµСЃС‚ РІ СЃРѕСЃС‚Р°РІРµ СЃС‚СЂРѕРєРё
 #undef MACRO
 #define MACRO 999
 assert("1998la al MACRO lalal asg MACRO " == tostring(MACRO * 2)..'la al MACRO lalal '.."asg MACRO ")
 
--- Тест однострочный комментарий
+-- РўРµСЃС‚ РѕРґРЅРѕСЃС‚СЂРѕС‡РЅС‹Р№ РєРѕРјРјРµРЅС‚Р°СЂРёР№
 #define RRR 888--88888888
 assert(RRR == 888)
-local comment = "qwerty ------ qwerty" -- Однострочный комментарий в составе строки
+local comment = "qwerty ------ qwerty" -- РћРґРЅРѕСЃС‚СЂРѕС‡РЅС‹Р№ РєРѕРјРјРµРЅС‚Р°СЂРёР№ РІ СЃРѕСЃС‚Р°РІРµ СЃС‚СЂРѕРєРё
 comment = nil
 
--- Тест многострочных макросов
+-- РўРµСЃС‚ РјРЅРѕРіРѕСЃС‚СЂРѕС‡РЅС‹С… РјР°РєСЂРѕСЃРѕРІ
 -----------------------------
 #define_begin CHUNK_OF_CODE
 	assert(2 + 2 == 4)
@@ -142,7 +142,7 @@ tmp = nil
 var1 = nil
 var2 = nil
 
--- Тест символ '.'
+-- РўРµСЃС‚ СЃРёРјРІРѕР» '.'
 #define_begin COROUTINE_ANIMATION_SCENE(MAP, NUMBER1, NUMBER2)
 	coroutines.MAP = {}
 	local pptest_sum = NUMBER1 + NUMBER2

@@ -3,13 +3,13 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Fireman - монстр пожарник
+-- Actor Fireman - РјРѕРЅСЃС‚СЂ РїРѕР¶Р°СЂРЅРёРє
 ------------------------------------------------------------------------
 
 
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 
 actor_fireman.guid = {0x2104cd62, 0xe4c6, 0x4aa5, 0x96, 0x4a, 0x5e, 0x55, 0x2c, 0xb3, 0x23, 0x2d};
 
@@ -17,7 +17,7 @@ function actor_fireman:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_fireman = utils.inherit(sv_actor_basic, actor_fireman);
 
 function sv_actor_fireman:register_properties(prop_registry)
@@ -29,15 +29,15 @@ function sv_actor_fireman:on_init()
 	actor_fireman.on_init(self);
 end
 
--- пожарник после атаки с прыжка
--- должен бежать дальше
+-- РїРѕР¶Р°СЂРЅРёРє РїРѕСЃР»Рµ Р°С‚Р°РєРё СЃ РїСЂС‹Р¶РєР°
+-- РґРѕР»Р¶РµРЅ Р±РµР¶Р°С‚СЊ РґР°Р»СЊС€Рµ
 function sv_actor_fireman:on_enter_attack_jump_land()
 	sv_actor_basic.on_enter_attack_jump_land(self);
 	self.m_performed_forward = 1;
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_fireman = utils.inherit(cl_actor_basic, actor_fireman);
 
 function cl_actor_fireman:on_init()

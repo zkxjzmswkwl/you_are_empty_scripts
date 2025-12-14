@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- физическое поведение для актера
+-- С„РёР·РёС‡РµСЃРєРѕРµ РїРѕРІРµРґРµРЅРёРµ РґР»СЏ Р°РєС‚РµСЂР°
 ------------------------------------------------------------------------
 
 FORWARD = 0;
@@ -74,8 +74,8 @@ function sv_actor_basic:reset_legs_state(strong_reset)
 end
 
 function sv_actor_basic:reset_body_state(strong_reset)
-	--.hack помогает бороться с залипанием монстров
-	-- когда они не оповещают контроллер о завершении атаки
+	--.hack РїРѕРјРѕРіР°РµС‚ Р±РѕСЂРѕС‚СЊСЃСЏ СЃ Р·Р°Р»РёРїР°РЅРёРµРј РјРѕРЅСЃС‚СЂРѕРІ
+	-- РєРѕРіРґР° РѕРЅРё РЅРµ РѕРїРѕРІРµС‰Р°СЋС‚ РєРѕРЅС‚СЂРѕР»Р»РµСЂ Рѕ Р·Р°РІРµСЂС€РµРЅРёРё Р°С‚Р°РєРё
 	--self:end_attack();
 
 	--console.print(" ==================== sv_actor_basic:reset_body_state() ");
@@ -114,8 +114,8 @@ function sv_actor_basic:init_moving_states()
 	end	
 end
 
--- вызывается после перехода из положения стоя 
--- в положения сидя
+-- РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ РїРµСЂРµС…РѕРґР° РёР· РїРѕР»РѕР¶РµРЅРёСЏ СЃС‚РѕСЏ 
+-- РІ РїРѕР»РѕР¶РµРЅРёСЏ СЃРёРґСЏ
 function sv_actor_basic:stay_to_sit_begin()
 	--console.print(" ----------------- stay_to_sit_begin ");
 	if (self.state_visual_info["transition_stay_to_sit"]) then
@@ -132,8 +132,8 @@ function sv_actor_basic:stay_to_sit_end()
 	self:reset_body_state();
 end
 
--- вызывается после перехода из положения сидя
--- в положение стоя
+-- РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ РїРµСЂРµС…РѕРґР° РёР· РїРѕР»РѕР¶РµРЅРёСЏ СЃРёРґСЏ
+-- РІ РїРѕР»РѕР¶РµРЅРёРµ СЃС‚РѕСЏ
 function sv_actor_basic:sit_to_stay_begin()
 	--console.print(" ----------------- sit_to_stay_begin ");
 	assert(self.state_visual_info["transition_sit_to_stay"], "no transition");
@@ -152,7 +152,7 @@ end
 
 
 -------------------------------------------
--- обновление во время состояния падения
+-- РѕР±РЅРѕРІР»РµРЅРёРµ РІРѕ РІСЂРµРјСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 function sv_actor_basic:bhv_fall_update(dt, bhv_state, cur_state)
 	if(self:is_jumping() == true) then
 		return;
@@ -191,7 +191,7 @@ function sv_actor_basic:bhv_walk_update(dt, bhv_state, cur_state)
 		return true;
 	end	
 	
-	-- приседание
+	-- РїСЂРёСЃРµРґР°РЅРёРµ
 	if(self.m_down == 1) then
 		self.m_performed_down = 1;
 	else
@@ -211,7 +211,7 @@ function sv_actor_basic:bhv_walk_update(dt, bhv_state, cur_state)
 	end	
 	--]]
 		
-	-- прыжок
+	-- РїСЂС‹Р¶РѕРє
 	if(self.m_up == 1) then
 		if(self:is_jumping() == false and cur_state ~= self.jump_state) then
 			self:change_fsm_state(self.body_fsm, self.jump_state, false);
@@ -258,10 +258,10 @@ function sv_actor_basic:bhv_walk_update(dt, bhv_state, cur_state)
 			--console.print(" =========== calc_relative_velocity_dot_with_dir "..max_val);
 			
 			if(cur_legs_state ~= fsm_move_state) then
-				-- если ноги уже находятся в состоянии ходьбы или бега, то
-				-- не следует запускать анимацию сначала,
-				-- для плавности нужно выставить процент (self.m_legs_anim_time_percent)
-				-- того времени, которое уже отыгралось текущей анимации
+				-- РµСЃР»Рё РЅРѕРіРё СѓР¶Рµ РЅР°С…РѕРґСЏС‚СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё С…РѕРґСЊР±С‹ РёР»Рё Р±РµРіР°, С‚Рѕ
+				-- РЅРµ СЃР»РµРґСѓРµС‚ Р·Р°РїСѓСЃРєР°С‚СЊ Р°РЅРёРјР°С†РёСЋ СЃРЅР°С‡Р°Р»Р°,
+				-- РґР»СЏ РїР»Р°РІРЅРѕСЃС‚Рё РЅСѓР¶РЅРѕ РІС‹СЃС‚Р°РІРёС‚СЊ РїСЂРѕС†РµРЅС‚ (self.m_legs_anim_time_percent)
+				-- С‚РѕРіРѕ РІСЂРµРјРµРЅРё, РєРѕС‚РѕСЂРѕРµ СѓР¶Рµ РѕС‚С‹РіСЂР°Р»РѕСЃСЊ С‚РµРєСѓС‰РµР№ Р°РЅРёРјР°С†РёРё
 				if(self.m_legs_walk == true) then
 					local anim_cur_time = self:get_animation_time(self.m_legs_anim_idx);
 					local anim_full_time = self:get_animation_length_speed(self.m_legs_anim_idx);
@@ -286,7 +286,7 @@ end
 
 
 
--- вызывается когда персонаж стоит на земле и больше ничего не делает
+-- РІС‹Р·С‹РІР°РµС‚СЃСЏ РєРѕРіРґР° РїРµСЂСЃРѕРЅР°Р¶ СЃС‚РѕРёС‚ РЅР° Р·РµРјР»Рµ Рё Р±РѕР»СЊС€Рµ РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°РµС‚
 function sv_actor_basic:stand_idle_update(dt, cur_state)
 	if(self.m_idle_time_left > 0) then
 		self.m_idle_time_left = self.m_idle_time_left - dt;
@@ -306,7 +306,7 @@ function sv_actor_basic:bhv_stand_update(dt, bhv_state, cur_state)
 	if(self:is_jumping() == true) then
 		-- do nothing
 	elseif(self.m_up == 1) then		
-		-- анимация начала прыжка из состояния стоя
+		-- Р°РЅРёРјР°С†РёСЏ РЅР°С‡Р°Р»Р° РїСЂС‹Р¶РєР° РёР· СЃРѕСЃС‚РѕСЏРЅРёСЏ СЃС‚РѕСЏ
 		if(self:is_jumping() == false and cur_state ~= self.jump_state) then
 			self:change_fsm_state(self.body_fsm, self.jump_state, false);
 		end
@@ -327,7 +327,7 @@ function sv_actor_basic:bhv_movement_update(dt, bhv_state, cur_state)
 		--self.m_performed_down		= self.m_down;
 	end
 	
-	-- развернуть корпус в направлении движения
+	-- СЂР°Р·РІРµСЂРЅСѓС‚СЊ РєРѕСЂРїСѓСЃ РІ РЅР°РїСЂР°РІР»РµРЅРёРё РґРІРёР¶РµРЅРёСЏ
 	if(self.m_performed_forward == 1) then
 		if(self.m_performed_left == 1) then
 			self:set_property_value(self.foots_angle_prop, self.params.body_rotate_forward_strafe);
@@ -345,13 +345,13 @@ function sv_actor_basic:bhv_movement_update(dt, bhv_state, cur_state)
 	end
 
 
-	-- передать команды физическому carrier-у
+	-- РїРµСЂРµРґР°С‚СЊ РєРѕРјР°РЅРґС‹ С„РёР·РёС‡РµСЃРєРѕРјСѓ carrier-Сѓ
 	self:set_behavior_move(self.m_performed_forward, self.m_performed_backward, 
 							self.m_performed_left, self.m_performed_right, 
 							self.m_performed_up, self.m_performed_down);
 end
 
--- событие приземления
+-- СЃРѕР±С‹С‚РёРµ РїСЂРёР·РµРјР»РµРЅРёСЏ
 function sv_actor_basic:on_bhv_land(cur_state)
 	self.io.m_falling_time = 0;
 	
@@ -361,19 +361,19 @@ function sv_actor_basic:on_bhv_land(cur_state)
 	end
 end
 
--- изменение состояния carrier-а
+-- РёР·РјРµРЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ carrier-Р°
 function sv_actor_basic:on_bhv_state_change(bhv_state, bhv_prev_state)
 
 	--console.print(" ===== !!!!!!!!!!  sv_actor_basic:on_bhv_state_change "..bhv_state.." "..bhv_prev_state);
 	
 	local cur_state = self:get_cur_fsm_state(self.body_fsm);
 
-	-- начало падения
+	-- РЅР°С‡Р°Р»Рѕ РїР°РґРµРЅРёСЏ
 	if(bhv_state == BHV_FALL) then
 		self.io.m_falling_time = 0;
 		return;
 	end	
-	-- конец падения (приземления)
+	-- РєРѕРЅРµС† РїР°РґРµРЅРёСЏ (РїСЂРёР·РµРјР»РµРЅРёСЏ)
 	if(bhv_prev_state == BHV_FALL or bhv_prev_state == BHV_JUMP) then
 		self:on_bhv_land(cur_state);
 	end
@@ -388,8 +388,8 @@ function sv_actor_basic:on_bhv_update(dt, bhv_state, cur_state)
 	self.m_cur_body_state = cur_state;
 	self.m_cur_bhv_state = bhv_state;
 	
-	--  особый случай, если carrier находится в
-	-- 	воздухе, но shapes_enabled = false
+	--  РѕСЃРѕР±С‹Р№ СЃР»СѓС‡Р°Р№, РµСЃР»Рё carrier РЅР°С…РѕРґРёС‚СЃСЏ РІ
+	-- 	РІРѕР·РґСѓС…Рµ, РЅРѕ shapes_enabled = false
 	if(bhv_state == BHV_FALL and 
 		self:get_property_value(self.m_carrier_freeze_prop) == true) then 
 		bhv_state = BHV_WALK;
@@ -398,13 +398,13 @@ function sv_actor_basic:on_bhv_update(dt, bhv_state, cur_state)
 	if(bhv_state == BHV_FALL or bhv_state == BHV_JUMP) then
 		--console.print("================  BHV_FALL");
 		self:bhv_fall_update(dt, bhv_state, cur_state);
-	-- рассматривается случай, когда bhv_state == BHV_WALK, но 
-	-- мы все равно движемся (нас толкают),  в таком случае тоже
-	-- нужно проверять self:bhv_walk_update
+	-- СЂР°СЃСЃРјР°С‚СЂРёРІР°РµС‚СЃСЏ СЃР»СѓС‡Р°Р№, РєРѕРіРґР° bhv_state == BHV_WALK, РЅРѕ 
+	-- РјС‹ РІСЃРµ СЂР°РІРЅРѕ РґРІРёР¶РµРјСЃСЏ (РЅР°СЃ С‚РѕР»РєР°СЋС‚),  РІ С‚Р°РєРѕРј СЃР»СѓС‡Р°Рµ С‚РѕР¶Рµ
+	-- РЅСѓР¶РЅРѕ РїСЂРѕРІРµСЂСЏС‚СЊ self:bhv_walk_update
 	elseif(bhv_state == BHV_WALK or bhv_state == BHV_STAND
 		or bhv_state == BHV_SIT or bhv_state == BHV_CREEP) then
-		--.hack по другому стал работать carrier BHV_FALL включается
-		-- снова после приземления
+		--.hack РїРѕ РґСЂСѓРіРѕРјСѓ СЃС‚Р°Р» СЂР°Р±РѕС‚Р°С‚СЊ carrier BHV_FALL РІРєР»СЋС‡Р°РµС‚СЃСЏ
+		-- СЃРЅРѕРІР° РїРѕСЃР»Рµ РїСЂРёР·РµРјР»РµРЅРёСЏ
 		if(cur_state == self.fall_state) then
 			--console.print("================  bhv_state "..bhv_state);
 			self:reset_body_state();

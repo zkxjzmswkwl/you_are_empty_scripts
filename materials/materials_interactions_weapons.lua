@@ -1,5 +1,5 @@
 
--- настройки оружия для взаимодействия с бетоном
+-- РЅР°СЃС‚СЂРѕР№РєРё РѕСЂСѓР¶РёСЏ РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ Р±РµС‚РѕРЅРѕРј
 materials_interactions_infos.inter_spanner_beton = {
 	effects = { 
 		{ name = "hit_spanner.lua", n_range = { 0, 1 } },
@@ -194,7 +194,7 @@ materials_interactions_infos.inter_ppsh_beton = {
 	},
 }
 	
--- настройки оружия для взаимодействия с живыми телами
+-- РЅР°СЃС‚СЂРѕР№РєРё РѕСЂСѓР¶РёСЏ РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ Р¶РёРІС‹РјРё С‚РµР»Р°РјРё
 materials_interactions_infos.inter_melee_metal_body = {
 	effects = { 
 		{ name = "hit_body_melee_metal.lua", n_range = { 0, 1 } },

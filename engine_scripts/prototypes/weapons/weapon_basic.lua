@@ -6,8 +6,8 @@
 -- Weapon Basic 
 ------------------------------------------------------------------------
 
--- параметры для звуков, которые могут быть использованы для конкретных реализаций
--- оружия
+-- РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ Р·РІСѓРєРѕРІ, РєРѕС‚РѕСЂС‹Рµ РјРѕРіСѓС‚ Р±С‹С‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅС‹ РґР»СЏ РєРѕРЅРєСЂРµС‚РЅС‹С… СЂРµР°Р»РёР·Р°С†РёР№
+-- РѕСЂСѓР¶РёСЏ
 
 
 snd_weapon_shot = {
@@ -45,13 +45,13 @@ snd_weapon_common = {
 
 weapon_basic = {};
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_basic.properties_design =
 {
 	{ "sound_on_take",	"Player_Take_Weapons.wav"},
 };
 
--- Настройка параметров визуализации моделей от первого лица
+-- РќР°СЃС‚СЂРѕР№РєР° РїР°СЂР°РјРµС‚СЂРѕРІ РІРёР·СѓР°Р»РёР·Р°С†РёРё РјРѕРґРµР»РµР№ РѕС‚ РїРµСЂРІРѕРіРѕ Р»РёС†Р°
 weapon_basic.fp_model_render_params = {
 	depth_near	= 0.0,
 	depth_far	= 0.2,
@@ -62,11 +62,11 @@ weapon_basic.fp_model_render_params = {
 
 ----------------------------------------------------------------------
 function weapon_basic:prepare_visual_state_info()
-	-- таблица в которую будут записаны индексы для проинициализированных
-	-- анимаций и звуков
+	-- С‚Р°Р±Р»РёС†Р° РІ РєРѕС‚РѕСЂСѓСЋ Р±СѓРґСѓС‚ Р·Р°РїРёСЃР°РЅС‹ РёРЅРґРµРєСЃС‹ РґР»СЏ РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹С…
+	-- Р°РЅРёРјР°С†РёР№ Рё Р·РІСѓРєРѕРІ
 	self.state_visual_info = {};
 	
-	-- предварительная обработка таблицы описания состояний
+	-- РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР° С‚Р°Р±Р»РёС†С‹ РѕРїРёСЃР°РЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёР№
 	for i,v in pairs(self.states_design) do
 		self.state_visual_info[i] = {};
 		
@@ -74,7 +74,7 @@ function weapon_basic:prepare_visual_state_info()
 		for j,w in ipairs(v) do
 			self.state_visual_info[i][j] = {};
 			
-			-- проинициализировать различные варианты визуализации
+			-- РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ СЂР°Р·Р»РёС‡РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ РІРёР·СѓР°Р»РёР·Р°С†РёРё
 			
 			self.state_visual_info[i][j].anim_hands		= {}
 			self.state_visual_info[i][j].anim_fp		= {}
@@ -90,8 +90,8 @@ function weapon_basic:prepare_visual_state_info()
 			total_weight = total_weight + weight;
 		end
 		
-		-- перевести веса в соответствующие
-		-- разбиения отрезка от 0 до 1
+		-- РїРµСЂРµРІРµСЃС‚Рё РІРµСЃР° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ
+		-- СЂР°Р·Р±РёРµРЅРёСЏ РѕС‚СЂРµР·РєР° РѕС‚ 0 РґРѕ 1
 		for j,w in ipairs(v) do
 		
 			local weight = 1;
@@ -107,7 +107,7 @@ function weapon_basic:prepare_visual_state_info()
 end
 
 ----------------------------------------------------------------------
--- Добавляет анимации в соответствии с именем игрока
+-- Р”РѕР±Р°РІР»СЏРµС‚ Р°РЅРёРјР°С†РёРё РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃ РёРјРµРЅРµРј РёРіСЂРѕРєР°
 function weapon_basic:add_animations(_player_name)
 
 	for i,v in pairs(self.states_design) do
@@ -161,14 +161,14 @@ function weapon_basic:get_cur_player_name()
 end
 
 ----------------------------------------------------------------------
--- Играет ли указанный игрок на уровне
+-- РРіСЂР°РµС‚ Р»Рё СѓРєР°Р·Р°РЅРЅС‹Р№ РёРіСЂРѕРє РЅР° СѓСЂРѕРІРЅРµ
 function weapon_basic:is_player_playing(_player_name, _level_name)
 	
 	local is_playing = false
 	
 	if g_players_on_levels then
-		-- Если используется таблица g_players_on_levels, то имя игрока должно быть
-		-- в данной таблице для текущего уровня
+		-- Р•СЃР»Рё РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚Р°Р±Р»РёС†Р° g_players_on_levels, С‚Рѕ РёРјСЏ РёРіСЂРѕРєР° РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ
+		-- РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ РґР»СЏ С‚РµРєСѓС‰РµРіРѕ СѓСЂРѕРІРЅСЏ
 		if _level_name then
 			local players_on_this_level = g_players_on_levels[_level_name]
 			if players_on_this_level then
@@ -179,12 +179,12 @@ function weapon_basic:is_player_playing(_player_name, _level_name)
 					end
 				end
 			else
-				-- Такого уровня нет в таблице g_players_on_levels. Играют все.
+				-- РўР°РєРѕРіРѕ СѓСЂРѕРІРЅСЏ РЅРµС‚ РІ С‚Р°Р±Р»РёС†Рµ g_players_on_levels. РРіСЂР°СЋС‚ РІСЃРµ.
 				is_playing = true
 			end
 		end
 	else
-		-- Таблица g_players_on_levels не используется. Играют все.
+		-- РўР°Р±Р»РёС†Р° g_players_on_levels РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ. РРіСЂР°СЋС‚ РІСЃРµ.
 		is_playing = true
 	end
 	
@@ -194,17 +194,17 @@ end
 ----------------------------------------------------------------------
 function weapon_basic:register_properties(prop_registry)
 
-	-- Имя текущего игрока, подобравшего данное оружие.
+	-- РРјСЏ С‚РµРєСѓС‰РµРіРѕ РёРіСЂРѕРєР°, РїРѕРґРѕР±СЂР°РІС€РµРіРѕ РґР°РЅРЅРѕРµ РѕСЂСѓР¶РёРµ.
 	self:register_property(prop_registry, "cur_player_name", "-nil-")
 	
-	-- Приоритет данного оружия. Влияет на то, какое оружие автоматически
-	-- выбирается следующим, когда у текущего оружия заканчиваются патроны.
+	-- РџСЂРёРѕСЂРёС‚РµС‚ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ. Р’Р»РёСЏРµС‚ РЅР° С‚Рѕ, РєР°РєРѕРµ РѕСЂСѓР¶РёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё
+	-- РІС‹Р±РёСЂР°РµС‚СЃСЏ СЃР»РµРґСѓСЋС‰РёРј, РєРѕРіРґР° Сѓ С‚РµРєСѓС‰РµРіРѕ РѕСЂСѓР¶РёСЏ Р·Р°РєР°РЅС‡РёРІР°СЋС‚СЃСЏ РїР°С‚СЂРѕРЅС‹.
 	self:register_property(prop_registry, "priority", 0)
 	
-	-- Объект подлежит уничтожению
+	-- РћР±СЉРµРєС‚ РїРѕРґР»РµР¶РёС‚ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЋ
 	self:register_property(prop_registry, "marked_to_delete", false)
 
-	-- запомнить ссылки на properties для быстрого доступа к ним
+	-- Р·Р°РїРѕРјРЅРёС‚СЊ СЃСЃС‹Р»РєРё РЅР° properties РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РґРѕСЃС‚СѓРїР° Рє РЅРёРј
 	self.m_enable_ammo_prop	= self:get_property_by_name("enable_ammo");
 	self.m_loaded_ammo_prop	= self:get_property_by_name("loaded_ammo");
 	self.m_all_ammo_prop	= self:get_property_by_name("all_ammo");
@@ -213,19 +213,19 @@ end
 ----------------------------------------------------------------------
 function weapon_basic:on_init()
 		
-	-- Массив моделей рук для всех игроков
+	-- РњР°СЃСЃРёРІ РјРѕРґРµР»РµР№ СЂСѓРє РґР»СЏ РІСЃРµС… РёРіСЂРѕРєРѕРІ
 	self.m_model_hands = {}
-	-- Массив моделей оружия для всех игроков
+	-- РњР°СЃСЃРёРІ РјРѕРґРµР»РµР№ РѕСЂСѓР¶РёСЏ РґР»СЏ РІСЃРµС… РёРіСЂРѕРєРѕРІ
 	self.m_model_fp = {}
 	
-	-- Загружаем модели рук и оружия для игроков
-	-- Инстанцироваться же они будут на cl_weapon_basic:on_take
+	-- Р—Р°РіСЂСѓР¶Р°РµРј РјРѕРґРµР»Рё СЂСѓРє Рё РѕСЂСѓР¶РёСЏ РґР»СЏ РёРіСЂРѕРєРѕРІ
+	-- РРЅСЃС‚Р°РЅС†РёСЂРѕРІР°С‚СЊСЃСЏ Р¶Рµ РѕРЅРё Р±СѓРґСѓС‚ РЅР° cl_weapon_basic:on_take
 	for player_name, v in pairs(self.m_models_names) do
 	
-		-- Загружаем модели только для тех игроков, которые играют на текущем уровне
+		-- Р—Р°РіСЂСѓР¶Р°РµРј РјРѕРґРµР»Рё С‚РѕР»СЊРєРѕ РґР»СЏ С‚РµС… РёРіСЂРѕРєРѕРІ, РєРѕС‚РѕСЂС‹Рµ РёРіСЂР°СЋС‚ РЅР° С‚РµРєСѓС‰РµРј СѓСЂРѕРІРЅРµ
 		if g_players_on_levels then
 		
-			-- Играет ли игрок на данном уровне
+			-- РРіСЂР°РµС‚ Р»Рё РёРіСЂРѕРє РЅР° РґР°РЅРЅРѕРј СѓСЂРѕРІРЅРµ
 			local is_playing = false
 			
 			local level_name = engine.get_level_name()
@@ -246,12 +246,12 @@ function weapon_basic:on_init()
 					end
 					
 				else
-					-- Такой уровень не задан в таблице. Предполагаем, что на нем играют все игроки.
+					-- РўР°РєРѕР№ СѓСЂРѕРІРµРЅСЊ РЅРµ Р·Р°РґР°РЅ РІ С‚Р°Р±Р»РёС†Рµ. РџСЂРµРґРїРѕР»Р°РіР°РµРј, С‡С‚Рѕ РЅР° РЅРµРј РёРіСЂР°СЋС‚ РІСЃРµ РёРіСЂРѕРєРё.
 					is_playing = true
 				end
 				
 				if not is_playing then 
-					-- Игрок не играет на данном уровне. Не загружаем модели для него.
+					-- РРіСЂРѕРє РЅРµ РёРіСЂР°РµС‚ РЅР° РґР°РЅРЅРѕРј СѓСЂРѕРІРЅРµ. РќРµ Р·Р°РіСЂСѓР¶Р°РµРј РјРѕРґРµР»Рё РґР»СЏ РЅРµРіРѕ.
 					continue
 				end
 			end
@@ -267,11 +267,11 @@ end
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_basic = utils.inherit(sv_game_object, weapon_basic);
 
 -----------------------------------------------------------------------------
--- запустить анимацию и звук, ассоцированные с текущим записью в таблице
+-- Р·Р°РїСѓСЃС‚РёС‚СЊ Р°РЅРёРјР°С†РёСЋ Рё Р·РІСѓРє, Р°СЃСЃРѕС†РёСЂРѕРІР°РЅРЅС‹Рµ СЃ С‚РµРєСѓС‰РёРј Р·Р°РїРёСЃСЊСЋ РІ С‚Р°Р±Р»РёС†Рµ
 function sv_weapon_basic:visualize_state(fsm, states_visual_info_table, state_name, visual_idx)
 
 	if not self:get_cur_player_name() then return end
@@ -281,7 +281,7 @@ function sv_weapon_basic:visualize_state(fsm, states_visual_info_table, state_na
 	--console.print("visualize_state name:"..state_name);
 	assert(type(visual_info) == "table", "visual_info for state:"..state_name.." is not table");
 	
-	-- выбрать одну из записей используя вероятность
+	-- РІС‹Р±СЂР°С‚СЊ РѕРґРЅСѓ РёР· Р·Р°РїРёСЃРµР№ РёСЃРїРѕР»СЊР·СѓСЏ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ
 	local rnd = math.random();
 	
 	if(visual_idx == nil) then
@@ -414,16 +414,16 @@ function sv_weapon_basic:on_take(_actor)
 	local marked_to_delete = self:get_property_value_by_name("marked_to_delete")
 	
 	if _actor:is_player_controlled() and not marked_to_delete then 
-		-- Выбираем модель оружия и модель рук, соответствующие подобравшему игроку
+		-- Р’С‹Р±РёСЂР°РµРј РјРѕРґРµР»СЊ РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»СЊ СЂСѓРє, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ РїРѕРґРѕР±СЂР°РІС€РµРјСѓ РёРіСЂРѕРєСѓ
 		if self:get_cur_player_name() then
 			self:hide_model(self.m_model_hands[self:get_cur_player_name()], true);
 			self:hide_model(self.m_model_fp[self:get_cur_player_name()], true);
 		end
 		
-		-- переопределить свой fov, как fov хозяина
+		-- РїРµСЂРµРѕРїСЂРµРґРµР»РёС‚СЊ СЃРІРѕР№ fov, РєР°Рє fov С…РѕР·СЏРёРЅР°
 		self.m_normal_fov = _actor:get_property_value_by_name("view_fov");
 		
-		-- Сообщение об ошибке, если для данного игрока в таблице m_models_names нет записи.
+		-- РЎРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ, РµСЃР»Рё РґР»СЏ РґР°РЅРЅРѕРіРѕ РёРіСЂРѕРєР° РІ С‚Р°Р±Р»РёС†Рµ m_models_names РЅРµС‚ Р·Р°РїРёСЃРё.
 		local player_name = _actor:get_property_value_by_name("player_name")
 		assert(type(self.m_models_names[player_name]) == "table", "Proper models not found in '"..self.class_name..".m_models_names' for player '"..player_name.."'\n");
 		
@@ -431,13 +431,13 @@ function sv_weapon_basic:on_take(_actor)
 		assert(self:is_player_playing(player_name, level_name), 
 			"Player '"..player_name.."' not specified for level '"..level_name.."' in table 'g_players_on_levels'");
 		
-		-- Запоминаем игрока, подобравшего данное оружие.
+		-- Р—Р°РїРѕРјРёРЅР°РµРј РёРіСЂРѕРєР°, РїРѕРґРѕР±СЂР°РІС€РµРіРѕ РґР°РЅРЅРѕРµ РѕСЂСѓР¶РёРµ.
 		self:set_property_value_by_name("cur_player_name", player_name);
 		
-		-- Синхронизируем, чтобы клиент как можно скорее узнал о новом значении
+		-- РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј, С‡С‚РѕР±С‹ РєР»РёРµРЅС‚ РєР°Рє РјРѕР¶РЅРѕ СЃРєРѕСЂРµРµ СѓР·РЅР°Р» Рѕ РЅРѕРІРѕРј Р·РЅР°С‡РµРЅРёРё
 		self:instant_properties_synchronize();
 		
-		-- Добавляем анимации к предварительно загруженной модели
+		-- Р”РѕР±Р°РІР»СЏРµРј Р°РЅРёРјР°С†РёРё Рє РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ Р·Р°РіСЂСѓР¶РµРЅРЅРѕР№ РјРѕРґРµР»Рё
 		self:add_animations(player_name)	
 	end
 end
@@ -517,7 +517,7 @@ end
 
 
 ----------------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_basic = utils.inherit(cl_game_object, weapon_basic);
 
 ----------------------------------------------------------------------------------
@@ -556,14 +556,14 @@ function cl_weapon_basic:on_take()
 		assert(self:is_player_playing(player_name, level_name), 
 			"Player '"..player_name.."' not specified for level '"..level_name.."' in table 'g_players_on_levels'");
 
-		-- Добавляем анимации к предварительно загруженной модели
+		-- Р”РѕР±Р°РІР»СЏРµРј Р°РЅРёРјР°С†РёРё Рє РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ Р·Р°РіСЂСѓР¶РµРЅРЅРѕР№ РјРѕРґРµР»Рё
 		self:add_animations(player_name)
 		
-		-- Инстанцируем предварительно загруженные модели
+		-- РРЅСЃС‚Р°РЅС†РёСЂСѓРµРј РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ Р·Р°РіСЂСѓР¶РµРЅРЅС‹Рµ РјРѕРґРµР»Рё
 		self:instantiate_model(self.m_model_hands[player_name])
 		self:instantiate_model(self.m_model_fp[player_name])
 		
-		--render-свойства для модели, чтоб она корректно выглядела для вида от 1-го лица
+		--render-СЃРІРѕР№СЃС‚РІР° РґР»СЏ РјРѕРґРµР»Рё, С‡С‚РѕР± РѕРЅР° РєРѕСЂСЂРµРєС‚РЅРѕ РІС‹РіР»СЏРґРµР»Р° РґР»СЏ РІРёРґР° РѕС‚ 1-РіРѕ Р»РёС†Р°
 		self:set_model_first_person(self.m_model_hands[player_name],
 			self.m_model_fov,
 			self.fp_model_render_params.depth_near,
@@ -592,7 +592,7 @@ function cl_weapon_basic:on_enter_show()
 	--engine.show_msg_string(""..self.class_name)
 
 	--console.print("================== cl_weapon_basic:on_enter_show()");
-	--render-свойства для модели, чтоб она корректно выглядела для вида от 1-го лица
+	--render-СЃРІРѕР№СЃС‚РІР° РґР»СЏ РјРѕРґРµР»Рё, С‡С‚РѕР± РѕРЅР° РєРѕСЂСЂРµРєС‚РЅРѕ РІС‹РіР»СЏРґРµР»Р° РґР»СЏ РІРёРґР° РѕС‚ 1-РіРѕ Р»РёС†Р°
 	if self:get_cur_player_name() then
 		
 		self:set_model_first_person(self.m_model_hands[self:get_cur_player_name()],

@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_kill - триггер, находясь в котором, объект умирает
+-- trigger_kill - С‚СЂРёРіРіРµСЂ, РЅР°С…РѕРґСЏСЃСЊ РІ РєРѕС‚РѕСЂРѕРј, РѕР±СЉРµРєС‚ СѓРјРёСЂР°РµС‚
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_kill = {
 	guid = {0x80fcaa07, 0xcc00, 0x48c8, 0xbe, 0x34, 0x76, 0xe9, 0x14, 0xae, 0xfc, 0xe3},
 };
@@ -16,7 +16,7 @@ function trigger_kill:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_trigger_kill = utils.Inherit(sv_game_object, trigger_kill);
 
 function sv_trigger_kill:register_properties(prop_registry)
@@ -28,15 +28,15 @@ function sv_trigger_kill:OnInit()
 	sv_game_object.OnInit(self);
 end
 
--- функции обработчики слотов
+-- С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 function sv_trigger_kill:OnEnter(activator)
-	--.hack - надо сделать EVENT_KILL
+	--.hack - РЅР°РґРѕ СЃРґРµР»Р°С‚СЊ EVENT_KILL
 	self:send_event(activator, EVENT_DAMAGE, 0, 1, -1);
 	return true;
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_trigger_kill = utils.Inherit(cl_game_object, trigger_kill);
 
 function cl_trigger_kill:register_properties(prop_registry)

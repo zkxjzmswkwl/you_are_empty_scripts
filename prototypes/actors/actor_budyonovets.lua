@@ -3,18 +3,18 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Budyonovets - солдат красной армии
+-- Actor Budyonovets - СЃРѕР»РґР°С‚ РєСЂР°СЃРЅРѕР№ Р°СЂРјРёРё
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_budyonovets.guid = {0xf993fb1d, 0xfd60, 0x4160, 0xa4, 0x13, 0x5f, 0xf3, 0x74, 0x77, 0xd8, 0x90};
 
 function actor_budyonovets:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_budyonovets = utils.inherit(sv_actor_basic, actor_budyonovets);
 
 function sv_actor_budyonovets:register_properties(prop_registry)
@@ -27,7 +27,7 @@ function sv_actor_budyonovets:on_init()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_budyonovets = utils.inherit(cl_actor_basic, actor_budyonovets);
 
 function cl_actor_budyonovets:on_init()

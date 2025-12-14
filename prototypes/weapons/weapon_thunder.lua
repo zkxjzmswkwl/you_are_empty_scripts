@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Оружие Thunder
+-- РћСЂСѓР¶РёРµ Thunder
 ------------------------------------------------------------------------
 
 include("ammo_thunder.lua")
@@ -16,61 +16,61 @@ weapon_thunder = {};
 weapon_thunder.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"ItemTUNDER"},
 	{"hit_material",		"mat_hit_ppsh" },
-	{ "slot_name",			g_weapon_slots[8] },	-- слот в котором может быть оружие
-	{ "priority",			9 },					-- приоритет оружия
---	{ "icon_id",			6 },					-- иконка для HUD
+	{ "slot_name",			g_weapon_slots[8] },	-- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{ "priority",			9 },					-- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			6 },					-- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		35 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			0 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия
-	{ "max_ammo",			350 },	-- максимальное кол-во патронов, которое может быть у нас в инвентаре
+	{ "loaded_ammo",		35 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			0 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
+	{ "max_ammo",			350 },	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Сѓ РЅР°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ
 	
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_thunder.m_models_names = {
---	Имя игрока				Имя модели рук			Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє			РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"Thunder_hands",		"Thunder"			},
 }
 	
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_thunder.m_ammo_icon_id		= 5
 weapon_thunder.m_holdable_icon_id	= 12
 
 ---------------------------------------
--- параметры выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РІС‹СЃС‚СЂРµР»Р°
 ---------------------------------------
-weapon_thunder.m_missile_type		= "ammo_missile_fireball";	-- тип снаряда
-weapon_thunder.m_missile_velocity	= 5000;						-- скорость снаряда
+weapon_thunder.m_missile_type		= "ammo_missile_fireball";	-- С‚РёРї СЃРЅР°СЂСЏРґР°
+weapon_thunder.m_missile_velocity	= 5000;						-- СЃРєРѕСЂРѕСЃС‚СЊ СЃРЅР°СЂСЏРґР°
 weapon_thunder.m_shot_disp			= 0;
 weapon_thunder.m_shot_recoil		= 7;
-weapon_thunder.m_throw_point_offset	= {0, 0.2, 1.5};			-- смещение точки выброса метательного патрона
-weapon_thunder.m_angular_velocity	= {0, 20, 0};				-- вращение после броска
+weapon_thunder.m_throw_point_offset	= {0, 0.2, 1.5};			-- СЃРјРµС‰РµРЅРёРµ С‚РѕС‡РєРё РІС‹Р±СЂРѕСЃР° РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РїР°С‚СЂРѕРЅР°
+weapon_thunder.m_angular_velocity	= {0, 20, 0};				-- РІСЂР°С‰РµРЅРёРµ РїРѕСЃР»Рµ Р±СЂРѕСЃРєР°
 
 			
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_thunder.m_rate_of_fire		= .5
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_thunder.m_ammo_class			= "ammo_thunder"	-- класс используемых патронов
-weapon_thunder.m_ammo_type			= "thunder ammo"	-- тип используемых патронов
-weapon_thunder.m_clip_size			= 71				-- вместимость обоймы
-weapon_thunder.m_ammo_for_shot		= 1					-- кол-во патронов расходуемых на один выстрел
+weapon_thunder.m_ammo_class			= "ammo_thunder"	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_thunder.m_ammo_type			= "thunder ammo"	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_thunder.m_clip_size			= 71				-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
+weapon_thunder.m_ammo_for_shot		= 1					-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_thunder.m_normal_fov			= 55
 --weapon_thunder.m_zoomed_fov			= 65
 weapon_thunder.m_model_fov			= 55
 
-weapon_thunder.m_min_force			= 0.001	-- минимальная сила броска предмета
-weapon_thunder.m_max_force			= 1		-- максимальная сила броска предмета
-weapon_thunder.m_time_to_gain_max_force	= 1500	-- время, в течение которого сила броска приобретает максимум
+weapon_thunder.m_min_force			= 0.001	-- РјРёРЅРёРјР°Р»СЊРЅР°СЏ СЃРёР»Р° Р±СЂРѕСЃРєР° РїСЂРµРґРјРµС‚Р°
+weapon_thunder.m_max_force			= 1		-- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ СЃРёР»Р° Р±СЂРѕСЃРєР° РїСЂРµРґРјРµС‚Р°
+weapon_thunder.m_time_to_gain_max_force	= 1500	-- РІСЂРµРјСЏ, РІ С‚РµС‡РµРЅРёРµ РєРѕС‚РѕСЂРѕРіРѕ СЃРёР»Р° Р±СЂРѕСЃРєР° РїСЂРёРѕР±СЂРµС‚Р°РµС‚ РјР°РєСЃРёРјСѓРј
 
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_thunder.states_design = {};
 
@@ -110,14 +110,14 @@ weapon_thunder.states_design["fire_finish_chain"] = {
 -- RELOAD
 weapon_thunder.states_design["reload"] = {{anim = "reload", snd = "thunder_reload", snd_params = snd_weapon_common},};
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_thunder.guid = {0xf115cb21, 0x3aba, 0x4a5f, 0x96, 0x82, 0xc0, 0x78, 0x4d, 0xff, 0x9, 0x3d};
 
 function weapon_thunder:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_thunder = utils.inherit(sv_weapon_firearm, weapon_thunder);
 
 ---------------------------------------------------------------------------
@@ -152,18 +152,18 @@ function sv_weapon_thunder:event_lever2_up()
 	
 	local owner = self:get_owner()
 	if not owner:arms_has_thing() then
-		-- Подбираем предмет
+		-- РџРѕРґР±РёСЂР°РµРј РїСЂРµРґРјРµС‚
 		owner:execute_action(ACTION_USE)
 	else
-		-- Бросаем предмет
+		-- Р‘СЂРѕСЃР°РµРј РїСЂРµРґРјРµС‚
 		local old_throw_on_drop		= engine.get_var("ph_throw_on_drop")
 		local old_throw_force		= engine.get_var("ph_throw_force")
 		local old_throw_torque_x	= engine.get_var("ph_throw_torque_x")
 		local old_throw_torque_y	= engine.get_var("ph_throw_torque_y")
 		
-		-- Время удерживания кнопки
+		-- Р’СЂРµРјСЏ СѓРґРµСЂР¶РёРІР°РЅРёСЏ РєРЅРѕРїРєРё
 		local hold_time = self.m_lever_up_time - self.m_lever_down_time
-		-- Определим силу пропорционально времени удержания
+		-- РћРїСЂРµРґРµР»РёРј СЃРёР»Сѓ РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕ РІСЂРµРјРµРЅРё СѓРґРµСЂР¶Р°РЅРёСЏ
 		local force
 		if hold_time > self.m_time_to_gain_max_force then 
 			force = self.m_max_force
@@ -178,7 +178,7 @@ function sv_weapon_thunder:event_lever2_up()
 		
 		owner:execute_action(ACTION_USE)
 		
-		-- Восстанавливаем значения переменных
+		-- Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РїРµСЂРµРјРµРЅРЅС‹С…
 		engine.set_var("ph_throw_on_drop", old_throw_on_drop)
 		engine.set_var("ph_throw_force", old_throw_force)
 		engine.set_var("ph_throw_torque_x", old_throw_torque_x)
@@ -193,16 +193,16 @@ function sv_weapon_thunder:on_enter_fire()
 end
 
 --------------------------------------------------------------------------------
--- завершение выстрела
+-- Р·Р°РІРµСЂС€РµРЅРёРµ РІС‹СЃС‚СЂРµР»Р°
 function sv_weapon_thunder:on_enter_fire_finish()
 
 	local owner = self:get_owner();
 	if owner then
 	
-		-- Направление атаки: прямо перед собой
+		-- РќР°РїСЂР°РІР»РµРЅРёРµ Р°С‚Р°РєРё: РїСЂСЏРјРѕ РїРµСЂРµРґ СЃРѕР±РѕР№
 		local attack_dir = owner:calc_target_dir({0, 0, 0}, 0, 0, 0);
 				
-		-- Стреляем снарядом
+		-- РЎС‚СЂРµР»СЏРµРј СЃРЅР°СЂСЏРґРѕРј
 		owner:fire_missile(
 			self.m_throw_point_offset,
 			attack_dir,
@@ -212,11 +212,11 @@ function sv_weapon_thunder:on_enter_fire_finish()
 			self.m_angular_velocity
 		);		
 		
-		-- Уменьшаем количество патронов
+		-- РЈРјРµРЅСЊС€Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ
 		self:set_property_value(self.m_loaded_ammo_prop, 
 			self:get_property_value(self.m_loaded_ammo_prop) - self.m_ammo_for_shot);
 	else
-		-- Актер наверное мертв. Хватит стрелять.
+		-- РђРєС‚РµСЂ РЅР°РІРµСЂРЅРѕРµ РјРµСЂС‚РІ. РҐРІР°С‚РёС‚ СЃС‚СЂРµР»СЏС‚СЊ.
 		self.m_need_to_stop_firing = true 
 	end
 	
@@ -237,7 +237,7 @@ function sv_weapon_thunder:on_update_fire_finish()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_thunder = utils.inherit(cl_weapon_firearm, weapon_thunder);
 
 function cl_weapon_thunder:on_init()

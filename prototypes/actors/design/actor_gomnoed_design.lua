@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Gomnoed - монстр плюющейся кислотой
+-- Actor Gomnoed - РјРѕРЅСЃС‚СЂ РїР»СЋСЋС‰РµР№СЃСЏ РєРёСЃР»РѕС‚РѕР№
 ------------------------------------------------------------------------
 
 actor_gomnoed = {};
@@ -26,33 +26,33 @@ actor_gomnoed.properties_design = utils.merge_arrays(actor_basic.properties_desi
 	{ "run_backward_speed",		310.0 },
 	{ "run_strafe_speed",		210.0 },
 	{ "jump_height",			30	  },
-	{ "turn_speed",				{180.0, 180.0, 380.0}  }, -- угловая скорость поворота
+	{ "turn_speed",				{180.0, 180.0, 380.0}  }, -- СѓРіР»РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р°
 	
-	-- праметры зрения
-	{ "view_fov",				90	  },	-- угол обзора (град) 
-	{ "view_dist",				25	  },	-- максимальная дальность зрения (м)
+	-- РїСЂР°РјРµС‚СЂС‹ Р·СЂРµРЅРёСЏ
+	{ "view_fov",				90	  },	-- СѓРіРѕР» РѕР±Р·РѕСЂР° (РіСЂР°Рґ) 
+	{ "view_dist",				25	  },	-- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР°Р»СЊРЅРѕСЃС‚СЊ Р·СЂРµРЅРёСЏ (Рј)
 	
 	{ "turn_hands",							  0 },
 	{ "allow_head_turn",				false	},
 	
-	-- выравнивать модель по положению нормали земли, на которой стоим
+	-- РІС‹СЂР°РІРЅРёРІР°С‚СЊ РјРѕРґРµР»СЊ РїРѕ РїРѕР»РѕР¶РµРЅРёСЋ РЅРѕСЂРјР°Р»Рё Р·РµРјР»Рё, РЅР° РєРѕС‚РѕСЂРѕР№ СЃС‚РѕРёРј
 	{ "align_model_to_ground_normal",	true	  },
 	{ "align_model_only_by_pitch",		true	  },
 });
 ---------------------------------------------------------------------------------
 actor_gomnoed.params = {
-	-- поворот тела относительно головы при ходьбе прямо и вбок
+	-- РїРѕРІРѕСЂРѕС‚ С‚РµР»Р° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РіРѕР»РѕРІС‹ РїСЂРё С…РѕРґСЊР±Рµ РїСЂСЏРјРѕ Рё РІР±РѕРє
 	body_rotate_forward_strafe = 30,
-	-- время падения после которого начинает отыгрыватья анимация падения
+	-- РІСЂРµРјСЏ РїР°РґРµРЅРёСЏ РїРѕСЃР»Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅР°С‡РёРЅР°РµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	falling_time = 60, 
-	-- высота, выше которой включается анимация падения
+	-- РІС‹СЃРѕС‚Р°, РІС‹С€Рµ РєРѕС‚РѕСЂРѕР№ РІРєР»СЋС‡Р°РµС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	above_ground_level = 2,
-	-- время в течении которого персонаж должен находится в состоянии
-	-- idle_alert после последней атаки
+	-- РІСЂРµРјСЏ РІ С‚РµС‡РµРЅРёРё РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶ РґРѕР»Р¶РµРЅ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё
+	-- idle_alert РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµР№ Р°С‚Р°РєРё
 	aggresive_stance_time = 20000,
 };
 
--- настройки hitbox-ов
+-- РЅР°СЃС‚СЂРѕР№РєРё hitbox-РѕРІ
 actor_gomnoed.params.hitboxes = { 
 	{name = "head", damage_k = .7, },
 	
@@ -71,11 +71,11 @@ actor_gomnoed.params.hitboxes = {
     {name = "rthigh2", damage_k = .45, },
 };
 
--- параметры атаки
+-- РїР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё
 actor_gomnoed.params.attack_info = {};
 
 
--- плевание
+-- РїР»РµРІР°РЅРёРµ
 actor_gomnoed.params.attack_info[0] = {
 	type				= ATTACK_DISTANT,
 	dist				= 15, 
@@ -84,12 +84,12 @@ actor_gomnoed.params.attack_info[0] = {
 	max_angle			= 6, 
 	stop_during_attack	= 1,
 	
-	pause_between_attacks = 3000, -- пауза между атаками такого типа
+	pause_between_attacks = 3000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	dispersion			= 0,
 	offset_pos			= {0.0, 2.0, 1.3},
 
-	-- коррекция для попадания по параболе: на dist метрах мы целимся на height метров выше.
+	-- РєРѕСЂСЂРµРєС†РёСЏ РґР»СЏ РїРѕРїР°РґР°РЅРёСЏ РїРѕ РїР°СЂР°Р±РѕР»Рµ: РЅР° dist РјРµС‚СЂР°С… РјС‹ С†РµР»РёРјСЃСЏ РЅР° height РјРµС‚СЂРѕРІ РІС‹С€Рµ.
 	height_offset				= {min_height = 0, min_dist = 5, max_dist = 25, max_height = 14}, 
 	
 	missile						= "ammo_missile_spit",
@@ -102,7 +102,7 @@ actor_gomnoed.params.attack_info[0] = {
 	visual_state_prefix	= "attack_missile",
 };
 
--- ближняя атака
+-- Р±Р»РёР¶РЅСЏСЏ Р°С‚Р°РєР°
 actor_gomnoed.params.attack_info[1] = {
 		type				= ATTACK_MELEE,
 		dist				= 2,
@@ -146,7 +146,7 @@ actor_gomnoed.states_design["idle_alert"] = {
 			{anim = "alert4_p1", weight = 1, snd = "gomnoed_alert4_p1"},};
 			
 -------------------------------------------------------------
--- TRANSITION TO ALERT (Переход в агрессивное состояние)
+-- TRANSITION TO ALERT (РџРµСЂРµС…РѕРґ РІ Р°РіСЂРµСЃСЃРёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ)
 -------------------------------------------------------------
 actor_gomnoed.states_design["transition_to_alert"] = {
 	{anim = nil, weight = 1, snd = "gomnoed_klich", snd_params = snd_actor_alert},
@@ -178,21 +178,21 @@ actor_gomnoed.states_design["strafe_right_run"] = {
 ----------------------------
 -- JUMP & FALL & LAND
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 actor_gomnoed.states_design["jump_prepare"] = {
 			{anim = "run", anim_speed = 1.0, snd = "gomnoed_run"},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_gomnoed.states_design["jump_begin"] = {
 			{anim = "run", anim_speed = 1, snd = "gomnoed_run"},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_gomnoed.states_design["fall"] = {
 			{anim = "run", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "gomnoed_run"},};
 
--- приземление на бегу
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° Р±РµРіСѓ
 actor_gomnoed.states_design["land_run"] = {
 			{anim = "run", anim_speed = 1, snd = "gomnoed_run"},};
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_gomnoed.states_design["land_stand"] = {
 			{anim = "run", anim_speed = 1, snd = "gomnoed_run"},};
 

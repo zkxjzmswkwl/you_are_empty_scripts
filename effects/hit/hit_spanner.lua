@@ -1,7 +1,7 @@
 partice_system_desc = {
 	auto_delete = 4,
 -------------------------------------------------------------------------------------
-	{	-- дымо 1 (g0)
+	{	-- РґС‹РјРѕ 1 (g0)
 		max_count = 4,
 		type = "sprite_view_align_xy",
 		texture = "PRT_Smoke_White01.tga",
@@ -34,7 +34,7 @@ partice_system_desc = {
 	},
 
 -------------------------------------------------------------------------------------
-	{	-- Ошметки материи 3
+	{	-- РћС€РјРµС‚РєРё РјР°С‚РµСЂРёРё 3
 		max_count = 7,
 		type = "sprite_view_align_xy",
 		texture = "PRT_Derbis02.tga",

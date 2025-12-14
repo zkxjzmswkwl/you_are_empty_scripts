@@ -3,16 +3,16 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Патроны для винтовки
+-- РџР°С‚СЂРѕРЅС‹ РґР»СЏ РІРёРЅС‚РѕРІРєРё
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ammo_rifle = {};
 
 ammo_rifle.guid = {0x318efdcd, 0x8a5d, 0x4b0d, 0xa4, 0x74, 0xc, 0xea, 0x1f, 0xc1, 0x7d, 0x3e}
 
 -------------------------------------------	
--- Свойства
+-- РЎРІРѕР№СЃС‚РІР°
 -------------------------------------------	
 ammo_rifle.properties_design = utils.merge_arrays(ammo_basic.properties_design, {
 	{"model_name",		"itemAmmoMosin"},
@@ -24,13 +24,13 @@ ammo_rifle.properties_design = utils.merge_arrays(ammo_basic.properties_design, 
 })
 
 -------------------------------------------
-ammo_rifle.m_holdable_icon_id	= 18	-- Иконка HUD
+ammo_rifle.m_holdable_icon_id	= 18	-- РРєРѕРЅРєР° HUD
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ammo_rifle = utils.inherit(sv_ammo_basic, ammo_rifle)
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_ammo_rifle = utils.inherit(cl_ammo_basic, ammo_rifle)

@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- object_quaker - создает эффект трясения земли с центром в своей позиции
+-- object_quaker - СЃРѕР·РґР°РµС‚ СЌС„С„РµРєС‚ С‚СЂСЏСЃРµРЅРёСЏ Р·РµРјР»Рё СЃ С†РµРЅС‚СЂРѕРј РІ СЃРІРѕРµР№ РїРѕР·РёС†РёРё
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 object_quaker = {
 	guid = {0x43b42a6f, 0x8fb2, 0x4ea1, 0x8f, 0x4f, 0xc7, 0x3f, 0xe0, 0xf2, 0x75, 0x85},
 }
@@ -21,7 +21,7 @@ function object_quaker:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_object_quaker = utils.inherit(sv_game_object, object_quaker)
 sv_object_quaker.MSG_ON_EXECUTE = 0;
 
@@ -30,7 +30,7 @@ function sv_object_quaker:register_properties(prop_registry)
 	sv_game_object.register_properties(self, prop_registry)
 	object_quaker.register_properties(self, prop_registry);
 
-	-- Регистрация слотов
+	-- Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃР»РѕС‚РѕРІ
 	self.execute = self:register_input_slot("execute", self.execute)
 end
 
@@ -40,7 +40,7 @@ function sv_object_quaker:execute(sender, activator, input_data)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_object_quaker = utils.inherit(cl_game_object, object_quaker)
 
 ------------------------------------

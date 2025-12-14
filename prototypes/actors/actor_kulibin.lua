@@ -3,29 +3,29 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Kulibin - дед NPC с уровня "Колхоз"
+-- Actor Kulibin - РґРµРґ NPC СЃ СѓСЂРѕРІРЅСЏ "РљРѕР»С…РѕР·"
 ------------------------------------------------------------------------
 
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_kulibin.guid = {0x984a5e28, 0x2500, 0x4d57, 0xba, 0x45, 0x44, 0xee, 0x20, 0x38, 0x4f, 0xfb};
 
 function actor_kulibin:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_kulibin = utils.inherit(sv_actor_basic, actor_kulibin);
 
 -------------------------------------
 function sv_actor_kulibin:register_properties(prop_registry)
 	sv_actor_basic.register_properties(self, prop_registry);
 	
-	-- входящие слоты
+	-- РІС…РѕРґСЏС‰РёРµ СЃР»РѕС‚С‹
 	self.in_begin_talk_slot = self:register_input_slot("begin_talk", self.begin_talk);
 	self.in_dont_shoot_slot = self:register_input_slot("dont_shoot", self.dont_shoot);
-	-- исходящие слоты
+	-- РёСЃС…РѕРґСЏС‰РёРµ СЃР»РѕС‚С‹
 	self.out_give_key = self:register_output_slot("on_give_key", nil);
 
 end
@@ -44,7 +44,7 @@ end
 function sv_actor_kulibin:on_load_state(dreader)
 	sv_actor_basic.on_load_state(self, dreader);
 	
-	-- если загружаемся из save
+	-- РµСЃР»Рё Р·Р°РіСЂСѓР¶Р°РµРјСЃСЏ РёР· save
 	if(self.io.talk_begin == true) then
 		self:emit_signals(self.out_give_key);
 		self:talk_is_over();
@@ -108,7 +108,7 @@ end
 
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_kulibin = utils.inherit(cl_actor_basic, actor_kulibin);
 
 function cl_actor_kulibin:on_init()

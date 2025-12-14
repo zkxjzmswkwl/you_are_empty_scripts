@@ -3,10 +3,10 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- дверь со звуком
+-- РґРІРµСЂСЊ СЃРѕ Р·РІСѓРєРѕРј
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 door_sound = {
 	guid = {0xdd345c53, 0x1326, 0x4190, 0xa8, 0xee, 0x9, 0xc7, 0x66, 0xae, 0xc4, 0x0},
 };
@@ -33,7 +33,7 @@ function door_sound:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_door_sound = utils.inherit(sv_game_object, door_sound);
 
 function sv_door_sound:on_init()
@@ -66,7 +66,7 @@ function sv_door_sound:OnToggle()
 end
 
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_door_sound = utils.inherit(cl_game_object, door_sound);
 
 function cl_door_sound:on_init()

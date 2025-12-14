@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
--- прототипы сопрограмм, предназначенные для наследования
+-- РїСЂРѕС‚РѕС‚РёРїС‹ СЃРѕРїСЂРѕРіСЂР°РјРј, РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅРЅС‹Рµ РґР»СЏ РЅР°СЃР»РµРґРѕРІР°РЅРёСЏ
 -------------------------------------------------------------------------------
 coroutines.prototypes = {}
 
 -------------------------------------------------------------------------------
--- анимационная сцена
+-- Р°РЅРёРјР°С†РёРѕРЅРЅР°СЏ СЃС†РµРЅР°
 -------------------------------------------------------------------------------
 coroutines.prototypes.animation_scene = {}
-coroutines.prototypes.animation_scene.m_scene = nil					-- имя файла с описанием сцены
-coroutines.prototypes.animation_scene.m_sound = nil					-- имя файла звука
-coroutines.prototypes.animation_scene.m_fade_time = 1500			-- время фейда
-coroutines.prototypes.animation_scene.m_start_immediately = false	-- если true, то начинать сразу синематику, без начального фейда
-coroutines.prototypes.animation_scene.m_on_begin_cinema = nil		-- callback на старт анимации
-coroutines.prototypes.animation_scene.m_on_end_cinema = nil			-- callback на конец анимации
+coroutines.prototypes.animation_scene.m_scene = nil					-- РёРјСЏ С„Р°Р№Р»Р° СЃ РѕРїРёСЃР°РЅРёРµРј СЃС†РµРЅС‹
+coroutines.prototypes.animation_scene.m_sound = nil					-- РёРјСЏ С„Р°Р№Р»Р° Р·РІСѓРєР°
+coroutines.prototypes.animation_scene.m_fade_time = 1500			-- РІСЂРµРјСЏ С„РµР№РґР°
+coroutines.prototypes.animation_scene.m_start_immediately = false	-- РµСЃР»Рё true, С‚Рѕ РЅР°С‡РёРЅР°С‚СЊ СЃСЂР°Р·Сѓ СЃРёРЅРµРјР°С‚РёРєСѓ, Р±РµР· РЅР°С‡Р°Р»СЊРЅРѕРіРѕ С„РµР№РґР°
+coroutines.prototypes.animation_scene.m_on_begin_cinema = nil		-- callback РЅР° СЃС‚Р°СЂС‚ Р°РЅРёРјР°С†РёРё
+coroutines.prototypes.animation_scene.m_on_end_cinema = nil			-- callback РЅР° РєРѕРЅРµС† Р°РЅРёРјР°С†РёРё
 
 function coroutines.prototypes.animation_scene:init()
 	assert(self.m_scene)
@@ -21,14 +21,14 @@ function coroutines.prototypes.animation_scene:init()
 	self.m_pp_fade_in_inf	= engine.get_post_process_id("fade_in_inf")
 	self.m_pp_fade_out		= engine.get_post_process_id("fade_out")
 
-	-- спавним анимацию
+	-- СЃРїР°РІРЅРёРј Р°РЅРёРјР°С†РёСЋ
 	self.m_anim = engine.spawn_entity("AnimationScene")
 	self.m_anim:set_property_value_by_name("ds2sn_file", self.m_scene)
 	self.m_anim:set_property_value_by_name("self_control", false)
 	self.m_anim:set_property_value_by_name("hud_hide", false)
 	engine.add_entity_to_world(self.m_anim)
 	
-	-- спавним звук
+	-- СЃРїР°РІРЅРёРј Р·РІСѓРє
 	self.m_snd = nil
 	if self.m_sound then
 		self.m_snd = engine.spawn_entity("SoundSource")
@@ -44,52 +44,52 @@ function coroutines.prototypes.animation_scene:run()
 	g_world_props:signal("lock_players")
 	
 	if self.m_start_immediately == false and g_actor_player then
-		-- уход в черное
+		-- СѓС…РѕРґ РІ С‡РµСЂРЅРѕРµ
 		g_actor_player:apply_post_process(self.m_pp_fade_in)
 		wait(self.m_fade_time)
 	end
 	
-	-- начало проигрывания	
+	-- РЅР°С‡Р°Р»Рѕ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ	
 	if self.m_on_begin_cinema ~= nil then self.m_on_begin_cinema() end
 	engine.set_var("hud_render", 0)
 	self.m_anim:signal("play")
 	if self.m_snd then self.m_snd:signal("play", nil, {fade_time = self.m_fade_time}) end
 
-	-- выход в светлое
+	-- РІС‹С…РѕРґ РІ СЃРІРµС‚Р»РѕРµ
 	self.m_anim:apply_post_process(self.m_pp_fade_out)
 
-	-- ждем пока доиграет почти до конца, когда надо включать постпроцесс
+	-- Р¶РґРµРј РїРѕРєР° РґРѕРёРіСЂР°РµС‚ РїРѕС‡С‚Рё РґРѕ РєРѕРЅС†Р°, РєРѕРіРґР° РЅР°РґРѕ РІРєР»СЋС‡Р°С‚СЊ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃ
 	local anim_time = self.m_anim:get_property_value_by_name("anim_time")
 	wait(anim_time-self.m_fade_time)
 
-	-- уход в черное и затихание звука	
+	-- СѓС…РѕРґ РІ С‡РµСЂРЅРѕРµ Рё Р·Р°С‚РёС…Р°РЅРёРµ Р·РІСѓРєР°	
 	self.m_anim:apply_post_process(self.m_pp_fade_in_inf)
 	if self.m_snd then self.m_snd:signal("stop", nil, {fade_time = self.m_fade_time}) end
 	wait(self.m_fade_time)
 
-	-- конец проигрывания
+	-- РєРѕРЅРµС† РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ
 	if self.m_on_end_cinema ~= nil then self.m_on_end_cinema() end
 	engine.set_var("hud_render", 1)
 	g_world_props:signal("unlock_players")
 
-	-- выход в светлое
+	-- РІС‹С…РѕРґ РІ СЃРІРµС‚Р»РѕРµ
 	if g_actor_player then
 		g_actor_player:apply_post_process(self.m_pp_fade_out)
 	end
 end
 
 function coroutines.prototypes.animation_scene:shutdown()
-	-- удалим объекты
+	-- СѓРґР°Р»РёРј РѕР±СЉРµРєС‚С‹
 	engine.destroy_entity(self.m_anim)
 	if self.m_snd then engine.destroy_entity(self.m_snd) end
 end
 
 -------------------------------------------------------------------------------
--- MAP		- имя карты
--- NAME		- имя сопрограммы
--- SCENE	- имя файла синематики
--- SOUND	- имя файла звука
--- IMM		- стартовать сразу синематику, без начального фейда
+-- MAP		- РёРјСЏ РєР°СЂС‚С‹
+-- NAME		- РёРјСЏ СЃРѕРїСЂРѕРіСЂР°РјРјС‹
+-- SCENE	- РёРјСЏ С„Р°Р№Р»Р° СЃРёРЅРµРјР°С‚РёРєРё
+-- SOUND	- РёРјСЏ С„Р°Р№Р»Р° Р·РІСѓРєР°
+-- IMM		- СЃС‚Р°СЂС‚РѕРІР°С‚СЊ СЃСЂР°Р·Сѓ СЃРёРЅРµРјР°С‚РёРєСѓ, Р±РµР· РЅР°С‡Р°Р»СЊРЅРѕРіРѕ С„РµР№РґР°
 -------------------------------------------------------------------------------
 #define_begin COROUTINE_ANIMATION_SCENE(MAP, NAME, SCENE, SOUND, IMM)
 	if coroutines.MAP == nil then
@@ -106,18 +106,18 @@ end
 #define_end
 
 -------------------------------------------------------------------------------
--- видео ролик
+-- РІРёРґРµРѕ СЂРѕР»РёРє
 -------------------------------------------------------------------------------
 coroutines.prototypes.video_clip = {}
-coroutines.prototypes.video_clip.m_preset_name = nil			-- имя пресета для проигрывания видео
-coroutines.prototypes.video_clip.m_sound = nil					-- имя файла звука
-coroutines.prototypes.video_clip.m_sound_volume = 0				-- громкость звука
-coroutines.prototypes.video_clip.m_fade_in_name = "fade_in"		-- имя начального постпроцесса
-coroutines.prototypes.video_clip.m_fade_out_name = "fade_out"	-- имя конечного постпроцесса 
-coroutines.prototypes.video_clip.m_fade_time = 1500				-- длительность постпроцесса
+coroutines.prototypes.video_clip.m_preset_name = nil			-- РёРјСЏ РїСЂРµСЃРµС‚Р° РґР»СЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ РІРёРґРµРѕ
+coroutines.prototypes.video_clip.m_sound = nil					-- РёРјСЏ С„Р°Р№Р»Р° Р·РІСѓРєР°
+coroutines.prototypes.video_clip.m_sound_volume = 0				-- РіСЂРѕРјРєРѕСЃС‚СЊ Р·РІСѓРєР°
+coroutines.prototypes.video_clip.m_fade_in_name = "fade_in"		-- РёРјСЏ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
+coroutines.prototypes.video_clip.m_fade_out_name = "fade_out"	-- РёРјСЏ РєРѕРЅРµС‡РЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР° 
+coroutines.prototypes.video_clip.m_fade_time = 1500				-- РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
 
-coroutines.prototypes.video_clip.m_on_begin_cinema = nil		-- callback на старт анимации
-coroutines.prototypes.video_clip.m_on_end_cinema = nil			-- callback на конец анимации
+coroutines.prototypes.video_clip.m_on_begin_cinema = nil		-- callback РЅР° СЃС‚Р°СЂС‚ Р°РЅРёРјР°С†РёРё
+coroutines.prototypes.video_clip.m_on_end_cinema = nil			-- callback РЅР° РєРѕРЅРµС† Р°РЅРёРјР°С†РёРё
 
 function coroutines.prototypes.video_clip:init()
 
@@ -133,34 +133,34 @@ end
 
 function coroutines.prototypes.video_clip:run()
 
-	-- Постпроцесс в начале проигрывания видео		
+	-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ РІ РЅР°С‡Р°Р»Рµ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ РІРёРґРµРѕ		
 	if self.m_fade_in_name and self.m_pp_fade_in_id ~= -1 then
 		g_actor_player:apply_post_process(self.m_pp_fade_in_id)
 		
-		-- Ждем, пока закончится проигрываться постпроцесс
+		-- Р–РґРµРј, РїРѕРєР° Р·Р°РєРѕРЅС‡РёС‚СЃСЏ РїСЂРѕРёРіСЂС‹РІР°С‚СЊСЃСЏ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃ
 		wait(self.m_fade_time)
 	end
 	
-	-- Постпроцесс в конце проигрывания видео		
+	-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ РІ РєРѕРЅС†Рµ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ РІРёРґРµРѕ		
 	if self.m_fade_out_name and self.m_pp_fade_out_id ~= -1 then
-		-- Постпроцесс будет назначен, но проиграется только после завершения play_video. 
-		-- play_video ставит игру на паузу. Постпроцесс начнет отыгрываться 
-		-- только когда игра будет снята с паузы. А это произодет после завершения play_video.
+		-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ Р±СѓРґРµС‚ РЅР°Р·РЅР°С‡РµРЅ, РЅРѕ РїСЂРѕРёРіСЂР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ play_video. 
+		-- play_video СЃС‚Р°РІРёС‚ РёРіСЂСѓ РЅР° РїР°СѓР·Сѓ. РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ РЅР°С‡РЅРµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЃСЏ 
+		-- С‚РѕР»СЊРєРѕ РєРѕРіРґР° РёРіСЂР° Р±СѓРґРµС‚ СЃРЅСЏС‚Р° СЃ РїР°СѓР·С‹. Рђ СЌС‚Рѕ РїСЂРѕРёР·РѕРґРµС‚ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ play_video.
 		g_actor_player:apply_post_process(self.m_pp_fade_out_id)
 	end
 	
-	-- Проигрываем видео
+	-- РџСЂРѕРёРіСЂС‹РІР°РµРј РІРёРґРµРѕ
 	if self.m_preset_name then
 		engine.play_video(self.m_preset_name, self.m_sound, self.m_sound_volume)
 	end
 	
-	-- После вызова play_video игровое время ставится на паузу
-	-- и снимается с паузы после того, как видео перестанет проигрываться.
-	-- Делаем вызов функции wait для того, чтобы код продолжил выполнение
-	-- с этого места, после окончания проигрывания видео.
+	-- РџРѕСЃР»Рµ РІС‹Р·РѕРІР° play_video РёРіСЂРѕРІРѕРµ РІСЂРµРјСЏ СЃС‚Р°РІРёС‚СЃСЏ РЅР° РїР°СѓР·Сѓ
+	-- Рё СЃРЅРёРјР°РµС‚СЃСЏ СЃ РїР°СѓР·С‹ РїРѕСЃР»Рµ С‚РѕРіРѕ, РєР°Рє РІРёРґРµРѕ РїРµСЂРµСЃС‚Р°РЅРµС‚ РїСЂРѕРёРіСЂС‹РІР°С‚СЊСЃСЏ.
+	-- Р”РµР»Р°РµРј РІС‹Р·РѕРІ С„СѓРЅРєС†РёРё wait РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РєРѕРґ РїСЂРѕРґРѕР»Р¶РёР» РІС‹РїРѕР»РЅРµРЅРёРµ
+	-- СЃ СЌС‚РѕРіРѕ РјРµСЃС‚Р°, РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ РІРёРґРµРѕ.
 	wait(0)
 	
-	-- конец проигрывания
+	-- РєРѕРЅРµС† РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ
 	if self.m_on_end_cinema ~= nil then 
 		self.m_on_end_cinema() 
 	end
@@ -170,14 +170,14 @@ function coroutines.prototypes.video_clip:shutdown()
 end
 
 -------------------------------------------------------------------------------
--- MAP				- имя карты
--- NAME				- имя сопрограммы
--- PRESET			- имя пресета для проигрывания 
--- SOUND			- имя файла звука
--- SOUND_VOLUME		- громкость звука
--- FADE_IN_NAME		- имя начального постпроцесса
--- FADE_OUT_NAME	- имя конечного постпроцесса 
--- FADE_TIME		- длительность постпроцесса
+-- MAP				- РёРјСЏ РєР°СЂС‚С‹
+-- NAME				- РёРјСЏ СЃРѕРїСЂРѕРіСЂР°РјРјС‹
+-- PRESET			- РёРјСЏ РїСЂРµСЃРµС‚Р° РґР»СЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ 
+-- SOUND			- РёРјСЏ С„Р°Р№Р»Р° Р·РІСѓРєР°
+-- SOUND_VOLUME		- РіСЂРѕРјРєРѕСЃС‚СЊ Р·РІСѓРєР°
+-- FADE_IN_NAME		- РёРјСЏ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
+-- FADE_OUT_NAME	- РёРјСЏ РєРѕРЅРµС‡РЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР° 
+-- FADE_TIME		- РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
 -------------------------------------------------------------------------------
 #define_begin COROUTINE_VIDEO_CLIP(MAP, NAME, PRESET, SOUND, SOUND_VOLUME, FADE_IN_NAME, FADE_OUT_NAME, FADE_TIME)
 	if coroutines.MAP == nil then
@@ -201,14 +201,14 @@ end
 
 
 ---------------------------------------------------------------------------
--- Провал миссии
+-- РџСЂРѕРІР°Р» РјРёСЃСЃРёРё
 ---------------------------------------------------------------------------
 coroutines.prototypes.mission_failed = {}
 
--- 0мс: Смерть, упала камера на землю 
--- 0мс: Сразу (в течении 500мс) наступает fade_in
--- 500мс: появляется надпись в нижней части экрана "Вы не успели сделать то что надо..." (появлять ее в течении 1500мс)
--- 2000мс: появляется окно on_death_меню...
+-- 0РјСЃ: РЎРјРµСЂС‚СЊ, СѓРїР°Р»Р° РєР°РјРµСЂР° РЅР° Р·РµРјР»СЋ 
+-- 0РјСЃ: РЎСЂР°Р·Сѓ (РІ С‚РµС‡РµРЅРёРё 500РјСЃ) РЅР°СЃС‚СѓРїР°РµС‚ fade_in
+-- 500РјСЃ: РїРѕСЏРІР»СЏРµС‚СЃСЏ РЅР°РґРїРёСЃСЊ РІ РЅРёР¶РЅРµР№ С‡Р°СЃС‚Рё СЌРєСЂР°РЅР° "Р’С‹ РЅРµ СѓСЃРїРµР»Рё СЃРґРµР»Р°С‚СЊ С‚Рѕ С‡С‚Рѕ РЅР°РґРѕ..." (РїРѕСЏРІР»СЏС‚СЊ РµРµ РІ С‚РµС‡РµРЅРёРё 1500РјСЃ)
+-- 2000РјСЃ: РїРѕСЏРІР»СЏРµС‚СЃСЏ РѕРєРЅРѕ on_death_РјРµРЅСЋ...
 
 ---------------------------------------------------------------------------
 function coroutines.prototypes.mission_failed:init()	
@@ -217,7 +217,7 @@ end
 ---------------------------------------------------------------------------
 function coroutines.prototypes.mission_failed:run()
 
-	-- Постпроцесс
+	-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ
 	if self.m_fade_in_name ~= nil then
 		g_world_props:signal("apply_single_player_pp", nil, {pp_name = ""..self.m_fade_in_name})
 		wait(self.m_fade_in_time)
@@ -225,21 +225,21 @@ function coroutines.prototypes.mission_failed:run()
 	
 	g_world_props:signal("mission_failed", nil, {description = ""..self.m_description})
 	
-	-- Замедляем игровое время
+	-- Р—Р°РјРµРґР»СЏРµРј РёРіСЂРѕРІРѕРµ РІСЂРµРјСЏ
 	g_world_props:signal("set_time_scale", nil, {target_scale = self.m_time_scale, time_in = self.m_time_in, duration = 0, time_out = 0})
 	
 end 
 
 -------------------------------------------------------------------------------
--- Шаблон подпрограммы mission_failed
+-- РЁР°Р±Р»РѕРЅ РїРѕРґРїСЂРѕРіСЂР°РјРјС‹ mission_failed
 -------------------------------------------------------------------------------
--- NAMESPACE		- имя пространства имен
--- NAME				- имя сопрограммы
--- FADE_IN_NAME		- имя проигрываемого постпроцесса
--- FADE_IN_TIME		- длительность постпроцесса в мс, как она указана в postprocesses.lua
--- TIME_SCALE		- коэффициент масштабирования игрового времени
--- TIME_IN			- время, в течение которого выполняется переход к TIME_SCALE
--- DESCRIPTION		- причина провала миссии. Строка из ui_strings.txt
+-- NAMESPACE		- РёРјСЏ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РёРјРµРЅ
+-- NAME				- РёРјСЏ СЃРѕРїСЂРѕРіСЂР°РјРјС‹
+-- FADE_IN_NAME		- РёРјСЏ РїСЂРѕРёРіСЂС‹РІР°РµРјРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
+-- FADE_IN_TIME		- РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР° РІ РјСЃ, РєР°Рє РѕРЅР° СѓРєР°Р·Р°РЅР° РІ postprocesses.lua
+-- TIME_SCALE		- РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ РёРіСЂРѕРІРѕРіРѕ РІСЂРµРјРµРЅРё
+-- TIME_IN			- РІСЂРµРјСЏ, РІ С‚РµС‡РµРЅРёРµ РєРѕС‚РѕСЂРѕРіРѕ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРµСЂРµС…РѕРґ Рє TIME_SCALE
+-- DESCRIPTION		- РїСЂРёС‡РёРЅР° РїСЂРѕРІР°Р»Р° РјРёСЃСЃРёРё. РЎС‚СЂРѕРєР° РёР· ui_strings.txt
 -------------------------------------------------------------------------------
 #define_begin COROUTINE_MISSION_FAILED(NAMESPACE, NAME, FADE_IN_NAME, FADE_IN_TIME, TIME_SCALE, TIME_IN, DESCRIPTION)
 	if coroutines.NAMESPACE == nil then
@@ -260,17 +260,17 @@ end
 
 
 -------------------------------------------------------------------------------
--- комикс
+-- РєРѕРјРёРєСЃ
 -------------------------------------------------------------------------------
 coroutines.prototypes.comics = {}
-coroutines.prototypes.comics.m_comics_filename = nil		-- имя комикса
-coroutines.prototypes.comics.m_show_controls = true			-- отображать ли кнопки управления
-coroutines.prototypes.comics.m_fade_in_name = "fade_in"		-- имя начального постпроцесса
-coroutines.prototypes.comics.m_fade_out_name = "fade_out"	-- имя конечного постпроцесса 
-coroutines.prototypes.comics.m_fade_time = 1500				-- длительность постпроцесса
+coroutines.prototypes.comics.m_comics_filename = nil		-- РёРјСЏ РєРѕРјРёРєСЃР°
+coroutines.prototypes.comics.m_show_controls = true			-- РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ Р»Рё РєРЅРѕРїРєРё СѓРїСЂР°РІР»РµРЅРёСЏ
+coroutines.prototypes.comics.m_fade_in_name = "fade_in"		-- РёРјСЏ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
+coroutines.prototypes.comics.m_fade_out_name = "fade_out"	-- РёРјСЏ РєРѕРЅРµС‡РЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР° 
+coroutines.prototypes.comics.m_fade_time = 1500				-- РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
 
-coroutines.prototypes.comics.m_on_begin_comics = nil		-- callback на старт комикса
-coroutines.prototypes.comics.m_on_end_comics = nil			-- callback на конец комикса
+coroutines.prototypes.comics.m_on_begin_comics = nil		-- callback РЅР° СЃС‚Р°СЂС‚ РєРѕРјРёРєСЃР°
+coroutines.prototypes.comics.m_on_end_comics = nil			-- callback РЅР° РєРѕРЅРµС† РєРѕРјРёРєСЃР°
 
 function coroutines.prototypes.comics:init()
 
@@ -286,34 +286,34 @@ end
 
 function coroutines.prototypes.comics:run()
 
-	-- Постпроцесс в начале проигрывания комикса		
+	-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ РІ РЅР°С‡Р°Р»Рµ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ РєРѕРјРёРєСЃР°		
 	if self.m_fade_in_name and self.m_pp_fade_in_id ~= -1 then
 		g_actor_player:apply_post_process(self.m_pp_fade_in_id)
 		
-		-- Ждем, пока закончится проигрываться постпроцесс
+		-- Р–РґРµРј, РїРѕРєР° Р·Р°РєРѕРЅС‡РёС‚СЃСЏ РїСЂРѕРёРіСЂС‹РІР°С‚СЊСЃСЏ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃ
 		wait(self.m_fade_time)
 	end
 	
-	-- Постпроцесс в конце проигрывания комикса		
+	-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ РІ РєРѕРЅС†Рµ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ РєРѕРјРёРєСЃР°		
 	if self.m_fade_out_name and self.m_pp_fade_out_id ~= -1 then
-		-- Постпроцесс будет назначен, но проиграется только после завершения play_comics. 
-		-- play_comics ставит игру на паузу. Постпроцесс начнет отыгрываться 
-		-- только когда игра будет снята с паузы. А это произодет после завершения play_comics.
+		-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ Р±СѓРґРµС‚ РЅР°Р·РЅР°С‡РµРЅ, РЅРѕ РїСЂРѕРёРіСЂР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ play_comics. 
+		-- play_comics СЃС‚Р°РІРёС‚ РёРіСЂСѓ РЅР° РїР°СѓР·Сѓ. РџРѕСЃС‚РїСЂРѕС†РµСЃСЃ РЅР°С‡РЅРµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЃСЏ 
+		-- С‚РѕР»СЊРєРѕ РєРѕРіРґР° РёРіСЂР° Р±СѓРґРµС‚ СЃРЅСЏС‚Р° СЃ РїР°СѓР·С‹. Рђ СЌС‚Рѕ РїСЂРѕРёР·РѕРґРµС‚ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ play_comics.
 		g_actor_player:apply_post_process(self.m_pp_fade_out_id)
 	end
 
-	-- Проигрываем видео
+	-- РџСЂРѕРёРіСЂС‹РІР°РµРј РІРёРґРµРѕ
 	if self.m_comics_filename then
 		engine.play_comics(self.m_comics_filename, self.m_show_controls)
 	end
 	
-	-- После вызова play_comics игровое время ставится на паузу
-	-- и снимается с паузы после того, как комикс перестанет проигрываться.
-	-- Делаем вызов функции wait для того, чтобы код продолжил выполнение
-	-- с этого места, после окончания проигрывания комикса.
+	-- РџРѕСЃР»Рµ РІС‹Р·РѕРІР° play_comics РёРіСЂРѕРІРѕРµ РІСЂРµРјСЏ СЃС‚Р°РІРёС‚СЃСЏ РЅР° РїР°СѓР·Сѓ
+	-- Рё СЃРЅРёРјР°РµС‚СЃСЏ СЃ РїР°СѓР·С‹ РїРѕСЃР»Рµ С‚РѕРіРѕ, РєР°Рє РєРѕРјРёРєСЃ РїРµСЂРµСЃС‚Р°РЅРµС‚ РїСЂРѕРёРіСЂС‹РІР°С‚СЊСЃСЏ.
+	-- Р”РµР»Р°РµРј РІС‹Р·РѕРІ С„СѓРЅРєС†РёРё wait РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РєРѕРґ РїСЂРѕРґРѕР»Р¶РёР» РІС‹РїРѕР»РЅРµРЅРёРµ
+	-- СЃ СЌС‚РѕРіРѕ РјРµСЃС‚Р°, РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ РєРѕРјРёРєСЃР°.
 	wait(0)
 	
-	-- конец проигрывания
+	-- РєРѕРЅРµС† РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ
 	if self.m_on_end_comics ~= nil then 
 		self.m_on_end_comics() 
 	end
@@ -323,13 +323,13 @@ function coroutines.prototypes.comics:shutdown()
 end
 
 -------------------------------------------------------------------------------
--- MAP				- имя карты
--- NAME				- имя сопрограммы
--- FILENAME			- имя комикса
--- SHOW_CONTROLS	- отображать ли кнопки управления
--- FADE_IN_NAME		- имя начального постпроцесса
--- FADE_OUT_NAME	- имя конечного постпроцесса 
--- FADE_TIME		- длительность постпроцесса
+-- MAP				- РёРјСЏ РєР°СЂС‚С‹
+-- NAME				- РёРјСЏ СЃРѕРїСЂРѕРіСЂР°РјРјС‹
+-- FILENAME			- РёРјСЏ РєРѕРјРёРєСЃР°
+-- SHOW_CONTROLS	- РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ Р»Рё РєРЅРѕРїРєРё СѓРїСЂР°РІР»РµРЅРёСЏ
+-- FADE_IN_NAME		- РёРјСЏ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
+-- FADE_OUT_NAME	- РёРјСЏ РєРѕРЅРµС‡РЅРѕРіРѕ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР° 
+-- FADE_TIME		- РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕСЃС‚РїСЂРѕС†РµСЃСЃР°
 -------------------------------------------------------------------------------
 #define_begin COROUTINE_COMICS(MAP, NAME, FILENAME, SHOW_CONTROLS, FADE_IN_NAME, FADE_OUT_NAME, FADE_TIME)
 	if coroutines.MAP == nil then

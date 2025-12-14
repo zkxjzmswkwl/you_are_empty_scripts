@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- ai controller anchors, работа с якорями
+-- ai controller anchors, СЂР°Р±РѕС‚Р° СЃ СЏРєРѕСЂСЏРјРё
 ------------------------------------------------------------------------
 
 function sv_ai_controller_basic:on_detach_actor()
@@ -16,7 +16,7 @@ function sv_ai_controller_basic:on_detach_actor()
 end
 
 -----------------------------------------------------
--- работа с tagpoint якорями
+-- СЂР°Р±РѕС‚Р° СЃ tagpoint СЏРєРѕСЂСЏРјРё
 -----------------------------------------------------
 
 function sv_ai_controller_basic:add_tagpoint(tagpoint)
@@ -33,7 +33,7 @@ end
 
 
 
--- применяем параметры указанные в якоре
+-- РїСЂРёРјРµРЅСЏРµРј РїР°СЂР°РјРµС‚СЂС‹ СѓРєР°Р·Р°РЅРЅС‹Рµ РІ СЏРєРѕСЂРµ
 function sv_ai_controller_basic:use_anchor(anchor, use)
 
 	self:use_attack_anchor(anchor, use);
@@ -131,7 +131,7 @@ function sv_ai_controller_basic:activate_anchor(anchor, need_to_activate)
 		end
 		
 		
-		-- включить визуальные состояния для актера
+		-- РІРєР»СЋС‡РёС‚СЊ РІРёР·СѓР°Р»СЊРЅС‹Рµ СЃРѕСЃС‚РѕСЏРЅРёСЏ РґР»СЏ Р°РєС‚РµСЂР°
 		local visual_config = anchor:get_visual_config();
 		if(visual_config ~= "?" and visual_config ~= " " and
 			visual_config ~= "") then
@@ -147,7 +147,7 @@ function sv_ai_controller_basic:activate_anchor(anchor, need_to_activate)
 		end
 		
 		
-		-- выключить визуальные состояния для актера
+		-- РІС‹РєР»СЋС‡РёС‚СЊ РІРёР·СѓР°Р»СЊРЅС‹Рµ СЃРѕСЃС‚РѕСЏРЅРёСЏ РґР»СЏ Р°РєС‚РµСЂР°
 		local visual_config = anchor:get_visual_config();
 		if(visual_config ~= "?" and visual_config ~= " " and
 			visual_config ~= "") then
@@ -156,7 +156,7 @@ function sv_ai_controller_basic:activate_anchor(anchor, need_to_activate)
 	end
 	
 	
-	-- остановить уже начатую атаку, если она не разрешена
+	-- РѕСЃС‚Р°РЅРѕРІРёС‚СЊ СѓР¶Рµ РЅР°С‡Р°С‚СѓСЋ Р°С‚Р°РєСѓ, РµСЃР»Рё РѕРЅР° РЅРµ СЂР°Р·СЂРµС€РµРЅР°
 	if(self.io.m_attack_started == true and
 		self.m_attack_infos[self.io.m_last_selected_attack].not_allowed == true) then
 		self:halt_attack();
@@ -191,25 +191,25 @@ function sv_ai_controller_basic:is_blind_attack_allowed()
 	return self.io.m_blind_attack_allowed or anchor_prop;
 end
 
--- выбор наиболее подходящего якоря для атаки, если такой есть.
--- возвращает new_anchor_selected, in_radius, in_fov, selected_anchor 
--- new_anchor_selected == true, если выбран новый якорь и надо к нему идти
--- in_radius = true - если расстояние меньше указанного в якоре значения
--- in_fov = true - если враг в заданном fov (для режима auto_activate)
+-- РІС‹Р±РѕСЂ РЅР°РёР±РѕР»РµРµ РїРѕРґС…РѕРґСЏС‰РµРіРѕ СЏРєРѕСЂСЏ РґР»СЏ Р°С‚Р°РєРё, РµСЃР»Рё С‚Р°РєРѕР№ РµСЃС‚СЊ.
+-- РІРѕР·РІСЂР°С‰Р°РµС‚ new_anchor_selected, in_radius, in_fov, selected_anchor 
+-- new_anchor_selected == true, РµСЃР»Рё РІС‹Р±СЂР°РЅ РЅРѕРІС‹Р№ СЏРєРѕСЂСЊ Рё РЅР°РґРѕ Рє РЅРµРјСѓ РёРґС‚Рё
+-- in_radius = true - РµСЃР»Рё СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµРЅСЊС€Рµ СѓРєР°Р·Р°РЅРЅРѕРіРѕ РІ СЏРєРѕСЂРµ Р·РЅР°С‡РµРЅРёСЏ
+-- in_fov = true - РµСЃР»Рё РІСЂР°Рі РІ Р·Р°РґР°РЅРЅРѕРј fov (РґР»СЏ СЂРµР¶РёРјР° auto_activate)
 function sv_ai_controller_basic:select_best_attack_anchor()
 	
 	local is_in_enemy_fov_of_anchor = false;
 	local enemy = self:get_enemy();
 	
 
-	-- пройтись по всем известным нам якорям
+	-- РїСЂРѕР№С‚РёСЃСЊ РїРѕ РІСЃРµРј РёР·РІРµСЃС‚РЅС‹Рј РЅР°Рј СЏРєРѕСЂСЏРј
 	local closest_anchor = nil;
 	local min_dist = nil;
 	for i,v in ipairs(self.m_attack_anchors) do
 		local anchor = v; 
 
-		-- просчитать для якоря в режиме самоактивации
-		-- его положение относительно врага
+		-- РїСЂРѕСЃС‡РёС‚Р°С‚СЊ РґР»СЏ СЏРєРѕСЂСЏ РІ СЂРµР¶РёРјРµ СЃР°РјРѕР°РєС‚РёРІР°С†РёРё
+		-- РµРіРѕ РїРѕР»РѕР¶РµРЅРёРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РІСЂР°РіР°
 		if(anchor:is_enable() and anchor:is_auto_activate()) then	
 			local enemy_in_fov = self:is_in_fov(anchor, enemy, anchor:get_min_dist_to_enemy(), anchor:get_max_dist_to_enemy(), anchor:get_fov_to_enemy());
 			anchor:set_active(enemy_in_fov);
@@ -222,8 +222,8 @@ function sv_ai_controller_basic:select_best_attack_anchor()
 			local dist_to_anchor = self:dist_to_pos(anchor:get_pos());
 			local dist_to_enemy = self:dist_to_pos(enemy:get_pos());
 				
-			-- если мы ближе в 2 раза к врагу, чем к якорю, 
-			-- то бежать в якорь не будем
+			-- РµСЃР»Рё РјС‹ Р±Р»РёР¶Рµ РІ 2 СЂР°Р·Р° Рє РІСЂР°РіСѓ, С‡РµРј Рє СЏРєРѕСЂСЋ, 
+			-- С‚Рѕ Р±РµР¶Р°С‚СЊ РІ СЏРєРѕСЂСЊ РЅРµ Р±СѓРґРµРј
 			if(2 * dist_to_enemy > dist_to_anchor) then
 
 				local anchor_selected = false;
@@ -241,9 +241,9 @@ function sv_ai_controller_basic:select_best_attack_anchor()
 				end
 
 				
-				-- попытаться "забронировать" себе якорь.
-				-- это получится, только в том случае если якорь еще 
-				-- не был никем занят или мы ближе текущего wanter-а в 2 раза
+				-- РїРѕРїС‹С‚Р°С‚СЊСЃСЏ "Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°С‚СЊ" СЃРµР±Рµ СЏРєРѕСЂСЊ.
+				-- СЌС‚Рѕ РїРѕР»СѓС‡РёС‚СЃСЏ, С‚РѕР»СЊРєРѕ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ РµСЃР»Рё СЏРєРѕСЂСЊ РµС‰Рµ 
+				-- РЅРµ Р±С‹Р» РЅРёРєРµРј Р·Р°РЅСЏС‚ РёР»Рё РјС‹ Р±Р»РёР¶Рµ С‚РµРєСѓС‰РµРіРѕ wanter-Р° РІ 2 СЂР°Р·Р°
 				if(anchor_selected == true and anchor:can_be_wanter(self, dist_to_anchor)) then
 					min_dist = dist_to_anchor;
 					closest_anchor = anchor;
@@ -280,8 +280,8 @@ function sv_ai_controller_basic:select_best_attack_anchor()
 	end
 end
 
--- оценить, какие якоря есть и какие нужно 
--- использовать в данный момент
+-- РѕС†РµРЅРёС‚СЊ, РєР°РєРёРµ СЏРєРѕСЂСЏ РµСЃС‚СЊ Рё РєР°РєРёРµ РЅСѓР¶РЅРѕ 
+-- РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
 function sv_ai_controller_basic:evaluate_attack_anchors()
 	if((self.m_current_anchor or self.io.m_is_actor_movement_blocked == false) and
 		self:is_enemy_present() and self.m_attack_anchors ~= nil) then
@@ -306,7 +306,7 @@ function sv_ai_controller_basic:evaluate_attack_anchors()
 				self.io.m_need_to_relocate = false;	
 			end	
 		elseif(selected_anchor ~= nil) then
-			-- если мы вышли из зоны действия текущего якоря - вернуться обратно	
+			-- РµСЃР»Рё РјС‹ РІС‹С€Р»Рё РёР· Р·РѕРЅС‹ РґРµР№СЃС‚РІРёСЏ С‚РµРєСѓС‰РµРіРѕ СЏРєРѕСЂСЏ - РІРµСЂРЅСѓС‚СЊСЃСЏ РѕР±СЂР°С‚РЅРѕ	
 			if(in_radius == false) then
 				--console.print(" ==== we've left radius for current anchor  "..selected_anchor:get_name());
 				
@@ -346,7 +346,7 @@ function sv_ai_controller_basic:evaluate_attack_anchors()
 			
 	
 		else
-			-- нет выбраных якорей
+			-- РЅРµС‚ РІС‹Р±СЂР°РЅС‹С… СЏРєРѕСЂРµР№
 			if(self.m_current_anchor ~= nil) then
 				if(self.io.m_current_anchor_used == true) then
 					--console.print(" 3	 ==== no selected anchors")

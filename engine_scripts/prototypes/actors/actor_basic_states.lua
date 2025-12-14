@@ -3,10 +3,10 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- описание состояний FSM Actor Basic
+-- РѕРїРёСЃР°РЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёР№ FSM Actor Basic
 ------------------------------------------------------------------------
 
--- запустить анимацию и звук, только на ноги
+-- Р·Р°РїСѓСЃС‚РёС‚СЊ Р°РЅРёРјР°С†РёСЋ Рё Р·РІСѓРє, С‚РѕР»СЊРєРѕ РЅР° РЅРѕРіРё
 function sv_actor_basic:visualize_state_legs(states_visual_info_table, state_name, visual_idx, transition_status)
 	
 	local cur_body_state = self:get_cur_fsm_state(self.body_fsm);
@@ -20,7 +20,7 @@ function sv_actor_basic:visualize_state_legs(states_visual_info_table, state_nam
 	return self:visualize_state(self.legs_fsm, states_visual_info_table, state_name, visual_idx, bone_group, transition_status);
 end
 
--- запустить анимацию и звук, только на тело
+-- Р·Р°РїСѓСЃС‚РёС‚СЊ Р°РЅРёРјР°С†РёСЋ Рё Р·РІСѓРє, С‚РѕР»СЊРєРѕ РЅР° С‚РµР»Рѕ
 function sv_actor_basic:visualize_state_torso(states_visual_info_table, state_name, visual_idx, transition_status)
 	local bone_group = nil;
 	local cur_legs_state = self:get_cur_fsm_state(self.legs_fsm);
@@ -39,7 +39,7 @@ function sv_actor_basic:on_enter_empty_body()
 
 	if(self.empty_without_anim ~= true) then
 	
-		-- переводим тело в 1й кадр положения idle
+		-- РїРµСЂРµРІРѕРґРёРј С‚РµР»Рѕ РІ 1Р№ РєР°РґСЂ РїРѕР»РѕР¶РµРЅРёСЏ idle
 		local visual_idx, anim_length, anim_idx =
 			self:visualize_state(self.body_fsm, self.state_visual_info, self.m_cur_idle_name, 1, self.m_torso_bones);
 
@@ -59,7 +59,7 @@ function sv_actor_basic:on_enter_empty_legs()
 		self.m_legs_anim_idx = nil;
 		
 		self.m_dont_visualize_sound = true;
-		-- переводим ноги в 1й кадр положения idle
+		-- РїРµСЂРµРІРѕРґРёРј РЅРѕРіРё РІ 1Р№ РєР°РґСЂ РїРѕР»РѕР¶РµРЅРёСЏ idle
 		local visual_idx, anim_length, anim_idx =
 			self:visualize_state(self.legs_fsm, self.state_visual_info, 
 				self.m_cur_idle_name, 1, self.m_legs_bones);
@@ -109,8 +109,8 @@ function sv_actor_basic:on_enter_pain()
 		
 		--console.print(" ------------------ function sv_actor_basic:on_enter_pain()");
 		
-		-- для того чтоб сказать контроллеру, что аттака еще не начавшись
-		-- прервана анимацией боли
+		-- РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР± СЃРєР°Р·Р°С‚СЊ РєРѕРЅС‚СЂРѕР»Р»РµСЂСѓ, С‡С‚Рѕ Р°С‚С‚Р°РєР° РµС‰Рµ РЅРµ РЅР°С‡Р°РІС€РёСЃСЊ
+		-- РїСЂРµСЂРІР°РЅР° Р°РЅРёРјР°С†РёРµР№ Р±РѕР»Рё
 		--if(self.io.m_wait_for_requested_attack == true) then
 		--self:send_callback(CALLBACK_ACTION_END, ACTION_ATTACK);
 		--self.io.m_wait_for_requested_attack = false;
@@ -182,8 +182,8 @@ function sv_actor_basic:end_walk(anim_length, anim_idx)
 	self.m_legs_walk = false;
 end
 
--- если в анимации задействованны и ноги, то
--- нужно это запоминать
+-- РµСЃР»Рё РІ Р°РЅРёРјР°С†РёРё Р·Р°РґРµР№СЃС‚РІРѕРІР°РЅРЅС‹ Рё РЅРѕРіРё, С‚Рѕ
+-- РЅСѓР¶РЅРѕ СЌС‚Рѕ Р·Р°РїРѕРјРёРЅР°С‚СЊ
 function sv_actor_basic:set_legs_busy(is_busy)
 	self.m_legs_busy = is_busy;
 end
@@ -330,7 +330,7 @@ function sv_actor_basic:on_enter_jump()
 		self.m_performed_up = 1;
 		
 		self.io.m_jump_prepared = true;
-		-- анимация начала прыжка
+		-- Р°РЅРёРјР°С†РёСЏ РЅР°С‡Р°Р»Р° РїСЂС‹Р¶РєР°
 		self:reset_legs_state();
 		self:visualize_state(self.body_fsm, self.state_visual_info, "jump_begin");
 		
@@ -338,7 +338,7 @@ function sv_actor_basic:on_enter_jump()
 		
 	elseif(self:get_behavior_state() == BHV_STAND) then
 		self.io.m_jump_prepared = false;
-		-- анимация подготовки к прыжку
+		-- Р°РЅРёРјР°С†РёСЏ РїРѕРґРіРѕС‚РѕРІРєРё Рє РїСЂС‹Р¶РєСѓ
 		self:reset_legs_state();
 		self:visualize_state(self.body_fsm, self.state_visual_info, "jump_prepare");
 	end
@@ -348,10 +348,10 @@ function sv_actor_basic:on_update_jump()
 	if(self.io.m_jump_prepared == false) then
 		self.io.m_jump_prepared = true;
 	
-		-- анимация начала прыжка
+		-- Р°РЅРёРјР°С†РёСЏ РЅР°С‡Р°Р»Р° РїСЂС‹Р¶РєР°
 		self:visualize_state(self.body_fsm, self.state_visual_info, "jump_begin");
 		
-		-- команда, которая передается физическому carrier-у
+		-- РєРѕРјР°РЅРґР°, РєРѕС‚РѕСЂР°СЏ РїРµСЂРµРґР°РµС‚СЃСЏ С„РёР·РёС‡РµСЃРєРѕРјСѓ carrier-Сѓ
 		self.io.m_block_movement = true;
 		self.m_performed_up = 1;
 		
@@ -400,11 +400,11 @@ function sv_actor_basic:on_enter_land()
 	self.io.m_landing_complete = false;
 	
 	if(self.m_forward == 1 and  self.m_acceleration == 1) then
-		-- если после приземления мы продолжаем бежать вперед
+		-- РµСЃР»Рё РїРѕСЃР»Рµ РїСЂРёР·РµРјР»РµРЅРёСЏ РјС‹ РїСЂРѕРґРѕР»Р¶Р°РµРј Р±РµР¶Р°С‚СЊ РІРїРµСЂРµРґ
 		self:visualize_state(self.body_fsm, self.state_visual_info, "land_run");
 	else
-		-- в любом другом случаем мы останавливаемся и отыгрываем анимацию
-		-- приземления
+		-- РІ Р»СЋР±РѕРј РґСЂСѓРіРѕРј СЃР»СѓС‡Р°РµРј РјС‹ РѕСЃС‚Р°РЅР°РІР»РёРІР°РµРјСЃСЏ Рё РѕС‚С‹РіСЂС‹РІР°РµРј Р°РЅРёРјР°С†РёСЋ
+		-- РїСЂРёР·РµРјР»РµРЅРёСЏ
 		self:stop_movement();
 	
 		self:visualize_state(self.body_fsm, self.state_visual_info, "land_stand");
@@ -458,7 +458,7 @@ function sv_actor_basic:on_update_attack()
 
 		self:visualize_state(self.body_fsm, self.state_visual_info, 
 				self.m_current_attack_info.visual_state_prefix.."_end", self.m_attack_selected_visual_idx);
-		-- произвести атаку
+		-- РїСЂРѕРёР·РІРµСЃС‚Рё Р°С‚Р°РєСѓ
 		
 		if(self.m_current_attack_info.missile ~= nil) then
 			self:perform_attack_missile(self.m_current_attack_info);
@@ -528,7 +528,7 @@ function sv_actor_basic:on_enter_attack_run()
 end
 
 function sv_actor_basic:on_update_attack_run()
-	-- произвести атаку
+	-- РїСЂРѕРёР·РІРµСЃС‚Рё Р°С‚Р°РєСѓ
 	if(self.io.m_attack_run_performed == false) then
 		self.io.m_pain_allowed = false;
 		self:perform_attack_trace(self.m_current_attack_info);
@@ -567,7 +567,7 @@ function sv_actor_basic:on_enter_attack_jump()
 		
 		self.io.m_jump_prepared = true;
 
-		-- анимация начала прыжка
+		-- Р°РЅРёРјР°С†РёСЏ РЅР°С‡Р°Р»Р° РїСЂС‹Р¶РєР°
 		self:reset_legs_state();		
 		self:visualize_state(self.body_fsm, self.state_visual_info, self.m_current_attack_info.visual_state_prefix.."_begin");
 		
@@ -575,7 +575,7 @@ function sv_actor_basic:on_enter_attack_jump()
 		self:begin_attack();
 	
 		self.io.m_jump_prepared = false;
-		-- анимация подготовки к прыжку
+		-- Р°РЅРёРјР°С†РёСЏ РїРѕРґРіРѕС‚РѕРІРєРё Рє РїСЂС‹Р¶РєСѓ
 		self:reset_legs_state();
 		self:visualize_state(self.body_fsm, self.state_visual_info, self.m_current_attack_info.visual_state_prefix.."_prepare");
 	end
@@ -585,10 +585,10 @@ function sv_actor_basic:on_update_attack_jump()
 	if(self.io.m_jump_prepared == false) then
 		self.io.m_jump_prepared = true;
 		
-		-- анимация начала прыжка
+		-- Р°РЅРёРјР°С†РёСЏ РЅР°С‡Р°Р»Р° РїСЂС‹Р¶РєР°
 		self:visualize_state(self.body_fsm, self.state_visual_info, self.m_current_attack_info.visual_state_prefix.."_begin");
 		
-		-- команда, которая передается физическому carrier-у
+		-- РєРѕРјР°РЅРґР°, РєРѕС‚РѕСЂР°СЏ РїРµСЂРµРґР°РµС‚СЃСЏ С„РёР·РёС‡РµСЃРєРѕРјСѓ carrier-Сѓ
 		self.io.m_block_movement = true;
 		self.m_performed_up = 1;
 		self.m_performed_forward = 1;
@@ -636,7 +636,7 @@ function sv_actor_basic:on_enter_attack_jump_land()
 	
 	self:visualize_state(self.body_fsm, self.state_visual_info, self.m_current_attack_info.visual_state_prefix.."_land_stand");
 	
-	-- произвести атаку
+	-- РїСЂРѕРёР·РІРµСЃС‚Рё Р°С‚Р°РєСѓ
 	self:perform_attack_trace(self.m_current_attack_info);
 
 end
@@ -662,15 +662,15 @@ end
 -------------------------------------
 function sv_actor_basic:on_enter_attack_shot()
 	
-	-- Если актер первый раз стреляет из данного оружия, то зарядим его.
+	-- Р•СЃР»Рё Р°РєС‚РµСЂ РїРµСЂРІС‹Р№ СЂР°Р· СЃС‚СЂРµР»СЏРµС‚ РёР· РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ, С‚Рѕ Р·Р°СЂСЏРґРёРј РµРіРѕ.
 	if(self.io.m_current_clip_size == nil) then
 		self.io.m_current_clip_size = self.params.clip_size;
 	end 
 	
-	-- Перед тем как выполнить атаку, проверяем хватит ли нам патронов на данный выстрел.
+	-- РџРµСЂРµРґ С‚РµРј РєР°Рє РІС‹РїРѕР»РЅРёС‚СЊ Р°С‚Р°РєСѓ, РїСЂРѕРІРµСЂСЏРµРј С…РІР°С‚РёС‚ Р»Рё РЅР°Рј РїР°С‚СЂРѕРЅРѕРІ РЅР° РґР°РЅРЅС‹Р№ РІС‹СЃС‚СЂРµР».
 	if(self.io.m_current_clip_size == 0) then
-		-- Патронов не хватает, нужно перезарядить.
-		-- Заканчиваем атаку
+		-- РџР°С‚СЂРѕРЅРѕРІ РЅРµ С…РІР°С‚Р°РµС‚, РЅСѓР¶РЅРѕ РїРµСЂРµР·Р°СЂСЏРґРёС‚СЊ.
+		-- Р—Р°РєР°РЅС‡РёРІР°РµРј Р°С‚Р°РєСѓ
 		self.io.m_attack_ended  = true;
 		
 		--console.print(" ------------------ CALLBACK_NEED_TO_RELOAD 3");
@@ -679,7 +679,7 @@ function sv_actor_basic:on_enter_attack_shot()
 		return;
 	end
 
-	-- Патронов хватает, можем стрелять.
+	-- РџР°С‚СЂРѕРЅРѕРІ С…РІР°С‚Р°РµС‚, РјРѕР¶РµРј СЃС‚СЂРµР»СЏС‚СЊ.
 	sv_actor_basic.on_enter_attack(self);
 end
 
@@ -699,7 +699,7 @@ function sv_actor_basic:on_update_attack_shot()
 		--	self.m_attack_selected_visual_idx);
 
 		
-		-- произвести атаку
+		-- РїСЂРѕРёР·РІРµСЃС‚Рё Р°С‚Р°РєСѓ
 		if(self.m_current_attack_info.missile ~= nil) then
 			self:perform_attack_missile(self.m_current_attack_info);
 		else
@@ -709,7 +709,7 @@ function sv_actor_basic:on_update_attack_shot()
 	else
 		self.io.m_attack_ended  = true;
 		
-		-- Нужно ли перезарядиться
+		-- РќСѓР¶РЅРѕ Р»Рё РїРµСЂРµР·Р°СЂСЏРґРёС‚СЊСЃСЏ
 		if(self.io.m_current_clip_size == 0) then
 		   --console.print(" ------------------ CALLBACK_NEED_TO_RELOAD 4");
 			self:send_callback(CALLBACK_NEED_TO_RELOAD,  {reload_begin = true});
@@ -736,15 +736,15 @@ end
 -------------------------------------
 function sv_actor_basic:on_enter_attack_shot_run()
 	
-	-- Если актер первый раз стреляет из данного оружия, то зарядим его.
+	-- Р•СЃР»Рё Р°РєС‚РµСЂ РїРµСЂРІС‹Р№ СЂР°Р· СЃС‚СЂРµР»СЏРµС‚ РёР· РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ, С‚Рѕ Р·Р°СЂСЏРґРёРј РµРіРѕ.
 	if(self.io.m_current_clip_size == nil) then
 		self.io.m_current_clip_size = self.params.clip_size;
 	end
 	
-	-- Перед тем как выполнить атаку, проверяем хватит ли нам патронов на данный выстрел.
+	-- РџРµСЂРµРґ С‚РµРј РєР°Рє РІС‹РїРѕР»РЅРёС‚СЊ Р°С‚Р°РєСѓ, РїСЂРѕРІРµСЂСЏРµРј С…РІР°С‚РёС‚ Р»Рё РЅР°Рј РїР°С‚СЂРѕРЅРѕРІ РЅР° РґР°РЅРЅС‹Р№ РІС‹СЃС‚СЂРµР».
 	if(self.io.m_current_clip_size == 0) then
-		-- Патронов не хватает, нужно перезарядить.
-		-- Заканчиваем атаку
+		-- РџР°С‚СЂРѕРЅРѕРІ РЅРµ С…РІР°С‚Р°РµС‚, РЅСѓР¶РЅРѕ РїРµСЂРµР·Р°СЂСЏРґРёС‚СЊ.
+		-- Р—Р°РєР°РЅС‡РёРІР°РµРј Р°С‚Р°РєСѓ
 		self.io.m_attack_ended  = true;
 		--console.print(" ------------------ CALLBACK_NEED_TO_RELOAD 5");
 		self:send_callback(CALLBACK_NEED_TO_RELOAD, {reload_begin = true});
@@ -752,7 +752,7 @@ function sv_actor_basic:on_enter_attack_shot_run()
 		return;
 	end
 
-	-- Патронов хватает, можем стрелять.
+	-- РџР°С‚СЂРѕРЅРѕРІ С…РІР°С‚Р°РµС‚, РјРѕР¶РµРј СЃС‚СЂРµР»СЏС‚СЊ.
 	sv_actor_basic.on_enter_attack_run(self);
 
 	
@@ -760,7 +760,7 @@ end
 
 function sv_actor_basic:on_update_attack_shot_run()
 
-	-- произвести атаку
+	-- РїСЂРѕРёР·РІРµСЃС‚Рё Р°С‚Р°РєСѓ
 	if(self.io.m_attack_run_performed == false) then
 		self.io.m_pain_allowed = false;
 		self:perform_attack_trace(self.m_current_attack_info);
@@ -772,7 +772,7 @@ function sv_actor_basic:on_update_attack_shot_run()
 	else
 		self.io.m_attack_run_complete = true;		
 		
-		-- Нужно ли перезарядиться
+		-- РќСѓР¶РЅРѕ Р»Рё РїРµСЂРµР·Р°СЂСЏРґРёС‚СЊСЃСЏ
 		if(self.io.m_current_clip_size == 0) then
 		--console.print(" ------------------ CALLBACK_NEED_TO_RELOAD 6");
 			self:send_callback(CALLBACK_NEED_TO_RELOAD, {reload_begin = true});
@@ -793,7 +793,7 @@ function sv_actor_basic:is_finished_attack_shot_run()
 end
 
 ----------------------------------------
--- ATTACK SHOT BURST (Стрельба очередью)
+-- ATTACK SHOT BURST (РЎС‚СЂРµР»СЊР±Р° РѕС‡РµСЂРµРґСЊСЋ)
 ----------------------------------------
 
 function sv_actor_basic:end_attack_burst()
@@ -808,7 +808,7 @@ function sv_actor_basic:on_enter_attack_shot_burst()
 	--console.print(" ------------------ begin "..self.m_current_attack_info.visual_state_prefix);
 	--self._prefix = self.m_current_attack_info.visual_state_prefix;
 	
-	-- количество выстрелов в очереди.
+	-- РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹СЃС‚СЂРµР»РѕРІ РІ РѕС‡РµСЂРµРґРё.
 	assert(self.params.burst_size);
 	self.io.m_cur_burst_size = self.params.burst_size;
 	
@@ -838,7 +838,7 @@ function sv_actor_basic:on_update_attack_shot_burst()
 		return;
 	end--]]
 
-	-- перед тем как выполнить атаку, проверить есть ли у нас патроны
+	-- РїРµСЂРµРґ С‚РµРј РєР°Рє РІС‹РїРѕР»РЅРёС‚СЊ Р°С‚Р°РєСѓ, РїСЂРѕРІРµСЂРёС‚СЊ РµСЃС‚СЊ Р»Рё Сѓ РЅР°СЃ РїР°С‚СЂРѕРЅС‹
 	if(self.io.m_current_clip_size == 0) then
 		self.io.m_attack_ended = true;
 		self:send_callback(CALLBACK_NEED_TO_RELOAD, {reload_begin = true});
@@ -849,17 +849,17 @@ function sv_actor_basic:on_update_attack_shot_burst()
 
 
 	if(self.io.m_attack_began == false) then
-		-- Начинаем очередь
+		-- РќР°С‡РёРЅР°РµРј РѕС‡РµСЂРµРґСЊ
 		self.io.m_attack_began = true;
 		self.io.m_pain_allowed = false;
 	else
 	
 		if self.io.m_cur_burst_size <= 0 then
-			-- Заканчиваем очередь
+			-- Р—Р°РєР°РЅС‡РёРІР°РµРј РѕС‡РµСЂРµРґСЊ
 			self.io.m_attack_ended = true;	
 			
 			self:reset_body_state();
-			-- есть ли у нас патроны
+			-- РµСЃС‚СЊ Р»Рё Сѓ РЅР°СЃ РїР°С‚СЂРѕРЅС‹
 			if(self.io.m_current_clip_size == 0) then
 			
 				--console.print("------------ CALLBACK_NEED_TO_RELOAD 7")
@@ -868,7 +868,7 @@ function sv_actor_basic:on_update_attack_shot_burst()
 			end	
 			--self:make_transition(self.m_current_attack_info.visual_state_prefix.."_end", nil, self.end_attack_burst)
 			self:end_attack_burst();
-			return  -- Заканчиваем очередь
+			return  -- Р—Р°РєР°РЅС‡РёРІР°РµРј РѕС‡РµСЂРµРґСЊ
 		end
 	end
 	
@@ -882,11 +882,11 @@ function sv_actor_basic:on_update_attack_shot_burst()
 	local visual_idx, anim_length, anim_idx;
 
 	if self.io.m_cur_burst_size < 1 then
-		-- Заканчиваем очередь
+		-- Р—Р°РєР°РЅС‡РёРІР°РµРј РѕС‡РµСЂРµРґСЊ
 		self.io.m_attack_ended = true;	
 		
 		self:reset_body_state();
-		-- есть ли у нас патроны
+		-- РµСЃС‚СЊ Р»Рё Сѓ РЅР°СЃ РїР°С‚СЂРѕРЅС‹
 		if(self.io.m_current_clip_size == 0) then
 		
 			--console.print("------------ CALLBACK_NEED_TO_RELOAD 7")
@@ -895,7 +895,7 @@ function sv_actor_basic:on_update_attack_shot_burst()
 		end	
 		--self:make_transition(self.m_current_attack_info.visual_state_prefix.."_end", nil, self.end_attack_burst)
 		self:end_attack_burst();
-		return  -- Заканчиваем очередь
+		return  -- Р—Р°РєР°РЅС‡РёРІР°РµРј РѕС‡РµСЂРµРґСЊ
 
 	end
 

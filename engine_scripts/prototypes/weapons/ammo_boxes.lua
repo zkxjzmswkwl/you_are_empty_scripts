@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Коробки с патронами для различных типов оружия
+-- РљРѕСЂРѕР±РєРё СЃ РїР°С‚СЂРѕРЅР°РјРё РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… С‚РёРїРѕРІ РѕСЂСѓР¶РёСЏ
 ------------------------------------------------------------------------
 
 function create_ammo_box(_guid, _ammo_box_model, _ammo_name, _ammo_capacity, _snd_on_take, _pp_on_take, _icon_id)
@@ -30,15 +30,15 @@ function create_ammo_box(_guid, _ammo_box_model, _ammo_name, _ammo_capacity, _sn
 		self:set_update_enable(false);
 	end	
 	
-	-- использование патронов актером
+	-- РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РїР°С‚СЂРѕРЅРѕРІ Р°РєС‚РµСЂРѕРј
 	_server_table.on_use = function(self, activator)
 	
-		-- проверка на то, можно ли подобрать патроны
-		-- или у нас уже нет метса
+		-- РїСЂРѕРІРµСЂРєР° РЅР° С‚Рѕ, РјРѕР¶РЅРѕ Р»Рё РїРѕРґРѕР±СЂР°С‚СЊ РїР°С‚СЂРѕРЅС‹
+		-- РёР»Рё Сѓ РЅР°СЃ СѓР¶Рµ РЅРµС‚ РјРµС‚СЃР°
 		
 		if(activator.get_all_from_inventory == nil) then return end
 		
-		-- перебираем все слоты
+		-- РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЃР»РѕС‚С‹
 		for i, slot_name in pairs(g_weapon_slots) do
 			
 			local weapons = activator:get_all_from_inventory(slot_name)
@@ -46,11 +46,11 @@ function create_ammo_box(_guid, _ammo_box_model, _ammo_name, _ammo_capacity, _sn
 				continue
 			end
 				
-			-- Перебираем все оружия данного слота
+			-- РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ РѕСЂСѓР¶РёСЏ РґР°РЅРЅРѕРіРѕ СЃР»РѕС‚Р°
 			for j, weapon in pairs(weapons) do	
 				
-				-- Каждое оружие, использующее данный тип патронов
-				-- пересчитывает количество доступных патронов
+				-- РљР°Р¶РґРѕРµ РѕСЂСѓР¶РёРµ, РёСЃРїРѕР»СЊР·СѓСЋС‰РµРµ РґР°РЅРЅС‹Р№ С‚РёРї РїР°С‚СЂРѕРЅРѕРІ
+				-- РїРµСЂРµСЃС‡РёС‚С‹РІР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РґРѕСЃС‚СѓРїРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ
 				if weapon.m_ammo_class == self.class_name and weapon:get_owner() then
 					if(weapon.m_all_ammo_prop and weapon.m_max_ammo_prop and 
 						weapon:get_property_value(weapon.m_all_ammo_prop) < weapon:get_property_value(weapon.m_max_ammo_prop)) then
@@ -65,7 +65,7 @@ function create_ammo_box(_guid, _ammo_box_model, _ammo_name, _ammo_capacity, _sn
 						self:set_property_value_by_name("ammo_stored", taken_ammo);
 						self:set_property_value_by_name("is_can_take", true);
 					end
-					-- не можем взять больше патронов
+					-- РЅРµ РјРѕР¶РµРј РІР·СЏС‚СЊ Р±РѕР»СЊС€Рµ РїР°С‚СЂРѕРЅРѕРІ
 					do return; end
 				end
 			end
@@ -76,12 +76,12 @@ function create_ammo_box(_guid, _ammo_box_model, _ammo_name, _ammo_capacity, _sn
 	end
 				
 	
-	-- Вызывается при подборе патронов
+	-- Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕРґР±РѕСЂРµ РїР°С‚СЂРѕРЅРѕРІ
 	_server_table.on_take = function(self, _holder)
-		-- При подборе патронов, все оружия, использующие данный
-		-- тип патронов должны пересчитать свое количество доступных патронов.
+		-- РџСЂРё РїРѕРґР±РѕСЂРµ РїР°С‚СЂРѕРЅРѕРІ, РІСЃРµ РѕСЂСѓР¶РёСЏ, РёСЃРїРѕР»СЊР·СѓСЋС‰РёРµ РґР°РЅРЅС‹Р№
+		-- С‚РёРї РїР°С‚СЂРѕРЅРѕРІ РґРѕР»Р¶РЅС‹ РїРµСЂРµСЃС‡РёС‚Р°С‚СЊ СЃРІРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РґРѕСЃС‚СѓРїРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ.
 		
-		-- Перебираем все слоты
+		-- РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЃР»РѕС‚С‹
 		for i, slot_name in pairs(g_weapon_slots) do
 			
 			local weapons = _holder:get_all_from_inventory(slot_name)
@@ -89,10 +89,10 @@ function create_ammo_box(_guid, _ammo_box_model, _ammo_name, _ammo_capacity, _sn
 				continue
 			end
 				
-			-- Перебираем все оружия данного слота
+			-- РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ РѕСЂСѓР¶РёСЏ РґР°РЅРЅРѕРіРѕ СЃР»РѕС‚Р°
 			for j, weapon in pairs(weapons) do	
-				-- Каждое оружие, использующее данный тип патронов
-				-- пересчитывает количество доступных патронов
+				-- РљР°Р¶РґРѕРµ РѕСЂСѓР¶РёРµ, РёСЃРїРѕР»СЊР·СѓСЋС‰РµРµ РґР°РЅРЅС‹Р№ С‚РёРї РїР°С‚СЂРѕРЅРѕРІ
+				-- РїРµСЂРµСЃС‡РёС‚С‹РІР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РґРѕСЃС‚СѓРїРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ
 				if weapon.m_ammo_class == self.class_name and weapon:get_owner() then
 					weapon:calc_ammo_count()
 				end

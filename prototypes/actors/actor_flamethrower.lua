@@ -3,21 +3,21 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Actor Flamethrower - огнеметчик
+-- Actor Flamethrower - РѕРіРЅРµРјРµС‚С‡РёРє
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_flamethrower.guid = {0x9b8f11c4, 0xf436, 0x4973, 0xbf, 0x38, 0xcb, 0xe3, 0x18, 0x9f, 0xff, 0x22};
 
 ----------------------------------------
 function actor_flamethrower:on_init()
-	-- Загружаем звук начала атаки
+	-- Р—Р°РіСЂСѓР¶Р°РµРј Р·РІСѓРє РЅР°С‡Р°Р»Р° Р°С‚Р°РєРё
 	self.m_begin_flame_snd = self:add_sound(self.params.begin_flame_snd_name, false, -5000, 1, SND_ACTOR_MIN_DIST, SND_ACTOR_MAX_DIST);
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_flamethrower = utils.inherit(sv_actor_basic, actor_flamethrower);
 
 ----------------------------------------
@@ -36,13 +36,13 @@ function sv_actor_flamethrower:on_init()
 end
 
 ----------------------------------------
--- ATTACK SHOT BURST (Стрельба очередью)
+-- ATTACK SHOT BURST (РЎС‚СЂРµР»СЊР±Р° РѕС‡РµСЂРµРґСЊСЋ)
 ----------------------------------------
 function sv_actor_flamethrower:on_enter_attack_shot_burst()
 	sv_actor_basic.on_enter_attack_shot_burst(self)
 	self:play_sound(self.m_begin_flame_snd)
 	
-	-- Загружаем эффект выброса огня (только при первом выстреле)
+	-- Р—Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ (С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј РІС‹СЃС‚СЂРµР»Рµ)
 	if self.m_flamethrow_effect == nil then
 		local template_id = self:add_effect_template(self.params.flame_effect_name)
 		local effect_id = self:create_effect(template_id, self.m_model_body, self.params.flame_shoot_point)
@@ -53,7 +53,7 @@ function sv_actor_flamethrower:on_enter_attack_shot_burst()
 		end
 	end
 	
-	-- Включаем эффект выброса огня
+	-- Р’РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 	self:activate_effect(self.m_flamethrow_effect)
 		
 end
@@ -62,17 +62,17 @@ end
 function sv_actor_flamethrower:on_exit_attack_shot_burst()
 	sv_actor_basic.on_exit_attack_shot_burst(self)
 	
-	-- Выключаем эффект выброса огня
+	-- Р’С‹РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 	self:deactivate_effect(self.m_flamethrow_effect)
 end
 
 
 ----------------------------------------
--- Обработка эффектов при enable/disable
+-- РћР±СЂР°Р±РѕС‚РєР° СЌС„С„РµРєС‚РѕРІ РїСЂРё enable/disable
 ----------------------------------------
 function sv_actor_flamethrower:on_inslot_disable(sender, activator, input_data)
 
-	-- Выключаем все эффекты.
+	-- Р’С‹РєР»СЋС‡Р°РµРј РІСЃРµ СЌС„С„РµРєС‚С‹.
 	if self.m_flamethrow_effect then
 		self:deactivate_effect(self.m_flamethrow_effect)
 	end
@@ -86,7 +86,7 @@ end
 ----------------------------------------
 function sv_actor_flamethrower:on_inslot_enable(sender, activator, input_data)
 	
-	-- Загружаем эффект горелки (только при первом enable)
+	-- Р—Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё (С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј enable)
 	if self.m_nozzle_effect == nil then
 		template_id = self:add_effect_template(self.params.nozzle_effect_name)
 		effect_id = self:create_effect(template_id, self.m_model_body, self.params.flame_shoot_point)
@@ -96,10 +96,10 @@ function sv_actor_flamethrower:on_inslot_enable(sender, activator, input_data)
 			self.m_nozzle_effect = effect_id
 		end
 	end
-	-- Включаем эффект горелки
+	-- Р’РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё
 	self:activate_effect(self.m_nozzle_effect)
 	
-	-- Если жжем, то включаем эффект выброса огня.
+	-- Р•СЃР»Рё Р¶Р¶РµРј, С‚Рѕ РІРєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ.
 	local cur_state = self:get_cur_fsm_state(self.body_fsm)
 	if cur_state == self.attack_shot_burst_state then
 		self:activate_effect(self.m_flamethrow_effect)
@@ -110,7 +110,7 @@ end
 function sv_actor_flamethrower:on_shutdown()
 	sv_actor_basic.on_shutdown(self);
 	
-	-- Освобождаем эффекты
+	-- РћСЃРІРѕР±РѕР¶РґР°РµРј СЌС„С„РµРєС‚С‹
 	if self.m_nozzle_effect then
 		self:release_effect(self.m_nozzle_effect)
 	end
@@ -122,7 +122,7 @@ end
 
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_flamethrower = utils.inherit(cl_actor_basic, actor_flamethrower);
 
 function cl_actor_flamethrower:on_init()

@@ -3,17 +3,17 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_teleport_target - место назначения телепорта
+-- trigger_teleport_target - РјРµСЃС‚Рѕ РЅР°Р·РЅР°С‡РµРЅРёСЏ С‚РµР»РµРїРѕСЂС‚Р°
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_teleport_target = {
 	guid = {0xae0debfc, 0xf364, 0x46c9, 0xa9, 0xd6, 0x2, 0x9d, 0x1f, 0x5b, 0xf4, 0x96},
 }
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_trigger_teleport_target = utils.inherit(sv_game_object, trigger_teleport_target);
 
 function sv_trigger_teleport_target:register_properties(prop_registry)
@@ -22,12 +22,12 @@ function sv_trigger_teleport_target:register_properties(prop_registry)
 	self.in_teleport_slot = self:register_input_slot("teleport", self.teleport);
 end
 
--- функции обработчики слотов
+-- С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 function sv_trigger_teleport_target:teleport(sender, activator, input_data)
 	local tm = self:get_tm()
 	self:send_event(activator, EVENT_SET_POS, tm)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_trigger_teleport_target = utils.inherit(cl_game_object, trigger_teleport_target);

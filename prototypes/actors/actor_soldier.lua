@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Actor Soldier - солдат
+-- Actor Soldier - СЃРѕР»РґР°С‚
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_soldier.guid = {0x60c234e3, 0x4297, 0x4d34, 0xb0, 0x98, 0xaa, 0x42, 0x13, 0x21, 0xf8, 0x84};
 
 ------------------------------------
@@ -15,7 +15,7 @@ function actor_soldier:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_soldier = utils.inherit(sv_actor_basic, actor_soldier);
 
 ------------------------------------
@@ -29,7 +29,7 @@ function sv_actor_soldier:on_init()
 	sv_actor_basic.on_init(self);
 	actor_soldier.on_init(self);
 --[[	
-	-- Переход из стоячего положения в сидячее и обратно
+	-- РџРµСЂРµС…РѕРґ РёР· СЃС‚РѕСЏС‡РµРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ РІ СЃРёРґСЏС‡РµРµ Рё РѕР±СЂР°С‚РЅРѕ
 	self.transition_state = self:add_fsm_state(self.body_fsm, "transition", self.on_enter_transition, self.on_update_transition, nil, nil);
 	self.m_attack_begin_str	= "attack_begin"
 	self.m_attack_end_str	= "attack_end"
@@ -42,7 +42,7 @@ end
 -- ATTACK SHOT RUN
 -------------------------------------
 function sv_actor_soldier:on_enter_attack_shot_run()
-	-- Встаем, если сидим
+	-- Р’СЃС‚Р°РµРј, РµСЃР»Рё СЃРёРґРёРј
 	if self.m_is_sitting then
 		self:change_fsm_state(self.body_fsm, self.transition_state, true);
 		return
@@ -69,7 +69,7 @@ end
 function sv_actor_soldier:on_update_reload()
 	sv_actor_basic.on_update_reload(self)
 	
-	-- Меняем положение
+	-- РњРµРЅСЏРµРј РїРѕР»РѕР¶РµРЅРёРµ
 	self:change_fsm_state(self.body_fsm, self.transition_state, false);
 end
 
@@ -87,7 +87,7 @@ function sv_actor_soldier:on_enter_pain()
 end
 
 -------------------------------------
--- Переходы из стоячего положения в сидячее и обратно
+-- РџРµСЂРµС…РѕРґС‹ РёР· СЃС‚РѕСЏС‡РµРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ РІ СЃРёРґСЏС‡РµРµ Рё РѕР±СЂР°С‚РЅРѕ
 -------------------------------------
 function sv_actor_soldier:on_enter_transition()
 	
@@ -118,7 +118,7 @@ end
 --]]
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_soldier = utils.inherit(cl_actor_basic, actor_soldier);
 
 ------------------------------------

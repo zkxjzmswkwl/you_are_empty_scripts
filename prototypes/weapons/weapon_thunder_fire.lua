@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Оружие Thunder Fire
+-- РћСЂСѓР¶РёРµ Thunder Fire
 ------------------------------------------------------------------------
 
 include("ammo_thunder.lua")
@@ -16,60 +16,60 @@ weapon_thunder_fire = {};
 weapon_thunder_fire.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"ItemMauzer"},
 	{"hit_material",		"mat_hit_ppsh" },
-	{ "slot_name",			g_weapon_slots[8] },	-- слот в котором может быть оружие
-	{ "priority",			0 },					-- приоритет оружия
---	{ "icon_id",			6 },					-- иконка для HUD
+	{ "slot_name",			g_weapon_slots[8] },	-- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{ "priority",			0 },					-- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			6 },					-- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		35 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			0 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия
+	{ "loaded_ammo",		35 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			0 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
 
 	
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_thunder_fire.m_models_names = {
---	Имя игрока				Имя модели рук			Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє			РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"Thunder_hands",		"Thunder"			},
 }
 
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_thunder_fire.m_ammo_icon_id		= 5
 weapon_thunder_fire.m_holdable_icon_id	= 12
 
 ---------------------------------------
--- параметры выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РІС‹СЃС‚СЂРµР»Р°
 ---------------------------------------
-weapon_thunder_fire.m_missile_type		= "ammo_missile_fireball"	-- тип снаряда
-weapon_thunder_fire.m_missile_velocity	= 5000						-- скорость снаряда
+weapon_thunder_fire.m_missile_type		= "ammo_missile_fireball"	-- С‚РёРї СЃРЅР°СЂСЏРґР°
+weapon_thunder_fire.m_missile_velocity	= 5000						-- СЃРєРѕСЂРѕСЃС‚СЊ СЃРЅР°СЂСЏРґР°
 weapon_thunder_fire.m_shot_disp			= 0
 weapon_thunder_fire.m_shot_recoil		= 7
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_thunder_fire.m_rate_of_fire		= 1
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_thunder_fire.m_ammo_class			= "ammo_thunder"	-- класс используемых патронов
-weapon_thunder_fire.m_ammo_type			= "thunder ammo"	-- тип используемых патронов
-weapon_thunder_fire.m_clip_size			= 71				-- объем патронтажа
-weapon_thunder_fire.m_ammo_for_shot		= 1					-- кол-во патронов расходуемых на один выстрел
-weapon_thunder_fire.m_loaded_ammo		= 35				-- кол-во заряженных патронов
+weapon_thunder_fire.m_ammo_class			= "ammo_thunder"	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_thunder_fire.m_ammo_type			= "thunder ammo"	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_thunder_fire.m_clip_size			= 71				-- РѕР±СЉРµРј РїР°С‚СЂРѕРЅС‚Р°Р¶Р°
+weapon_thunder_fire.m_ammo_for_shot		= 1					-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
+weapon_thunder_fire.m_loaded_ammo		= 35				-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_thunder_fire.m_normal_fov			= 90
 weapon_thunder_fire.m_zoomed_fov			= 45
 weapon_thunder_fire.m_model_fov			= 55
 
--- Эффект выброса огня
+-- Р­С„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 weapon_thunder_fire.flame_effect_name	= "pfx_flamethrower1.lua"
--- Эффект горелки
+-- Р­С„С„РµРєС‚ РіРѕСЂРµР»РєРё
 weapon_thunder_fire.nozzle_effect_name	= "pfx_flamethrower1_nozzle.lua"
--- Точка выброса огня
+-- РўРѕС‡РєР° РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 weapon_thunder_fire.flame_shoot_point	= "#shoot_point"
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_thunder_fire.states_design = {};
 
@@ -109,14 +109,14 @@ weapon_thunder_fire.states_design["fire_finish_chain"] = {
 -- RELOAD
 weapon_thunder_fire.states_design["reload"] = {{anim = "reload", snd = "thunder_reload", snd_params = snd_weapon_common},};
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_thunder_fire.guid = {0xc72f5a07, 0x64c8, 0x4913, 0xad, 0x2d, 0x86, 0x59, 0x2d, 0x1, 0x95, 0x5f};
 
 function weapon_thunder_fire:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_thunder_fire = utils.inherit(sv_weapon_firearm, weapon_thunder_fire);
 
 ---------------------------------------------------------------------------
@@ -137,7 +137,7 @@ function sv_weapon_thunder_fire:event_lever1_down()
 	local cur_state = self:get_cur_fsm_state(self.main_fsm);
 	if cur_state == self.fire_state then
 	
-		-- Загружаем эффект выброса огня
+		-- Р—Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 		if self.m_flamethrow_effect == nil then
 			local template_id = self:add_effect_template(self.flame_effect_name)
 			local effect_id = self:create_effect(template_id, self.m_model_fp[self:get_cur_player_name()], self.flame_shoot_point)
@@ -148,7 +148,7 @@ function sv_weapon_thunder_fire:event_lever1_down()
 			end
 		end
 		
-		-- Включаем эффект выброса огня
+		-- Р’РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 		self:activate_effect(self.m_flamethrow_effect)
 	end
 	
@@ -158,7 +158,7 @@ end
 function sv_weapon_thunder_fire:on_selected()
 	sv_weapon_firearm.on_selected(self)
 	
-	-- Загружаем эффект горелки (если оружие выбрано в первый раз)
+	-- Р—Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё (РµСЃР»Рё РѕСЂСѓР¶РёРµ РІС‹Р±СЂР°РЅРѕ РІ РїРµСЂРІС‹Р№ СЂР°Р·)
 	if self.m_nozzle_effect == nil then
 		template_id = self:add_effect_template(self.nozzle_effect_name)
 		effect_id = self:create_effect(template_id, self.m_model_fp[self:get_cur_player_name()], self.flame_shoot_point)
@@ -169,7 +169,7 @@ function sv_weapon_thunder_fire:on_selected()
 		end
 	end
 	
-	-- Включаем эффект горелки
+	-- Р’РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё
 	self:activate_effect(self.m_nozzle_effect)
 	
 end
@@ -178,7 +178,7 @@ end
 function sv_weapon_thunder_fire:on_deselected()
 	sv_weapon_firearm.on_deselected(self)
 	
-	-- Выключаем эффект горелки
+	-- Р’С‹РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё
 	self:deactivate_effect(self.m_nozzle_effect)
 end
 
@@ -194,7 +194,7 @@ end
 
 ---------------------------------------------------------------------------
 function sv_weapon_thunder_fire:event_lever2_down()
-	--Ничего не делаем
+	--РќРёС‡РµРіРѕ РЅРµ РґРµР»Р°РµРј
 end
 
 ---------------------------------------------------------------------------
@@ -204,17 +204,17 @@ function sv_weapon_thunder_fire:on_enter_fire()
 end
 
 --------------------------------------------------------------------------------
--- завершение выстрела
+-- Р·Р°РІРµСЂС€РµРЅРёРµ РІС‹СЃС‚СЂРµР»Р°
 function sv_weapon_thunder_fire:on_enter_fire_finish()
 
 	local owner = self:get_owner();
 --[[	
 	if owner then
 	
-		-- Направление атаки: прямо перед собой
+		-- РќР°РїСЂР°РІР»РµРЅРёРµ Р°С‚Р°РєРё: РїСЂСЏРјРѕ РїРµСЂРµРґ СЃРѕР±РѕР№
 		local attack_dir = owner:calc_target_dir({0, 0, 0}, 0, 0, 0);
 				
-		-- Стреляем снарядом
+		-- РЎС‚СЂРµР»СЏРµРј СЃРЅР°СЂСЏРґРѕРј
 		owner:fire_missile(
 			{2, 0, 1.5},
 			attack_dir,
@@ -224,7 +224,7 @@ function sv_weapon_thunder_fire:on_enter_fire_finish()
 			{0, 20, 0}
 		);		
 		
-		-- Уменьшаем количество патронов
+		-- РЈРјРµРЅСЊС€Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ
 		self:set_property_value(self.m_loaded_ammo_prop, 
 			self:get_property_value(self.m_loaded_ammo_prop) - self.m_ammo_for_shot);
 	end
@@ -242,7 +242,7 @@ function sv_weapon_thunder_fire:on_update_fire_finish()
 	if (self:can_fire() and self.m_need_to_stop_firing ~= true) then
 		self:change_fsm_state(self.main_fsm, self.fire_finish_state, true, true);
 	else
-		-- Выключаем эффект выброса огня
+		-- Р’С‹РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚ РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 		self:deactivate_effect(self.m_flamethrow_effect)
 		
 		sv_weapon_firearm.on_update_fire_finish(self);
@@ -253,7 +253,7 @@ end
 function sv_weapon_thunder_fire:on_shutdown()
 	sv_weapon_firearm.on_shutdown(self)
 	
-	-- Освобождаем эффекты
+	-- РћСЃРІРѕР±РѕР¶РґР°РµРј СЌС„С„РµРєС‚С‹
 	if self.m_nozzle_effect then
 		self:release_effect(self.m_nozzle_effect)
 	end
@@ -264,7 +264,7 @@ function sv_weapon_thunder_fire:on_shutdown()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_thunder_fire = utils.inherit(cl_weapon_firearm, weapon_thunder_fire);
 
 function cl_weapon_thunder_fire:on_init()

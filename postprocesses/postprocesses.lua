@@ -2,7 +2,7 @@
 postprocesses = {}
 
 -----------------------------------------------------------------
--- Постпроцессы повреждений
+-- РџРѕСЃС‚РїСЂРѕС†РµСЃСЃС‹ РїРѕРІСЂРµР¶РґРµРЅРёР№
 include("you_are_empty\\postprocesses\\damage\\gunshots.lua")
 include("you_are_empty\\postprocesses\\damage\\knocks.lua")
 include("you_are_empty\\postprocesses\\damage\\falls.lua")
@@ -26,7 +26,7 @@ postprocesses["test"] =
 		color_r	= { points = { {0, 0} } },
 		color_g	= { points = { {0, 0} } },
 		color_b	= { points = { {0, 0} } },
-		-- точки задаются как пары {time, value}
+		-- С‚РѕС‡РєРё Р·Р°РґР°СЋС‚СЃСЏ РєР°Рє РїР°СЂС‹ {time, value}
 		intensivity = { points = { {1, 0}, {0, 1} } },
 
 	},

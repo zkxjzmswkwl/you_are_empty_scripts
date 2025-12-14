@@ -3,12 +3,12 @@
 ------------------------------------------------------------------------
 -- Authors: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- object_spawner - создает объекты с заданными свойствами 
--- в месте расположения самого spawner'а
+-- object_spawner - СЃРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚С‹ СЃ Р·Р°РґР°РЅРЅС‹РјРё СЃРІРѕР№СЃС‚РІР°РјРё 
+-- РІ РјРµСЃС‚Рµ СЂР°СЃРїРѕР»РѕР¶РµРЅРёСЏ СЃР°РјРѕРіРѕ spawner'Р°
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 object_spawner = {
 	guid = {0x6b38498a, 0x28de, 0x4312, 0x9a, 0xad, 0x65, 0x35, 0x7a, 0x68, 0xef, 0xd},
 }
@@ -21,7 +21,7 @@ function object_spawner:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_object_spawner = utils.inherit(sv_game_object, object_spawner)
 
 ------------------------------------
@@ -29,16 +29,16 @@ function sv_object_spawner:register_properties(prop_registry)
 	sv_game_object.register_properties(self, prop_registry)
 	object_spawner.register_properties(self, prop_registry);
 
-	-- Регистрация слотов
+	-- Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃР»РѕС‚РѕРІ
 	self.spawn = self:register_input_slot("spawn", self.spawn)
 end
 
 ------------------------------------
 function sv_object_spawner:spawn(sender, activator, input_data)
-	-- Создаем объект
+	-- РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚
 	local new_obj = engine.spawn_entity( self:get_property_value(self.m_class_name) );
 
-	-- Задаем свойства
+	-- Р—Р°РґР°РµРј СЃРІРѕР№СЃС‚РІР°
 	local prop_table = _G[self:get_property_value(self.m_prop_table_name)]
 	if prop_table then
 		for i,v in ipairs(prop_table) do
@@ -46,13 +46,13 @@ function sv_object_spawner:spawn(sender, activator, input_data)
 		end
 	end
 
-	-- Добавляем объект
+	-- Р”РѕР±Р°РІР»СЏРµРј РѕР±СЉРµРєС‚
 	engine.add_entity_to_world(new_obj);
 	new_obj:set_pos( self:get_pos() )
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_object_spawner = utils.inherit(cl_game_object, object_spawner)
 
 ------------------------------------

@@ -3,15 +3,15 @@
 ------------------------------------------------------------------------
 -- Authors: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Вспомогательные макросы для более удобного и короткого задания часто 
--- иcпользуемых операций
+-- Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ РјР°РєСЂРѕСЃС‹ РґР»СЏ Р±РѕР»РµРµ СѓРґРѕР±РЅРѕРіРѕ Рё РєРѕСЂРѕС‚РєРѕРіРѕ Р·Р°РґР°РЅРёСЏ С‡Р°СЃС‚Рѕ 
+-- РёcРїРѕР»СЊР·СѓРµРјС‹С… РѕРїРµСЂР°С†РёР№
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
--- Создает игровой объект
+-- РЎРѕР·РґР°РµС‚ РёРіСЂРѕРІРѕР№ РѕР±СЉРµРєС‚
 #define_begin SPAWN_ENTITY(CLASS_NAME, ENTITY_NAME, PROP_TABLE, POS)
 
-	-- Создаем объект
+	-- РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚
 	local new_obj = nil
 	if ENTITY_NAME then
 		new_obj = engine.spawn_entity(CLASS_NAME, ENTITY_NAME)
@@ -19,14 +19,14 @@
 		new_obj = engine.spawn_entity(CLASS_NAME)
 	end 
 
-	-- Задаем свойства
+	-- Р—Р°РґР°РµРј СЃРІРѕР№СЃС‚РІР°
 	if type(PROP_TABLE) == "table" then
 		for i,v in pairs(PROP_TABLE) do
 			new_obj:set_property_value_by_name(i, v);
 		end
 	end
 	
-	-- Добавляем объект
+	-- Р”РѕР±Р°РІР»СЏРµРј РѕР±СЉРµРєС‚
 	engine.add_entity_to_world(new_obj);
 	if type(POS) == "table" then
 		new_obj:set_pos( POS )
@@ -35,7 +35,7 @@
 #define_end
 
 ------------------------------------------------------------------------
--- Уничтожает игровые объекты с указанным именем
+-- РЈРЅРёС‡С‚РѕР¶Р°РµС‚ РёРіСЂРѕРІС‹Рµ РѕР±СЉРµРєС‚С‹ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј
 #define_begin DESTROY_ENTITY(ENTITY_NAME)
 
 	local entities = engine.get_entities_by_name(ENTITY_NAME)
@@ -48,7 +48,7 @@
 #define_end
 
 ------------------------------------------------------------------------
--- Устанавливает указанное свойство игрового объекта
+-- РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СѓРєР°Р·Р°РЅРЅРѕРµ СЃРІРѕР№СЃС‚РІРѕ РёРіСЂРѕРІРѕРіРѕ РѕР±СЉРµРєС‚Р°
 #define_begin SET_ENTITY_PROPERTY(ENTITY_NAME, PROP_NAME, PROP_VALUE)
 
 	local entities = engine.get_entities_by_name(ENTITY_NAME)
@@ -61,7 +61,7 @@
 #define_end
 
 ------------------------------------------------------------------------
--- Посылает сигнал на входящий слот получателя
+-- РџРѕСЃС‹Р»Р°РµС‚ СЃРёРіРЅР°Р» РЅР° РІС…РѕРґСЏС‰РёР№ СЃР»РѕС‚ РїРѕР»СѓС‡Р°С‚РµР»СЏ
 #define_begin SEND_EVENT(SENDER_NAME, RECEIVER_NAME, EVENT_NAME, PARAMS_TABLE)
 	
 	local sender = engine.get_entities_by_name(SENDER_NAME)[1]
@@ -77,7 +77,7 @@
 #define_end
 
 ------------------------------------------------------------------------
--- Добавить связь
+-- Р”РѕР±Р°РІРёС‚СЊ СЃРІСЏР·СЊ
 #define_begin ADD_LINK(OUTPUT_OBJECT_NAME, OUTPUT_SLOT_NAME, INPUT_OBJECT_NAME, INPUT_SLOT_NAME, DELAY, COUNT, PARAMS)
 
 	local output_obj = engine.get_entities_by_name(OUTPUT_OBJECT_NAME)[1]

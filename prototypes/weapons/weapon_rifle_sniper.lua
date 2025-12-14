@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Оружие снайперская винтовка 
+-- РћСЂСѓР¶РёРµ СЃРЅР°Р№РїРµСЂСЃРєР°СЏ РІРёРЅС‚РѕРІРєР° 
 ------------------------------------------------------------------------
 
 include("ammo_rifle.lua")
@@ -18,24 +18,24 @@ weapon_rifle_sniper.guid = {0x9520cf42, 0x5743, 0x4121, 0xa3, 0x26, 0xfe, 0xee, 
 weapon_rifle_sniper.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"ItemRifleOPTIC"},
 	{"hit_material",		"mat_hit_mauzer" },
-	{ "slot_name",			g_weapon_slots[11] }, -- слот в котором может быть оружие
-	{ "priority",			6.5 }, -- приоритет оружия
---	{ "icon_id",			8 }, -- иконка для HUD
+	{ "slot_name",			g_weapon_slots[11] }, -- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{ "priority",			6.5 }, -- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			8 }, -- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		5 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			0 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия
-	{ "max_ammo",			25 },	-- максимальное кол-во патронов, которое может быть у нас в инвентаре
+	{ "loaded_ammo",		5 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			0 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
+	{ "max_ammo",			25 },	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Сѓ РЅР°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ
 	
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_rifle_sniper.m_models_names = {
---	Имя игрока				Имя модели рук		Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє		РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"snayper_hands",		"snayper"		},
 }
 
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_rifle_sniper.m_ammo_icon_id		= 3
 weapon_rifle_sniper.m_holdable_icon_id	= 9
 
@@ -43,14 +43,14 @@ weapon_rifle_sniper.fp_model_render_params = {}
 weapon_rifle_sniper.fp_model_render_params.z_far = 500.0
 	
 ---------------------------------------
--- параметры скорострельности
+-- РїР°СЂР°РјРµС‚СЂС‹ СЃРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚Рё
 ---------------------------------------
--- время через которое, 
--- можно не дожидаясь начала анимации сделать новый выстрел,
--- если nil, то обязательно ждем конца всей анимации
+-- РІСЂРµРјСЏ С‡РµСЂРµР· РєРѕС‚РѕСЂРѕРµ, 
+-- РјРѕР¶РЅРѕ РЅРµ РґРѕР¶РёРґР°СЏСЃСЊ РЅР°С‡Р°Р»Р° Р°РЅРёРјР°С†РёРё СЃРґРµР»Р°С‚СЊ РЅРѕРІС‹Р№ РІС‹СЃС‚СЂРµР»,
+-- РµСЃР»Рё nil, С‚Рѕ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ Р¶РґРµРј РєРѕРЅС†Р° РІСЃРµР№ Р°РЅРёРјР°С†РёРё
 weapon_rifle_sniper.fire_finish_interruption_time = nil;
 ---------------------------------------
--- параметры выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РІС‹СЃС‚СЂРµР»Р°
 ---------------------------------------
 weapon_rifle_sniper.m_bullets_in_shot					= 1;
 weapon_rifle_sniper.m_bullet_damage						= 500;
@@ -66,33 +66,33 @@ weapon_rifle_sniper.m_shot_recoil_zoomed				= weapon_rifle_sniper.m_shot_recoil;
 
 weapon_rifle_sniper.m_not_visualize_last_fire_finish	= true;
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_rifle_sniper.m_rate_of_fire				= 1
 
--- Эффекты
-weapon_rifle_sniper.m_shot_effect_name			= "pfx_shot_rifle.lua"		-- эффект при выстреле
-weapon_rifle_sniper.m_shot_point_name			= "#shoot_point"			-- точка привязки эффекта в модели
-weapon_rifle_sniper.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"	-- эффект трейса пули
+-- Р­С„С„РµРєС‚С‹
+weapon_rifle_sniper.m_shot_effect_name			= "pfx_shot_rifle.lua"		-- СЌС„С„РµРєС‚ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
+weapon_rifle_sniper.m_shot_point_name			= "#shoot_point"			-- С‚РѕС‡РєР° РїСЂРёРІСЏР·РєРё СЌС„С„РµРєС‚Р° РІ РјРѕРґРµР»Рё
+weapon_rifle_sniper.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"	-- СЌС„С„РµРєС‚ С‚СЂРµР№СЃР° РїСѓР»Рё
 
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_rifle_sniper.m_ammo_class		= "ammo_rifle";	-- класс используемых патронов
-weapon_rifle_sniper.m_ammo_type			= "rifle ammo";	-- тип используемых патронов
-weapon_rifle_sniper.m_clip_size			= 5;			-- вместимость обоймы
-weapon_rifle_sniper.m_ammo_for_shot		= 1;			-- кол-во патронов расходуемых на один выстрел
+weapon_rifle_sniper.m_ammo_class		= "ammo_rifle";	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_rifle_sniper.m_ammo_type			= "rifle ammo";	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_rifle_sniper.m_clip_size			= 5;			-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
+weapon_rifle_sniper.m_ammo_for_shot		= 1;			-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_rifle_sniper.m_normal_fov		= 90;
 weapon_rifle_sniper.m_zoomed_fov		= 45;
 weapon_rifle_sniper.m_model_fov			= 25;
 
--- Чувствительность мыши (коэффициент масштабирования)
+-- Р§СѓРІСЃС‚РІРёС‚РµР»СЊРЅРѕСЃС‚СЊ РјС‹С€Рё (РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ)
 weapon_rifle_sniper.m_zoomed_mouse_sens_scale	= 0.3;
 weapon_rifle_sniper.m_normal_mouse_sens_scale	= 1;
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_rifle_sniper.states_design = {};
 weapon_rifle_sniper.states_design["show"] = {{anim = "taking", anim_speed = 1, snd = "rifle_taking", snd_params = snd_weapon_common},};
@@ -116,7 +116,7 @@ weapon_rifle_sniper.states_design["fire_finish"] = {
 	{anim = "fire2", snd = "rifle_fire_in2b", anim_speed = weapon_rifle_sniper.m_rate_of_fire, snd_params = snd_weapon_reload},
 }
 
--- анимации для zoom in/out
+-- Р°РЅРёРјР°С†РёРё РґР»СЏ zoom in/out
 weapon_rifle_sniper.states_design["zoom_in"] = {{anim = "sight_in", anim_speed = 1}};
 weapon_rifle_sniper.states_design["zoom_out"] = {{anim = "sight_out", anim_speed = 1}};
 weapon_rifle_sniper.states_design["idle_zoomed"] = {
@@ -132,12 +132,12 @@ weapon_rifle_sniper.states_design["fire_finish_zoomed"] = {{anim = "fire2",
 weapon_rifle_sniper.states_design["reload"] = {{anim = "reload", snd = "rifle_reload", snd_params = snd_weapon_common},};
 
 ---------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 function weapon_rifle_sniper:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_rifle_sniper = utils.inherit(sv_weapon_firearm, weapon_rifle_sniper);
 
 ---------------------------------------------------------------------------
@@ -196,7 +196,7 @@ function sv_weapon_rifle_sniper:on_update_fire_finish()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_rifle_sniper = utils.inherit(cl_weapon_firearm, weapon_rifle_sniper);
 
 ---------------------------------------------------------------------------

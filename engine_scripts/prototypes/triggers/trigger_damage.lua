@@ -4,11 +4,11 @@
 -- Authors: Yuri Dobronravin
 --				Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_damage - триггер, находясь в котором, объект получает damage 
+-- trigger_damage - С‚СЂРёРіРіРµСЂ, РЅР°С…РѕРґСЏСЃСЊ РІ РєРѕС‚РѕСЂРѕРј, РѕР±СЉРµРєС‚ РїРѕР»СѓС‡Р°РµС‚ damage 
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_damage = {
 	guid = {0xb740ab7f, 0x1d04, 0x480b, 0xb6, 0xa9, 0x03, 0xf6, 0x41, 0xaf, 0x3b, 0x6f},
 };
@@ -21,7 +21,7 @@ function trigger_damage:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 
 sv_trigger_damage = utils.inherit(sv_game_object, trigger_damage);
 sv_trigger_damage.last_damage_time = -1;
@@ -35,7 +35,7 @@ end
 function sv_trigger_damage:on_init()
 	sv_game_object.on_init(self);
 	
-	-- Считываем тип damage'а
+	-- РЎС‡РёС‚С‹РІР°РµРј С‚РёРї damage'Р°
 	local damage_type = self:get_property_value(self.damage_type_prop)
 	self.damage_type = g_damage_type[damage_type]
 	if not self.damage_type then
@@ -64,7 +64,7 @@ function sv_trigger_damage:damage(activator)
 	return true
 end
 
--- функции обработчики слотов
+-- С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 function sv_trigger_damage:OnEnter(activator)
 	self.entered_time = engine.get_game_time()
 	return self:damage(activator)
@@ -80,7 +80,7 @@ function sv_trigger_damage:OnExit(activator)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_trigger_damage = utils.inherit(cl_game_object, trigger_damage);
 
 function cl_trigger_damage:register_properties(prop_registry)

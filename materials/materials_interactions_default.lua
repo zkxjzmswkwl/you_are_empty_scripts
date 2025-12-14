@@ -1,5 +1,5 @@
 
--- настройки оружия по умолчанию
+-- РЅР°СЃС‚СЂРѕР№РєРё РѕСЂСѓР¶РёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 materials_interactions_infos.inter_spanner_default = {
 	effects = { 
 		{ name = "hit_spanner.lua", n_range = { 0, 1 } },
@@ -24,7 +24,7 @@ materials_interactions_infos.inter_ppsh_default = {
 	},
 }
 
--- настройки для различных материалов по умолчанию
+-- РЅР°СЃС‚СЂРѕР№РєРё РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РјР°С‚РµСЂРёР°Р»РѕРІ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 materials_interactions_infos.inter_main = {
 	contact = {
 		friction	= 0.5,

@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Метательные предметы и гранаты
+-- РњРµС‚Р°С‚РµР»СЊРЅС‹Рµ РїСЂРµРґРјРµС‚С‹ Рё РіСЂР°РЅР°С‚С‹
 ------------------------------------------------------------------------
 
 -------------------------------------------
--- шприц
+-- С€РїСЂРёС†
 -------------------------------------------
 ammo_missile_squirt, sv_ammo_missile_squirt, cl_ammo_missile_squirt = create_ammo_missile(
 					{0x9fc74420, 0x80a1, 0x4b43, 0x89, 0xcc, 0xb5, 0xa3, 0x4a, 0x81, 0x83, 0xcc},
@@ -52,7 +52,7 @@ ammo_missile_fireball, sv_ammo_missile_fireball, cl_ammo_missile_fireball = crea
 					 }); 
 					 
 -------------------------------------------
--- канализационный люк
+-- РєР°РЅР°Р»РёР·Р°С†РёРѕРЅРЅС‹Р№ Р»СЋРє
 -------------------------------------------
 ammo_missile_disk, sv_ammo_missile_disk, cl_ammo_missile_disk = create_ammo_missile(
 					{0x760d687c, 0x290d, 0x4886, 0xb9, 0x6a, 0xb1, 0x78, 0x55, 0xd9, 0xd2, 0xc2},
@@ -71,7 +71,7 @@ ammo_missile_disk, sv_ammo_missile_disk, cl_ammo_missile_disk = create_ammo_miss
 					 });
 					 
 -------------------------------------------
--- граната
+-- РіСЂР°РЅР°С‚Р°
 -------------------------------------------
 ammo_missile_grenade, sv_ammo_missile_grenade, cl_ammo_missile_grenade = create_ammo_missile(
 					{0x76674a3, 0x3cf, 0x4162, 0x8b, 0x1, 0x2b, 0x42, 0x5e, 0xec, 0xfa, 0xa1},
@@ -91,7 +91,7 @@ ammo_missile_grenade, sv_ammo_missile_grenade, cl_ammo_missile_grenade = create_
 					 });
 					 
 -------------------------------------------
--- коктейль молотова
+-- РєРѕРєС‚РµР№Р»СЊ РјРѕР»РѕС‚РѕРІР°
 -------------------------------------------
 ammo_missile_bottle, sv_ammo_missile_bottle, cl_ammo_missile_bottle = create_ammo_missile(
 					{0xb87c3c31, 0x52fe, 0x47ad, 0xba, 0x9f, 0x27, 0x76, 0x46, 0x49, 0x61, 0xbc},
@@ -111,7 +111,7 @@ ammo_missile_bottle, sv_ammo_missile_bottle, cl_ammo_missile_bottle = create_amm
 					 });
 					 
 -------------------------------------------
--- коктейль молотова, которым бросаются боты.
+-- РєРѕРєС‚РµР№Р»СЊ РјРѕР»РѕС‚РѕРІР°, РєРѕС‚РѕСЂС‹Рј Р±СЂРѕСЃР°СЋС‚СЃСЏ Р±РѕС‚С‹.
 -------------------------------------------
 ammo_missile_bottle_bot, sv_ammo_missile_bottle_bot, cl_ammo_missile_bottle_bot = create_ammo_missile(
 					{0x4d9f990c, 0x70bc, 0x4099, 0x96, 0xaa, 0x37, 0xc2, 0x67, 0x2, 0xa0, 0xcc},
@@ -131,7 +131,7 @@ ammo_missile_bottle_bot, sv_ammo_missile_bottle_bot, cl_ammo_missile_bottle_bot 
 					 });
 					 
 -------------------------------------------
--- плевки гомноеда
+-- РїР»РµРІРєРё РіРѕРјРЅРѕРµРґР°
 -------------------------------------------
 ammo_missile_spit, sv_ammo_missile_spit, cl_ammo_missile_spit = create_ammo_missile(
 					{0xf58bf614, 0xf837, 0x4377, 0xa6, 0xa8, 0x67, 0x2d, 0x43, 0x18, 0xc, 0xf1},
@@ -153,7 +153,7 @@ ammo_missile_spit, sv_ammo_missile_spit, cl_ammo_missile_spit = create_ammo_miss
 					 });
 
 -------------------------------------------
--- Песня примы
+-- РџРµСЃРЅСЏ РїСЂРёРјС‹
 -------------------------------------------
 ammo_missile_song, sv_ammo_missile_song, cl_ammo_missile_song = create_ammo_missile(
 					{0x191c7ff9, 0xe88e, 0x44e5, 0x9f, 0x79, 0x44, 0x18, 0x6d, 0x40, 0xa1, 0x7c},

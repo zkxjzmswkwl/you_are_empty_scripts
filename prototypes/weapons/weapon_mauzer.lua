@@ -3,8 +3,8 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Базовый класс для всех пистолетов и револьверов,
--- выстрел происходит в 2 фазы 
+-- Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ РІСЃРµС… РїРёСЃС‚РѕР»РµС‚РѕРІ Рё СЂРµРІРѕР»СЊРІРµСЂРѕРІ,
+-- РІС‹СЃС‚СЂРµР» РїСЂРѕРёСЃС…РѕРґРёС‚ РІ 2 С„Р°Р·С‹ 
 ------------------------------------------------------------------------
 
 include("ammo_mauzer.lua")
@@ -17,36 +17,36 @@ weapon_mauzer = {};
 weapon_mauzer.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"ItemMauzer"},
 	{"hit_material",		"mat_hit_mauzer" },
-	{ "slot_name",			g_weapon_slots[2] }, -- слот в котором может быть оружие
-	{ "priority",			3 }, -- приоритет оружия
---	{ "icon_id",			2 }, -- иконка для HUD
+	{ "slot_name",			g_weapon_slots[2] }, -- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{ "priority",			3 }, -- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			2 }, -- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		5 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			0 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия
-	{ "max_ammo",			45 },	-- максимальное кол-во патронов, которое может быть у нас в инвентаре
+	{ "loaded_ammo",		5 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			0 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
+	{ "max_ammo",			45 },	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Сѓ РЅР°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ
 	
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_mauzer.m_models_names = {
---	Имя игрока				Имя модели рук		Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє		РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"mauzer_hands",		"mauzer"			},
 }
 
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_mauzer.m_ammo_icon_id		= 1
 weapon_mauzer.m_holdable_icon_id	= 5
 
 ---------------------------------------
--- параметры скорострельности
+-- РїР°СЂР°РјРµС‚СЂС‹ СЃРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚Рё
 ---------------------------------------
--- время через которое, 
--- можно не дожидаясь начала анимации сделать новый выстрел,
--- если nil, то обязательно ждем конца всей анимации
+-- РІСЂРµРјСЏ С‡РµСЂРµР· РєРѕС‚РѕСЂРѕРµ, 
+-- РјРѕР¶РЅРѕ РЅРµ РґРѕР¶РёРґР°СЏСЃСЊ РЅР°С‡Р°Р»Р° Р°РЅРёРјР°С†РёРё СЃРґРµР»Р°С‚СЊ РЅРѕРІС‹Р№ РІС‹СЃС‚СЂРµР»,
+-- РµСЃР»Рё nil, С‚Рѕ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ Р¶РґРµРј РєРѕРЅС†Р° РІСЃРµР№ Р°РЅРёРјР°С†РёРё
 weapon_mauzer.fire_finish_interruption_time = 350;
 ---------------------------------------
--- параметры выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РІС‹СЃС‚СЂРµР»Р°
 ---------------------------------------
 weapon_mauzer.m_bullets_in_shot		= 1;
 weapon_mauzer.m_bullet_damage		= 70;
@@ -60,31 +60,31 @@ weapon_mauzer.m_shot_disp_zoomed	= weapon_mauzer.m_shot_disp / 3;
 weapon_mauzer.m_shot_recoil			= 7;
 weapon_mauzer.m_shot_recoil_zoomed	= weapon_mauzer.m_shot_recoil;
 
-weapon_mauzer.m_shot_effect_name			= "pfx_shot_mauzer.lua" -- эффект при выстреле
-weapon_mauzer.m_shot_point_name				= "#shoot_point"		-- точка привязки эффекта в модели
-weapon_mauzer.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"	-- эффект трейса пули
+weapon_mauzer.m_shot_effect_name			= "pfx_shot_mauzer.lua" -- СЌС„С„РµРєС‚ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
+weapon_mauzer.m_shot_point_name				= "#shoot_point"		-- С‚РѕС‡РєР° РїСЂРёРІСЏР·РєРё СЌС„С„РµРєС‚Р° РІ РјРѕРґРµР»Рё
+weapon_mauzer.m_trace_bullet_effect_name	= "pfx_shot_trace_fp.lua"	-- СЌС„С„РµРєС‚ С‚СЂРµР№СЃР° РїСѓР»Рё
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_mauzer.m_rate_of_fire		= 1
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_mauzer.m_ammo_class			= "ammo_mauzer";	-- класс используемых патронов
-weapon_mauzer.m_ammo_type			= "mauzer ammo";	-- тип используемых патронов
-weapon_mauzer.m_clip_size			= 9;				-- вместимость обоймы
-weapon_mauzer.m_ammo_for_shot		= 1;				-- кол-во патронов расходуемых на один выстрел
+weapon_mauzer.m_ammo_class			= "ammo_mauzer";	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_mauzer.m_ammo_type			= "mauzer ammo";	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_mauzer.m_clip_size			= 9;				-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
+weapon_mauzer.m_ammo_for_shot		= 1;				-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_mauzer.m_normal_fov			= 90;
 weapon_mauzer.m_zoomed_fov			= 45;
 weapon_mauzer.m_model_fov			= 65;
 
--- Чувствительность мыши (коэффициент масштабирования)
+-- Р§СѓРІСЃС‚РІРёС‚РµР»СЊРЅРѕСЃС‚СЊ РјС‹С€Рё (РєРѕСЌС„С„РёС†РёРµРЅС‚ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ)
 weapon_mauzer.m_zoomed_mouse_sens_scale	= 0.3;
 weapon_mauzer.m_normal_mouse_sens_scale	= 1;
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_mauzer.states_design = {};
 weapon_mauzer.states_design["show"] = {{anim = "taking", anim_speed = 2, snd = "mauz_taking", snd_params = snd_weapon_common},};
@@ -92,17 +92,17 @@ weapon_mauzer.states_design["hide"] = {{anim = "hiding", anim_speed = 2.5, snd =
 weapon_mauzer.states_design["idle"] = {{anim = "idle", anim_playback = ANIM_PB_REPEATEDLY,}};
 weapon_mauzer.states_design["fire"] = {{anim = "fire_in", snd = "mauz_fire_in", anim_speed = weapon_mauzer.m_rate_of_fire*8, snd_params = snd_weapon_common},};
 weapon_mauzer.states_design["fire_finish"] = {{anim = "fire", snd = "mauz_fire", anim_speed = weapon_mauzer.m_rate_of_fire, snd_params = snd_weapon_shot},};
--- анимации для zoom in/out
+-- Р°РЅРёРјР°С†РёРё РґР»СЏ zoom in/out
 weapon_mauzer.states_design["zoom_in"] = {{anim = "sight_in", anim_speed = 1.7}};
 weapon_mauzer.states_design["zoom_out"] = {{anim = "sight_out", anim_speed = 1.8}};
 weapon_mauzer.states_design["idle_zoomed"] = {{anim = "sight", anim_playback = ANIM_PB_REPEATEDLY,}};
 weapon_mauzer.states_design["fire_zoomed"] = {{anim = "fire_in_s", snd = "mauz_fire_in", anim_speed = weapon_mauzer.m_rate_of_fire*8, snd_params = snd_weapon_common},};
 weapon_mauzer.states_design["fire_finish_zoomed"] = {{anim = "fire_s", snd = "mauz_fire", anim_speed = weapon_mauzer.m_rate_of_fire, snd_params = snd_weapon_shot},};
--- перезарядка
+-- РїРµСЂРµР·Р°СЂСЏРґРєР°
 weapon_mauzer.states_design["reload"] = {{anim = "reload", snd = "mauz_reload", snd_params = snd_weapon_common},};
 
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_mauzer.guid = {0x3cf4872, 0xbac, 0x45e8, 0xbc, 0xa9, 0xbb, 0xe7, 0xb7, 0xa9, 0x95, 0xff};
 
 ---------------------------------------------------------------------------
@@ -110,7 +110,7 @@ function weapon_mauzer:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_mauzer = utils.inherit(sv_weapon_firearm, weapon_mauzer);
 
 ---------------------------------------------------------------------------
@@ -137,7 +137,7 @@ function sv_weapon_mauzer:on_enter_fire_finish()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_mauzer = utils.inherit(cl_weapon_firearm, weapon_mauzer);
 
 ---------------------------------------------------------------------------

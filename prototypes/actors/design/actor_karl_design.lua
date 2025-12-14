@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Karl - летающий монстр карлосон
+-- Actor Karl - Р»РµС‚Р°СЋС‰РёР№ РјРѕРЅСЃС‚СЂ РєР°СЂР»РѕСЃРѕРЅ
 ------------------------------------------------------------------------
 
 actor_karl = {};
@@ -26,33 +26,33 @@ actor_karl.properties_design = utils.merge_arrays(actor_basic.properties_design,
 	{ "run_backward_speed",		310.0 },
 	{ "run_strafe_speed",		210.0 },
 	{ "jump_height",			300	  },
-	{ "turn_speed",				{180.0, 180.0, 220.0}  }, -- угловая скорость поворота
+	{ "turn_speed",				{180.0, 180.0, 220.0}  }, -- СѓРіР»РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р°
 	
-	-- праметры зрения
-	{ "view_fov",				90	  },	-- угол обзора (град) 
-	{ "view_dist",				25	  },	-- максимальная дальность зрения (м)
+	-- РїСЂР°РјРµС‚СЂС‹ Р·СЂРµРЅРёСЏ
+	{ "view_fov",				90	  },	-- СѓРіРѕР» РѕР±Р·РѕСЂР° (РіСЂР°Рґ) 
+	{ "view_dist",				25	  },	-- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР°Р»СЊРЅРѕСЃС‚СЊ Р·СЂРµРЅРёСЏ (Рј)
 });
 
 ---------------------------------------------------------------------------------
 actor_karl.params = {
-	-- поворот тела относительно головы при ходьбе прямо и вбок
+	-- РїРѕРІРѕСЂРѕС‚ С‚РµР»Р° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РіРѕР»РѕРІС‹ РїСЂРё С…РѕРґСЊР±Рµ РїСЂСЏРјРѕ Рё РІР±РѕРє
 	body_rotate_forward_strafe = 30,
-	-- время падения после которого начинает отыгрыватья анимация падения
+	-- РІСЂРµРјСЏ РїР°РґРµРЅРёСЏ РїРѕСЃР»Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅР°С‡РёРЅР°РµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	falling_time = 60, 
-	-- высота, выше которой включается анимация падения
+	-- РІС‹СЃРѕС‚Р°, РІС‹С€Рµ РєРѕС‚РѕСЂРѕР№ РІРєР»СЋС‡Р°РµС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	above_ground_level = 2,
-	-- время в течении которого персонаж должен находится в состоянии
-	-- idle_alert после последней атаки
+	-- РІСЂРµРјСЏ РІ С‚РµС‡РµРЅРёРё РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶ РґРѕР»Р¶РµРЅ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё
+	-- idle_alert РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµР№ Р°С‚Р°РєРё
 	aggresive_stance_time = 30000,
 	
-	-- эффект горелки 
+	-- СЌС„С„РµРєС‚ РіРѕСЂРµР»РєРё 
 	nozzle_effect_name = "pfx_welder_nozzle.lua",
-	-- точка выброса огня
+	-- С‚РѕС‡РєР° РІС‹Р±СЂРѕСЃР° РѕРіРЅСЏ
 	nozzle_point = "#shoot_point",
 };
 
 
--- настройки hitbox-ов
+-- РЅР°СЃС‚СЂРѕР№РєРё hitbox-РѕРІ
 actor_karl.params.hitboxes = { 
 	{name = "head", damage_k = 1.5, },
 	{name = "pelvis", damage_k = 1, },
@@ -68,10 +68,10 @@ actor_karl.params.hitboxes = {
     {name = "rthigh2", damage_k = .6, },
 };
 
--- параметры атаки
+-- РїР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё
 actor_karl.params.attack_info = {};
 
--- ближняя атака
+-- Р±Р»РёР¶РЅСЏСЏ Р°С‚Р°РєР°
 actor_karl.params.attack_info[0] = {
 
 	type				= ATTACK_MELEE,
@@ -92,7 +92,7 @@ actor_karl.params.attack_info[0] = {
 	visual_state_prefix	= "attack",
 };
 
--- атака с прыжка
+-- Р°С‚Р°РєР° СЃ РїСЂС‹Р¶РєР°
 actor_karl.params.attack_info[1] = {
 
 	type				= ATTACK_JUMP,
@@ -110,7 +110,7 @@ actor_karl.params.attack_info[1] = {
 	dispersion			= 0,
 	offset_pos			= {0, 0, 0.70},
 	
-	pause_between_attacks = 5000, -- пауза между атаками такого типа
+	pause_between_attacks = 5000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	jump_height			= 3,
 	
@@ -119,7 +119,7 @@ actor_karl.params.attack_info[1] = {
 	visual_state_prefix	= "attack_jump",
 };
 
--- атака для приближения к цели
+-- Р°С‚Р°РєР° РґР»СЏ РїСЂРёР±Р»РёР¶РµРЅРёСЏ Рє С†РµР»Рё
 actor_karl.params.attack_info[2] = {
 
 	type				= ATTACK_JUMP,
@@ -137,7 +137,7 @@ actor_karl.params.attack_info[2] = {
 	dispersion			= 0,
 	offset_pos			= {0, 0, 0.70},
 	
-	pause_between_attacks = 8000, -- пауза между атаками такого типа
+	pause_between_attacks = 8000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	jump_height			= 7,
 	
@@ -171,7 +171,7 @@ actor_karl.states_design["idle_alert"] = {
 			};
 			
 -------------------------------------------------------------
--- TRANSITION TO ALERT (Переход в агрессивное состояние)
+-- TRANSITION TO ALERT (РџРµСЂРµС…РѕРґ РІ Р°РіСЂРµСЃСЃРёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ)
 -------------------------------------------------------------
 actor_karl.states_design["transition_to_alert"] = {
 	{anim = nil, weight = 1, snd = "karlson_klich", snd_params = snd_actor_alert},
@@ -205,21 +205,21 @@ actor_karl.states_design["strafe_right_run"] = {
 ----------------------------
 -- JUMP & FALL & LAND
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 actor_karl.states_design["jump_prepare"] = {
 			{anim = "perehod_p1_p4", anim_speed = 1.0, snd = "karlson_perehod_p1_p4"},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_karl.states_design["jump_begin"] = {
 			{anim = "flay1_p4", anim_speed = 1, snd = "karlson_flay1_p4"},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_karl.states_design["fall"] = {
 			{anim = "flay1_p4", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "karlson_flay1_p4"},};
 
--- приземление на бегу
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° Р±РµРіСѓ
 actor_karl.states_design["land_run"] = {
 			{anim = "flay1_p4", anim_speed = 1, snd = "karlson_flay1_p4"},};
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_karl.states_design["land_stand"] = {
 			{anim = "perehod_p4_p1", anim_speed = 1, snd = "karlson_perehod_p4_p1"},};
 
@@ -242,18 +242,18 @@ actor_karl.states_design["attack_end"] = {
 ----------------------------
 -- ATTACK JUMP 
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 actor_karl.states_design["attack_jump_prepare"] = {
 			{anim = "jump1", anim_speed = 1.0, snd = "karlson_jamp1"},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_karl.states_design["attack_jump_begin"] = {
 			{anim = "jump2", anim_speed = 1.0, snd = "karlson_jamp3"},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_karl.states_design["attack_jump_fall"] = {
 			{anim = "flay1_p4", anim_speed = 1.0, anim_playback = ANIM_PB_REPEATEDLY, snd = "karlson_flay1_p4"},};
 
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_karl.states_design["attack_jump_land_stand"] = {
 			{anim = "jump4", anim_speed = 1.3, snd = "karlson_fly_jamp_p4"},};
 
@@ -261,27 +261,27 @@ actor_karl.states_design["attack_jump_land_stand"] = {
 ----------------------------
 -- ATTACK JUMP APPROACH
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 actor_karl.states_design["attack_jump_approach_prepare"] = {
 			{anim = "perehod_p1_p4", anim_speed = 1.0, snd = "karlson_perehod_p1_p4"},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_karl.states_design["attack_jump_approach_begin"] = {
 			{anim = "flay1_p4", anim_speed = 1, snd = "karlson_flay1_p4"},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_karl.states_design["attack_jump_approach_fall"] = {
 			{anim = "flay1_p4", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "karlson_flay1_p4"},};
 
--- приземление на бегу
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° Р±РµРіСѓ
 actor_karl.states_design["attack_jump_approach_land_run"] = {
 			{anim = "flay1_p4", anim_speed = 1, snd = "karlson_flay1_p4"},};
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_karl.states_design["attack_jump_approach_land_stand"] = {
 			{anim = "perehod_p4_p1", anim_speed = 1, snd = "karlson_perehod_p4_p1"},};
 
 
 ----------------------------
--- FLY - неожиданный взлет
+-- FLY - РЅРµРѕР¶РёРґР°РЅРЅС‹Р№ РІР·Р»РµС‚
 ----------------------------
 actor_karl.states_design["fly_idle"] = {
 			{anim = "jump5_vzlet_idle", anim_speed = 1.0, snd = "karlson_jamp1"},};
@@ -289,7 +289,7 @@ actor_karl.states_design["fly_to_alert"] = {
 			{anim = "jump5_vzlet", anim_speed = 1.0, snd = "karlson_jamp3"},};
 			
 ----------------------------
--- Висит на стенке и работает
+-- Р’РёСЃРёС‚ РЅР° СЃС‚РµРЅРєРµ Рё СЂР°Р±РѕС‚Р°РµС‚
 ----------------------------
 actor_karl.states_design["idle_working"] = {
 			{anim = "idle6_p2", anim_speed = 1.0, snd = "karlson_idle6_p2"},

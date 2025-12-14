@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Actor Soldier - солдат
+-- Actor Soldier - СЃРѕР»РґР°С‚
 ------------------------------------------------------------------------
 
 actor_soldier = {};
@@ -26,45 +26,45 @@ actor_soldier.properties_design = utils.merge_arrays(actor_basic.properties_desi
 	{ "run_backward_speed",		280.0 },
 	{ "run_strafe_speed",		240.0 },
 	{ "jump_height",			20	  },
-	{ "turn_speed",				{700.0, 700.0, 700.0}  }, -- угловая скорость поворота
+	{ "turn_speed",				{700.0, 700.0, 700.0}  }, -- СѓРіР»РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р°
 	
-	-- праметры зрения
-	{ "view_fov",				90		},	-- угол обзора (град) 
-	{ "view_dist",				170		},	-- максимальная дальность зрения (м)
+	-- РїСЂР°РјРµС‚СЂС‹ Р·СЂРµРЅРёСЏ
+	{ "view_fov",				90		},	-- СѓРіРѕР» РѕР±Р·РѕСЂР° (РіСЂР°Рґ) 
+	{ "view_dist",				170		},	-- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР°Р»СЊРЅРѕСЃС‚СЊ Р·СЂРµРЅРёСЏ (Рј)
 	
     { "turn_hands",				3       },	--// 0 - none, 1 - right, 2 - left, 3 - both
 	{ "allow_head_turn",		true    },
 	
-	{ "ignore_insuperable_danger", 	false   }, -- реагировать на гранаты
+	{ "ignore_insuperable_danger", 	false   }, -- СЂРµР°РіРёСЂРѕРІР°С‚СЊ РЅР° РіСЂР°РЅР°С‚С‹
 });
 ---------------------------------------------------------------------------------
 actor_soldier.params = {
-	-- варианты моделек
+	-- РІР°СЂРёР°РЅС‚С‹ РјРѕРґРµР»РµРє
 	--model_variants = {"pepe" , "pepe", "pepe"};
 
-	-- поворот тела относительно головы при ходьбе прямо и вбок
+	-- РїРѕРІРѕСЂРѕС‚ С‚РµР»Р° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РіРѕР»РѕРІС‹ РїСЂРё С…РѕРґСЊР±Рµ РїСЂСЏРјРѕ Рё РІР±РѕРє
 	body_rotate_forward_strafe = 30,
 	
-	-- время падения после которого начинает отыгрыватья анимация падения
+	-- РІСЂРµРјСЏ РїР°РґРµРЅРёСЏ РїРѕСЃР»Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅР°С‡РёРЅР°РµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	falling_time = 60, 
 	
-	-- высота, выше которой включается анимация падения
+	-- РІС‹СЃРѕС‚Р°, РІС‹С€Рµ РєРѕС‚РѕСЂРѕР№ РІРєР»СЋС‡Р°РµС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ РїР°РґРµРЅРёСЏ
 	above_ground_level = 2,
 	
-	-- время в течении которого персонаж должен находится в состоянии
-	-- idle_alert после последней атаки
+	-- РІСЂРµРјСЏ РІ С‚РµС‡РµРЅРёРё РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶ РґРѕР»Р¶РµРЅ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃРѕСЃС‚РѕСЏРЅРёРё
+	-- idle_alert РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµР№ Р°С‚Р°РєРё
 	aggresive_stance_time = 2000,
 	
-	-- Количество выстрелов в очереди.
+	-- РљРѕР»РёС‡РµСЃС‚РІРѕ РІС‹СЃС‚СЂРµР»РѕРІ РІ РѕС‡РµСЂРµРґРё.
 	burst_size			= 5,--= 15,
-	-- кол-во патронов в обойме
+	-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ РІ РѕР±РѕР№РјРµ
 	clip_size			= 20,--= 71,
 	
-	-- расстояние отступления
+	-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚СЃС‚СѓРїР»РµРЅРёСЏ
 	retreat_dist = 4;
 };
 
--- настройки hitbox-ов
+-- РЅР°СЃС‚СЂРѕР№РєРё hitbox-РѕРІ
 actor_soldier.params.hitboxes = { 
 	{name = "head", damage_k = 1.45, },
 	{name = "pelvis", damage_k = .8, },
@@ -80,11 +80,11 @@ actor_soldier.params.hitboxes = {
     {name = "rthigh2", damage_k = .35, },
 };
 
--- параметры атаки
+-- РїР°СЂР°РјРµС‚СЂС‹ Р°С‚Р°РєРё
 actor_soldier.params.attack_info = {};
 
 
--- Атака на бегу
+-- РђС‚Р°РєР° РЅР° Р±РµРіСѓ
 actor_soldier.params.attack_info[0] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 5,
@@ -102,20 +102,20 @@ actor_soldier.params.attack_info[0] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
-	--pause_between_attacks = 2000, -- пауза между атаками такого типа
+	--pause_between_attacks = 2000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 		
-	-- Эффект, появляющийся при выстреле.
-	-- Ключами в данной таблице являются точки привязки в модели.
-	-- Значениям в данной таблице являются списки эффектов. Во время выстрела
-	-- будет выбран случайным образом один из эффектов в списке.
+	-- Р­С„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ.
+	-- РљР»СЋС‡Р°РјРё РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё РІ РјРѕРґРµР»Рё.
+	-- Р—РЅР°С‡РµРЅРёСЏРј РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ СЃРїРёСЃРєРё СЌС„С„РµРєС‚РѕРІ. Р’Рѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	-- Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ РІ СЃРїРёСЃРєРµ.
 	shoot_effect		= {
 								["#shoot_point"] = {"pfx_shot_soldier.lua"}, 
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -123,7 +123,7 @@ actor_soldier.params.attack_info[0] = {
 	visual_state_prefix	= "attack_run",
 };
 
--- Атака стоя
+-- РђС‚Р°РєР° СЃС‚РѕСЏ
 actor_soldier.params.attack_info[1] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 5,
@@ -140,18 +140,18 @@ actor_soldier.params.attack_info[1] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
-	-- Эффект, появляющийся при выстреле.
-	-- Ключами в данной таблице являются точки привязки в модели.
-	-- Значениям в данной таблице являются списки эффектов. Во время выстрела
-	-- будет выбран случайным образом один из эффектов в списке.
+	-- Р­С„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ.
+	-- РљР»СЋС‡Р°РјРё РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё РІ РјРѕРґРµР»Рё.
+	-- Р—РЅР°С‡РµРЅРёСЏРј РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ СЃРїРёСЃРєРё СЌС„С„РµРєС‚РѕРІ. Р’Рѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	-- Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ РІ СЃРїРёСЃРєРµ.
 	shoot_effect		= {
 								["#shoot_point"]	= {"pfx_shot_soldier.lua"},
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -161,7 +161,7 @@ actor_soldier.params.attack_info[1] = {
 
 -- [[
 
--- Бросок гранаты
+-- Р‘СЂРѕСЃРѕРє РіСЂР°РЅР°С‚С‹
 actor_soldier.params.attack_info[2] = {
 	type				= ATTACK_DISTANT,
 	dist				= 15,
@@ -179,14 +179,14 @@ actor_soldier.params.attack_info[2] = {
 	missile_angular_velocity	= {0, 10, 0},
 
 	priority = 2,
-	pause_between_attacks = 6000, -- пауза между атаками такого типа
+	pause_between_attacks = 6000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
 	fsm_state			= "attack",
 	visual_state_prefix	= "attack_missile",
 };
 
--- стрельба из-за угла слева
+-- СЃС‚СЂРµР»СЊР±Р° РёР·-Р·Р° СѓРіР»Р° СЃР»РµРІР°
 actor_soldier.params.attack_info[3] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 5,
@@ -203,14 +203,14 @@ actor_soldier.params.attack_info[3] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
 	shoot_effect		= {
 								["#shoot_point"] = {"pfx_shot_soldier.lua"}, 
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -221,7 +221,7 @@ actor_soldier.params.attack_info[3] = {
 	allow_blind_attack	= true,
 };
 
--- стрельба из-за угла справа
+-- СЃС‚СЂРµР»СЊР±Р° РёР·-Р·Р° СѓРіР»Р° СЃРїСЂР°РІР°
 actor_soldier.params.attack_info[4] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 5,
@@ -238,14 +238,14 @@ actor_soldier.params.attack_info[4] = {
 	impulse				= 0.5,
 	dispersion			= 25,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
 	bullets_in_shot		= 1,
 	
 	shoot_effect		= {
 								["#shoot_point"] = {"pfx_shot_soldier.lua"}, 
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -256,7 +256,7 @@ actor_soldier.params.attack_info[4] = {
 	allow_blind_attack	= true,
 };
 
--- бросок гранаты слева
+-- Р±СЂРѕСЃРѕРє РіСЂР°РЅР°С‚С‹ СЃР»РµРІР°
 actor_soldier.params.attack_info[5] = {
 	type				= ATTACK_DISTANT,
 	dist				= 15,
@@ -274,7 +274,7 @@ actor_soldier.params.attack_info[5] = {
 	missile_angular_velocity	= {0, 10, 0},
 	
 	priority = 2,
-	pause_between_attacks = 6000, -- пауза между атаками такого типа
+	pause_between_attacks = 6000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
 	fsm_state			= "attack",
@@ -284,7 +284,7 @@ actor_soldier.params.attack_info[5] = {
 	allow_blind_attack	= true,
 };
 
--- бросок гранаты справа
+-- Р±СЂРѕСЃРѕРє РіСЂР°РЅР°С‚С‹ СЃРїСЂР°РІР°
 actor_soldier.params.attack_info[6] = {
 	type				= ATTACK_DISTANT,
 	dist				= 15,
@@ -302,7 +302,7 @@ actor_soldier.params.attack_info[6] = {
 	missile_angular_velocity	= {0, 10, 0},
 	
 	priority = 2,
-	pause_between_attacks = 6000, -- пауза между атаками такого типа
+	pause_between_attacks = 6000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 	
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
 	fsm_state			= "attack",
@@ -312,7 +312,7 @@ actor_soldier.params.attack_info[6] = {
 	allow_blind_attack	= true,
 };
 
--- Атака стоя на дирижабле (Dnepr)
+-- РђС‚Р°РєР° СЃС‚РѕСЏ РЅР° РґРёСЂРёР¶Р°Р±Р»Рµ (Dnepr)
 actor_soldier.params.attack_info[7] = {
 	type				= ATTACK_DISTANT,
 	real_min_dist		= 0,
@@ -329,20 +329,20 @@ actor_soldier.params.attack_info[7] = {
 	impulse				= 1,
 	dispersion			= 10,
 	shoot_point_tag		= "#shoot_point",
-	offset_pos			= {0, 0, 1.37}, -- не используется, если указан 'shoot_point_tag'
+	offset_pos			= {0, 0, 1.37}, -- РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё СѓРєР°Р·Р°РЅ 'shoot_point_tag'
 	
-	clip_size			= 71, -- кол-во патронов в обойме
+	clip_size			= 71, -- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ РІ РѕР±РѕР№РјРµ
 	bullets_in_shot		= 1,
---	burst_size			= 15, -- Количество выстрелов в очереди.
+--	burst_size			= 15, -- РљРѕР»РёС‡РµСЃС‚РІРѕ РІС‹СЃС‚СЂРµР»РѕРІ РІ РѕС‡РµСЂРµРґРё.
 	
-	-- Эффект, появляющийся при выстреле.
-	-- Ключами в данной таблице являются точки привязки в модели.
-	-- Значениям в данной таблице являются списки эффектов. Во время выстрела
-	-- будет выбран случайным образом один из эффектов в списке.
+	-- Р­С„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ.
+	-- РљР»СЋС‡Р°РјРё РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё РІ РјРѕРґРµР»Рё.
+	-- Р—РЅР°С‡РµРЅРёСЏРј РІ РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЏРІР»СЏСЋС‚СЃСЏ СЃРїРёСЃРєРё СЌС„С„РµРєС‚РѕРІ. Р’Рѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	-- Р±СѓРґРµС‚ РІС‹Р±СЂР°РЅ СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ РІ СЃРїРёСЃРєРµ.
 	shoot_effect		= {
 								["#shoot_point"]	= {"pfx_shot_soldier.lua"},
 						  },
-	-- Эффект, трейса пули.
+	-- Р­С„С„РµРєС‚, С‚СЂРµР№СЃР° РїСѓР»Рё.
 	trace_bullet_effect = "pfx_shot_trace.lua",
 						  
 	allowed_bhv			= {BHV_STAND, BHV_WALK},
@@ -354,7 +354,7 @@ actor_soldier.params.attack_info[7] = {
 };
 
 
--- ближняя атака
+-- Р±Р»РёР¶РЅСЏСЏ Р°С‚Р°РєР°
 actor_soldier.params.attack_info["melee"] = {
 		type				= ATTACK_MELEE,
 		dist				= 2, 
@@ -367,7 +367,7 @@ actor_soldier.params.attack_info["melee"] = {
 		turn_body_to_enemy	= 1,
 		
 		priority = 3,
-		pause_between_attacks = 3000, -- пауза между атаками такого типа
+		pause_between_attacks = 3000, -- РїР°СѓР·Р° РјРµР¶РґСѓ Р°С‚Р°РєР°РјРё С‚Р°РєРѕРіРѕ С‚РёРїР°
 
 		
 		damage_type			= g_damage_type.KNOCK,
@@ -384,7 +384,7 @@ actor_soldier.params.attack_info["melee"] = {
 
 
 ---------------------------------------------------------------------------------
--- состояние тела
+-- СЃРѕСЃС‚РѕСЏРЅРёРµ С‚РµР»Р°
 actor_soldier.params.body_states_transistions = {};
 actor_soldier.params.body_states_transistions[NORMAL_BODY_STATE] = {};
 actor_soldier.params.body_states_transistions[SIT_BODY_STATE] = {};
@@ -421,7 +421,7 @@ actor_soldier.states_design["idle_alert"] = {
 			};
 			
 -------------------------------------------------------------
--- TRANSITION TO IDLE ALERT (Переход в агрессивное состояние)
+-- TRANSITION TO IDLE ALERT (РџРµСЂРµС…РѕРґ РІ Р°РіСЂРµСЃСЃРёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ)
 -------------------------------------------------------------
 actor_soldier.states_design["transition_to_alert"] = {
 			{weight = 1, snd = "Fireman_KolbasivoPeredVzrivomBallona", snd_params = snd_actor_alert},
@@ -465,21 +465,21 @@ actor_soldier.states_design["strafe_right_run"] = {
 ----------------------------
 -- JUMP & FALL & LAND
 ----------------------------
--- подготовительная фаза прыжка
+-- РїРѕРґРіРѕС‚РѕРІРёС‚РµР»СЊРЅР°СЏ С„Р°Р·Р° РїСЂС‹Р¶РєР°
 actor_soldier.states_design["jump_prepare"] = {
 			{anim = "jamp6", anim_speed = 1.0, snd = "Organ_run", snd_params = snd_actor_common},};
--- начало прыжка			
+-- РЅР°С‡Р°Р»Рѕ РїСЂС‹Р¶РєР°			
 actor_soldier.states_design["jump_begin"] = {
 			{anim = "jamp7", anim_speed = 1.0, snd = "Organ_run", snd_params = snd_actor_common},};			
 
--- зацикленная анимация состояния падения
+-- Р·Р°С†РёРєР»РµРЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°РґРµРЅРёСЏ
 actor_soldier.states_design["fall"] = {
 			{anim = "jamp3", anim_speed = 1.0, anim_playback = ANIM_PB_REPEATEDLY, snd = "Organ_run", snd_params = snd_actor_common},};
 
--- приземление на бегу
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° Р±РµРіСѓ
 actor_soldier.states_design["land_run"] = {
 			{anim = "jamp_4run", anim_speed = 1, snd = "Organ_run", snd_params = snd_actor_common},};
--- приземление на месте
+-- РїСЂРёР·РµРјР»РµРЅРёРµ РЅР° РјРµСЃС‚Рµ
 actor_soldier.states_design["land_stand"] = {
 			{anim = "jamp5", anim_speed = 1, snd = "Organ_run", snd_params = snd_actor_common},};
 			
@@ -639,7 +639,7 @@ actor_soldier.states_design["reload"] = {
 			{anim = "reload_p1", anim_speed = 1.5, snd = "Ded_reload1_attack", snd_params = snd_actor_common},};	
 			
 --------------------------------------------------------
--- Переходы из стоячего положения в сидячее и обратно
+-- РџРµСЂРµС…РѕРґС‹ РёР· СЃС‚РѕСЏС‡РµРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ РІ СЃРёРґСЏС‡РµРµ Рё РѕР±СЂР°С‚РЅРѕ
 --------------------------------------------------------
 actor_soldier.states_design["transition_stay_to_sit"] = {
 			{anim = "perehod_p1_p2", anim_speed = 1.5, snd = "Ded_reload1_attack", snd_params = snd_actor_common},};

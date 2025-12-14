@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Actor Pig Parent - монстр свиноматка
+-- Actor Pig Parent - РјРѕРЅСЃС‚СЂ СЃРІРёРЅРѕРјР°С‚РєР°
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 
 actor_pig_parent.guid = {0xdc68413d, 0x15f5, 0x41cf, 0xbc, 0xac, 0x5e, 0x5, 0xd5, 0x46, 0x16, 0x3b};
 
@@ -16,7 +16,7 @@ function actor_pig_parent:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_pig_parent = utils.inherit(sv_actor_basic, actor_pig_parent);
 
 ---------------------------------------------------------------------------
@@ -34,7 +34,7 @@ end
 function sv_actor_pig_parent:death_end()
 	
 	
-	-- Создаем бомбу
+	-- РЎРѕР·РґР°РµРј Р±РѕРјР±Сѓ
 	local bomb = engine.spawn_entity("Bomb")
 	bomb:set_property_value_by_name("model_name", "svin")
 	bomb:set_property_value_by_name("shape", "sphere")
@@ -48,7 +48,7 @@ function sv_actor_pig_parent:death_end()
 	bomb:set_pos(self:get_pos())
 	engine.add_entity_to_world(bomb)
 	
-	-- Взрываем бомбу
+	-- Р’Р·СЂС‹РІР°РµРј Р±РѕРјР±Сѓ
 	bomb:signal("explode", self);
 
 
@@ -63,10 +63,10 @@ function sv_actor_pig_parent:on_update_attack()
 		self:visualize_state(self.body_fsm, self.state_visual_info, 
 				self.m_current_attack_info.visual_state_prefix.."_end", self.m_attack_selected_visual_idx);
 		
-		-- Самоубийство
+		-- РЎР°РјРѕСѓР±РёР№СЃС‚РІРѕ
 		self:set_health(-1)
 --[[
-		-- Рожает поросенка
+		-- Р РѕР¶Р°РµС‚ РїРѕСЂРѕСЃРµРЅРєР°
 		local svin = engine.spawn_entity("actor_pig")
 		local new_tm = self:get_offsetted_tm(self.m_current_attack_info.offset_pos)
 		svin:set_tm(new_tm)
@@ -85,7 +85,7 @@ function sv_actor_pig_parent:on_death()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_pig_parent = utils.inherit(cl_actor_basic, actor_pig_parent);
 
 function cl_actor_pig_parent:on_init()

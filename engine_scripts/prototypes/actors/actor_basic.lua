@@ -3,22 +3,22 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Basic, скриптовое представление для базового актера.
--- загружает анимации для передвижения
+-- Actor Basic, СЃРєСЂРёРїС‚РѕРІРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РґР»СЏ Р±Р°Р·РѕРІРѕРіРѕ Р°РєС‚РµСЂР°.
+-- Р·Р°РіСЂСѓР¶Р°РµС‚ Р°РЅРёРјР°С†РёРё РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ
 ------------------------------------------------------------------------
 
 
--- таблица с описанием визуального представления состояния FSM
--- инициализируется в отдельном файле, который редактируется дизайнерами
+-- С‚Р°Р±Р»РёС†Р° СЃ РѕРїРёСЃР°РЅРёРµРј РІРёР·СѓР°Р»СЊРЅРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ FSM
+-- РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚СЃСЏ РІ РѕС‚РґРµР»СЊРЅРѕРј С„Р°Р№Р»Рµ, РєРѕС‚РѕСЂС‹Р№ СЂРµРґР°РєС‚РёСЂСѓРµС‚СЃСЏ РґРёР·Р°Р№РЅРµСЂР°РјРё
 --[[
-states_design["имя состояния fsm"] = {
-			-- таблица с описанием различных анимаций для данного состояния	
-			{{anim = "имя анимации 1", anim_speed = скорость_анимации, anim_bone_group = "имя группы костей", snd = "имя звука 1", snd_vol = громкость_звука, weight = вес (вероятность),},
-			 {anim = "имя анимации 2", anim_speed = скорость_анимации, snd = "имя звука 2", snd_vol = громкость_звука, weight = вес (вероятность),},
+states_design["РёРјСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ fsm"] = {
+			-- С‚Р°Р±Р»РёС†Р° СЃ РѕРїРёСЃР°РЅРёРµРј СЂР°Р·Р»РёС‡РЅС‹С… Р°РЅРёРјР°С†РёР№ РґР»СЏ РґР°РЅРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ	
+			{{anim = "РёРјСЏ Р°РЅРёРјР°С†РёРё 1", anim_speed = СЃРєРѕСЂРѕСЃС‚СЊ_Р°РЅРёРјР°С†РёРё, anim_bone_group = "РёРјСЏ РіСЂСѓРїРїС‹ РєРѕСЃС‚РµР№", snd = "РёРјСЏ Р·РІСѓРєР° 1", snd_vol = РіСЂРѕРјРєРѕСЃС‚СЊ_Р·РІСѓРєР°, weight = РІРµСЃ (РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ),},
+			 {anim = "РёРјСЏ Р°РЅРёРјР°С†РёРё 2", anim_speed = СЃРєРѕСЂРѕСЃС‚СЊ_Р°РЅРёРјР°С†РёРё, snd = "РёРјСЏ Р·РІСѓРєР° 2", snd_vol = РіСЂРѕРјРєРѕСЃС‚СЊ_Р·РІСѓРєР°, weight = РІРµСЃ (РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ),},
 			 ...,},};
 --]]
 
--- значение для звуков актера по умолчанию
+-- Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р·РІСѓРєРѕРІ Р°РєС‚РµСЂР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 SND_ACTOR_MIN_DIST = 5;
 SND_ACTOR_MAX_DIST = 15;
 -- 
@@ -110,13 +110,13 @@ snd_actor_steps_run = {
 	ai_type = AI_SOUND_DANGER,
 };
 
--- группы костей для анимаций персонажа
+-- РіСЂСѓРїРїС‹ РєРѕСЃС‚РµР№ РґР»СЏ Р°РЅРёРјР°С†РёР№ РїРµСЂСЃРѕРЅР°Р¶Р°
 LEGS_BONE_GROUP = "nogi";
 TORSO_BONE_GROUP = "upper_model";
 BODY_BONE_GROUP = {"nogi", "upper_model"};
 --
 
--- состояние в котором может находится модель тела актера
+-- СЃРѕСЃС‚РѕСЏРЅРёРµ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ РЅР°С…РѕРґРёС‚СЃСЏ РјРѕРґРµР»СЊ С‚РµР»Р° Р°РєС‚РµСЂР°
 NORMAL_BODY_STATE = 0;
 SIT_BODY_STATE = 1;
 LEFT_SLOPE_BODY_STATE = 2;
@@ -125,7 +125,7 @@ RIGHT_SLOPE_BODY_STATE = 3;
 --
 actor_basic = {};
 
--- множители-модификаторы на различные типы повреждений
+-- РјРЅРѕР¶РёС‚РµР»Рё-РјРѕРґРёС„РёРєР°С‚РѕСЂС‹ РЅР° СЂР°Р·Р»РёС‡РЅС‹Рµ С‚РёРїС‹ РїРѕРІСЂРµР¶РґРµРЅРёР№
 actor_basic.damage_types_k = {
 	[g_damage_type.GUNSHOT] = 1,
 	[g_damage_type.FALL] = 1,
@@ -142,40 +142,40 @@ actor_basic.damage_types_k[g_damage_type.BLAST] = 1;
 actor_basic.damage_types_k[g_damage_type.BURN] = 1;
 --]]
 
--- настройки пропертей для базового актера
+-- РЅР°СЃС‚СЂРѕР№РєРё РїСЂРѕРїРµСЂС‚РµР№ РґР»СЏ Р±Р°Р·РѕРІРѕРіРѕ Р°РєС‚РµСЂР°
 actor_basic.properties_design = {
-    -- имя класса используемого ИИ контроллера
+    -- РёРјСЏ РєР»Р°СЃСЃР° РёСЃРїРѕР»СЊР·СѓРµРјРѕРіРѕ РР РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
 	{ "ai_controller_name",			"ai_controller_basic" },
-    -- материалы на carrier и ragdoll
+    -- РјР°С‚РµСЂРёР°Р»С‹ РЅР° carrier Рё ragdoll
 	{ "material_body_default",		"mat_actor_body"	},
 	{ "material_carrier_default",	"mat_actor_carrier"	},
-	-- разлет крови
+	-- СЂР°Р·Р»РµС‚ РєСЂРѕРІРё
 	{ "bloodmark_effect",			"wall_blood.lua"	},
 	{ "bloodmark_dispersion_angle",	120					},
 	{ "bloodmark_hit_threshold", 10						},
 	-------------------------------
-	-- настройки сенсоров осязания
+	-- РЅР°СЃС‚СЂРѕР№РєРё СЃРµРЅСЃРѕСЂРѕРІ РѕСЃСЏР·Р°РЅРёСЏ
 	-------------------------------
-	-- FOV зрения
+	-- FOV Р·СЂРµРЅРёСЏ
 	{ "view_fov",					90 },
-	-- макс. дистанция зрения 
+	-- РјР°РєСЃ. РґРёСЃС‚Р°РЅС†РёСЏ Р·СЂРµРЅРёСЏ 
 	{ "view_dist",					25 },	
 	
 	
 	--{ "material_steps",				"mat_actor_human_steps"	},
 	
-	-- порог слышимости звука
-	-- минимальная громкость звука (0 - слышит все, до >1 - не слышит ничего),
-	-- на которую срабатывает сенсор слуха
+	-- РїРѕСЂРѕРі СЃР»С‹С€РёРјРѕСЃС‚Рё Р·РІСѓРєР°
+	-- РјРёРЅРёРјР°Р»СЊРЅР°СЏ РіСЂРѕРјРєРѕСЃС‚СЊ Р·РІСѓРєР° (0 - СЃР»С‹С€РёС‚ РІСЃРµ, РґРѕ >1 - РЅРµ СЃР»С‹С€РёС‚ РЅРёС‡РµРіРѕ),
+	-- РЅР° РєРѕС‚РѕСЂСѓСЋ СЃСЂР°Р±Р°С‚С‹РІР°РµС‚ СЃРµРЅСЃРѕСЂ СЃР»СѓС…Р°
 	-- { "sensor_sound_threshold",		0  },	
-	-- параметры повреждения
-	-- мин. размер хита и импульса чувствительные для сенсора повреждения
+	-- РїР°СЂР°РјРµС‚СЂС‹ РїРѕРІСЂРµР¶РґРµРЅРёСЏ
+	-- РјРёРЅ. СЂР°Р·РјРµСЂ С…РёС‚Р° Рё РёРјРїСѓР»СЊСЃР° С‡СѓРІСЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РґР»СЏ СЃРµРЅСЃРѕСЂР° РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 	-- { "sensor_damage_hit_threshold",	 0  },
     -- { "sensor_damage_impulse_threshold", 0  },
-    -- сенсор столкновения (вкл/выкл)
+    -- СЃРµРЅСЃРѕСЂ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ (РІРєР»/РІС‹РєР»)
     -- { "sensor_collision",		true    },
         
-    -- макс. угол поворота головы, который можно делать свлева на вправо и наоборот
+    -- РјР°РєСЃ. СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р° РіРѕР»РѕРІС‹, РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РЅРѕ РґРµР»Р°С‚СЊ СЃРІР»РµРІР° РЅР° РІРїСЂР°РІРѕ Рё РЅР°РѕР±РѕСЂРѕС‚
     { "head_yaw_max",			45 },
     { "head_pitch_min",			-10 },
     { "head_pitch_max",			60 },
@@ -184,7 +184,7 @@ actor_basic.properties_design = {
     { "torso_pitch_max",		45 },
     { "turn_hands",				0 },	--// 0 - none, 1 - right, 2 - left, 3 - both
     { "allow_head_turn",		false },
-    -- настройки для памяти ИИ
+    -- РЅР°СЃС‚СЂРѕР№РєРё РґР»СЏ РїР°РјСЏС‚Рё РР
 	{ "track_pos_time",					2000 },
 	{ "forget_nonsensed_entity_time",	120000 },
 	{ "vision_fade_in_time",			0 },
@@ -193,48 +193,48 @@ actor_basic.properties_design = {
 
 actor_basic.params = {};
 
--- боль
--- порог, выше которого отыгрывается анимация боли
+-- Р±РѕР»СЊ
+-- РїРѕСЂРѕРі, РІС‹С€Рµ РєРѕС‚РѕСЂРѕРіРѕ РѕС‚С‹РіСЂС‹РІР°РµС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ Р±РѕР»Рё
 actor_basic.params.pain_threshold = 1;
--- анимация боли будет отыгрываться на все тело, монстр при этом остановится
+-- Р°РЅРёРјР°С†РёСЏ Р±РѕР»Рё Р±СѓРґРµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЃСЏ РЅР° РІСЃРµ С‚РµР»Рѕ, РјРѕРЅСЃС‚СЂ РїСЂРё СЌС‚РѕРј РѕСЃС‚Р°РЅРѕРІРёС‚СЃСЏ
 actor_basic.params.pain_for_full_body = false;
--- боль может прерывать атаку
+-- Р±РѕР»СЊ РјРѕР¶РµС‚ РїСЂРµСЂС‹РІР°С‚СЊ Р°С‚Р°РєСѓ
 actor_basic.params.pain_can_disrupt_attack = false;
 
--- пороговое значение суммарного импульса, если
--- при привышение которого не будет отыгрываться анимация смерти,
--- а просто проспавниться регдол
+-- РїРѕСЂРѕРіРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃСѓРјРјР°СЂРЅРѕРіРѕ РёРјРїСѓР»СЊСЃР°, РµСЃР»Рё
+-- РїСЂРё РїСЂРёРІС‹С€РµРЅРёРµ РєРѕС‚РѕСЂРѕРіРѕ РЅРµ Р±СѓРґРµС‚ РѕС‚С‹РіСЂС‹РІР°С‚СЊСЃСЏ Р°РЅРёРјР°С†РёСЏ СЃРјРµСЂС‚Рё,
+-- Р° РїСЂРѕСЃС‚Рѕ РїСЂРѕСЃРїР°РІРЅРёС‚СЊСЃСЏ СЂРµРіРґРѕР»
 actor_basic.params.death_impulse_threshold = 3.0;
 
--- настройки для взрыва регдола, после смерти - 
--- разлета кусков после сильного повреждения
+-- РЅР°СЃС‚СЂРѕР№РєРё РґР»СЏ РІР·СЂС‹РІР° СЂРµРіРґРѕР»Р°, РїРѕСЃР»Рµ СЃРјРµСЂС‚Рё - 
+-- СЂР°Р·Р»РµС‚Р° РєСѓСЃРєРѕРІ РїРѕСЃР»Рµ СЃРёР»СЊРЅРѕРіРѕ РїРѕРІСЂРµР¶РґРµРЅРёСЏ
 actor_basic.params.death_explosion_impulse_threshold = nil;
 actor_basic.params.death_explosion_damage_threshold = nil;
--- настроки для взрыва регдола
+-- РЅР°СЃС‚СЂРѕРєРё РґР»СЏ РІР·СЂС‹РІР° СЂРµРіРґРѕР»Р°
 actor_basic.params.death_explosion_effect = "Rat_Blood.lua";
 actor_basic.params.death_explosion_model_name = "rat";
 actor_basic.params.death_explosion_debris_model = "rat_debris";
 actor_basic.params.death_explosion_debris_scattering = 200000;
 
--- параметры для перемещения во время боя
--- расстояние ближе которого, актер начинает отступать
+-- РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РІРѕ РІСЂРµРјСЏ Р±РѕСЏ
+-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ Р±Р»РёР¶Рµ РєРѕС‚РѕСЂРѕРіРѕ, Р°РєС‚РµСЂ РЅР°С‡РёРЅР°РµС‚ РѕС‚СЃС‚СѓРїР°С‚СЊ
 actor_basic.params.retreat_dist = 0;
--- расстояние до которого, актер преследует игрока
+-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ РєРѕС‚РѕСЂРѕРіРѕ, Р°РєС‚РµСЂ РїСЂРµСЃР»РµРґСѓРµС‚ РёРіСЂРѕРєР°
 actor_basic.params.chase_dist = 0;
--- расстояние на которое актер стрейфится во время боя
+-- СЂР°СЃСЃС‚РѕСЏРЅРёРµ РЅР° РєРѕС‚РѕСЂРѕРµ Р°РєС‚РµСЂ СЃС‚СЂРµР№С„РёС‚СЃСЏ РІРѕ РІСЂРµРјСЏ Р±РѕСЏ
 actor_basic.params.dodge_dist = 5;
--- время которое актер тратит на стрейф в одну сторону
+-- РІСЂРµРјСЏ РєРѕС‚РѕСЂРѕРµ Р°РєС‚РµСЂ С‚СЂР°С‚РёС‚ РЅР° СЃС‚СЂРµР№С„ РІ РѕРґРЅСѓ СЃС‚РѕСЂРѕРЅСѓ
 actor_basic.m_actor.params.dodge_time = 1000;
 
 
 
 ----------------------------------------------------------------------
 function actor_basic:prepare_visual_state_info()
-	-- таблица в которую будут записаны индексы для проинициализированных
-	-- анимаций и звуков
+	-- С‚Р°Р±Р»РёС†Р° РІ РєРѕС‚РѕСЂСѓСЋ Р±СѓРґСѓС‚ Р·Р°РїРёСЃР°РЅС‹ РёРЅРґРµРєСЃС‹ РґР»СЏ РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹С…
+	-- Р°РЅРёРјР°С†РёР№ Рё Р·РІСѓРєРѕРІ
 	self.state_visual_info = {};
 	
-	-- предварительная обработка таблицы описания состояний
+	-- РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР° С‚Р°Р±Р»РёС†С‹ РѕРїРёСЃР°РЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёР№
 	for i,v in pairs(self.states_design) do
 		assert(type(v) == "table", self.class_name.." state '"..i.."' is not a table");
 		
@@ -244,8 +244,8 @@ function actor_basic:prepare_visual_state_info()
 		self.state_visual_info[i].without_anims = true;
 		self.state_visual_info[i].without_sounds = true;
 		
-		-- запомнить состояние тела, для которого прописывается
-		-- визуальное состояние
+		-- Р·Р°РїРѕРјРЅРёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ С‚РµР»Р°, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ РїСЂРѕРїРёСЃС‹РІР°РµС‚СЃСЏ
+		-- РІРёР·СѓР°Р»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
 		if(self:is_server_object()) then
 			self.state_visual_info[i].body_state = v.body_state;
 		
@@ -254,7 +254,7 @@ function actor_basic:prepare_visual_state_info()
 			end	
 			
 			self.state_visual_info[i].primary_bone_group = v.primary_bone_group;
-			-- только для reload
+			-- С‚РѕР»СЊРєРѕ РґР»СЏ reload
 			self.state_visual_info[i].block_movement = v.block_movement;
 		end
 		
@@ -263,7 +263,7 @@ function actor_basic:prepare_visual_state_info()
 		for j,w in ipairs(v) do
 			self.state_visual_info[i][j] = {};
 			
-			-- проинициализировать различные варианты визуализации
+			-- РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ СЂР°Р·Р»РёС‡РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ РІРёР·СѓР°Р»РёР·Р°С†РёРё
 			if(w.anim ~= nil) then
 			
 				self.state_visual_info[i].without_anims = false;
@@ -307,14 +307,14 @@ function actor_basic:prepare_visual_state_info()
 				anim_info.anim_playback = anim_playback;
 				anim_info.anim_speed = anim_speed;
 
-				-- создать отдельные анимации для каждой группы костей
+				-- СЃРѕР·РґР°С‚СЊ РѕС‚РґРµР»СЊРЅС‹Рµ Р°РЅРёРјР°С†РёРё РґР»СЏ РєР°Р¶РґРѕР№ РіСЂСѓРїРїС‹ РєРѕСЃС‚РµР№
 				anim_info.anims = {};			
 				for ii,vv in pairs(anim_bone_group) do
 					
 					local animation = {};	
 					
-					-- вычисляем index по имени группы костей,
-					-- это будет self.m_legs_bones или self.m_torso_bones
+					-- РІС‹С‡РёСЃР»СЏРµРј index РїРѕ РёРјРµРЅРё РіСЂСѓРїРїС‹ РєРѕСЃС‚РµР№,
+					-- СЌС‚Рѕ Р±СѓРґРµС‚ self.m_legs_bones РёР»Рё self.m_torso_bones
 					local bone_group_idx = self:add_bones_group(self.m_model_body, vv);
 					animation.anim_bone_group = bone_group_idx;
 					animation.anim = self:add_animation(self.m_model_body, w.anim, anim_playback, anim_speed, animation.anim_bone_group, anim_blend_in_time, anim_blend_out_time);
@@ -346,8 +346,8 @@ function actor_basic:prepare_visual_state_info()
 			total_weight = total_weight + weight;
 		end
 		
-		-- перевести веса в соответствующие
-		-- разбиения отрезка от 0 до 1
+		-- РїРµСЂРµРІРµСЃС‚Рё РІРµСЃР° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ
+		-- СЂР°Р·Р±РёРµРЅРёСЏ РѕС‚СЂРµР·РєР° РѕС‚ 0 РґРѕ 1
 		for j,w in ipairs(v) do
 		
 			local weight = 1;
@@ -363,7 +363,7 @@ function actor_basic:prepare_visual_state_info()
 end
 
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 function actor_basic:register_properties(prop_registry)
 	self.m_model_body_prop = self:register_property(prop_registry, "model_name", "?");
 	self.m_custom_idle_prop = self:register_property(prop_registry, "custom_idle", "?");
@@ -373,7 +373,7 @@ function actor_basic:register_properties(prop_registry)
 	
 	self.m_seek_dist = self:register_property(prop_registry, "seek_dist", 15);
 
-	-- атаки, которые изначально разрешены и запрещены	
+	-- Р°С‚Р°РєРё, РєРѕС‚РѕСЂС‹Рµ РёР·РЅР°С‡Р°Р»СЊРЅРѕ СЂР°Р·СЂРµС€РµРЅС‹ Рё Р·Р°РїСЂРµС‰РµРЅС‹	
 	self.m_allowed_attacks_prop = self:register_property(prop_registry, "allowed_attacks", " ");
 	self.m_disallowed_attacks_prop = self:register_property(prop_registry, "disallowed_attacks", " ");
 	-- visual config
@@ -384,12 +384,12 @@ end
 	
 function actor_basic:on_init()
 	---------------------------------------
-	-- модель тела актера
+	-- РјРѕРґРµР»СЊ С‚РµР»Р° Р°РєС‚РµСЂР°
 	---------------------------------------
 	
 	local model_name = self:get_property_value(self.m_model_body_prop);
 	if(self:is_server_object()) then
-		-- если прописаны альтернативы модели, сделать случайный выбор
+		-- РµСЃР»Рё РїСЂРѕРїРёСЃР°РЅС‹ Р°Р»СЊС‚РµСЂРЅР°С‚РёРІС‹ РјРѕРґРµР»Рё, СЃРґРµР»Р°С‚СЊ СЃР»СѓС‡Р°Р№РЅС‹Р№ РІС‹Р±РѕСЂ
 		if(type(self.params.model_variants) == "table") then
 			local table_n = table.getn(self.params.model_variants);
 			local rnd = math.random(table_n);
@@ -406,12 +406,12 @@ function actor_basic:on_init()
 	self.m_legs_bones = self:add_bones_group(self.m_model_body, LEGS_BONE_GROUP);
 	self.m_torso_bones = self:add_bones_group(self.m_model_body, TORSO_BONE_GROUP);
 
-	-- FSM, который описывает состояние тела, 
-	-- состояния вызывают проигрывание анимаций и звуков
+	-- FSM, РєРѕС‚РѕСЂС‹Р№ РѕРїРёСЃС‹РІР°РµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ С‚РµР»Р°, 
+	-- СЃРѕСЃС‚РѕСЏРЅРёСЏ РІС‹Р·С‹РІР°СЋС‚ РїСЂРѕРёРіСЂС‹РІР°РЅРёРµ Р°РЅРёРјР°С†РёР№ Рё Р·РІСѓРєРѕРІ
 	self.body_fsm = self:add_fsm("body_fsm");
 	self.legs_fsm = self:add_fsm("legs_fsm");
 	
-	-- состояния пустышки, которые ничего не делают
+	-- СЃРѕСЃС‚РѕСЏРЅРёСЏ РїСѓСЃС‚С‹С€РєРё, РєРѕС‚РѕСЂС‹Рµ РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°СЋС‚
 	self.empty_body_state = self:add_fsm_state(self.body_fsm, "empty", self.on_enter_empty_body, self.on_update_empty_body, self.on_exit_empty_body, self.is_finished_empty_body);
 	self.empty_legs_state = self:add_fsm_state(self.legs_fsm, "empty", self.on_enter_empty_legs, self.on_update_empty_legs, self.on_exit_empty_legs, self.is_finished_empty_legs);
 	-- idle states
@@ -438,27 +438,27 @@ function actor_basic:on_init()
 	self.land_state = self:add_fsm_state(self.body_fsm, "land", self.on_enter_land, self.on_update_land, self.on_exit_land, self.is_finished_land);
 	
 	
-	-- различные варианты атаки
-	-- на месте
+	-- СЂР°Р·Р»РёС‡РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ Р°С‚Р°РєРё
+	-- РЅР° РјРµСЃС‚Рµ
 	self.attack_state = self:add_fsm_state(self.body_fsm, "attack", self.on_enter_attack, self.on_update_attack, self.on_exit_attack, self.is_finished_attack);
-	-- на бегу
+	-- РЅР° Р±РµРіСѓ
 	self.attack_run_state = self:add_fsm_state(self.body_fsm, "attack_run", self.on_enter_attack_run, self.on_update_attack_run, self.on_exit_attack_run, self.is_finished_attack_run);
-	-- после прыжка
+	-- РїРѕСЃР»Рµ РїСЂС‹Р¶РєР°
 	self.attack_jump_state = self:add_fsm_state(self.body_fsm, "attack_jump", self.on_enter_attack_jump, self.on_update_attack_jump, self.on_exit_attack_jump, self.is_finished_attack_jump);
 	self.attack_jump_fall_state = self:add_fsm_state(self.body_fsm, "attack_jump_fall", self.on_enter_attack_jump_fall, self.on_update_attack_jump_fall, self.on_exit_attack_jump_fall, self.is_finished_attack_jump_fall);
 	self.attack_jump_land_state = self:add_fsm_state(self.body_fsm, "attack_jump_land", self.on_enter_attack_jump_land, self.on_update_attack_jump_land, self.on_exit_attack_jump_land, self.is_finished_attack_jump_land);
-	-- выстрел	
+	-- РІС‹СЃС‚СЂРµР»	
 	self.attack_shot_state = self:add_fsm_state(self.body_fsm, "attack_shot", self.on_enter_attack_shot, self.on_update_attack_shot, self.on_exit_attack_shot, self.is_finished_attack_shot);
-	-- стрельба очередью
+	-- СЃС‚СЂРµР»СЊР±Р° РѕС‡РµСЂРµРґСЊСЋ
 	self.attack_shot_burst_state = self:add_fsm_state(self.body_fsm, "attack_shot_burst", self.on_enter_attack_shot_burst, self.on_update_attack_shot_burst, self.on_exit_attack_shot_burst, self.is_finished_attack_shot_burst);
-	-- выстрел на бегу
+	-- РІС‹СЃС‚СЂРµР» РЅР° Р±РµРіСѓ
 	self.attack_shot_run_state = self:add_fsm_state(self.body_fsm, "attack_shot_run", self.on_enter_attack_shot_run, self.on_update_attack_shot_run, self.on_exit_attack_shot_run, self.is_finished_attack_shot_run);
-	-- перезарядка оружия
+	-- РїРµСЂРµР·Р°СЂСЏРґРєР° РѕСЂСѓР¶РёСЏ
 	self.reload_state = self:add_fsm_state(self.body_fsm, "reload", self.on_enter_reload, self.on_update_reload, self.on_exit_reload, self.is_finished_reload);
-	-- вместо атаки отыгрываем одну анимацию
+	-- РІРјРµСЃС‚Рѕ Р°С‚Р°РєРё РѕС‚С‹РіСЂС‹РІР°РµРј РѕРґРЅСѓ Р°РЅРёРјР°С†РёСЋ
 	self.attack_anim_state = self:add_fsm_state(self.body_fsm, "attack_anim", self.on_enter_attack_anim, self.on_update_attack_anim, self.on_exit_attack_anim, self.is_finished_attack_anim);
 	
-	-- переход из одного положения в другое
+	-- РїРµСЂРµС…РѕРґ РёР· РѕРґРЅРѕРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ РІ РґСЂСѓРіРѕРµ
 	self.transition_state = self:add_fsm_state(self.body_fsm, "transition", self.on_enter_transition, self.on_update_transition, self.on_exit_transition, self.is_finished_transition);
 	
 	self:prepare_visual_state_info();
@@ -478,20 +478,20 @@ end
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_basic = utils.inherit(sv_game_object, actor_basic);
 
 function sv_actor_basic:register_properties(prop_registry)
 	sv_game_object.register_properties(self, prop_registry);
 	actor_basic.register_properties(self, prop_registry);
 
-	-- Входящие слоты	
+	-- Р’С…РѕРґСЏС‰РёРµ СЃР»РѕС‚С‹	
 	self.in_set_guard_slot = self:register_input_slot("set_guard", self.set_guard, "target = \"name_of_entity\", time = -1, radius = 3, ignore_enemies = true, run = 1");
 	self.in_reset_guard_slot = self:register_input_slot("reset_guard", self.reset_guard);
 	self.in_set_attack_type_slot = self:register_input_slot("set_attack_type", self.set_attack_type, "attack_type = 1, status = 0");
 	self.in_ignore_enemies = self:register_input_slot("ignore_enemies", self.ignore_enemies, "ignore = true");
 			
-	-- Исходящие слоты
+	-- РСЃС…РѕРґСЏС‰РёРµ СЃР»РѕС‚С‹
 	self.out_alert = self:register_output_slot("on_alert", nil);
 	------------------------
 	self.m_block_movement_prop	= self:get_property_by_name("block_movement");
@@ -505,7 +505,7 @@ end
 
 
 --------------------------------------
--- обработчики слотов
+-- РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 --------------------------------------
 function sv_actor_basic:set_guard(sender, activator, input_data)
 	self:send_callback(CALLBACK_GUARD, 1, input_data);
@@ -519,7 +519,7 @@ function sv_actor_basic:set_attack_type(sender, activator, input_data)
 	self:send_callback(CALLBACK_SET_ATTACK_TYPE, input_data.attack_type, input_data.status);
 end
 
--- установка эксклюзивного режима атаки при вызове команды set_enemy
+-- СѓСЃС‚Р°РЅРѕРІРєР° СЌРєСЃРєР»СЋР·РёРІРЅРѕРіРѕ СЂРµР¶РёРјР° Р°С‚Р°РєРё РїСЂРё РІС‹Р·РѕРІРµ РєРѕРјР°РЅРґС‹ set_enemy
 function sv_actor_basic:in_set_enemy(sender, activator, input_data)
 	if(input_data.attack_type > 0) then
 		self:send_callback(CALLBACK_SET_ATTACK_TYPE, input_data.attack_type, 1);
@@ -558,7 +558,7 @@ function sv_actor_basic:stop_movement()
 	self.m_performed_down = 0;
 end
 
--- функции нужно вызвать при начале и завершении атаки
+-- С„СѓРЅРєС†РёРё РЅСѓР¶РЅРѕ РІС‹Р·РІР°С‚СЊ РїСЂРё РЅР°С‡Р°Р»Рµ Рё Р·Р°РІРµСЂС€РµРЅРёРё Р°С‚Р°РєРё
 function sv_actor_basic:begin_attack()
 	--if(self.io.m_attack_has_begin == true) then
 	--	engine.warning(" attack has already started!!!! "..self:get_name());
@@ -606,7 +606,7 @@ function sv_actor_basic:end_attack()
 end
 
 
--- сигнал о том, что текущая атака должна быть резко завершена
+-- СЃРёРіРЅР°Р» Рѕ С‚РѕРј, С‡С‚Рѕ С‚РµРєСѓС‰Р°СЏ Р°С‚Р°РєР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂРµР·РєРѕ Р·Р°РІРµСЂС€РµРЅР°
 function sv_actor_basic:halt_attack()
 	if(self:is_jumping()) then return end
 		
@@ -646,7 +646,7 @@ function sv_actor_basic:on_init()
 
 	self:hide_model(self.m_model_body, false);
 	
-	-- команды управления	
+	-- РєРѕРјР°РЅРґС‹ СѓРїСЂР°РІР»РµРЅРёСЏ	
 	self.m_forward = 0;
 	self.m_backward = 0;
 	self.m_left = 0;
@@ -658,7 +658,7 @@ function sv_actor_basic:on_init()
 	
 	self:stop_movement();
 	
-	-- запомнить ссылки на properties для быстрого доступа к ним
+	-- Р·Р°РїРѕРјРЅРёС‚СЊ СЃСЃС‹Р»РєРё РЅР° properties РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РґРѕСЃС‚СѓРїР° Рє РЅРёРј
 	self.run_forward_speed_prop		= self:get_property_by_name("run_forward_speed");
 	self.run_backward_speed_prop	= self:get_property_by_name("run_backward_speed");
 	self.run_strafe_speed_prop		= self:get_property_by_name("run_strafe_speed");
@@ -678,28 +678,28 @@ function sv_actor_basic:on_init()
 	
 	self.m_carrier_freeze_prop = self:get_property_by_name("carrier_freeze");
 	
-	-- время в падении, нужно для в включения соответствующей анимации
+	-- РІСЂРµРјСЏ РІ РїР°РґРµРЅРёРё, РЅСѓР¶РЅРѕ РґР»СЏ РІ РІРєР»СЋС‡РµРЅРёСЏ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ Р°РЅРёРјР°С†РёРё
 	self.io.m_falling_time = 0;
-	-- блокирование управлением carrier-ом в update
+	-- Р±Р»РѕРєРёСЂРѕРІР°РЅРёРµ СѓРїСЂР°РІР»РµРЅРёРµРј carrier-РѕРј РІ update
 	self.io.m_block_movement = false;
-	-- разрешение отыгрывания анимации pain
+	-- СЂР°Р·СЂРµС€РµРЅРёРµ РѕС‚С‹РіСЂС‹РІР°РЅРёСЏ Р°РЅРёРјР°С†РёРё pain
 	self.io.m_pain_allowed = true;
 	
-	-- индекс текущей атаки
+	-- РёРЅРґРµРєСЃ С‚РµРєСѓС‰РµР№ Р°С‚Р°РєРё
 	self.io.m_current_attack_idx = nil;
 	self.m_current_attack_info = nil;
 	
-	-- Текущая idle-анимация
+	-- РўРµРєСѓС‰Р°СЏ idle-Р°РЅРёРјР°С†РёСЏ
 	self.m_cur_idle_name = "idle";
-	-- Время, в течение которого будет активна текущая idle-анимация
-	-- Если время равно нулю, то активной становится анимация с именем "idle"
+	-- Р’СЂРµРјСЏ, РІ С‚РµС‡РµРЅРёРµ РєРѕС‚РѕСЂРѕРіРѕ Р±СѓРґРµС‚ Р°РєС‚РёРІРЅР° С‚РµРєСѓС‰Р°СЏ idle-Р°РЅРёРјР°С†РёСЏ
+	-- Р•СЃР»Рё РІСЂРµРјСЏ СЂР°РІРЅРѕ РЅСѓР»СЋ, С‚Рѕ Р°РєС‚РёРІРЅРѕР№ СЃС‚Р°РЅРѕРІРёС‚СЃСЏ Р°РЅРёРјР°С†РёСЏ СЃ РёРјРµРЅРµРј "idle"
 	self.m_idle_time_left = 0;
 	
-	-- коэффициент на скорость перемещения
+	-- РєРѕСЌС„С„РёС†РёРµРЅС‚ РЅР° СЃРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ
 	self.m_walk_speed_k = 1;
 	
 	
-	-- поддерживаемые callbacks	
+	-- РїРѕРґРґРµСЂР¶РёРІР°РµРјС‹Рµ callbacks	
 	self:register_callback(CALLBACK_WALK_HERE);
 	self:register_callback(CALLBACK_GUARD);
 	self:register_callback(CALLBACK_NEED_TO_RELOAD);
@@ -710,20 +710,20 @@ function sv_actor_basic:on_init()
 	
 	self:add_odd_ragdolls();
 	
-	-- Таблица для хранения эффектов выстрела
+	-- РўР°Р±Р»РёС†Р° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЌС„С„РµРєС‚РѕРІ РІС‹СЃС‚СЂРµР»Р°
 	self.m_shoot_effects = {}
 	
 	self:init_attacks();
 	self:init_moving_states();
 	self:init_inventory();
 	
-	--.hack чтобы reset_legs_state смог сбросить анимацию ног
+	--.hack С‡С‚РѕР±С‹ reset_legs_state СЃРјРѕРі СЃР±СЂРѕСЃРёС‚СЊ Р°РЅРёРјР°С†РёСЋ РЅРѕРі
 	self.m_legs_anim_idx = 0
 
 	--self:reset_legs_state();
 	--self:reset_body_state();
 	
-	-- callback для проигрывания звука шагов
+	-- callback РґР»СЏ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ Р·РІСѓРєР° С€Р°РіРѕРІ
 	if(self.params.states_with_step_callbacks) then
 		for i,v in pairs(self.params.states_with_step_callbacks) do 
 			self:set_callback_on_visual_state(v, nil, "step1", self.step_callback, {});
@@ -731,7 +731,7 @@ function sv_actor_basic:on_init()
 		end
 	end	
 
-	-- актер находится в некоторой начальной позе
+	-- Р°РєС‚РµСЂ РЅР°С…РѕРґРёС‚СЃСЏ РІ РЅРµРєРѕС‚РѕСЂРѕР№ РЅР°С‡Р°Р»СЊРЅРѕР№ РїРѕР·Рµ
 	local custom_trans_to_alert_state_name = self:get_property_value(self.m_custom_transition_to_alert_prop);
 	if(custom_trans_to_alert_state_name == "?" or custom_trans_to_alert_state_name == " " or custom_trans_to_alert_state_name == "") then
 		self.io.m_in_custom_idle = nil;
@@ -751,7 +751,7 @@ function sv_actor_basic:on_init()
 		self:set_idle("idle", 0);
 	end
 
-	-- перключиться в другой визуальный режим	
+	-- РїРµСЂРєР»СЋС‡РёС‚СЊСЃСЏ РІ РґСЂСѓРіРѕР№ РІРёР·СѓР°Р»СЊРЅС‹Р№ СЂРµР¶РёРј	
 	local visual_config = self:get_property_value(self.m_visual_config_prop);
 	if(visual_config ~= "?" and visual_config ~= " " and visual_config ~= "") then
 		self:activate_state_config(visual_config);
@@ -764,7 +764,7 @@ function sv_actor_basic:step_callback(marker_name, data)
 	self:make_actor_steps();
 end
 
--- восстановление загруженного состояния
+-- РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ Р·Р°РіСЂСѓР¶РµРЅРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 -- put_bool, put_int, put_float, put_string
 -- get_bool, get_int, get_float, get_string
 
@@ -784,13 +784,13 @@ function sv_actor_basic:on_load_state(dreader)
 		self:init_ragdoll_bomb(dreader);
 	end
 	
-	-- текущее состояние тела
+	-- С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ С‚РµР»Р°
 	if(self.io.m_current_body_state == nil) then
 		self.io.m_current_body_state = NORMAL_BODY_STATE;
 	end	
 end
 
--- запись текущего состояния
+-- Р·Р°РїРёСЃСЊ С‚РµРєСѓС‰РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 function sv_actor_basic:on_save_state(dwriter)
 	sv_game_object.on_save_state(self,  dwriter);
 end
@@ -813,21 +813,21 @@ function sv_actor_basic:get_run_forward_speed()
 end
 
 --------------------------------------------------
--- Задает текущую idle-анимацию
---		idle_name	- имя idle'а в таблице states_design
---		time		- время, в течение которого данный idle будет активным
+-- Р—Р°РґР°РµС‚ С‚РµРєСѓС‰СѓСЋ idle-Р°РЅРёРјР°С†РёСЋ
+--		idle_name	- РёРјСЏ idle'Р° РІ С‚Р°Р±Р»РёС†Рµ states_design
+--		time		- РІСЂРµРјСЏ, РІ С‚РµС‡РµРЅРёРµ РєРѕС‚РѕСЂРѕРіРѕ РґР°РЅРЅС‹Р№ idle Р±СѓРґРµС‚ Р°РєС‚РёРІРЅС‹Рј
 function sv_actor_basic:set_idle(idle_name, time)
 	self.m_cur_idle_name = idle_name
 	self.m_idle_time_left = time
 end
 
 --------------------------------------------------
--- Проигрывает анимацию прехода из одного положения в другое
---		anim_name	- имя transition'а в таблице states_design
---		next_state	- состояние в которое будет переведен FSM, после отыгрывания анимации.
---					  Если параметр не указан, то возвращаемся в то состояние, в котором находились.
---		callback	- функция, будет вызвана, после завешения перехода
---		brute_transition	- если true, то прерывает текущее состояние, не дожидаясь его завершения
+-- РџСЂРѕРёРіСЂС‹РІР°РµС‚ Р°РЅРёРјР°С†РёСЋ РїСЂРµС…РѕРґР° РёР· РѕРґРЅРѕРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ РІ РґСЂСѓРіРѕРµ
+--		anim_name	- РёРјСЏ transition'Р° РІ С‚Р°Р±Р»РёС†Рµ states_design
+--		next_state	- СЃРѕСЃС‚РѕСЏРЅРёРµ РІ РєРѕС‚РѕСЂРѕРµ Р±СѓРґРµС‚ РїРµСЂРµРІРµРґРµРЅ FSM, РїРѕСЃР»Рµ РѕС‚С‹РіСЂС‹РІР°РЅРёСЏ Р°РЅРёРјР°С†РёРё.
+--					  Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ РІ С‚Рѕ СЃРѕСЃС‚РѕСЏРЅРёРµ, РІ РєРѕС‚РѕСЂРѕРј РЅР°С…РѕРґРёР»РёСЃСЊ.
+--		callback	- С„СѓРЅРєС†РёСЏ, Р±СѓРґРµС‚ РІС‹Р·РІР°РЅР°, РїРѕСЃР»Рµ Р·Р°РІРµС€РµРЅРёСЏ РїРµСЂРµС…РѕРґР°
+--		brute_transition	- РµСЃР»Рё true, С‚Рѕ РїСЂРµСЂС‹РІР°РµС‚ С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ, РЅРµ РґРѕР¶РёРґР°СЏСЃСЊ РµРіРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ
 function sv_actor_basic:make_transition(anim_name, next_state, callback, brute_transition)
 	
 	self.m_transition_anim_name = anim_name;
@@ -838,7 +838,7 @@ function sv_actor_basic:make_transition(anim_name, next_state, callback, brute_t
 	
 	local cur_state = self:get_cur_fsm_state(self.body_fsm);
 	if(next_state == nil) then
-		-- чтоб не было зацикливания
+		-- С‡С‚РѕР± РЅРµ Р±С‹Р»Рѕ Р·Р°С†РёРєР»РёРІР°РЅРёСЏ
 		if(cur_state == self.transition_state) then 
 			self.m_after_transition_state = self.empty_body_state;
 		else
@@ -902,7 +902,7 @@ function sv_actor_basic:transition_end()
 end
 
 
--- callback на завершение анимации
+-- callback РЅР° Р·Р°РІРµСЂС€РµРЅРёРµ Р°РЅРёРјР°С†РёРё
 function sv_actor_basic:set_animation_end_callback(anim_idx, callback_func)
 	assert(callback_func ~= nil, "callback_func func must not be nil");
 	self.m_callback_anim_idx = anim_idx;
@@ -922,7 +922,7 @@ end
 
 
 --------------------------------------------------
--- инициализация параметров различных видов атаки
+-- РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ СЂР°Р·Р»РёС‡РЅС‹С… РІРёРґРѕРІ Р°С‚Р°РєРё
 function sv_actor_basic:init_attacks()
 	assert(self.params.attack_info, "self.params.attack_info")
 	
@@ -965,32 +965,32 @@ function sv_actor_basic:init_attacks()
 end
 
 -------------------------------------
--- Инициализация инвентаря актера
+-- РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РёРЅРІРµРЅС‚Р°СЂСЏ Р°РєС‚РµСЂР°
 function sv_actor_basic:init_inventory()
 
 	local inventory = self.params.inventory
 	
 	local inv_str = self:get_property_value_by_name("inventory_items")
 	for token in string.gfind(inv_str, "[_%w]+") do 
-		-- Добавляем предметы, указанные в параметре "inventory_items" в инвентарь актера.
+		-- Р”РѕР±Р°РІР»СЏРµРј РїСЂРµРґРјРµС‚С‹, СѓРєР°Р·Р°РЅРЅС‹Рµ РІ РїР°СЂР°РјРµС‚СЂРµ "inventory_items" РІ РёРЅРІРµРЅС‚Р°СЂСЊ Р°РєС‚РµСЂР°.
 		local entity = engine.spawn_entity(token);
 		engine.add_entity_to_world(entity);
 		self:add_to_inventory(entity);
 	end
 	
-	-- Если в свойстве "inventory_items" актера что-то указано
-	-- или нет таблицы инвентаря, то ничего в инвентарь не добавляем.	
+	-- Р•СЃР»Рё РІ СЃРІРѕР№СЃС‚РІРµ "inventory_items" Р°РєС‚РµСЂР° С‡С‚Рѕ-С‚Рѕ СѓРєР°Р·Р°РЅРѕ
+	-- РёР»Рё РЅРµС‚ С‚Р°Р±Р»РёС†С‹ РёРЅРІРµРЅС‚Р°СЂСЏ, С‚Рѕ РЅРёС‡РµРіРѕ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РЅРµ РґРѕР±Р°РІР»СЏРµРј.	
 	if (inv_str ~= " ") or (type(inventory) ~= "table") then
 		return
 	end
 	
-	-- Определяем общий вес всех записей таблицы
+	-- РћРїСЂРµРґРµР»СЏРµРј РѕР±С‰РёР№ РІРµСЃ РІСЃРµС… Р·Р°РїРёСЃРµР№ С‚Р°Р±Р»РёС†С‹
 	local total_weight = 0;
 	for i, v in pairs(inventory) do
 		total_weight = total_weight + (v.weight or 1);
 	end
 	
-	-- Переводим веса в соответствующие разбиения отрезка от 0 до 1
+	-- РџРµСЂРµРІРѕРґРёРј РІРµСЃР° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ СЂР°Р·Р±РёРµРЅРёСЏ РѕС‚СЂРµР·РєР° РѕС‚ 0 РґРѕ 1
 	for i, v in ipairs(inventory) do
 	
 		local distribution = (v.weight or 1)/total_weight;
@@ -1001,7 +1001,7 @@ function sv_actor_basic:init_inventory()
 		
 	end
 	
-	-- Выбираем одну из записей используя вероятность
+	-- Р’С‹Р±РёСЂР°РµРј РѕРґРЅСѓ РёР· Р·Р°РїРёСЃРµР№ РёСЃРїРѕР»СЊР·СѓСЏ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ
 	local rnd = math.random();
 	
 	local selected_idx
@@ -1010,7 +1010,7 @@ function sv_actor_basic:init_inventory()
 		if(rnd < v.distribution) then break; end
 	end
 	
-	-- Добавляем предметы полученного набора в инвентарь актера.
+	-- Р”РѕР±Р°РІР»СЏРµРј РїСЂРµРґРјРµС‚С‹ РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РЅР°Р±РѕСЂР° РІ РёРЅРІРµРЅС‚Р°СЂСЊ Р°РєС‚РµСЂР°.
 	for i, v in pairs(inventory[selected_idx].items) do
 		local entity = engine.spawn_entity(v);
 		engine.add_entity_to_world(entity);
@@ -1020,7 +1020,7 @@ function sv_actor_basic:init_inventory()
 end
 
 -------------------------------------
--- создает бомбу для взрыва регдола после смерти
+-- СЃРѕР·РґР°РµС‚ Р±РѕРјР±Сѓ РґР»СЏ РІР·СЂС‹РІР° СЂРµРіРґРѕР»Р° РїРѕСЃР»Рµ СЃРјРµСЂС‚Рё
 function sv_actor_basic:init_ragdoll_bomb(dreader)
 	if(dreader == nil) then
 		local bomb = engine.spawn_entity("Bomb");
@@ -1089,7 +1089,7 @@ end
 
 
 function sv_actor_basic:is_pain_allowed()
-	-- будем атаковать
+	-- Р±СѓРґРµРј Р°С‚Р°РєРѕРІР°С‚СЊ
 	if(self.params.pain_can_disrupt_attack == false and
 			(self.io.m_wait_for_requested_attack == true or
 			self:is_attack_began())) then 
@@ -1146,7 +1146,7 @@ end
 
 
 --------------------------------------------------------
--- запустить анимацию и звук, ассоцированные с текущим записью в таблице
+-- Р·Р°РїСѓСЃС‚РёС‚СЊ Р°РЅРёРјР°С†РёСЋ Рё Р·РІСѓРє, Р°СЃСЃРѕС†РёСЂРѕРІР°РЅРЅС‹Рµ СЃ С‚РµРєСѓС‰РёРј Р·Р°РїРёСЃСЊСЋ РІ С‚Р°Р±Р»РёС†Рµ
 function sv_actor_basic:body_state_transition_end()
 	if(self.m_body_state_transition) then
 		self:visualize_state(self.m_body_state_transition.fsm,
@@ -1164,14 +1164,14 @@ function sv_actor_basic:state_exists(state_name)
 	return type(self.state_visual_info[state_name]) == "table";
 end
 
--- команды, регулирущие переход состояний модели тела
+-- РєРѕРјР°РЅРґС‹, СЂРµРіСѓР»РёСЂСѓС‰РёРµ РїРµСЂРµС…РѕРґ СЃРѕСЃС‚РѕСЏРЅРёР№ РјРѕРґРµР»Рё С‚РµР»Р°
 ALLOW_TRANSITION = 0;
 IGNORE_TRANSITION = 1;
 ALLOW_TRANSITION_WITHOUT_ORIGINAL_STATE = 2;
 
 --------------------------------------------
--- анимация и звук для состояния модели
--- переключает body_fsm
+-- Р°РЅРёРјР°С†РёСЏ Рё Р·РІСѓРє РґР»СЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РјРѕРґРµР»Рё
+-- РїРµСЂРµРєР»СЋС‡Р°РµС‚ body_fsm
 -- return visual_idx, anim_length, anim_idx;
 
 function sv_actor_basic:visualize_state(fsm, 
@@ -1208,10 +1208,10 @@ function sv_actor_basic:visualize_state(fsm,
 		return 1, 1, 1;
 	end	
 	
-	-- блокируем последовательное появление двух одинаковых анимаций
+	-- Р±Р»РѕРєРёСЂСѓРµРј РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕРµ РїРѕСЏРІР»РµРЅРёРµ РґРІСѓС… РѕРґРёРЅР°РєРѕРІС‹С… Р°РЅРёРјР°С†РёР№
 	local block_doubles = (visual_info.block_doubles == nil) and true or visual_info.block_doubles;
 
-	-- выбрать одну из записей используя вероятность
+	-- РІС‹Р±СЂР°С‚СЊ РѕРґРЅСѓ РёР· Р·Р°РїРёСЃРµР№ РёСЃРїРѕР»СЊР·СѓСЏ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ
 	local rnd = math.random();
 	
 	if(visual_idx == nil) then
@@ -1221,7 +1221,7 @@ function sv_actor_basic:visualize_state(fsm,
 			if(rnd < v.distribution) then 
 			
 				if(block_doubles == true and visual_idx == visual_info.last_visual_idx) then
-					-- с вероятностью 1/2 выбираем предыдущею или следующею анимацию
+					-- СЃ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ 1/2 РІС‹Р±РёСЂР°РµРј РїСЂРµРґС‹РґСѓС‰РµСЋ РёР»Рё СЃР»РµРґСѓСЋС‰РµСЋ Р°РЅРёРјР°С†РёСЋ
 					if(math.random() > 0.5) then
 						visual_idx = ((i - 1) > 1) and (i - 1) or 1;
 					else
@@ -1241,11 +1241,11 @@ function sv_actor_basic:visualize_state(fsm,
 	
 	
 	
-	--.hack кто-то сбрасывает self.io.m_current_body_state в nil
+	--.hack РєС‚Рѕ-С‚Рѕ СЃР±СЂР°СЃС‹РІР°РµС‚ self.io.m_current_body_state РІ nil
 	if(self.io.m_current_body_state == nil) then 
 		self.io.m_current_body_state = NORMAL_BODY_STATE;
 	end
-	-- если прописан переход в другое состояние модели - включить его
+	-- РµСЃР»Рё РїСЂРѕРїРёСЃР°РЅ РїРµСЂРµС…РѕРґ РІ РґСЂСѓРіРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РјРѕРґРµР»Рё - РІРєР»СЋС‡РёС‚СЊ РµРіРѕ
 	local transition = self.params.body_states_transistions[self.io.m_current_body_state][visual_info.body_state];
 	if(transition_status ~= IGNORE_TRANSITION and transition) then
 		assert(self.io.m_current_body_state ~= visual_info.body_state);
@@ -1266,12 +1266,12 @@ function sv_actor_basic:visualize_state(fsm,
 			anim_length = self:get_animation_length_speed(anim_idx);
 		end
 		
-		-- показываем только переход, но не запрошенный state
+		-- РїРѕРєР°Р·С‹РІР°РµРј С‚РѕР»СЊРєРѕ РїРµСЂРµС…РѕРґ, РЅРѕ РЅРµ Р·Р°РїСЂРѕС€РµРЅРЅС‹Р№ state
 		if(transition_status == ALLOW_TRANSITION_WITHOUT_ORIGINAL_STATE) then
 			anim_length = trans_anim_length;
 			self.m_body_state_transition = nil;
 		else
-			-- .hack разобраться почему нужно проверять на nil trans_anim_length и anim_length
+			-- .hack СЂР°Р·РѕР±СЂР°С‚СЊСЃСЏ РїРѕС‡РµРјСѓ РЅСѓР¶РЅРѕ РїСЂРѕРІРµСЂСЏС‚СЊ РЅР° nil trans_anim_length Рё anim_length
 			trans_anim_length = trans_anim_length and trans_anim_length or 0;
 			anim_length = anim_length and anim_length or 0;
 			
@@ -1310,7 +1310,7 @@ function sv_actor_basic:visualize_state(fsm,
 		for i,v in pairs(anim_info.anims) do
 			last_anim = v;
 			--console.print(" -- try  v.anim "..v.anim);
-			-- если задана bone group, то отыгрываем анимацию только на ней
+			-- РµСЃР»Рё Р·Р°РґР°РЅР° bone group, С‚Рѕ РѕС‚С‹РіСЂС‹РІР°РµРј Р°РЅРёРјР°С†РёСЋ С‚РѕР»СЊРєРѕ РЅР° РЅРµР№
 			if(bone_group == nil or v.anim_bone_group == bone_group) then
 	
 				if(anim_info.anim_playback == ANIM_PB_ONCE or
@@ -1321,8 +1321,8 @@ function sv_actor_basic:visualize_state(fsm,
 			end
 		end
 		
-		-- возвращаем все параметры относительно последней анимации,
-		-- подразумевается, что все запущенные анимации одинаковые по времени
+		-- РІРѕР·РІСЂР°С‰Р°РµРј РІСЃРµ РїР°СЂР°РјРµС‚СЂС‹ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РїРѕСЃР»РµРґРЅРµР№ Р°РЅРёРјР°С†РёРё,
+		-- РїРѕРґСЂР°Р·СѓРјРµРІР°РµС‚СЃСЏ, С‡С‚Рѕ РІСЃРµ Р·Р°РїСѓС‰РµРЅРЅС‹Рµ Р°РЅРёРјР°С†РёРё РѕРґРёРЅР°РєРѕРІС‹Рµ РїРѕ РІСЂРµРјРµРЅРё
 		assert(last_anim);
 		anim_idx = last_anim.anim;
 		anim_length = self:get_animation_length_speed(anim_idx);
@@ -1367,13 +1367,13 @@ end
 
 
 --------------------------------------------------
---[[	Загружает эффект, появляющийся при выстреле
+--[[	Р—Р°РіСЂСѓР¶Р°РµС‚ СЌС„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
 
-Возвращает:
-	handle эффекта (НЕ effect_id !), который впоследствии может быть передан функции
-	visualize_shoot_effect для отображения эффекта.
+Р’РѕР·РІСЂР°С‰Р°РµС‚:
+	handle СЌС„С„РµРєС‚Р° (РќР• effect_id !), РєРѕС‚РѕСЂС‹Р№ РІРїРѕСЃР»РµРґСЃС‚РІРёРё РјРѕР¶РµС‚ Р±С‹С‚СЊ РїРµСЂРµРґР°РЅ С„СѓРЅРєС†РёРё
+	visualize_shoot_effect РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЌС„С„РµРєС‚Р°.
 	
-	-1, если эффект не был загружен.
+	-1, РµСЃР»Рё СЌС„С„РµРєС‚ РЅРµ Р±С‹Р» Р·Р°РіСЂСѓР¶РµРЅ.
 --]]
 function sv_actor_basic:load_shoot_effect(shoot_effect)
 
@@ -1381,21 +1381,21 @@ function sv_actor_basic:load_shoot_effect(shoot_effect)
 	
 	assert(type(shoot_effect) == "table", "shoot_effect is not a table");
 	
-	-- Таблица, которая хранит id загруженных эффектов.
-	-- Будет добавлена в m_shoot_effects, если все эффекты будут 
-	-- успешно загружены.
+	-- РўР°Р±Р»РёС†Р°, РєРѕС‚РѕСЂР°СЏ С…СЂР°РЅРёС‚ id Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… СЌС„С„РµРєС‚РѕРІ.
+	-- Р‘СѓРґРµС‚ РґРѕР±Р°РІР»РµРЅР° РІ m_shoot_effects, РµСЃР»Рё РІСЃРµ СЌС„С„РµРєС‚С‹ Р±СѓРґСѓС‚ 
+	-- СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅС‹.
 	local effect_tbl = {}
 	
-	-- Перебираем точки привязки
+	-- РџРµСЂРµР±РёСЂР°РµРј С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё
 	for ref_point_name, effects in pairs(shoot_effect) do
 	
 		assert(type(ref_point_name) == "string", "ref_point_name is not a string");
 		assert(type(effects) == "table", "effects must form a table");
 		
-		-- Таблица эффектов, соответствующих данному ref_point'у
+		-- РўР°Р±Р»РёС†Р° СЌС„С„РµРєС‚РѕРІ, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёС… РґР°РЅРЅРѕРјСѓ ref_point'Сѓ
 		effect_tbl[ref_point_name] = {}
 		
-		-- Перебираем эффекты данной точки привязки
+		-- РџРµСЂРµР±РёСЂР°РµРј СЌС„С„РµРєС‚С‹ РґР°РЅРЅРѕР№ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё
 		for i, v in pairs(effects) do
 			assert(type(v) == "string", "effect name is not a string");
 			local template_id = self:add_effect_template(v)
@@ -1409,7 +1409,7 @@ function sv_actor_basic:load_shoot_effect(shoot_effect)
 		
 	end
 	
-	-- Добавляем в конец таблицы загруженных эффектов
+	-- Р”РѕР±Р°РІР»СЏРµРј РІ РєРѕРЅРµС† С‚Р°Р±Р»РёС†С‹ Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… СЌС„С„РµРєС‚РѕРІ
 	table.insert(self.m_shoot_effects, effect_tbl)
 	effect_handle = table.getn(self.m_shoot_effects)
 	
@@ -1417,21 +1417,21 @@ function sv_actor_basic:load_shoot_effect(shoot_effect)
 end
 
 --------------------------------------------------
--- Отображает эффект, появляющийся при выстреле
+-- РћС‚РѕР±СЂР°Р¶Р°РµС‚ СЌС„С„РµРєС‚, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
 function sv_actor_basic:visualize_shoot_effect(effect_handle)
 
 	local effect_tbl = self.m_shoot_effects[effect_handle]
 	assert(effect_tbl, "wrong effect_handle")
 	
-	-- Отображаем эффекты для каждой точки привязки
+	-- РћС‚РѕР±СЂР°Р¶Р°РµРј СЌС„С„РµРєС‚С‹ РґР»СЏ РєР°Р¶РґРѕР№ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё
 	for ref_point_name, effects in pairs(effect_tbl) do
 	
 		local effects_count = table.getn(effects)
 		if effects_count ~= 0 then
-			-- Выбираем один из эффектов, соответствующих данной точке привязки и отображаем его
+			-- Р’С‹Р±РёСЂР°РµРј РѕРґРёРЅ РёР· СЌС„С„РµРєС‚РѕРІ, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёС… РґР°РЅРЅРѕР№ С‚РѕС‡РєРµ РїСЂРёРІСЏР·РєРё Рё РѕС‚РѕР±СЂР°Р¶Р°РµРј РµРіРѕ
 			local rnd = math.random( 1, effects_count );
 			
-			-- Непосредственно отображаем эффект.
+			-- РќРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РѕС‚РѕР±СЂР°Р¶Р°РµРј СЌС„С„РµРєС‚.
 			self:reset_effect(effects[rnd])
 		end
 		
@@ -1439,13 +1439,13 @@ function sv_actor_basic:visualize_shoot_effect(effect_handle)
 end
 
 --------------------------------------------------
--- Деактивирует эффекты, появляющийся при выстреле
+-- Р”РµР°РєС‚РёРІРёСЂСѓРµС‚ СЌС„С„РµРєС‚С‹, РїРѕСЏРІР»СЏСЋС‰РёР№СЃСЏ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
 function sv_actor_basic:deactivate_shoot_effect(effect_handle)
 
 	local effect_tbl = self.m_shoot_effects[effect_handle]
 	assert(effect_tbl, "wrong effect_handle")
 	
-	-- Деактивируем эффекты для каждой точки привязки
+	-- Р”РµР°РєС‚РёРІРёСЂСѓРµРј СЌС„С„РµРєС‚С‹ РґР»СЏ РєР°Р¶РґРѕР№ С‚РѕС‡РєРё РїСЂРёРІСЏР·РєРё
 	for ref_point_name, effects in pairs(effect_tbl) do
 		for i, effect_id in pairs(effects) do
 			self:deactivate_effect(effect_id)
@@ -1454,13 +1454,13 @@ function sv_actor_basic:deactivate_shoot_effect(effect_handle)
 end
 
 ----------------------------------------------------------------
--- различные варианты атаки
+-- СЂР°Р·Р»РёС‡РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ Р°С‚Р°РєРё
 ----------------------------------------------------------------
 
 function sv_actor_basic:perform_attack_trace(attack_info)
 	assert(attack_info);
 
-	-- Если есть shoot_point, то используем его вместо смещения
+	-- Р•СЃР»Рё РµСЃС‚СЊ shoot_point, С‚Рѕ РёСЃРїРѕР»СЊР·СѓРµРј РµРіРѕ РІРјРµСЃС‚Рѕ СЃРјРµС‰РµРЅРёСЏ
 	local shoot_point_pos;
 	if(attack_info.shoot_point_tag) then
 		local tag_info = self:get_tag_point_pos(attack_info.shoot_point_tag, self.m_model_body);
@@ -1482,12 +1482,12 @@ function sv_actor_basic:perform_attack_trace(attack_info)
 		max_dist = attack_info.dist;
 	end
 	
-	-- Уменьшаем обойму на количество патронов, необходимых для выстрела
+	-- РЈРјРµРЅСЊС€Р°РµРј РѕР±РѕР№РјСѓ РЅР° РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ, РЅРµРѕР±С…РѕРґРёРјС‹С… РґР»СЏ РІС‹СЃС‚СЂРµР»Р°
 	if self.io.m_current_clip_size then
 		self.io.m_current_clip_size = self.io.m_current_clip_size - 1
 	end
 	
-	-- кол-во дробинок в выстреле
+	-- РєРѕР»-РІРѕ РґСЂРѕР±РёРЅРѕРє РІ РІС‹СЃС‚СЂРµР»Рµ
 	local bullets_in_shot = 1;
 	if(attack_info.bullets_in_shot ~= nil) then
 		bullets_in_shot = attack_info.bullets_in_shot;
@@ -1506,14 +1506,14 @@ function sv_actor_basic:perform_attack_trace(attack_info)
 						attack_info.hit_material);
 	end	
 	
-	-- загружаем эффект выстрела (только при первом выстреле)
+	-- Р·Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р° (С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј РІС‹СЃС‚СЂРµР»Рµ)
 	if self.m_current_attack_info.effect_handle == nil then
 		if(self.m_current_attack_info.shoot_effect ~= nil) then
 			self.m_current_attack_info.effect_handle = self:load_shoot_effect(self.m_current_attack_info.shoot_effect);
 		end
 	end
 		
-	-- Отображаем эффект выстрела
+	-- РћС‚РѕР±СЂР°Р¶Р°РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р°
 	if self.m_current_attack_info.effect_handle then
 		self:visualize_shoot_effect(self.m_current_attack_info.effect_handle);
 	end
@@ -1524,7 +1524,7 @@ end
 function sv_actor_basic:perform_attack_missile(attack_info)
 	assert(attack_info);
 	
-	-- Если есть shoot_point, то используем его вместо смещения
+	-- Р•СЃР»Рё РµСЃС‚СЊ shoot_point, С‚Рѕ РёСЃРїРѕР»СЊР·СѓРµРј РµРіРѕ РІРјРµСЃС‚Рѕ СЃРјРµС‰РµРЅРёСЏ
 	local shoot_point_pos
 	if(attack_info.shoot_point_tag) then
 		local tag_info = self:get_tag_point_pos(attack_info.shoot_point_tag, self.m_model_body);
@@ -1535,7 +1535,7 @@ function sv_actor_basic:perform_attack_missile(attack_info)
 	local height_offset =  -0.30;
 	
 	
-	-- для коррекция прицеливания при стрельбе по параболе
+	-- РґР»СЏ РєРѕСЂСЂРµРєС†РёСЏ РїСЂРёС†РµР»РёРІР°РЅРёСЏ РїСЂРё СЃС‚СЂРµР»СЊР±Рµ РїРѕ РїР°СЂР°Р±РѕР»Рµ
 	if(attack_info.height_offset) then
 		local dist_to_target = self:calc_target_dist(self.m_attack_target_id);
 		local k = (dist_to_target - attack_info.height_offset.min_dist) / 
@@ -1559,21 +1559,21 @@ function sv_actor_basic:perform_attack_missile(attack_info)
 					attack_info.missile_velocity,
 					attack_info.missile_angular_velocity);
 					
-	-- загружаем эффект выстрела (только при первом выстреле)
+	-- Р·Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р° (С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј РІС‹СЃС‚СЂРµР»Рµ)
 	if self.m_current_attack_info.effect_handle == nil then
 		if(self.m_current_attack_info.shoot_effect ~= nil) then
 			self.m_current_attack_info.effect_handle = self:load_shoot_effect(self.m_current_attack_info.shoot_effect);
 		end
 	end
 		
-	-- Отображаем эффект выстрела
+	-- РћС‚РѕР±СЂР°Р¶Р°РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р°
 	if self.m_current_attack_info.effect_handle then
 		self:visualize_shoot_effect(self.m_current_attack_info.effect_handle);
 	end
 end
 
 --------------------------------------------------
--- смерть персонажа
+-- СЃРјРµСЂС‚СЊ РїРµСЂСЃРѕРЅР°Р¶Р°
 function sv_actor_basic:death_end()
 	self:activate_death(0, true);
 end
@@ -1586,7 +1586,7 @@ function sv_actor_basic:on_death(who_id)
 	local total_impulses = self:calc_total_impulses();
 	local total_damage = self:calc_total_damage();
 	
-	-- взрыв регдола
+	-- РІР·СЂС‹РІ СЂРµРіРґРѕР»Р°
 	if((self.params.death_explosion_impulse_threshold  and 
 		total_impulses > self.params.death_explosion_impulse_threshold) or 
 		(self.params.death_explosion_damage_threshold  and 
@@ -1596,7 +1596,7 @@ function sv_actor_basic:on_death(who_id)
 		return;
 	end
 
-	-- анимация смерти
+	-- Р°РЅРёРјР°С†РёСЏ СЃРјРµСЂС‚Рё
 	if(self.state_visual_info["death"] and
 		total_impulses < self.params.death_impulse_threshold) then
 		
@@ -1615,7 +1615,7 @@ function sv_actor_basic:on_death(who_id)
 		else	
 			self:make_transition("death", nil, self.death_end, true);
 		end
-	-- просто регдол
+	-- РїСЂРѕСЃС‚Рѕ СЂРµРіРґРѕР»
 	else
 		self:activate_death(0, true);
 	end	
@@ -1625,7 +1625,7 @@ end
 function sv_actor_basic:on_shutdown()
 	sv_game_object.on_shutdown(self)
 	
-	-- Освобождаем эффекты
+	-- РћСЃРІРѕР±РѕР¶РґР°РµРј СЌС„С„РµРєС‚С‹
 	for i, effects in pairs(self.m_shoot_effects) do
 		if type(effects) == "table" then
 			for k, effect_tbl in pairs(effects) do
@@ -1673,7 +1673,7 @@ end
 
 
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_basic = utils.inherit(cl_game_object, actor_basic);
 
 --------------------------------------------------

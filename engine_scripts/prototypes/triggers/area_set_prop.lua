@@ -3,12 +3,12 @@
 ------------------------------------------------------------------------
 -- Authors: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- area_set_prop - зона, которая по входящему событию устанавливает 
--- указанное свойство объектам, которые в ней находятся.
+-- area_set_prop - Р·РѕРЅР°, РєРѕС‚РѕСЂР°СЏ РїРѕ РІС…РѕРґСЏС‰РµРјСѓ СЃРѕР±С‹С‚РёСЋ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ 
+-- СѓРєР°Р·Р°РЅРЅРѕРµ СЃРІРѕР№СЃС‚РІРѕ РѕР±СЉРµРєС‚Р°Рј, РєРѕС‚РѕСЂС‹Рµ РІ РЅРµР№ РЅР°С…РѕРґСЏС‚СЃСЏ.
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 area_set_prop = {
 	guid = {0x679abedf, 0x5ca9, 0x4933, 0x9d, 0xbe, 0xaa, 0x9a, 0x56, 0x34, 0x35, 0x11},
 	UNKNOWN			= "-unknown-",
@@ -19,7 +19,7 @@ function area_set_prop:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_area_set_prop = utils.inherit(sv_game_object, area_set_prop);
 
 function sv_area_set_prop:on_init()
@@ -37,7 +37,7 @@ function sv_area_set_prop:register_properties(prop_registry)
 end
 
 ------------------------------------
--- функции обработчики слотов
+-- С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 function sv_area_set_prop:set_prop(sender, activator, input_data)
 	self.m_property_name	= input_data.prop_name
 	self.m_property_value	= input_data.value
@@ -49,7 +49,7 @@ function sv_area_set_prop:OnEnter(activator)
 	
 	local obj_property = activator:get_property_by_name(self.m_property_name)
 	if obj_property then
-		-- Задаем свойство попавшему объекту
+		-- Р—Р°РґР°РµРј СЃРІРѕР№СЃС‚РІРѕ РїРѕРїР°РІС€РµРјСѓ РѕР±СЉРµРєС‚Сѓ
 		local prop_value	= self.m_property_value
 		local value_number	= tonumber(prop_value)
 		
@@ -76,7 +76,7 @@ function sv_area_set_prop:OnPhysicsAfterStep(activator)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_area_set_prop = utils.inherit(cl_game_object, area_set_prop);
 
 ------------------------------------

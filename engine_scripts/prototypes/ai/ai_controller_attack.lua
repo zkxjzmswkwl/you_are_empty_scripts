@@ -3,14 +3,14 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- ai controller attack, функции для атаки противника
+-- ai controller attack, С„СѓРЅРєС†РёРё РґР»СЏ Р°С‚Р°РєРё РїСЂРѕС‚РёРІРЅРёРєР°
 ------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------------
--- у актера может быть несколько видов атак
+-- Сѓ Р°РєС‚РµСЂР° РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ РІРёРґРѕРІ Р°С‚Р°Рє
 function sv_ai_controller_basic:read_attacks_params()
 
-	-- таблица с описанием 
+	-- С‚Р°Р±Р»РёС†Р° СЃ РѕРїРёСЃР°РЅРёРµРј 
 		
 	local output_params = self:execute_action(ACTION_GET_ATTACK_PARAMS);
 	if(output_params == nil) then return; end
@@ -22,8 +22,8 @@ function sv_ai_controller_basic:read_attacks_params()
 		local attack_info = v;
 		attack_info.attack_id = i;
 						
-		-- дополнительный статус, который описывает как будет использоваться атака
-		-- 0 - вкл., 1 - вкл. экслюзивно, 2 - выкл.
+		-- РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ СЃС‚Р°С‚СѓСЃ, РєРѕС‚РѕСЂС‹Р№ РѕРїРёСЃС‹РІР°РµС‚ РєР°Рє Р±СѓРґРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ Р°С‚Р°РєР°
+		-- 0 - РІРєР»., 1 - РІРєР». СЌРєСЃР»СЋР·РёРІРЅРѕ, 2 - РІС‹РєР».
 		attack_info.status = 0;
 		
 		attack_info.attacks_in_row = 0;
@@ -40,7 +40,7 @@ function sv_ai_controller_basic:read_attacks_params()
 			assert(false, "unknown attack type!");
 		end
 
-		-- здесь запомним время когда последний раз была произведена атака
+		-- Р·РґРµСЃСЊ Р·Р°РїРѕРјРЅРёРј РІСЂРµРјСЏ РєРѕРіРґР° РїРѕСЃР»РµРґРЅРёР№ СЂР°Р· Р±С‹Р»Р° РїСЂРѕРёР·РІРµРґРµРЅР° Р°С‚Р°РєР°
 		attack_info.last_attack_time = 0;
 	end
 	data_stream_release(output_params);
@@ -60,7 +60,7 @@ function sv_ai_controller_basic:read_attacks_params()
 end
 -------------------------------------------------------------------------------------
 
--- проверяет применимость атаки 
+-- РїСЂРѕРІРµСЂСЏРµС‚ РїСЂРёРјРµРЅРёРјРѕСЃС‚СЊ Р°С‚Р°РєРё 
 function sv_ai_controller_basic:general_attack_evaluator(info_index)
 
 	local attack_info = self.m_attack_infos[info_index];
@@ -80,8 +80,8 @@ function sv_ai_controller_basic:general_attack_evaluator(info_index)
 	end
 	
 	
-	-- выдержать паузу между атаки одного типа, если
-	-- заданы соответствующие параметры
+	-- РІС‹РґРµСЂР¶Р°С‚СЊ РїР°СѓР·Сѓ РјРµР¶РґСѓ Р°С‚Р°РєРё РѕРґРЅРѕРіРѕ С‚РёРїР°, РµСЃР»Рё
+	-- Р·Р°РґР°РЅС‹ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ РїР°СЂР°РјРµС‚СЂС‹
 	if(attack_info.next_attack_time) then
 		if(attack_info.attacks_in_row > 0) then
 			if(engine.get_game_time() > attack_info.next_attack_time) then
@@ -177,7 +177,7 @@ function sv_ai_controller_basic:attack_distant_evaluator(info_index)
 	--	end
 	--end
 	
-	-- мы не можем двигаться и цель за пределами досягаемости
+	-- РјС‹ РЅРµ РјРѕР¶РµРј РґРІРёРіР°С‚СЊСЃСЏ Рё С†РµР»СЊ Р·Р° РїСЂРµРґРµР»Р°РјРё РґРѕСЃСЏРіР°РµРјРѕСЃС‚Рё
 	if(self.io.m_is_actor_movement_blocked == true and 
 		dist_to_enemy > attack_info.dist) then
 			return 0.0;
@@ -214,17 +214,17 @@ end
 function sv_ai_controller_basic:process_attack(dt)
 	--do return end
 	
-	-- выбрать наиболее подходящую атаку
+	-- РІС‹Р±СЂР°С‚СЊ РЅР°РёР±РѕР»РµРµ РїРѕРґС…РѕРґСЏС‰СѓСЋ Р°С‚Р°РєСѓ
 	local selected_attack = nil;
 	local max_desire = 0;
 	
 	if(self.io.m_attack_started ~= true) then
 		for i,v in pairs(self.m_attack_infos) do
-			-- атака включена эксклюзивно
+			-- Р°С‚Р°РєР° РІРєР»СЋС‡РµРЅР° СЌРєСЃРєР»СЋР·РёРІРЅРѕ
 			if(self.m_attack_infos[i].status == 1) then
 				selected_attack = i;
 				break;
-			-- атака выключена
+			-- Р°С‚Р°РєР° РІС‹РєР»СЋС‡РµРЅР°
 			elseif(self.m_attack_infos[i].status == 2) then
 				continue;
 			end
@@ -315,7 +315,7 @@ function sv_ai_controller_basic:process_attack(dt)
 	end
 end
 
--- остановка выполняемой атаки
+-- РѕСЃС‚Р°РЅРѕРІРєР° РІС‹РїРѕР»РЅСЏРµРјРѕР№ Р°С‚Р°РєРё
 function sv_ai_controller_basic:halt_attack()
 
 	if(self.io.m_attack_started == true and self.m_reloading ~= true) then

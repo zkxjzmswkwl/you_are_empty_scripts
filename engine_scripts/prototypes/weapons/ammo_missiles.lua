@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Метательное оружие (ракеты, камни и т.д.)
+-- РњРµС‚Р°С‚РµР»СЊРЅРѕРµ РѕСЂСѓР¶РёРµ (СЂР°РєРµС‚С‹, РєР°РјРЅРё Рё С‚.Рґ.)
 ------------------------------------------------------------------------
 
 function create_ammo_missile(_guid, _model, _properties_table)
@@ -12,11 +12,11 @@ function create_ammo_missile(_guid, _model, _properties_table)
 	local _server_table = {};
 	local _client_table = {};
 					
-	-- Общая часть			
+	-- РћР±С‰Р°СЏ С‡Р°СЃС‚СЊ			
 	_common_table.guid = _guid;
 	_common_table.properties_design = _properties_table;
 	
-	-- Серверная часть
+	-- РЎРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ
 	_server_table = utils.inherit(sv_game_object, _common_table);
 	_server_table.register_properties = function(self, prop_registry)
 		sv_game_object.register_properties(self, prop_registry);
@@ -29,7 +29,7 @@ function create_ammo_missile(_guid, _model, _properties_table)
 		sv_game_object.on_init(self);
 	end
 
-	-- Клиентская часть
+	-- РљР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ
 	_client_table = utils.inherit(cl_game_object, _common_table);
 	
 	_client_table.on_post_anims_init = function(self)

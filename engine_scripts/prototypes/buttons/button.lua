@@ -4,11 +4,11 @@
 -- Authors: Yuri Dobronravin
 --				Andrey Frolov
 ------------------------------------------------------------------------
--- Прототип объекта кнопка
+-- РџСЂРѕС‚РѕС‚РёРї РѕР±СЉРµРєС‚Р° РєРЅРѕРїРєР°
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 button = {
 	guid = {0x4eaff5e, 0x2b15, 0x4f7f, 0xaf, 0xaa, 0x9f, 0x75, 0xd8, 0xe7, 0x21, 0x41},
 }
@@ -25,7 +25,7 @@ function button:register_properties(prop_registry)
 end
 
 function button:on_init()
-	-- ожидаем что RigidBody загрузили одну модель, ее и используем
+	-- РѕР¶РёРґР°РµРј С‡С‚Рѕ RigidBody Р·Р°РіСЂСѓР·РёР»Рё РѕРґРЅСѓ РјРѕРґРµР»СЊ, РµРµ Рё РёСЃРїРѕР»СЊР·СѓРµРј
 	self.m_model					= 0;
 	self.m_turn_on_anim				= self:add_animation(self.m_model, "turn_on", ANIM_PB_ONCE);
 	self.m_turn_off_anim			= self:add_animation(self.m_model, "turn_off", ANIM_PB_ONCE);
@@ -44,7 +44,7 @@ function button:on_init()
 end
 	
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_button = utils.inherit(sv_game_object, button);
 
 function sv_button:register_properties(prop_registry)
@@ -191,7 +191,7 @@ function sv_button:on_update_switch_off()
 end
 
 ------------------------------------
--- клиентская часть
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ
 cl_button = utils.inherit(cl_game_object, button);
 
 function cl_button:on_init()

@@ -1,4 +1,4 @@
--- взаимодействие актера с бетоном
+-- РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ Р°РєС‚РµСЂР° СЃ Р±РµС‚РѕРЅРѕРј
 materials_interactions_infos.mat_actor_carrier_beton = {
 	contact = {
 		friction	= 1,

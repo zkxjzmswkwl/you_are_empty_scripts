@@ -1,4 +1,4 @@
--- взаимодействие шагов актера
+-- РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ С€Р°РіРѕРІ Р°РєС‚РµСЂР°
 materials_interactions_infos.steps_main = {
 	effects = { 
 		{ name = "steps_beton.lua", t_range = { 0.01, 1 } },
@@ -72,14 +72,14 @@ materials_interactions_infos.climb_metal_ladder = {
 	},
 }
 
--- взаимодействие jump актера
+-- РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ jump Р°РєС‚РµСЂР°
 materials_interactions_infos.jump_main = {
 	effects = { 
 		{ name = "jump_main.lua", n_range = { 0.001, 1 } },
 	},
 }
 
--- взаимодействие land актера
+-- РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ land Р°РєС‚РµСЂР°
 materials_interactions_infos.land_main = {
 	effects = { 
 		{ name = "land_beton.lua", n_range = { 0.04, 1 } },

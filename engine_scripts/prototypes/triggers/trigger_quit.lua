@@ -3,10 +3,10 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- trigger_quit - тригер для выхода из игры
+-- trigger_quit - С‚СЂРёРіРµСЂ РґР»СЏ РІС‹С…РѕРґР° РёР· РёРіСЂС‹
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 trigger_quit = {
 	guid = {0x96c2e857, 0x477b, 0x4a4f, 0xb6, 0x63, 0xde, 0xf5, 0xdd, 0x26, 0x6, 0xa6},
 };
@@ -15,7 +15,7 @@ function trigger_quit:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_trigger_quit = utils.inherit(sv_game_object, trigger_quit);
 
 function sv_trigger_quit:register_properties(prop_registry)
@@ -27,7 +27,7 @@ function sv_trigger_quit:on_init()
 	sv_game_object.on_init(self);
 end
 
--- функции обработчики слотов
+-- С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃР»РѕС‚РѕРІ
 function sv_trigger_quit:OnEnter(activator)
 	engine.process_command("quit");
 end

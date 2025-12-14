@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Оружие Коктейль Молотова
+-- РћСЂСѓР¶РёРµ РљРѕРєС‚РµР№Р»СЊ РњРѕР»РѕС‚РѕРІР°
 ------------------------------------------------------------------------
 
 include("ammo_bottle.lua")
@@ -16,67 +16,67 @@ weapon_bottle = {};
 weapon_bottle.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"molotbotle"},
 	{"hit_material",		"mat_hit_ppsh" },
-	{ "slot_name",			g_weapon_slots[10] },	-- слот в котором может быть оружие
+	{ "slot_name",			g_weapon_slots[10] },	-- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
 	{"sound_on_take",		"Player_Take_Butilo4ka.wav"},
-	{ "priority",			1 },					-- приоритет оружия
---	{ "icon_id",			8 },					-- иконка для HUD
+	{ "priority",			1 },					-- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			8 },					-- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		1 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			0 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия
-	{ "max_ammo",			5 },	-- максимальное кол-во патронов, которое может быть у нас в инвентаре
+	{ "loaded_ammo",		1 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			0 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
+	{ "max_ammo",			5 },	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Сѓ РЅР°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ
 	
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_bottle.m_models_names = {
---	Имя игрока				Имя модели рук		Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє		РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"batl_hands",		"batl"			},
 }
 
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_bottle.m_ammo_icon_id		= 7
 weapon_bottle.m_holdable_icon_id	= 13 
 
-weapon_bottle.m_damage_limit			= 5		-- Предел повреждения, при котором бутылка разрушается
+weapon_bottle.m_damage_limit			= 5		-- РџСЂРµРґРµР» РїРѕРІСЂРµР¶РґРµРЅРёСЏ, РїСЂРё РєРѕС‚РѕСЂРѕРј Р±СѓС‚С‹Р»РєР° СЂР°Р·СЂСѓС€Р°РµС‚СЃСЏ
 
 ----------------------------------------
--- эффекты
+-- СЌС„С„РµРєС‚С‹
 ----------------------------------------
-weapon_bottle.m_shot_effect_name			= "pfx_burning_bottle.lua"	-- эффект при выстреле
-weapon_bottle.m_shot_point_name				= "#shoot_point"		-- точка привязки эффекта в модели
+weapon_bottle.m_shot_effect_name			= "pfx_burning_bottle.lua"	-- СЌС„С„РµРєС‚ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
+weapon_bottle.m_shot_point_name				= "#shoot_point"		-- С‚РѕС‡РєР° РїСЂРёРІСЏР·РєРё СЌС„С„РµРєС‚Р° РІ РјРѕРґРµР»Рё
 
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_bottle.m_ammo_class				= "ammo_bottle"			-- класс используемых патронов
-weapon_bottle.m_missile_ammo_class		= "ammo_missile_bottle"	-- класс используемых метательных патронов 
-weapon_bottle.m_throw_point_offset		= {0.2, 0.5, 2}			-- смещение точки выброса метательного патрона
-weapon_bottle.m_angular_velocity		= {0, 20, 0}			-- вращение после броска
-weapon_bottle.m_ammo_type				= "bottle ammo"			-- тип используемых патронов
-weapon_bottle.m_clip_size				= 1						-- вместимость обоймы
-weapon_bottle.m_ammo_for_shot			= 1						-- кол-во патронов расходуемых на один выстрел
+weapon_bottle.m_ammo_class				= "ammo_bottle"			-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_bottle.m_missile_ammo_class		= "ammo_missile_bottle"	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РјРµС‚Р°С‚РµР»СЊРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ 
+weapon_bottle.m_throw_point_offset		= {0.2, 0.5, 2}			-- СЃРјРµС‰РµРЅРёРµ С‚РѕС‡РєРё РІС‹Р±СЂРѕСЃР° РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РїР°С‚СЂРѕРЅР°
+weapon_bottle.m_angular_velocity		= {0, 20, 0}			-- РІСЂР°С‰РµРЅРёРµ РїРѕСЃР»Рµ Р±СЂРѕСЃРєР°
+weapon_bottle.m_ammo_type				= "bottle ammo"			-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_bottle.m_clip_size				= 1						-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
+weapon_bottle.m_ammo_for_shot			= 1						-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_bottle.m_model_fov = 30;
 
 ----------------------------------------
--- параметры броска
+-- РїР°СЂР°РјРµС‚СЂС‹ Р±СЂРѕСЃРєР°
 ----------------------------------------
 
---	При нажатии и удерживании кнопки выстрела, стартовая скорость полета 
---  метательного оружия будет увеличиваться	от минимальной(нажали и сразу же отпустили),
---  до максимальной(удерживание гранаты в течение времени m_time_to_gain_max_velocity или дольше)
+--	РџСЂРё РЅР°Р¶Р°С‚РёРё Рё СѓРґРµСЂР¶РёРІР°РЅРёРё РєРЅРѕРїРєРё РІС‹СЃС‚СЂРµР»Р°, СЃС‚Р°СЂС‚РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕР»РµС‚Р° 
+--  РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ Р±СѓРґРµС‚ СѓРІРµР»РёС‡РёРІР°С‚СЊСЃСЏ	РѕС‚ РјРёРЅРёРјР°Р»СЊРЅРѕР№(РЅР°Р¶Р°Р»Рё Рё СЃСЂР°Р·Сѓ Р¶Рµ РѕС‚РїСѓСЃС‚РёР»Рё),
+--  РґРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№(СѓРґРµСЂР¶РёРІР°РЅРёРµ РіСЂР°РЅР°С‚С‹ РІ С‚РµС‡РµРЅРёРµ РІСЂРµРјРµРЅРё m_time_to_gain_max_velocity РёР»Рё РґРѕР»СЊС€Рµ)
 
--- минимальная стартовая скорость полета метательного оружия	
+-- РјРёРЅРёРјР°Р»СЊРЅР°СЏ СЃС‚Р°СЂС‚РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕР»РµС‚Р° РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ	
 weapon_bottle.m_min_velocity	= 300
--- максимальная стартовая скорость полета метательного оружия
+-- РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ СЃС‚Р°СЂС‚РѕРІР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕР»РµС‚Р° РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
 weapon_bottle.m_max_velocity	= 1300
--- время, в течение которого метательное оружие приобретает максимальную стартовую скорость
+-- РІСЂРµРјСЏ, РІ С‚РµС‡РµРЅРёРµ РєРѕС‚РѕСЂРѕРіРѕ РјРµС‚Р°С‚РµР»СЊРЅРѕРµ РѕСЂСѓР¶РёРµ РїСЂРёРѕР±СЂРµС‚Р°РµС‚ РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ СЃС‚Р°СЂС‚РѕРІСѓСЋ СЃРєРѕСЂРѕСЃС‚СЊ
 weapon_bottle.m_time_to_gain_max_velocity = 1500
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_bottle.states_design = {};
 
@@ -95,14 +95,14 @@ weapon_bottle.states_design["fire_lift"]	= {{anim = "fire2", },};
 weapon_bottle.states_design["fire"]			= {{anim = "fire3", snd = "butl_fire3"},};
 weapon_bottle.states_design["fire_finish"]	= {{anim = "fire4", },};
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_bottle.guid = {0x7d73d792, 0x9f3d, 0x4e91, 0x99, 0x21, 0xf8, 0xb1, 0x7c, 0x1a, 0x2, 0x1d};
 
 function weapon_bottle:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_bottle = utils.inherit(sv_weapon_missile, weapon_bottle);
 
 function sv_weapon_bottle:register_properties(prop_registry)
@@ -114,11 +114,11 @@ function sv_weapon_bottle:on_init()
 	sv_weapon_missile.on_init(self);
 	weapon_bottle.on_init(self);
 
-	-- дополнительное состояние для выстрела	
-	-- замах
+	-- РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РґР»СЏ РІС‹СЃС‚СЂРµР»Р°	
+	-- Р·Р°РјР°С…
 	self.fire_lift_state	= self:add_fsm_state(self.main_fsm, "fire_lift_state", self.on_enter_fire_lift, self.on_update_fire_lift, nil, nil);
 	
-	-- Разрушение бутылки
+	-- Р Р°Р·СЂСѓС€РµРЅРёРµ Р±СѓС‚С‹Р»РєРё
 	self:set_property_value_by_name("damage_limit",		self.m_damage_limit);
 	self:set_property_value_by_name("auto_fall_apart",	true);
 end
@@ -126,10 +126,10 @@ end
 -------------------------------------------
 function sv_weapon_bottle:on_damage_limit()
 
-	-- Создаем взрыв
+	-- РЎРѕР·РґР°РµРј РІР·СЂС‹РІ
 	local explosion = engine.spawn_entity("Explosion")
 	
-	-- Задаем свойства, такие же как и у ammo_missile_bottle
+	-- Р—Р°РґР°РµРј СЃРІРѕР№СЃС‚РІР°, С‚Р°РєРёРµ Р¶Рµ РєР°Рє Рё Сѓ ammo_missile_bottle
 	local missile = engine.spawn_entity("ammo_missile_bottle")
 	
 	explosion:set_property_value_by_name("radius", missile:get_property_value_by_name("explode_radius") * 64)
@@ -139,14 +139,14 @@ function sv_weapon_bottle:on_damage_limit()
 	explosion:set_property_value_by_name("effect", missile:get_property_value_by_name("explode_effect_name"))
 	explosion:set_property_value_by_name("destroy_after_explosion", true)
 	
-	-- Уничтожаем временный объект
+	-- РЈРЅРёС‡С‚РѕР¶Р°РµРј РІСЂРµРјРµРЅРЅС‹Р№ РѕР±СЉРµРєС‚
 	missile:destroy_object()
 	
-	-- Позиционируем
+	-- РџРѕР·РёС†РёРѕРЅРёСЂСѓРµРј
 	explosion:set_pos(self:get_pos())
 	engine.add_entity_to_world(explosion)
 	
-	-- Взрываем
+	-- Р’Р·СЂС‹РІР°РµРј
 	explosion:signal("explode", self);
 
 end
@@ -173,12 +173,12 @@ end
 function sv_weapon_bottle:on_enter_fire_finish()
 	sv_weapon_missile.on_enter_fire_finish(self)
 	
-	-- На всякий случай прячем эффекты горения 
+	-- РќР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№ РїСЂСЏС‡РµРј СЌС„С„РµРєС‚С‹ РіРѕСЂРµРЅРёСЏ 
 	self:deactivate_shoot_effects()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_bottle = utils.inherit(cl_weapon_missile, weapon_bottle);
 
 function cl_weapon_bottle:on_init()

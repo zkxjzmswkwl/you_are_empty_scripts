@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Ружье - обрез
+-- Р СѓР¶СЊРµ - РѕР±СЂРµР·
 -- 
 ------------------------------------------------------------------------
 
@@ -17,34 +17,34 @@ weapon_obrez = {};
 weapon_obrez.properties_design = utils.merge_arrays(weapon_basic.properties_design, {
 	{"model_name",			"Item_Obrez"},
 	{"hit_material",		"mat_hit_obrez" },
-	{ "slot_name",			g_weapon_slots[3] },	-- слот в котором может быть оружие
-	{ "priority",			4 }, -- приоритет оружия
---	{ "icon_id",			3 },	-- иконка для HUD
+	{ "slot_name",			g_weapon_slots[3] },	-- СЃР»РѕС‚ РІ РєРѕС‚РѕСЂРѕРј РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕСЂСѓР¶РёРµ
+	{ "priority",			4 }, -- РїСЂРёРѕСЂРёС‚РµС‚ РѕСЂСѓР¶РёСЏ
+--	{ "icon_id",			3 },	-- РёРєРѕРЅРєР° РґР»СЏ HUD
 	
-	{ "loaded_ammo",		2 },	-- кол-во заряженных патронов в стволе (не больше чем m_clip_size)
-	{ "all_ammo",			2 },	-- кол-во дополнительных, патронов, которые добавляются в инвентарь при подборе данного оружия
-	{ "max_ammo",			60 },	-- максимальное кол-во патронов, которое может быть у нас в инвентаре
+	{ "loaded_ammo",		2 },	-- РєРѕР»-РІРѕ Р·Р°СЂСЏР¶РµРЅРЅС‹С… РїР°С‚СЂРѕРЅРѕРІ РІ СЃС‚РІРѕР»Рµ (РЅРµ Р±РѕР»СЊС€Рµ С‡РµРј m_clip_size)
+	{ "all_ammo",			2 },	-- РєРѕР»-РІРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…, РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РІ РёРЅРІРµРЅС‚Р°СЂСЊ РїСЂРё РїРѕРґР±РѕСЂРµ РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ
+	{ "max_ammo",			60 },	-- РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Сѓ РЅР°СЃ РІ РёРЅРІРµРЅС‚Р°СЂРµ
 	
-	{ "light_enable",		true }, -- подсветка во время выстрела
+	{ "light_enable",		true }, -- РїРѕРґСЃРІРµС‚РєР° РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
 });
 
--- Модели оружия и модели рук данного оружия для различных игроков
+-- РњРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ Рё РјРѕРґРµР»Рё СЂСѓРє РґР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… РёРіСЂРѕРєРѕРІ
 weapon_obrez.m_models_names = {
---	Имя игрока				Имя модели рук		Имя модели оружия		
+--	РРјСЏ РёРіСЂРѕРєР°				РРјСЏ РјРѕРґРµР»Рё СЂСѓРє		РРјСЏ РјРѕРґРµР»Рё РѕСЂСѓР¶РёСЏ		
 	["-unknown-"]		= {	"obrez_hands",		"obrez"			},
 }
 
--- иконка для HUD
+-- РёРєРѕРЅРєР° РґР»СЏ HUD
 weapon_obrez.m_ammo_icon_id		= 2
 weapon_obrez.m_holdable_icon_id	= 7
 
 ---------------------------------------
--- параметры выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РІС‹СЃС‚СЂРµР»Р°
 ---------------------------------------
--- параметры для одиночного выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ РѕРґРёРЅРѕС‡РЅРѕРіРѕ РІС‹СЃС‚СЂРµР»Р°
 weapon_obrez.single = {}
-	weapon_obrez.single.m_ammo_for_shot		= 1;	-- кол-во патронов расходуемых на один выстрел
-	weapon_obrez.single.m_bullets_in_shot	= 5;	-- кол-во дробинок в выстреле
+	weapon_obrez.single.m_ammo_for_shot		= 1;	-- РєРѕР»-РІРѕ РїР°С‚СЂРѕРЅРѕРІ СЂР°СЃС…РѕРґСѓРµРјС‹С… РЅР° РѕРґРёРЅ РІС‹СЃС‚СЂРµР»
+	weapon_obrez.single.m_bullets_in_shot	= 5;	-- РєРѕР»-РІРѕ РґСЂРѕР±РёРЅРѕРє РІ РІС‹СЃС‚СЂРµР»Рµ
 	weapon_obrez.single.m_bullet_damage		= 50;
 	weapon_obrez.single.m_bullet_impulse	= .2 * 4;
 	weapon_obrez.single.m_bullet_min_dist	= 10;
@@ -53,7 +53,7 @@ weapon_obrez.single = {}
 	weapon_obrez.single.m_shot_disp			= 25;
 	weapon_obrez.single.m_shot_recoil		= 3.5;
 
--- параметры для двойного выстрела
+-- РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ РґРІРѕР№РЅРѕРіРѕ РІС‹СЃС‚СЂРµР»Р°
 weapon_obrez.double = {}		
 	weapon_obrez.double.m_ammo_for_shot		= weapon_obrez.single.m_ammo_for_shot	* 2;
 	weapon_obrez.double.m_bullets_in_shot	= weapon_obrez.single.m_bullets_in_shot	* 2;
@@ -65,26 +65,26 @@ weapon_obrez.double = {}
 	weapon_obrez.double.m_shot_disp			= 30;
 	weapon_obrez.double.m_shot_recoil		= weapon_obrez.single.m_shot_recoil		* 2;
 
-weapon_obrez.m_shot_effect_name				= "pfx_shot_shotgun.lua"	-- эффект при выстреле
-weapon_obrez.m_shot_point_name				= "#shoot_point"			-- точка привязки эффекта в модели
-weapon_obrez.m_trace_bullet_effect_name		= "pfx_shot_trace_fp.lua"		-- эффект трейса пули
+weapon_obrez.m_shot_effect_name				= "pfx_shot_shotgun.lua"	-- СЌС„С„РµРєС‚ РїСЂРё РІС‹СЃС‚СЂРµР»Рµ
+weapon_obrez.m_shot_point_name				= "#shoot_point"			-- С‚РѕС‡РєР° РїСЂРёРІСЏР·РєРё СЌС„С„РµРєС‚Р° РІ РјРѕРґРµР»Рё
+weapon_obrez.m_trace_bullet_effect_name		= "pfx_shot_trace_fp.lua"		-- СЌС„С„РµРєС‚ С‚СЂРµР№СЃР° РїСѓР»Рё
 
--- Скорострельность оружия
+-- РЎРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ
 weapon_obrez.m_rate_of_fire					= 1
 	
 ----------------------------------------
--- параметры патронов
+-- РїР°СЂР°РјРµС‚СЂС‹ РїР°С‚СЂРѕРЅРѕРІ
 ----------------------------------------
-weapon_obrez.m_ammo_class	= "ammo_obrez"	-- класс используемых патронов
-weapon_obrez.m_ammo_type	= "obrez ammo"	-- тип используемых патронов
-weapon_obrez.m_clip_size	= 2				-- вместимость обоймы
+weapon_obrez.m_ammo_class	= "ammo_obrez"	-- РєР»Р°СЃСЃ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_obrez.m_ammo_type	= "obrez ammo"	-- С‚РёРї РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РїР°С‚СЂРѕРЅРѕРІ
+weapon_obrez.m_clip_size	= 2				-- РІРјРµСЃС‚РёРјРѕСЃС‚СЊ РѕР±РѕР№РјС‹
 
--- FOV дляразных режимов
+-- FOV РґР»СЏСЂР°Р·РЅС‹С… СЂРµР¶РёРјРѕРІ
 weapon_obrez.m_normal_fov	= 90
 weapon_obrez.m_model_fov	= 45
 
 -------------------------------------------	
--- анимации и звуки состояний FSM
+-- Р°РЅРёРјР°С†РёРё Рё Р·РІСѓРєРё СЃРѕСЃС‚РѕСЏРЅРёР№ FSM
 -------------------------------------------	
 weapon_obrez.states_design = {};
 weapon_obrez.states_design["show"] = {{anim = "taking", anim_speed = 2, snd = "Drobovik_taking", snd_params = snd_weapon_common},};
@@ -92,10 +92,10 @@ weapon_obrez.states_design["hide"] = {{anim = "hiding", anim_speed = 2.5, snd = 
 weapon_obrez.states_design["idle"] = {{anim = "idle1", anim_playback = ANIM_PB_REPEATEDLY,}};
 weapon_obrez.states_design["fire"] = {{anim = "fire1_in", anim_speed = weapon_obrez.m_rate_of_fire}};
 weapon_obrez.states_design["fire_finish"] = {{anim = "fire1", snd = "Drobovik_fire1", anim_speed = weapon_obrez.m_rate_of_fire, snd_params = snd_weapon_shot},};
--- перезарядка
+-- РїРµСЂРµР·Р°СЂСЏРґРєР°
 weapon_obrez.states_design["reload"] = {{anim = "reload", anim_speed = 1.5, snd = "Drobovik_reload", snd_params = snd_weapon_reload},};
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_obrez.guid = {0x7b17e68a, 0xd148, 0x4560, 0x81, 0xfe, 0xd, 0xb0, 0x7d, 0x62, 0xe2, 0xeb};
 
 ---------------------------------------------------------------------------
@@ -103,7 +103,7 @@ function weapon_obrez:on_init()
 end
 
 ---------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_obrez = utils.inherit(sv_weapon_firearm, weapon_obrez);
 
 ---------------------------------------------------------------------------
@@ -116,7 +116,7 @@ function sv_weapon_obrez:on_init()
 	sv_weapon_firearm.on_init(self);
 	weapon_obrez.on_init(self);
 	
-	-- Установим значения по умолчанию
+	-- РЈСЃС‚Р°РЅРѕРІРёРј Р·РЅР°С‡РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 	self:set_shoot_params("single")
 end
 
@@ -173,7 +173,7 @@ function sv_weapon_obrez:on_update_fire_finish()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_obrez = utils.inherit(cl_weapon_firearm, weapon_obrez);
 
 function cl_weapon_obrez:on_init()

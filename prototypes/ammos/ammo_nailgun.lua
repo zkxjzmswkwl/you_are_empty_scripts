@@ -3,16 +3,16 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Патроны для nailgun
+-- РџР°С‚СЂРѕРЅС‹ РґР»СЏ nailgun
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ammo_nailgun = {};
 
 ammo_nailgun.guid = {0x2e47291f, 0xbc1a, 0x4af4, 0xa0, 0x6e, 0x9b, 0x6c, 0x4, 0xd5, 0x37, 0x8}
 
 -------------------------------------------	
--- Свойства
+-- РЎРІРѕР№СЃС‚РІР°
 -------------------------------------------	
 ammo_nailgun.properties_design = utils.merge_arrays(ammo_basic.properties_design, {
 	{"model_name",		"itemPatroni"},
@@ -24,13 +24,13 @@ ammo_nailgun.properties_design = utils.merge_arrays(ammo_basic.properties_design
 })
 
 -------------------------------------------
-ammo_nailgun.m_holdable_icon_id	= 11	-- Иконка HUD
+ammo_nailgun.m_holdable_icon_id	= 11	-- РРєРѕРЅРєР° HUD
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ammo_nailgun = utils.inherit(sv_ammo_basic, ammo_nailgun)
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_ammo_nailgun = utils.inherit(cl_ammo_basic, ammo_nailgun)

@@ -3,18 +3,18 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Kolhoz - колхозница с серпом
+-- Actor Kolhoz - РєРѕР»С…РѕР·РЅРёС†Р° СЃ СЃРµСЂРїРѕРј
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_kolhoz.guid = {0xb9409c33, 0x6eb8, 0x4b49, 0xb5, 0x96, 0xac, 0x9, 0x7e, 0x55, 0xca, 0x80};
 
 function actor_kolhoz:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_kolhoz = utils.inherit(sv_actor_basic, actor_kolhoz);
 
 function sv_actor_kolhoz:register_properties(prop_registry)
@@ -27,7 +27,7 @@ function sv_actor_kolhoz:on_init()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_kolhoz = utils.inherit(cl_actor_basic, actor_kolhoz);
 
 function cl_actor_kolhoz:on_init()

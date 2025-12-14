@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- object_random - счетчик, выдающий сигнал по достижении заданного числа
+-- object_random - СЃС‡РµС‚С‡РёРє, РІС‹РґР°СЋС‰РёР№ СЃРёРіРЅР°Р» РїРѕ РґРѕСЃС‚РёР¶РµРЅРёРё Р·Р°РґР°РЅРЅРѕРіРѕ С‡РёСЃР»Р°
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 object_random = {
 	guid = {0x567c195b, 0x52a5, 0x4e9a, 0x9e, 0x5c, 0xb5, 0xd9, 0xaf, 0x81, 0x49, 0x3a},
 }
@@ -18,7 +18,7 @@ function object_random:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_object_random = utils.Inherit(sv_game_object, object_random)
 sv_object_random.next_time = 0
 
@@ -42,7 +42,7 @@ function sv_object_random:OnUpdate(dt)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_object_random = utils.Inherit(cl_game_object, object_random)
 
 function cl_object_random:register_properties(prop_registry)

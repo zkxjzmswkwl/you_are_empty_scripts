@@ -3,16 +3,16 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Патроны для обреза
+-- РџР°С‚СЂРѕРЅС‹ РґР»СЏ РѕР±СЂРµР·Р°
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ammo_obrez_drop = {};
 
 ammo_obrez_drop.guid = {0xfebb6af, 0x7550, 0x45af, 0xbd, 0x35, 0x5c, 0xc9, 0xcc, 0x13, 0x9b, 0x62}
 
 -------------------------------------------	
--- Свойства
+-- РЎРІРѕР№СЃС‚РІР°
 -------------------------------------------	
 ammo_obrez_drop.properties_design = utils.merge_arrays(ammo_basic.properties_design, {
 	{"model_name",		"Item_Obrez"},
@@ -24,13 +24,13 @@ ammo_obrez_drop.properties_design = utils.merge_arrays(ammo_basic.properties_des
 })
 
 -------------------------------------------
-ammo_obrez_drop.m_holdable_icon_id	= 0	-- Иконка HUD
+ammo_obrez_drop.m_holdable_icon_id	= 0	-- РРєРѕРЅРєР° HUD
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ammo_obrez_drop = utils.inherit(sv_ammo_basic, ammo_obrez_drop)
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_ammo_obrez_drop = utils.inherit(cl_ammo_basic, ammo_obrez_drop)

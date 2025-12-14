@@ -3,18 +3,18 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Butcher - монстр мясник
+-- Actor Butcher - РјРѕРЅСЃС‚СЂ РјСЏСЃРЅРёРє
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 actor_butcher.guid = {0xbfa53e46, 0x4fd9, 0x412f, 0x9d, 0xb4, 0x11, 0xd, 0xe5, 0x41, 0x2, 0x77};
 
 function actor_butcher:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_butcher = utils.inherit(sv_actor_basic, actor_butcher);
 
 function sv_actor_butcher:register_properties(prop_registry)
@@ -27,7 +27,7 @@ function sv_actor_butcher:on_init()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_butcher = utils.inherit(cl_actor_basic, actor_butcher);
 
 function cl_actor_butcher:on_init()

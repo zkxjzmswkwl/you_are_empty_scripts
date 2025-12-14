@@ -1,5 +1,5 @@
 
--- материалы оружия
+-- РјР°С‚РµСЂРёР°Р»С‹ РѕСЂСѓР¶РёСЏ
 materials.mat_hit_spanner = {
 	inter_info	= "inter_spanner_default",
 }

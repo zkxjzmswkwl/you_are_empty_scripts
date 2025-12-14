@@ -3,10 +3,10 @@
 ------------------------------------------------------------------------
 -- Author: Andrey Frolov
 ------------------------------------------------------------------------
--- Броня
+-- Р‘СЂРѕРЅСЏ
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 item_armor = {
 	guid = {0x4774f4f9, 0x1ac9, 0x43ad, 0x8d, 0xd7, 0x2b, 0xee, 0xf3, 0xac, 0x7, 0xf3},
 }
@@ -17,7 +17,7 @@ function item_armor:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_item_armor = utils.inherit(sv_game_object, item_armor);
 
 function sv_item_armor:on_init()
@@ -28,7 +28,7 @@ function sv_item_armor:on_init()
 	self:set_update_enable(false);
 end
 
--- использование брони актером
+-- РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ Р±СЂРѕРЅРё Р°РєС‚РµСЂРѕРј
 function sv_item_armor:on_use(activator)
 	if(activator.add_armor ~= nil) then
 		if(activator:get_max_armor() > activator:get_armor()) then
@@ -43,12 +43,12 @@ function sv_item_armor:on_use(activator)
 end
 
 function sv_item_armor:on_take(activator)
-	-- если мы попали сюда, то броню использовали, так что удалимся
+	-- РµСЃР»Рё РјС‹ РїРѕРїР°Р»Рё СЃСЋРґР°, С‚Рѕ Р±СЂРѕРЅСЋ РёСЃРїРѕР»СЊР·РѕРІР°Р»Рё, С‚Р°Рє С‡С‚Рѕ СѓРґР°Р»РёРјСЃСЏ
 	engine.destroy_entity(self)
 end
 
 ------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_item_armor = utils.inherit(cl_game_object, item_armor);
 
 function cl_item_armor:on_init()

@@ -3,12 +3,12 @@
 ------------------------------------------------------------------------
 -- Authors: Andrey Frolov
 ------------------------------------------------------------------------
--- object_case - case (дешифратор) выдает сигнал на одном из входов, 
--- число у которого совпадает с соответствующим входным числом
+-- object_case - case (РґРµС€РёС„СЂР°С‚РѕСЂ) РІС‹РґР°РµС‚ СЃРёРіРЅР°Р» РЅР° РѕРґРЅРѕРј РёР· РІС…РѕРґРѕРІ, 
+-- С‡РёСЃР»Рѕ Сѓ РєРѕС‚РѕСЂРѕРіРѕ СЃРѕРІРїР°РґР°РµС‚ СЃ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРј РІС…РѕРґРЅС‹Рј С‡РёСЃР»РѕРј
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 object_case = {
 	guid = {0x9c1ebf6c, 0x9688, 0x40d2, 0x9f, 0xd0, 0xff, 0xf9, 0xe2, 0xfd, 0x33, 0x39},
 }
@@ -22,7 +22,7 @@ function object_case:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_object_case = utils.inherit(sv_game_object, object_case)
 
 function sv_object_case:register_properties(prop_registry)
@@ -124,7 +124,7 @@ function sv_object_case:in_random(sender, activator, input_data)
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_object_case = utils.inherit(cl_game_object, object_case)
 
 function cl_object_case:register_properties(prop_registry)

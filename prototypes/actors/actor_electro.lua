@@ -3,11 +3,11 @@
 ------------------------------------------------------------------------
 -- Author: Yuri Dobronravin
 ------------------------------------------------------------------------
--- Actor Electro - монстр электрик
+-- Actor Electro - РјРѕРЅСЃС‚СЂ СЌР»РµРєС‚СЂРёРє
 ------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 
 actor_electro.guid = {0x86f27096, 0xaba6, 0x4b47, 0xb6, 0x30, 0x97, 0x7f, 0x80, 0x87, 0xb7, 0x4b};
 
@@ -15,7 +15,7 @@ function actor_electro:on_init()
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_actor_electro = utils.inherit(sv_actor_basic, actor_electro);
 
 function sv_actor_electro:register_properties(prop_registry)
@@ -33,14 +33,14 @@ function sv_actor_electro:on_enter_attack()
 	
 	if(self.io.m_current_attack_idx == 1) then
 	
-		-- загружаем эффект выстрела (только при первом выстреле)
+		-- Р·Р°РіСЂСѓР¶Р°РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р° (С‚РѕР»СЊРєРѕ РїСЂРё РїРµСЂРІРѕРј РІС‹СЃС‚СЂРµР»Рµ)
 		if self.m_current_attack_info.effect_handle == nil then
 			if self.m_current_attack_info.shoot_effect then
 				self.effect_handle = self:load_shoot_effect(self.m_current_attack_info.shoot_effect);
 			end
 		end
 		
-		-- Отображаем эффект выстрела
+		-- РћС‚РѕР±СЂР°Р¶Р°РµРј СЌС„С„РµРєС‚ РІС‹СЃС‚СЂРµР»Р°
 		if self.m_current_attack_info.effect_handle then
 			self:visualize_shoot_effect(self.m_current_attack_info.effect_handle);
 		end
@@ -57,7 +57,7 @@ end
 function sv_actor_electro:on_exit_attack()
 	sv_actor_basic.on_exit_attack(self)
 	
-	-- Выключаем эффект
+	-- Р’С‹РєР»СЋС‡Р°РµРј СЌС„С„РµРєС‚
 	if(self.io.m_current_attack_idx == 1) then
 		if self.m_current_attack_info.effect_handle then
 			self:deactivate_shoot_effect(self.m_current_attack_info.effect_handle);
@@ -66,7 +66,7 @@ function sv_actor_electro:on_exit_attack()
 end
 
 ---------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_actor_electro = utils.inherit(cl_actor_basic, actor_electro);
 	
 function cl_actor_electro:on_init()

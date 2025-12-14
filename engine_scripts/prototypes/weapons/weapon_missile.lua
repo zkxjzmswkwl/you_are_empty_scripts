@@ -3,10 +3,10 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Базовый класс для метательного оружия.
+-- Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ РјРµС‚Р°С‚РµР»СЊРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ.
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 weapon_missile = {
 };
 
@@ -25,7 +25,7 @@ function weapon_missile:register_properties(prop_registry)
 end
 
 ---------------------------------------------------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_weapon_missile = utils.inherit(sv_weapon_firearm, weapon_missile);
 
 ---------------------------------------------------------------------------------
@@ -39,19 +39,19 @@ function sv_weapon_missile:on_init()
 	sv_weapon_firearm.on_init(self);
 	weapon_missile.on_init(self);
 	
-	-- дополнительное состояние для выстрела
+	-- РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РґР»СЏ РІС‹СЃС‚СЂРµР»Р°
 	self.fire_start_state	= self:add_fsm_state(self.main_fsm, "fire_start_state", self.on_enter_fire_start, self.on_update_fire_start, nil, nil);
 end
 
 ---------------------------------------------------------------------------------
 function sv_weapon_missile:can_be_selected()
-	-- Если нет патронов, то не позволяем выбирать оружие
+	-- Р•СЃР»Рё РЅРµС‚ РїР°С‚СЂРѕРЅРѕРІ, С‚Рѕ РЅРµ РїРѕР·РІРѕР»СЏРµРј РІС‹Р±РёСЂР°С‚СЊ РѕСЂСѓР¶РёРµ
 	return not self:is_empty()
 end
 
 ---------------------------------------------------------------------------
 function sv_weapon_missile:event_reload()	
-	-- Ничего не делаем, в отличие от версии в sv_weapon_firearm
+	-- РќРёС‡РµРіРѕ РЅРµ РґРµР»Р°РµРј, РІ РѕС‚Р»РёС‡РёРµ РѕС‚ РІРµСЂСЃРёРё РІ sv_weapon_firearm
 end
 
 ---------------------------------------------------------------------------
@@ -111,12 +111,12 @@ function sv_weapon_missile:on_update_fire()
 		local max_velocity = self:get_property_value(self.m_max_velocity_prop)
 		local time_to_gain_max_velocity = self:get_property_value(self.m_time_to_gain_max_velocity_prop)
 		
-		-- Направление атаки: прямо перед собой
+		-- РќР°РїСЂР°РІР»РµРЅРёРµ Р°С‚Р°РєРё: РїСЂСЏРјРѕ РїРµСЂРµРґ СЃРѕР±РѕР№
 		local attack_dir = owner:calc_target_dir({0, 0, 0}, 0, 0, 0);
 		
-		-- Время удерживания гранаты
+		-- Р’СЂРµРјСЏ СѓРґРµСЂР¶РёРІР°РЅРёСЏ РіСЂР°РЅР°С‚С‹
 		local hold_time = self.m_lever_up_time - self.m_lever_down_time
-		-- Определим скорость пропорционально времени удержания
+		-- РћРїСЂРµРґРµР»РёРј СЃРєРѕСЂРѕСЃС‚СЊ РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕ РІСЂРµРјРµРЅРё СѓРґРµСЂР¶Р°РЅРёСЏ
 		local velocity
 		if hold_time > time_to_gain_max_velocity then 
 			velocity = max_velocity
@@ -124,11 +124,11 @@ function sv_weapon_missile:on_update_fire()
 			velocity = min_velocity + (max_velocity - min_velocity) * hold_time / time_to_gain_max_velocity
 		end
 		
-		-- Бросаем гранату
+		-- Р‘СЂРѕСЃР°РµРј РіСЂР°РЅР°С‚Сѓ
 		owner:fire_missile(self.m_throw_point_offset, attack_dir, self.m_missile_ammo_class, 
 			0, velocity, self.m_angular_velocity);		
 		
-		-- Уменьшаем количество патронов
+		-- РЈРјРµРЅСЊС€Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ
 		self:set_property_value(self.m_loaded_ammo_prop, 
 			self:get_property_value(self.m_loaded_ammo_prop) - self.m_ammo_for_shot);
 	end
@@ -149,7 +149,7 @@ function sv_weapon_missile:on_update_fire_finish()
 		self:reload_ammo()	
 		self:change_fsm_state(self.main_fsm, self.idle_state, true);
 	else
-		-- Закончились патроны - преключаемся на следующее оружие (по приоритету)
+		-- Р—Р°РєРѕРЅС‡РёР»РёСЃСЊ РїР°С‚СЂРѕРЅС‹ - РїСЂРµРєР»СЋС‡Р°РµРјСЃСЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РѕСЂСѓР¶РёРµ (РїРѕ РїСЂРёРѕСЂРёС‚РµС‚Сѓ)
 		local owner = self:get_owner()
 		if owner then
 			if not owner:select_weapon(BEST_WEAPON) then
@@ -165,11 +165,11 @@ function sv_weapon_missile:on_enter_hide()
 end
 ---------------------------------------------------------------------------
 function sv_weapon_missile:event_lever2_down()
-	-- Ничего не делаем, в отличие от версии в sv_weapon_firearm
+	-- РќРёС‡РµРіРѕ РЅРµ РґРµР»Р°РµРј, РІ РѕС‚Р»РёС‡РёРµ РѕС‚ РІРµСЂСЃРёРё РІ sv_weapon_firearm
 end
 
 ---------------------------------------------------------------------------------
--- клиентская
+-- РєР»РёРµРЅС‚СЃРєР°СЏ
 cl_weapon_missile = utils.inherit(cl_weapon_firearm, weapon_missile);
 
 ---------------------------------------------------------------------------------

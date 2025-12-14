@@ -1,7 +1,7 @@
 partice_system_desc = {
 auto_delete = .7,
 
-	{	-- дымо 1 (g0)
+	{	-- РґС‹РјРѕ 1 (g0)
 		max_count = 4,
 		type = "sprite_view_align_xy",
 		texture = "PRT_Smoke_White01.tga",

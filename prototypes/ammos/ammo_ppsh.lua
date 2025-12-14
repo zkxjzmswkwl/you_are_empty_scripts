@@ -3,16 +3,16 @@
 ------------------------------------------------------------------------
 -- Author: Vyacheslav Korotayev
 ------------------------------------------------------------------------
--- Патроны для ППШ
+-- РџР°С‚СЂРѕРЅС‹ РґР»СЏ РџРџРЁ
 ------------------------------------------------------------------------
 
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 ammo_ppsh = {};
 
 ammo_ppsh.guid = {0x84742de9, 0x6d91, 0x45ea, 0x85, 0xf, 0xa5, 0xae, 0x25, 0xf2, 0x87, 0x2a}
 
 -------------------------------------------	
--- Свойства
+-- РЎРІРѕР№СЃС‚РІР°
 -------------------------------------------	
 ammo_ppsh.properties_design = utils.merge_arrays(ammo_basic.properties_design, {
 	{"model_name",		"itemPatroni"},
@@ -24,13 +24,13 @@ ammo_ppsh.properties_design = utils.merge_arrays(ammo_basic.properties_design, {
 })
 
 -------------------------------------------
-ammo_ppsh.m_holdable_icon_id	= 2	-- Иконка HUD
+ammo_ppsh.m_holdable_icon_id	= 2	-- РРєРѕРЅРєР° HUD
 
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_ammo_ppsh = utils.inherit(sv_ammo_basic, ammo_ppsh)
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_ammo_ppsh = utils.inherit(cl_ammo_basic, ammo_ppsh)

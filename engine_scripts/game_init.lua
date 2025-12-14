@@ -2,53 +2,53 @@
 -- Copyright (C) 2003-2005 Digital Spray Studios. All Rights Reserved.
 -- Author: Yuri Dobronravin
 -------------------------------------------------------------------
--- Предварительная инициализация игры
+-- РџСЂРµРґРІР°СЂРёС‚РµР»СЊРЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РёРіСЂС‹
 -------------------------------------------------------------------
 
--- типы атак для ИИ персонажей
-ATTACK_MELEE = 0; -- атака с близкого расстояния при непосредственном контакте
-ATTACK_JUMP = 1; -- атака с прыжка
-ATTACK_DISTANT = 2; -- атака на расстоянии при помощи оружия
+-- С‚РёРїС‹ Р°С‚Р°Рє РґР»СЏ РР РїРµСЂСЃРѕРЅР°Р¶РµР№
+ATTACK_MELEE = 0; -- Р°С‚Р°РєР° СЃ Р±Р»РёР·РєРѕРіРѕ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РїСЂРё РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕРј РєРѕРЅС‚Р°РєС‚Рµ
+ATTACK_JUMP = 1; -- Р°С‚Р°РєР° СЃ РїСЂС‹Р¶РєР°
+ATTACK_DISTANT = 2; -- Р°С‚Р°РєР° РЅР° СЂР°СЃСЃС‚РѕСЏРЅРёРё РїСЂРё РїРѕРјРѕС‰Рё РѕСЂСѓР¶РёСЏ
 				 
 -------------------------------------------------
--- серверная часть
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ
 function sv_game_init()
 	
-	-- регистрация событий
-	-- для ИИ, которого тригер "позвал" идти в его позицию);
+	-- СЂРµРіРёСЃС‚СЂР°С†РёСЏ СЃРѕР±С‹С‚РёР№
+	-- РґР»СЏ РР, РєРѕС‚РѕСЂРѕРіРѕ С‚СЂРёРіРµСЂ "РїРѕР·РІР°Р»" РёРґС‚Рё РІ РµРіРѕ РїРѕР·РёС†РёСЋ);
 	engine.register_event("EVENT_WALK_HERE",	"pos_to_go = %vec3");
 		
-	-- actions и callbacks для актеров и контроллеров
-	-- зовем NPC идти в позицию
+	-- actions Рё callbacks РґР»СЏ Р°РєС‚РµСЂРѕРІ Рё РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРІ
+	-- Р·РѕРІРµРј NPC РёРґС‚Рё РІ РїРѕР·РёС†РёСЋ
 	actor.register_callback("CALLBACK_WALK_HERE", "pos_to_go = %vec3");
-	-- режим GUARD
+	-- СЂРµР¶РёРј GUARD
 	actor.register_callback("CALLBACK_GUARD", "set = %i, data = %lo");
-	-- нужно перезарядить оружие
+	-- РЅСѓР¶РЅРѕ РїРµСЂРµР·Р°СЂСЏРґРёС‚СЊ РѕСЂСѓР¶РёРµ
 	actor.register_callback("CALLBACK_NEED_TO_RELOAD", "data = %lo");
-	-- выбор типа атаки
+	-- РІС‹Р±РѕСЂ С‚РёРїР° Р°С‚Р°РєРё
 	actor.register_callback("CALLBACK_SET_ATTACK_TYPE", "attack_type = %i, status = %i");
-	-- игнорировать наличие врагов
+	-- РёРіРЅРѕСЂРёСЂРѕРІР°С‚СЊ РЅР°Р»РёС‡РёРµ РІСЂР°РіРѕРІ
 	actor.register_callback("CALLBACK_IGNORE_ENEMIES", "need_to_ignore = %i");
 	
 	init_diff_levels()
 	
-	-- установить начальное значение для генератора случайных чисел
+	-- СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
 	math.randomseed(engine.get_system_time());
 end
 
 -------------------------------------------------
--- клиентская часть
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ
 function cl_game_init()
 end
 
 
 ------------------------------------------------
--- создание произвольной entity в run-time
+-- СЃРѕР·РґР°РЅРёРµ РїСЂРѕРёР·РІРѕР»СЊРЅРѕР№ entity РІ run-time
 ------------------------------------------------
 function spawn_entity(CLASS_NAME, ENTITY_NAME, PROP_TABLE, POS)
 	assert(CLASS_NAME, "spawn_entity CLASS_NAME cant be nil!");
 	
-	-- Создаем объект
+	-- РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚
 	local new_obj = nil
 	if ENTITY_NAME then
 		new_obj = engine.spawn_entity(CLASS_NAME, ENTITY_NAME)
@@ -56,14 +56,14 @@ function spawn_entity(CLASS_NAME, ENTITY_NAME, PROP_TABLE, POS)
 		new_obj = engine.spawn_entity(CLASS_NAME)
 	end 
 
-	-- Задаем свойства
+	-- Р—Р°РґР°РµРј СЃРІРѕР№СЃС‚РІР°
 	if type(PROP_TABLE) == "table" then
 		for i,v in pairs(PROP_TABLE) do
 			new_obj:set_property_value_by_name(i, v);
 		end
 	end
 	
-	-- Добавляем объект
+	-- Р”РѕР±Р°РІР»СЏРµРј РѕР±СЉРµРєС‚
 	engine.add_entity_to_world(new_obj);
 	if type(POS) == "table" then
 		new_obj:set_pos( POS )

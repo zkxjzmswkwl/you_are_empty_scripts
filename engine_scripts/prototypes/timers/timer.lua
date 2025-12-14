@@ -7,7 +7,7 @@
 ------------------------------------------------------------------------
 
 ------------------------------------
--- общая часть
+-- РѕР±С‰Р°СЏ С‡Р°СЃС‚СЊ
 timer = {
 	guid = {0x7706d5e, 0x7e98, 0x4ac1, 0xa2, 0xff, 0xa5, 0x10, 0x80, 0x5b, 0xef, 0xdf},
 }
@@ -23,14 +23,14 @@ function timer:register_properties(prop_registry)
 end
 
 ------------------------------------
--- серверная часть 
+-- СЃРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ 
 sv_timer = utils.inherit(sv_game_object, timer)
 
 function sv_timer:register_properties(prop_registry)
 	sv_game_object.register_properties(self, prop_registry)
 	timer.register_properties(self, prop_registry);
 	self.in_reset			= self:register_input_slot("reset", self.in_reset);
-	-- Принудительный вызов события tick
+	-- РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅС‹Р№ РІС‹Р·РѕРІ СЃРѕР±С‹С‚РёСЏ tick
 	self.in_tick			= self:register_input_slot("tick", self.in_tick);
 	self.out_tick_slot		= self:register_output_slot("on_tick", nil)
 end
@@ -38,12 +38,12 @@ end
 function sv_timer:on_update(dt)
 	sv_game_object.on_update(self, dt)
 
-	-- проверка на окончание работы по количеству тиков	
+	-- РїСЂРѕРІРµСЂРєР° РЅР° РѕРєРѕРЅС‡Р°РЅРёРµ СЂР°Р±РѕС‚С‹ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ С‚РёРєРѕРІ	
 	local ticks_count = self:get_property_value(self.ticks_count_prop)
 	local ticks_count_max = self:get_property_value(self.ticks_count_max_prop)
 	if ticks_count_max >= 0 and ticks_count >= ticks_count_max then return end
 	
-	-- корректировка времен
+	-- РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєР° РІСЂРµРјРµРЅ
 	local time_max = self:get_property_value(self.time_max_prop);
 	local time_min = self:get_property_value(self.time_min_prop);
 	
@@ -57,23 +57,23 @@ function sv_timer:on_update(dt)
 		time_max = time_min
 	end
 
-	-- получим значения из properties
+	-- РїРѕР»СѓС‡РёРј Р·РЅР°С‡РµРЅРёСЏ РёР· properties
 	local next_time = self:get_property_value(self.next_time_prop);
 	local local_time = self:get_property_value(self.local_time_prop);
 
 	if next_time < 0
 	then
-		-- первый раз не срабатываем
+		-- РїРµСЂРІС‹Р№ СЂР°Р· РЅРµ СЃСЂР°Р±Р°С‚С‹РІР°РµРј
 		next_time = local_time + time_min;
 	elseif next_time < local_time
 	then
 		local time_left = time_min;
 		if time_max > time_min then 
-			-- возможно задавать одинаковые времена в интервале
+			-- РІРѕР·РјРѕР¶РЅРѕ Р·Р°РґР°РІР°С‚СЊ РѕРґРёРЅР°РєРѕРІС‹Рµ РІСЂРµРјРµРЅР° РІ РёРЅС‚РµСЂРІР°Р»Рµ
 			time_left = time_left + math.random(time_max - time_min)
 		end
 		
-		-- время следующего срабатывания
+		-- РІСЂРµРјСЏ СЃР»РµРґСѓСЋС‰РµРіРѕ СЃСЂР°Р±Р°С‚С‹РІР°РЅРёСЏ
 		next_time = local_time + time_left
 
 		self:set_property_value(self.time_left_prop, time_left)
@@ -82,10 +82,10 @@ function sv_timer:on_update(dt)
 		self:emit_signals(self.out_tick_slot)
 	end
 
-	-- просчет локального времени
+	-- РїСЂРѕСЃС‡РµС‚ Р»РѕРєР°Р»СЊРЅРѕРіРѕ РІСЂРµРјРµРЅРё
 	local_time = local_time + dt
 	
-	-- установим обновленные значения
+	-- СѓСЃС‚Р°РЅРѕРІРёРј РѕР±РЅРѕРІР»РµРЅРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
 	self:set_property_value(self.next_time_prop, next_time)
 	self:set_property_value(self.local_time_prop, local_time)
 	
@@ -109,7 +109,7 @@ function sv_timer:in_tick()
 end
 
 ------------------------------------
--- клиентская часть 
+-- РєР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ 
 cl_timer = utils.inherit(cl_game_object, timer)
 
 function cl_timer:register_properties(prop_registry)
