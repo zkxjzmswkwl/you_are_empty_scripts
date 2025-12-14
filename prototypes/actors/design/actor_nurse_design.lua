@@ -1,0 +1,240 @@
+------------------------------------------------------------------------
+-- Copyright (C) 2003-2005 Digital Spray Studios. All Rights Reserved.
+------------------------------------------------------------------------
+-- Author: Yuri Dobronravin
+------------------------------------------------------------------------
+-- Actor Nurse - монстр мед. сестра
+------------------------------------------------------------------------
+
+actor_nurse = {};
+
+---------------------------------------------------------------------------------
+actor_nurse.properties_design = utils.merge_arrays(actor_basic.properties_design, {
+	{ "model_name",				"nurse" },
+	{ "rag_doll_model",			"nurse_ragdoll"  },	
+
+	{ "stay_height",			1.80  },
+	{ "sit_height",				1.0   },
+  	{ "body_radius",			0.5	  },
+
+	{ "mass",					200.0 },
+
+	{ "walk_forward_speed",		100.0 },
+	{ "walk_backward_speed",	100.0 },
+	{ "walk_strafe_speed",		50.0  },
+	{ "run_forward_speed",		360.0 },
+	{ "run_backward_speed",		310.0 },
+	{ "run_strafe_speed",		210.0 },
+	{ "jump_height",			40.0	  },
+	{ "turn_speed",				{680.0, 680.0, 680.0}  }, -- углова€ скорость поворота
+	
+	-- праметры зрени€
+	{ "view_fov",				90	  },	-- угол обзора (град) 
+	{ "view_dist",				25	  },	-- максимальна€ дальность зрени€ (м)
+});
+
+---------------------------------------------------------------------------------
+actor_nurse.params = {
+	-- поворот тела относительно головы при ходьбе пр€мо и вбок
+	body_rotate_forward_strafe = 30,
+	-- врем€ падени€ после которого начинает отыгрывать€ анимаци€ падени€
+	falling_time = 60, 
+	-- высота, выше которой включаетс€ анимаци€ падени€
+	above_ground_level = 1,
+	-- врем€ в течении которого персонаж должен находитс€ в состо€нии
+	-- idle_alert после последней атаки
+	aggresive_stance_time = 60000,
+};
+
+
+-- настройки hitbox-ов
+actor_nurse.params.hitboxes = { 
+	{name = "head", damage_k = 1.7, },
+	{name = "pelvis", damage_k = 1, },
+    {name = "rupperArm1", damage_k = .3, },
+    {name = "rupperArm2", damage_k = .45, },
+    {name = "spine", damage_k = 1, },
+    {name = "spine3", damage_k = 1, },
+    {name = "lupperArm1", damage_k = .3, },
+    {name = "lupperArm2", damage_k = .45, },
+    {name = "lthigh1", damage_k = .5, },
+    {name = "lthigh2", damage_k = .45, },
+    {name = "rthigh1", damage_k = .5, },
+    {name = "rthigh2", damage_k = .45, },
+};
+
+-- параметры атаки
+actor_nurse.params.attack_info = {};
+
+actor_nurse.params.attack_info[0] = {
+	type				= ATTACK_MELEE,
+	dist				= 2,
+	desired_min_dist	= 0, 
+	desired_max_dist	= 8,
+	max_angle			= 6, 
+	stop_during_attack	= 1,
+		
+	damage_type			= g_damage_type.KNOCK,
+	damage				= 15,
+	impulse				= 1,
+	dispersion			= 0,
+	offset_pos			= {0, 0, 0.70},
+	
+	allowed_bhv			= {BHV_STAND, BHV_WALK},
+	fsm_state			= "attack",
+	visual_state_prefix	= "attack",
+};
+
+actor_nurse.params.attack_info[1] = {
+	type				= ATTACK_DISTANT,
+	dist				= 15, 
+	desired_min_dist	= 8, 
+	desired_max_dist	= 1000, 
+	max_angle			= 6, 
+	stop_during_attack	= 1,
+	
+	dispersion			= 20,
+	offset_pos			= {0.2, 2.2, 2},
+	
+	missile						= "ammo_missile_squirt",
+	missile_velocity			= 2000,
+	missile_angular_velocity	= {0, 0, 0},
+	
+	allowed_bhv			= {BHV_STAND, BHV_WALK},
+	fsm_state			= "attack",
+	visual_state_prefix	= "attack_missile",
+};
+
+
+
+---------------------------------------------------------------------------------
+actor_nurse.states_design = {};
+
+
+--------------------
+-- IDLE
+--------------------
+actor_nurse.states_design["idle"] = {
+			{anim = "idle2", anim_speed = 1, snd = "Medsestra_idle1", weight = 1},
+			{anim = "idle3", anim_speed = 1, snd = "Medsestra_idle2", weight = 1},
+			{anim = "idle4", anim_speed = 1, snd = "Medsestra_idle3", weight = 1},
+			{anim = "idle5", anim_speed = 1, snd = "Medsestra_idle5", weight = 1},};
+			
+--------------------
+-- IDLE ALERT
+--------------------
+actor_nurse.states_design["idle_alert"] = {
+			{anim = "alert1", anim_speed = 0.9, snd = "Medsestra_idle1", weight = 1},
+			{anim = "alert2", anim_speed = 0.9, snd = "Medsestra_idle2", weight = 1},
+			{anim = "alert1", anim_speed = 1.6, snd = "Medsestra_idle3", weight = 1},
+			{anim = "alert2", anim_speed = 1.6, snd = "Medsestra_idle5", weight = 1},};
+
+-------------------------------------------------------------
+-- TRANSITION TO ALERT (ѕереход в агрессивное состо€ние)
+-------------------------------------------------------------
+actor_nurse.states_design["transition_to_alert"] = {
+	{anim = nil, weight = 1, snd = "medsestra_klich", snd_params = snd_actor_alert},
+	{anim = nil, weight = 1, snd = "Medsestra_attack1", snd_params = snd_actor_alert},
+	{anim = nil, weight = 1, snd = "Medsestra_attack2", snd_params = snd_actor_alert},
+	{anim = nil, weight = 1, snd = "Medsestra_attack3", snd_params = snd_actor_alert},
+};
+
+--------------------
+-- IDLE STOL
+--------------------
+actor_nurse.states_design["idle_stol"] = {
+			{anim = "alert_idle_stol1", anim_speed = 1, weight = 0.9, snd = "Medsestra_idle1"},
+			{anim = "alert_idle_stol2", anim_speed = 1, weight = 1.5, snd = "Medsestra_idle2"},
+			{anim = "alert_idle_stol3", anim_speed = 1, weight = 1.2, snd = "Medsestra_idle3"},};
+
+			
+--------------------
+-- WALK			
+--------------------
+actor_nurse.states_design["forward_walk"] = {
+			{anim = "walk", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_walk"},};
+actor_nurse.states_design["backward_walk"] = {
+			{anim = "walk", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_walk"},};
+actor_nurse.states_design["strafe_left_walk"] = {
+			{anim = "walk", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_jumpL"},};
+actor_nurse.states_design["strafe_right_walk"] = {
+			{anim = "walk", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_jumpR"},};
+--------------------
+-- RUN
+--------------------
+actor_nurse.states_design["forward_run"] = {
+			{anim = "run", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_run"},};
+actor_nurse.states_design["backward_run"] = {
+			{anim = "run2", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_run"},};
+actor_nurse.states_design["strafe_left_run"] = {
+			{anim = "run", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_run"},};
+actor_nurse.states_design["strafe_right_run"] = {
+			{anim = "run", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY, snd = "Medsestra_run"},};
+
+----------------------------
+-- JUMP & FALL & LAND
+----------------------------
+-- подготовительна€ фаза прыжка
+actor_nurse.states_design["jump_prepare"] = {
+			{anim = "run", anim_speed = 1.0, },};
+-- начало прыжка			
+actor_nurse.states_design["jump_begin"] = {
+			{anim = "run", anim_speed = 1, },};			
+
+-- зацикленна€ анимаци€ состо€ни€ падени€
+actor_nurse.states_design["fall"] = {
+			{anim = "run", anim_speed = 1, anim_playback = ANIM_PB_REPEATEDLY,},};
+
+-- приземление на бегу
+actor_nurse.states_design["land_run"] = {
+			{anim = "jump1", anim_speed = 1, },};
+-- приземление на месте
+actor_nurse.states_design["land_stand"] = {
+			{anim = "run", anim_speed = 1, },};
+
+
+
+
+----------------------------
+-- ATTACK
+----------------------------
+actor_nurse.states_design["attack_begin"] = {
+
+			{anim = "attack1", anim_speed = 1, snd = "Medsestra_attack1", snd_params = snd_actor_attack},
+			--{anim = "attack2", anim_speed = 1, snd = "Medsestra_attack2"},
+			{anim = "attack3", anim_speed = 1, snd = "Medsestra_attack3", snd_params = snd_actor_attack},};
+
+actor_nurse.states_design["attack_end"] = {
+			{anim = "attack1_out"},
+			--{anim = "attack2_out"},
+			{anim = "attack3_out"},};
+
+
+----------------------------
+-- ATTACK MISSILE
+----------------------------
+actor_nurse.states_design["attack_missile_begin"] = {
+			{anim = "attack2", anim_speed = 1, snd = "Medsestra_attack2", snd_params = snd_actor_attack},};
+
+actor_nurse.states_design["attack_missile_end"] = {
+			{anim = "attack2_out"},};
+
+
+--------------------
+-- PAIN
+--------------------
+actor_nurse.states_design["pain"] = {
+			{anim = "pain1", anim_speed = 1, weight = 1, snd = "Medsestra_damage1", snd_params = snd_actor_pain},
+			{anim = "pain2", anim_speed = 1, weight = 1, snd = "Medsestra_damage2", snd_params = snd_actor_pain},
+			{anim = "pain3", anim_speed = 1, weight = 1, snd = "Medsestra_damage3", snd_params = snd_actor_pain},
+};
+			
+--------------------
+-- DEATH
+--------------------
+actor_nurse.states_design["death"] = {
+			{--[[anim = "dead1",--]] weight = 1, snd = "Medsestra_damage1", snd_params = snd_actor_death},
+			{--[[anim = "dead2",--]] weight = 1, snd = "Medsestra_damage2", snd_params = snd_actor_death},
+			{--[[anim = "dead3",--]] weight = 1, snd = "Medsestra_damage3", snd_params = snd_actor_death},
+};
+			
